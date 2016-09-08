@@ -1,16 +1,16 @@
 package ca.qc.bdeb.maveo.controleur;
 
-import ca.qc.bdeb.maveo.LecteurMp3;
+import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 
 /**
  * Created by 1379708 on 2016-09-08.
  */
 public class ControleurMenu {
 
-    private LecteurMp3 mp3Player;
+    private GestionnaireMusique gestionMusique;
 
-    public ControleurMenu(LecteurMp3 mp3Player) {
-        this.mp3Player = mp3Player;
+    public ControleurMenu(GestionnaireMusique gestionMusique) {
+        this.gestionMusique = gestionMusique;
     }
 
 
