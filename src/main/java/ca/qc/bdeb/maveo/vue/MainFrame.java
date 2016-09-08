@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 /**
  * Created by Cedric Wu Tchan Ki on 2016-09-07.
  */
-public class MainFrame extends JFrame {
+public class MainFrame  {
 
 
     private static final String STR_MENU_ITEM_LECTURE = "Lecture";
@@ -19,9 +19,10 @@ public class MainFrame extends JFrame {
     private static final String STR_MENU_ITEM_VIDEO = "Video";
     private static final String STR_MENU_ITEM_SOUSTITRES = "Sous-titres";
     private static final String STR_MENU_ITEM_OUTILS = "Outils";
-    private static final String STR_MENU_ITEM_VUE = "vue";
+    private static final String STR_MENU_ITEM_VUE = "Vue";
     private static final String STR_MENU_ITEM_AIDE = "Aide";
 
+private JFrame fenetre;
     private JButton btnJouerPause;
     private JButton btnArreter;
     private boolean estEnJeu;
@@ -60,7 +61,8 @@ public class MainFrame extends JFrame {
     private ControleurMenu controleurMenu;
 
     public MainFrame(ControleurMenu controleurMenu) {
-        super("MAVEO");
+
+        fenetre = new JFrame("MAVEO");
 
         initialiserMainFrame();
 
@@ -88,12 +90,12 @@ public class MainFrame extends JFrame {
         btnArreter.addActionListener(ecouteurAction);
         btnJouerPause.addActionListener(ecouteurAction);
 
-        add(content, BorderLayout.SOUTH);
-        add(content2, BorderLayout.NORTH);
-        setJMenuBar(creerMenu());
-        setSize(800, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        fenetre.add(content, BorderLayout.SOUTH);
+        fenetre.add(content2, BorderLayout.NORTH);
+        fenetre.setJMenuBar(creerMenu());
+       fenetre.setSize(800, 700);
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fenetre.setVisible(true);
     }
 
     private JMenuBar creerMenu() {
