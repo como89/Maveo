@@ -1,11 +1,11 @@
 package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.controleur.ControleurMenu;
-import ca.qc.bdeb.maveo.modele.Gestion_Evenement;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 /**
@@ -75,7 +75,6 @@ public class MainFrame extends JFrame {
     private void initialiserMainFrame(){
         JPanel content = new JPanel(new java.awt.GridLayout());
         JPanel content2 = new JPanel(new java.awt.BorderLayout());
-        Gestion_Evenement ecouteurAction = new Gestion_Evenement(this);
 
         //Initialisation des boutons
         btnJouerPause = new JButton(STR_BOUTON_PLAY);
@@ -84,9 +83,6 @@ public class MainFrame extends JFrame {
         //ajout des boutons sur le frame
         content.add(btnJouerPause);
         content.add(btnArreter);
-
-        btnArreter.addActionListener(ecouteurAction);
-        btnJouerPause.addActionListener(ecouteurAction);
 
         add(content, BorderLayout.SOUTH);
         add(content2, BorderLayout.NORTH);
@@ -112,6 +108,12 @@ public class MainFrame extends JFrame {
         JMenuItem ouvrirPlusieursFichiers = new JMenuItem(STR_MEDIA_OPTION_OUVRIRPLUSIEURS);
         JMenuItem enregistrerListeDeLecture = new JMenuItem(STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE);
         JMenuItem quitter = new JMenuItem(STR_MEDIA_OPTION_QUITTER);
+
+        ouvrirUnFichier.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
         media.add(ouvrirUnFichier);
         media.add(ouvrirPlusieursFichiers);

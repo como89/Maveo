@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo;
 import ca.qc.bdeb.maveo.controleur.ControleurMenu;
+import ca.qc.bdeb.maveo.modele.LecteurMp3;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 
 public class MainClass {
