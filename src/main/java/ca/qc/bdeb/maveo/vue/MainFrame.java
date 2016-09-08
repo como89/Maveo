@@ -77,7 +77,6 @@ private JFrame fenetre;
     private void initialiserMainFrame(){
         JPanel content = new JPanel(new java.awt.GridLayout());
         JPanel content2 = new JPanel(new java.awt.BorderLayout());
-        Gestion_Evenement ecouteurAction = new Gestion_Evenement(this);
 
         //Initialisation des boutons
         btnJouerPause = new JButton(STR_BOUTON_PLAY);
@@ -86,10 +85,7 @@ private JFrame fenetre;
         //ajout des boutons sur le frame
         content.add(btnJouerPause);
         content.add(btnArreter);
-
-        btnArreter.addActionListener(ecouteurAction);
-        btnJouerPause.addActionListener(ecouteurAction);
-
+        
         fenetre.add(content, BorderLayout.SOUTH);
         fenetre.add(content2, BorderLayout.NORTH);
         fenetre.setJMenuBar(creerMenu());
