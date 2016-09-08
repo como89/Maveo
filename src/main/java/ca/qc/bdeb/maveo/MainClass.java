@@ -10,7 +10,7 @@ public class MainClass {
 
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "lib/natives/windows_32/");
 
-       GestionnaireMusique gestionMusique = new GestionnaireMusique();
+        GestionnaireMusique gestionMusique = new GestionnaireMusique();
 
         ControleurMenu controleurMenu = new ControleurMenu(gestionMusique);
 
