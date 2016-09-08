@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
+import ca.qc.bdeb.maveo.controleur.ControleurMenu;
 import ca.qc.bdeb.maveo.modele.Gestion_Evenement;
 
 import javax.swing.*;
@@ -54,9 +55,24 @@ public class MainFrame extends JFrame {
     private static final String STR_MEDIA_OPTION_QUITTER = "Quitter";
 
 
-    public MainFrame() {
+
+
+    private ControleurMenu controleurMenu;
+
+    public MainFrame(ControleurMenu controleurMenu) {
         super("MAVEO");
 
+        initialiserMainFrame();
+
+        this.controleurMenu = controleurMenu;
+    }
+
+
+    /*
+    Initialise le MainFrame avec tous les contrôles nécessaires. Méthode executée lors de la construction
+    du Frame.
+     */
+    private void initialiserMainFrame(){
         JPanel content = new JPanel(new java.awt.GridLayout());
         JPanel content2 = new JPanel(new java.awt.BorderLayout());
         Gestion_Evenement ecouteurAction = new Gestion_Evenement(this);
@@ -78,8 +94,6 @@ public class MainFrame extends JFrame {
         setSize(800, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
-
     }
 
     private JMenuBar creerMenu() {
