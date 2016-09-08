@@ -1,7 +1,7 @@
 package ca.qc.bdeb.maveo.modele;
 
 
-import ca.qc.bdeb.maveo.Vue.MainFrame;
+import ca.qc.bdeb.maveo.vue.MainFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

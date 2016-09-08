@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.Vue;
+package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.modele.Gestion_Evenement;
 
@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
     private static final String STR_MENU_ITEM_VIDEO = "Video";
     private static final String STR_MENU_ITEM_SOUSTITRES = "Sous-titres";
     private static final String STR_MENU_ITEM_OUTILS = "Outils";
-    private static final String STR_MENU_ITEM_VUE = "Vue";
+    private static final String STR_MENU_ITEM_VUE = "vue";
     private static final String STR_MENU_ITEM_AIDE = "Aide";
 
     private JButton btnJouerPause;
