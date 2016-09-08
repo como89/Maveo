@@ -1,6 +1,6 @@
 package ca.qc.bdeb.maveo.Vue;
 
-import ca.qc.bdeb.maveo.Modele.Gestion_Evenement;
+import ca.qc.bdeb.maveo.modele.Gestion_Evenement;
 
 import javax.swing.*;
 import java.awt.*;

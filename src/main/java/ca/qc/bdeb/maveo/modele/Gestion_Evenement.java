@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.Modele;
+package ca.qc.bdeb.maveo.modele;
 
 
 import ca.qc.bdeb.maveo.Vue.MainFrame;
