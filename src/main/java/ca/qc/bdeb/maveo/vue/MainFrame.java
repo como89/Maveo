@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.controleur.ControleurMenu;
-import ca.qc.bdeb.maveo.modele.Gestion_Evenement;
 
 import javax.swing.*;
 import java.awt.*;
