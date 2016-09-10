@@ -120,10 +120,10 @@ public class MainFrame {
         JMenu aide = new JMenu(STR_MENU_ITEM_AIDE);
 
 
-        JMenuItem ouvrirUnFichier = new JMenuItem(STR_MEDIA_OPTION_OUVRIR);
-        JMenuItem ouvrirPlusieursFichiers = new JMenuItem(STR_MEDIA_OPTION_OUVRIRPLUSIEURS);
-        JMenuItem enregistrerListeDeLecture = new JMenuItem(STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE);
-        JMenuItem quitter = new JMenuItem(STR_MEDIA_OPTION_QUITTER);
+        ouvrirUnFichier = new JMenuItem(STR_MEDIA_OPTION_OUVRIR);
+        ouvrirPlusieursFichiers = new JMenuItem(STR_MEDIA_OPTION_OUVRIRPLUSIEURS);
+        enregistrerListeDeLecture = new JMenuItem(STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE);
+        quitter = new JMenuItem(STR_MEDIA_OPTION_QUITTER);
 
         media.add(ouvrirUnFichier);
         media.add(ouvrirPlusieursFichiers);
