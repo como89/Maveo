@@ -5,12 +5,13 @@ import ca.qc.bdeb.maveo.controleur.ControleurMenu;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 /**
  * Created by Cedric Wu Tchan Ki on 2016-09-07.
  */
-public class MainFrame  {
+public class MainFrame {
 
 
     private static final String STR_MENU_ITEM_LECTURE = "Lecture";
@@ -20,8 +21,7 @@ public class MainFrame  {
     private static final String STR_MENU_ITEM_OUTILS = "Outils";
     private static final String STR_MENU_ITEM_VUE = "Vue";
     private static final String STR_MENU_ITEM_AIDE = "Aide";
-
-private JFrame fenetre;
+    private JFrame fenetre;
     private JButton btnJouerPause;
     private JButton btnArreter;
     private boolean estEnJeu;
@@ -55,17 +55,29 @@ private JFrame fenetre;
     private static final String STR_MEDIA_OPTION_QUITTER = "Quitter";
 
 
+    JMenuBar menu;
+    JMenu media;
+    JMenu lecture;
+    JMenu audio;
+    JMenu video;
+    JMenu sousTitres;
+    JMenu outils;
+    JMenu vue;
+    JMenu aide;
 
+
+    JMenuItem ouvrirUnFichier;
+    JMenuItem ouvrirPlusieursFichiers;
+    JMenuItem enregistrerListeDeLecture;
+    JMenuItem quitter;
 
     private ControleurMenu controleurMenu;
 
-    public MainFrame(ControleurMenu controleurMenu) {
+    public MainFrame() {
 
-        fenetre = new JFrame("MAVEO");
+        fenetre = new JFrame(STR_NOM_PROGRAMME);
 
         initialiserMainFrame();
-
-        this.controleurMenu = controleurMenu;
     }
 
 
@@ -73,7 +85,7 @@ private JFrame fenetre;
     Initialise le MainFrame avec tous les contrôles nécessaires. Méthode executée lors de la construction
     du Frame.
      */
-    private void initialiserMainFrame(){
+    private void initialiserMainFrame() {
         JPanel content = new JPanel(new java.awt.GridLayout());
         JPanel content2 = new JPanel(new java.awt.BorderLayout());
 
@@ -84,15 +96,18 @@ private JFrame fenetre;
         //ajout des boutons sur le frame
         content.add(btnJouerPause);
         content.add(btnArreter);
-        
+
         fenetre.add(content, BorderLayout.SOUTH);
         fenetre.add(content2, BorderLayout.NORTH);
         fenetre.setJMenuBar(creerMenu());
-       fenetre.setSize(800, 700);
+        fenetre.setSize(800, 700);
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenetre.setVisible(true);
     }
 
+    /*
+    Crée la barre de menu avec tous les components
+         */
     private JMenuBar creerMenu() {
         JMenuBar menu = new JMenuBar();
         JMenu media = new JMenu(STR_MENU_ITEM_MEDIA);
@@ -129,7 +144,21 @@ private JFrame fenetre;
         menu.add(outils);
         menu.add(vue);
         menu.add(aide);
+
+        ouvrirUnFichier.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         return menu;
     }
 
+    public void addOuvrirFichierListener(ActionListener listener) {
+        ouvrirUnFichier.addActionListener(listener);
+    }
+
+    public JFrame getFenetre() {
+        return fenetre;
+    }
 }
