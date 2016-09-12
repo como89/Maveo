@@ -1,7 +1,5 @@
 package ca.qc.bdeb.maveo.modele;
 
-import ca.qc.bdeb.maveo.vue.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -21,18 +19,16 @@ public class FileOpener {
     /*
     Active la fenêtre d'ouverture d'un fichier.
      */
-    public void activerOuvertureFichier(Component parent) {
+    public String activerOuvertureFichier(Component parent) {
 
-        int returnVal =0;
-       returnVal = fileChooser.showOpenDialog(parent);
+        int returnVal = 0;
+        returnVal = fileChooser.showOpenDialog(parent);
 
+        String cheminFichier = null;
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            //This is where a real application would open the file.
-            System.out.println("Opening: " + file.getName() + "." );
-        } else {
-            System.out.println("Open command cancelled by user.");
+            cheminFichier = file.getAbsolutePath();
         }
+        return cheminFichier;
     }
-
 }

@@ -39,7 +39,8 @@ public class ControleurMenu {
 
     class OuvrirFichierListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            String cheminFichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            gestionMusique.demarer(cheminFichier);
         }
     }
 
