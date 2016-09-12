@@ -22,7 +22,6 @@ public class ControleurMenu {
     private GestionnaireMusique gestionMusique;
 
     public ControleurMenu(MainFrame mainFrame, FileOpener fileOpener) {
-
         this.mainFrame = mainFrame;
         this.fileOpener = fileOpener;
         this.mainFrame.addOuvrirFichierListener(new OuvrirFichierListener());
