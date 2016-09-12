@@ -20,9 +20,10 @@ public class GestionnaireMusique {
      * Méthode qui permet de démarrer une musique selon le path du fichier.
      *
      * @param pathFichier - Le chemin du fichier audio.
+     * @return true, si l'exécution a eu succès, false si pas de succès.
      */
-    public void demarer(String pathFichier) {
-        mediaPlayer.startMedia(pathFichier);
+    public boolean demarrer(String pathFichier) {
+        return mediaPlayer.startMedia(pathFichier);
     }
 
     /**
