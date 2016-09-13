@@ -83,6 +83,14 @@ public class GestionnaireMusique {
     }
 
     /**
+     * Méthode pour obtenir le temps total d'une musique.
+     * @return le temps total de la musique en millisecondes.
+     */
+    public long getTempsTotal() {
+        return mediaPlayer.getLength();
+    }
+
+    /**
      * Méthode pour obtenir le temps écoulé de la musique.
      *
      * @return le temps écoulé de la musique en millisecondes.
