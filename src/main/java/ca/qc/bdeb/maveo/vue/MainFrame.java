@@ -94,7 +94,9 @@ public class MainFrame {
         btnJouerPause = new JButton(STR_BOUTON_JOUER);
         btnArreter = new JButton(STR_BOUTON_STOP);
 
-        //ajout des boutons sur le frame
+        labelNomChanson = new JLabel("NOM_MÉDIA");
+
+        //ajout des contrôles sur le frame
         content.add(btnJouerPause);
         content.add(btnArreter);
 
@@ -186,5 +188,9 @@ public class MainFrame {
      */
     public JFrame getFenetre() {
         return fenetre;
+    }
+
+    public JLabel getLabelNomChanson() {
+        return labelNomChanson;
     }
 }

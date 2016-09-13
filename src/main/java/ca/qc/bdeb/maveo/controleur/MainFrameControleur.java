@@ -1,12 +1,13 @@
 package ca.qc.bdeb.maveo.controleur;
 
-import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.FileOpener;
+import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Created by 1379708 on 2016-09-08.
@@ -71,8 +72,9 @@ public class MainFrameControleur {
      */
     class JMenuItemOuvrirFichierListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String cheminFichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
-            gestionMusique.setCheminFichier(cheminFichier);
+            File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            gestionMusique.setCheminFichier(fichier.getAbsolutePath());
+            mainFrame.getLabelNomChanson().setText(fichier.getName());
             gestionMusique.demarrer();
             gestionMusique.pause();
         }

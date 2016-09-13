@@ -21,16 +21,15 @@ public class FileOpener {
      * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
      * @return le chemin du fichier à ouvrir
      */
-    public String activerOuvertureFichier(Component parent) {
+    public File activerOuvertureFichier(Component parent) {
 
         int returnVal = 0;
         returnVal = fileChooser.showOpenDialog(parent);
 
-        String cheminFichier = null;
+        File fichier = null;
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            cheminFichier = file.getAbsolutePath();
+            fichier = fileChooser.getSelectedFile();
         }
-        return cheminFichier;
+        return fichier;
     }
 }
