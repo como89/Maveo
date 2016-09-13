@@ -42,12 +42,12 @@ public class GestionnaireMusique {
     }
 
     /**
-     * Méthode pour savoir si la musique est en pause.
+     * Méthode pour savoir si la musique est en lecture.
      *
-     * @return true, en pause, false n'est pas en pause.
+     * @return true, en lecture, false n'est pas en lecture.
      */
-    public boolean enPause() {
-        return !mediaPlayer.canPause();
+    public boolean enLecture() {
+        return mediaPlayer.isPlaying();
     }
 
     /**
@@ -92,6 +92,14 @@ public class GestionnaireMusique {
      */
     public long getTempsRestant() {
         return mediaPlayer.getLength() - mediaPlayer.getTime();
+    }
+
+    /**
+     * Méthode pour obtenir le temps total d'une musique.
+     * @return le temps total de la musique en millisecondes.
+     */
+    public long getTempsTotal() {
+        return mediaPlayer.getLength();
     }
 
     /**

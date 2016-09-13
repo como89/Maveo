@@ -8,19 +8,72 @@ import org.junit.Assert;
  */
 public class GestionnaireMusiqueTest {
 
+    private static final String TXT_LINK_MUSIQUE_TEST = "res/Gaara.mp3";
+
     static {
         UtilLib.chargerLibSysteme();
     }
 
     @org.junit.Test
-    public void demarer() throws Exception {
+    public void testDemarer() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
-        boolean success = gestionMusique.demarrer("res/Gaara.mp3");
-        try {
-            Thread.currentThread().join(10000);
-        } catch (InterruptedException e) {
-        }
+        boolean success = gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        Thread.currentThread().join(10);
         Assert.assertTrue(success);
     }
 
+    @org.junit.Test
+    public void testArreter() throws Exception {
+        GestionnaireMusique gestionMusique = new GestionnaireMusique();
+        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        Thread.currentThread().join(10);
+        gestionMusique.arreter();
+        Thread.currentThread().join(10);
+        Assert.assertFalse(gestionMusique.enLecture());
+    }
+
+    @org.junit.Test
+    public void testPause() throws Exception {
+        GestionnaireMusique gestionMusique = new GestionnaireMusique();
+        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        Thread.currentThread().join(10);
+        gestionMusique.pause();
+        Thread.currentThread().join(10);
+        Assert.assertFalse(gestionMusique.enLecture());
+    }
+
+    @org.junit.Test
+    public void testReprendre() throws Exception {
+        GestionnaireMusique gestionMusique = new GestionnaireMusique();
+        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.pause();
+        Thread.currentThread().join(10);
+        gestionMusique.reprendre();
+        Thread.currentThread().join(10);
+        Assert.assertTrue(gestionMusique.enLecture());
+    }
+
+    @org.junit.Test
+    public void testVolume() throws Exception {
+        GestionnaireMusique gestionMusique = new GestionnaireMusique();
+        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        Thread.currentThread().join(10);
+        int volume = gestionMusique.getVolume();
+        int volumeModifie = volume + 50;
+        gestionMusique.setVolume(volumeModifie);
+        Thread.currentThread().join(10);
+        Assert.assertEquals(volumeModifie, gestionMusique.getVolume());
+        //Retour au volume initial
+        gestionMusique.setVolume(volume);
+    }
+
+    @org.junit.Test
+    public void testTemps() throws Exception {
+        GestionnaireMusique gestionMusique = new GestionnaireMusique();
+        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        Thread.currentThread().join(1200);
+        Assert.assertTrue(gestionMusique.getTempsEcoule() >= 1000);
+        long tempsTotal = gestionMusique.getTempsTotal();
+        Assert.assertTrue(gestionMusique.getTempsRestant() <= tempsTotal);
+    }
 }
