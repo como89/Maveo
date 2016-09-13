@@ -7,5 +7,9 @@ import javax.swing.*;
  */
 public class PanneauDeVision extends JPanel {
 
+    public JPanel getContent2() {
+        return content2;
+    }
+
     JPanel content2 = new JPanel(new java.awt.BorderLayout());
 }

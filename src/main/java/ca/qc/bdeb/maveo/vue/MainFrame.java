@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+
+
 /**
  * Created by Cedric Wu Tchan Ki on 2016-09-07.
  */
@@ -26,6 +28,9 @@ public class MainFrame {
     private JButton btnArreter;
     private JLabel labelNomChanson;
     private boolean estEnJeu;
+
+    private JPanel content;
+    private JPanel content2;
 
     private final String STR_NOM_PROGRAMME = "M A V E O";
 
@@ -72,6 +77,7 @@ public class MainFrame {
     JMenuItem enregistrerListeDeLecture;
     JMenuItem quitter;
 
+
     private MainFrameControleur mainFrameControleur;
 
     public MainFrame() {
@@ -82,13 +88,21 @@ public class MainFrame {
     }
 
 
+    public JPanel getContent() {
+        return content;
+    }
+
+    public JPanel getContent2() {
+        return content2;
+    }
+
     /*
-    Initialise le MainFrame avec tous les contrôles nécessaires. Méthode executée lors de la construction
-    du Frame.
-     */
+        Initialise le MainFrame avec tous les contrôles nécessaires. Méthode executée lors de la construction
+        du Frame.
+         */
     private void initialiserMainFrame() {
-        JPanel content = new JPanel(new java.awt.GridLayout());
-        JPanel content2 = new JPanel(new java.awt.BorderLayout());
+         content = new JPanel(new java.awt.GridLayout());
+         content2 = new JPanel(new java.awt.BorderLayout());
 
         //Initialisation des boutons
         btnJouerPause = new JButton(STR_BOUTON_JOUER);
@@ -100,7 +114,7 @@ public class MainFrame {
         content.add(btnJouerPause);
         content.add(btnArreter);
 
-        content2.add(labelNomChanson, BorderLayout.CENTER);
+        content2.add(labelNomChanson, BorderLayout.SOUTH);
 
 
         fenetre.add(content, BorderLayout.SOUTH);
@@ -111,9 +125,10 @@ public class MainFrame {
         fenetre.setVisible(true);
     }
 
-    /*
-    Crée la barre de menu avec tous les components
-         */
+    /**
+     * Cree la barre de menu avec les components du menu
+     * @return la barre etablie prete a etre ajoutee au frame.
+     */
     private JMenuBar creerMenu() {
         JMenuBar menu = new JMenuBar();
         JMenu media = new JMenu(STR_MENU_ITEM_MEDIA);
