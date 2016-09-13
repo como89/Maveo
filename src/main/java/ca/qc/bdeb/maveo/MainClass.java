@@ -1,6 +1,6 @@
 package ca.qc.bdeb.maveo;
 
-import ca.qc.bdeb.maveo.controleur.MenuEditionControleur;
+import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.util.UtilLib;
@@ -21,10 +21,10 @@ public class MainClass {
         // Lecteur média
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
 
-        MenuEditionControleur menuEditionControleur = new MenuEditionControleur();
-        menuEditionControleur.ajouterMainFrame(mainFrame);
-        menuEditionControleur.ajouterFileOpener(fileOpener);
-        menuEditionControleur.ajouterGestionnaireMusique(gestionMusique);
+        MainFrameControleur mainFrameControleur = new MainFrameControleur();
+        mainFrameControleur.ajouterMainFrame(mainFrame);
+        mainFrameControleur.ajouterFileOpener(fileOpener);
+        mainFrameControleur.ajouterGestionnaireMusique(gestionMusique);
 
 
     }

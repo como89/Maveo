@@ -1,6 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
-import ca.qc.bdeb.maveo.controleur.MenuEditionControleur;
+import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +46,8 @@ public class MainFrame {
         this.btnArreter = btnArreter;
     }
 
-    private final String STR_BOUTON_PAUSE = "PAUSE";
+    public final String STR_BOUTON_PAUSE = "PAUSE";
+    public final String STR_BOUTON_JOUER = "JOUER";
     private final String STR_BOUTON_STOP = "STOP";
     private final String STR_MENU_ITEM_MEDIA = "Média";
     private final String STR_MEDIA_OPTION_OUVRIR = "Ouvrir un fichier...";
@@ -66,12 +67,12 @@ public class MainFrame {
     JMenu aide;
 
 
-    JMenuItem ouvrirUnFichier;
+    JMenuItem jMenuItemOuvrirUnFichier;
     JMenuItem ouvrirPlusieursFichiers;
     JMenuItem enregistrerListeDeLecture;
     JMenuItem quitter;
 
-    private MenuEditionControleur menuEditionControleur;
+    private MainFrameControleur mainFrameControleur;
 
     public MainFrame() {
 
@@ -120,17 +121,17 @@ public class MainFrame {
         JMenu aide = new JMenu(STR_MENU_ITEM_AIDE);
 
 
-        ouvrirUnFichier = new JMenuItem(STR_MEDIA_OPTION_OUVRIR);
+        jMenuItemOuvrirUnFichier = new JMenuItem(STR_MEDIA_OPTION_OUVRIR);
         ouvrirPlusieursFichiers = new JMenuItem(STR_MEDIA_OPTION_OUVRIRPLUSIEURS);
         enregistrerListeDeLecture = new JMenuItem(STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE);
         quitter = new JMenuItem(STR_MEDIA_OPTION_QUITTER);
 
-        media.add(ouvrirUnFichier);
+        media.add(jMenuItemOuvrirUnFichier);
         media.add(ouvrirPlusieursFichiers);
         media.add(enregistrerListeDeLecture);
         media.add(quitter);
 
-        ouvrirUnFichier.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+        jMenuItemOuvrirUnFichier.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         ouvrirPlusieursFichiers.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK |
                 KeyEvent.SHIFT_DOWN_MASK));
         enregistrerListeDeLecture.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
@@ -148,10 +149,26 @@ public class MainFrame {
         return menu;
     }
 
-    public void addOuvrirFichierListener(ActionListener listener) {
-        ouvrirUnFichier.addActionListener(listener);
+    /**
+     * Ajoute un Listener à jMenuItemOuvrirUnFichier
+     * @param listener Le listener à ajouter à jMenuItemOuvrirUnFichier
+     */
+    public void addListenerJMenuItemOuvrirFichier(ActionListener listener) {
+        jMenuItemOuvrirUnFichier.addActionListener(listener);
     }
 
+    /**
+     * Ajoute un Listener à btnJouerPause
+     * @param listener Le listener à ajouter à btnJouerPause
+     */
+    public void addListenerBtnJouerPause (ActionListener listener){
+        btnJouerPause.addActionListener(listener);
+    }
+
+    /**
+     * Retourne la fenêtre
+     * @return la fenêtre
+     */
     public JFrame getFenetre() {
         return fenetre;
     }

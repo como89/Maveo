@@ -11,7 +11,11 @@ import java.awt.event.ActionListener;
 /**
  * Created by 1379708 on 2016-09-08.
  */
-public class MenuEditionControleur {
+public class MainFrameControleur {
+
+    public MainFrameControleur() {
+
+    }
 
     // vue MainFrame
     private MainFrame mainFrame;
@@ -22,27 +26,30 @@ public class MenuEditionControleur {
     // Gestionnaire média
     private GestionnaireMusique gestionMusique;
 
-    public MenuEditionControleur() {  }
 
     /**
      * Ajoute la fenêtre principale au contrôleur
+     *
      * @param mainFrame la fenêtre principale
      */
-    public void ajouterMainFrame(MainFrame mainFrame){
+    public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        this.mainFrame.addOuvrirFichierListener(new OuvrirFichierListener());
+        this.mainFrame.addListenerJMenuItemOuvrirFichier(new JMenuItemOuvrirFichierListener());
+        this.mainFrame.addListenerBtnJouerPause(new BtnJouerPauseListener());
     }
 
     /**
      * Ajoute un FileOpener au contrôleur
+     *
      * @param fileOpener le FileOpener à ajouter
      */
-    public void ajouterFileOpener(FileOpener fileOpener){
+    public void ajouterFileOpener(FileOpener fileOpener) {
         this.fileOpener = fileOpener;
     }
 
     /**
      * Ajoute un gestionnaire de média
+     *
      * @param gestionMusique gesionnaire de média à ajouter
      */
     public void ajouterGestionnaireMusique(GestionnaireMusique gestionMusique) {
@@ -51,6 +58,7 @@ public class MenuEditionControleur {
 
     /**
      * Active l'ouverture d'un fichier
+     *
      * @param parent fenêtre dans laquelle la fenêtre d'ouverture du fichier s'affiche
      */
     public void activerOuvertureFichier(Component parent) {
@@ -60,10 +68,27 @@ public class MenuEditionControleur {
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouerture de fichier
      */
-    class OuvrirFichierListener implements ActionListener {
+    class JMenuItemOuvrirFichierListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String cheminFichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
-            gestionMusique.demarrer(cheminFichier);
+            gestionMusique.setCheminFichier(cheminFichier);
+            gestionMusique.demarrer();
+            gestionMusique.pause();
+        }
+    }
+
+    /**
+     * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton de Jouer/Pause
+     */
+    class BtnJouerPauseListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (gestionMusique.enLecture()) {
+                gestionMusique.pause();
+                mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
+            } else {
+                gestionMusique.reprendre();
+                mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
+            }
         }
     }
 }

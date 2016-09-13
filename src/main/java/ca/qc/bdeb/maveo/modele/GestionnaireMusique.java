@@ -11,6 +11,8 @@ public class GestionnaireMusique {
 
     private MediaPlayer mediaPlayer;
 
+    private String cheminFichier;
+
     public GestionnaireMusique() {
         AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
         mediaPlayer = audioEcouteur.getMediaPlayer();
@@ -19,11 +21,10 @@ public class GestionnaireMusique {
     /**
      * Méthode qui permet de démarrer une musique selon le path du fichier.
      *
-     * @param pathFichier - Le chemin du fichier audio.
      * @return true, si l'exécution a eu succès, false si pas de succès.
      */
-    public boolean demarrer(String pathFichier) {
-        return mediaPlayer.startMedia(pathFichier);
+    public boolean demarrer() {
+        return mediaPlayer.startMedia(cheminFichier);
     }
 
     /**
@@ -50,6 +51,16 @@ public class GestionnaireMusique {
     }
 
     /**
+     * Méthode pour savoir si la musique est en lecture.
+     *
+     * @return true si en lecture, false si pas en lecture
+     */
+    public boolean enLecture(){
+        return mediaPlayer.isPlaying();
+    }
+
+
+    /**
      * Méthode qui permet de reprendre la musique.
      */
     public void reprendre() {
@@ -58,6 +69,7 @@ public class GestionnaireMusique {
 
     /**
      * Méthode pour obtenir le débit du volume.
+     *
      * @return un pourcentage du volume entre 0 et 200.
      */
     public int getVolume() {
@@ -89,5 +101,13 @@ public class GestionnaireMusique {
      */
     public long getTempsEcoule() {
         return mediaPlayer.getTime();
+    }
+
+    public String getCheminFichier() {
+        return cheminFichier;
+    }
+
+    public void setCheminFichier(String cheminFichier) {
+        this.cheminFichier = cheminFichier;
     }
 }
