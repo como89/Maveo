@@ -41,12 +41,12 @@ public class GestionnaireMusique {
     }
 
     /**
-     * Méthode pour savoir si la musique est en pause.
+     * Méthode pour savoir si la musique est en lecture.
      *
-     * @return true, en pause, false n'est pas en pause.
+     * @return true, en lecture, false n'est pas en lecture.
      */
-    public boolean enPause() {
-        return !mediaPlayer.canPause();
+    public boolean enCoursDeLecture() {
+        return mediaPlayer.isPlaying();
     }
 
     /**
