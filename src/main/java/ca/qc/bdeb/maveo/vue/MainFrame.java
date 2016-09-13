@@ -27,7 +27,6 @@ public class MainFrame {
     private boolean estEnJeu;
 
     private final String STR_NOM_PROGRAMME = "M A V E O";
-    private final String STR_BOUTON_PLAY = "PLAY";
 
     public JButton getBtnJouerPause() {
         return btnJouerPause;
@@ -91,7 +90,7 @@ public class MainFrame {
         JPanel content2 = new JPanel(new java.awt.BorderLayout());
 
         //Initialisation des boutons
-        btnJouerPause = new JButton(STR_BOUTON_PLAY);
+        btnJouerPause = new JButton(STR_BOUTON_JOUER);
         btnArreter = new JButton(STR_BOUTON_STOP);
 
         //ajout des boutons sur le frame
@@ -151,6 +150,7 @@ public class MainFrame {
 
     /**
      * Ajoute un Listener à jMenuItemOuvrirUnFichier
+     *
      * @param listener Le listener à ajouter à jMenuItemOuvrirUnFichier
      */
     public void addListenerJMenuItemOuvrirFichier(ActionListener listener) {
@@ -159,14 +159,25 @@ public class MainFrame {
 
     /**
      * Ajoute un Listener à btnJouerPause
+     *
      * @param listener Le listener à ajouter à btnJouerPause
      */
-    public void addListenerBtnJouerPause (ActionListener listener){
+    public void addListenerBtnJouerPause(ActionListener listener) {
         btnJouerPause.addActionListener(listener);
     }
 
     /**
+     * Ajoute un Listener à btnArreter
+     *
+     * @param listener Le listener à ajouter à btnArreter
+     */
+    public void addListenerBtnArreter(ActionListener listener) {
+        btnArreter.addActionListener(listener);
+    }
+
+    /**
      * Retourne la fenêtre
+     *
      * @return la fenêtre
      */
     public JFrame getFenetre() {

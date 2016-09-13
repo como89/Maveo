@@ -36,6 +36,7 @@ public class MainFrameControleur {
         this.mainFrame = mainFrame;
         this.mainFrame.addListenerJMenuItemOuvrirFichier(new JMenuItemOuvrirFichierListener());
         this.mainFrame.addListenerBtnJouerPause(new BtnJouerPauseListener());
+        this.mainFrame.addListenerBtnArreter(new BtnArreterListener());
     }
 
     /**
@@ -89,6 +90,16 @@ public class MainFrameControleur {
                 gestionMusique.reprendre();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
             }
+        }
+    }
+
+    /**
+     * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'arrêt
+     */
+    class BtnArreterListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            gestionMusique.arreter();
+            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
         }
     }
 }

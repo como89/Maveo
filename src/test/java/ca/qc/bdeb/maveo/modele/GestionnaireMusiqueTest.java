@@ -17,7 +17,8 @@ public class GestionnaireMusiqueTest {
     @org.junit.Test
     public void testDemarer() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
-        boolean success = gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
+        boolean success = gestionMusique.demarrer();
         Thread.currentThread().join(10);
         Assert.assertTrue(success);
     }
@@ -25,7 +26,8 @@ public class GestionnaireMusiqueTest {
     @org.junit.Test
     public void testArreter() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
-        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.demarrer();
         Thread.currentThread().join(10);
         gestionMusique.arreter();
         Thread.currentThread().join(10);
@@ -35,7 +37,8 @@ public class GestionnaireMusiqueTest {
     @org.junit.Test
     public void testPause() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
-        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.demarrer();
         Thread.currentThread().join(10);
         gestionMusique.pause();
         Thread.currentThread().join(10);
@@ -45,7 +48,8 @@ public class GestionnaireMusiqueTest {
     @org.junit.Test
     public void testReprendre() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
-        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.demarrer();
         gestionMusique.pause();
         Thread.currentThread().join(10);
         gestionMusique.reprendre();
@@ -56,7 +60,8 @@ public class GestionnaireMusiqueTest {
     @org.junit.Test
     public void testVolume() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
-        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.demarrer();
         Thread.currentThread().join(10);
         int volume = gestionMusique.getVolume();
         int volumeModifie = volume + 50;
@@ -70,7 +75,8 @@ public class GestionnaireMusiqueTest {
     @org.junit.Test
     public void testTemps() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
-        gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
+        gestionMusique.demarrer();
         Thread.currentThread().join(1200);
         Assert.assertTrue(gestionMusique.getTempsEcoule() >= 1000);
         long tempsTotal = gestionMusique.getTempsTotal();
