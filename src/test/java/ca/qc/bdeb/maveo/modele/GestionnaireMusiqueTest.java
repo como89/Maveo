@@ -15,7 +15,7 @@ public class GestionnaireMusiqueTest {
     }
 
     @org.junit.Test
-    public void demarer() throws Exception {
+    public void testDemarer() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         boolean success = gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
         Thread.currentThread().join(10);
@@ -23,7 +23,7 @@ public class GestionnaireMusiqueTest {
     }
 
     @org.junit.Test
-    public void arreter() throws Exception {
+    public void testArreter() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
         Thread.currentThread().join(10);
@@ -33,7 +33,7 @@ public class GestionnaireMusiqueTest {
     }
 
     @org.junit.Test
-    public void pause() throws Exception {
+    public void testPause() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
         Thread.currentThread().join(10);
@@ -43,7 +43,7 @@ public class GestionnaireMusiqueTest {
     }
 
     @org.junit.Test
-    public void reprendre() throws Exception {
+    public void testReprendre() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
         gestionMusique.pause();
@@ -54,7 +54,7 @@ public class GestionnaireMusiqueTest {
     }
 
     @org.junit.Test
-    public void volume() throws Exception {
+    public void testVolume() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
         Thread.currentThread().join(10);
@@ -68,7 +68,7 @@ public class GestionnaireMusiqueTest {
     }
 
     @org.junit.Test
-    public void temps() throws Exception {
+    public void testTemps() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.demarrer(TXT_LINK_MUSIQUE_TEST);
         Thread.currentThread().join(1200);
