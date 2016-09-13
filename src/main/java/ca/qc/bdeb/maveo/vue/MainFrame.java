@@ -100,6 +100,7 @@ public class MainFrame {
 
         content2.add(labelNomChanson, BorderLayout.CENTER);
 
+
         fenetre.add(content, BorderLayout.SOUTH);
         fenetre.add(content2, BorderLayout.NORTH);
         fenetre.setJMenuBar(creerMenu());
