@@ -24,6 +24,7 @@ public class MainFrame {
     private JFrame fenetre;
     private JButton btnJouerPause;
     private JButton btnArreter;
+    private JLabel labelNomChanson;
     private boolean estEnJeu;
 
     private final String STR_NOM_PROGRAMME = "M A V E O";
@@ -96,6 +97,8 @@ public class MainFrame {
         //ajout des boutons sur le frame
         content.add(btnJouerPause);
         content.add(btnArreter);
+
+        content2.add(labelNomChanson, BorderLayout.CENTER);
 
         fenetre.add(content, BorderLayout.SOUTH);
         fenetre.add(content2, BorderLayout.NORTH);
