@@ -1,6 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
-import ca.qc.bdeb.maveo.controleur.ControleurMenu;
+import ca.qc.bdeb.maveo.controleur.MenuEditionControleur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class MainFrame {
 
     private static final String STR_MENU_ITEM_LECTURE = "Lecture";
     private static final String STR_MENU_ITEM_AUDIO = "Audio";
-    private static final String STR_MENU_ITEM_VIDEO = "Video";
+    private static final String STR_MENU_ITEM_VIDEO = "Vidéo";
     private static final String STR_MENU_ITEM_SOUSTITRES = "Sous-titres";
     private static final String STR_MENU_ITEM_OUTILS = "Outils";
     private static final String STR_MENU_ITEM_VUE = "Vue";
@@ -26,7 +26,7 @@ public class MainFrame {
     private JButton btnArreter;
     private boolean estEnJeu;
 
-    private final String STR_NOM_PROGRAMME = "MAVEO";
+    private final String STR_NOM_PROGRAMME = "M A V E O";
     private final String STR_BOUTON_PLAY = "PLAY";
 
     public JButton getBtnJouerPause() {
@@ -48,9 +48,9 @@ public class MainFrame {
 
     private final String STR_BOUTON_PAUSE = "PAUSE";
     private final String STR_BOUTON_STOP = "STOP";
-    private final String STR_MENU_ITEM_MEDIA = "Media";
-    private final String STR_MEDIA_OPTION_OUVRIR = "Ouvrir un fichier";
-    private static final String STR_MEDIA_OPTION_OUVRIRPLUSIEURS = "Ouvrir plusieurs fichiers";
+    private final String STR_MENU_ITEM_MEDIA = "Média";
+    private final String STR_MEDIA_OPTION_OUVRIR = "Ouvrir un fichier...";
+    private static final String STR_MEDIA_OPTION_OUVRIRPLUSIEURS = "Ouvrir plusieurs fichiers...";
     private static final String STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE = "Enregistrer Liste de lecture";
     private static final String STR_MEDIA_OPTION_QUITTER = "Quitter";
 
@@ -71,7 +71,7 @@ public class MainFrame {
     JMenuItem enregistrerListeDeLecture;
     JMenuItem quitter;
 
-    private ControleurMenu controleurMenu;
+    private MenuEditionControleur menuEditionControleur;
 
     public MainFrame() {
 
@@ -144,12 +144,6 @@ public class MainFrame {
         menu.add(outils);
         menu.add(vue);
         menu.add(aide);
-
-        ouvrirUnFichier.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
         return menu;
     }

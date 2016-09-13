@@ -16,8 +16,10 @@ public class FileOpener {
     }
 
 
-    /*
-    Active la fenêtre d'ouverture d'un fichier.
+    /**
+     * Active la fenêtre d'ouverture d'un fichier.
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
+     * @return le chemin du fichier à ouvrir
      */
     public String activerOuvertureFichier(Component parent) {
 
