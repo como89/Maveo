@@ -29,7 +29,7 @@ public class GestionnaireMusiqueTest {
         Thread.currentThread().join(10);
         gestionMusique.arreter();
         Thread.currentThread().join(10);
-        Assert.assertFalse(gestionMusique.enCoursDeLecture());
+        Assert.assertFalse(gestionMusique.enLecture());
     }
 
     @org.junit.Test
@@ -39,7 +39,7 @@ public class GestionnaireMusiqueTest {
         Thread.currentThread().join(10);
         gestionMusique.pause();
         Thread.currentThread().join(10);
-        Assert.assertFalse(gestionMusique.enCoursDeLecture());
+        Assert.assertFalse(gestionMusique.enLecture());
     }
 
     @org.junit.Test
@@ -50,7 +50,7 @@ public class GestionnaireMusiqueTest {
         Thread.currentThread().join(10);
         gestionMusique.reprendre();
         Thread.currentThread().join(10);
-        Assert.assertTrue(gestionMusique.enCoursDeLecture());
+        Assert.assertTrue(gestionMusique.enLecture());
     }
 
     @org.junit.Test

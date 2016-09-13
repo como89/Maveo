@@ -45,7 +45,7 @@ public class GestionnaireMusique {
      *
      * @return true, en lecture, false n'est pas en lecture.
      */
-    public boolean enCoursDeLecture() {
+    public boolean enLecture() {
         return mediaPlayer.isPlaying();
     }
 
