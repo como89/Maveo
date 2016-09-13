@@ -63,6 +63,8 @@ public class GestionnaireMusiqueTest {
         gestionMusique.setVolume(volumeModifie);
         Thread.currentThread().join(10);
         Assert.assertEquals(volumeModifie, gestionMusique.getVolume());
+        //Retour au volume initial
+        gestionMusique.setVolume(volume);
     }
 
     @org.junit.Test
