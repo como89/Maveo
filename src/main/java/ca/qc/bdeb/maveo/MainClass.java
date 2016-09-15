@@ -31,9 +31,12 @@ public class MainClass extends Application {
             stage.setScene(scene);
             stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
             stage.show();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+
 
         // modele
         FileOpener fileOpener = new FileOpener();

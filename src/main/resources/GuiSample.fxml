@@ -9,32 +9,32 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane id="layoutFenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.qc.bdeb.maveo.vue.Fenetre">
+<BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#renommerBouton" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.qc.bdeb.maveo.vue.MainFrame">
    <top>
-      <MenuBar id="menuBarFenetre" BorderPane.alignment="CENTER">
+      <MenuBar id="menuBarFenetre" fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
-          <Menu id="menuItemFile" mnemonicParsing="false" text="File">
+          <Menu id="menuItemFile" fx:id="menuItemFile" mnemonicParsing="false" text="File">
             <items>
-              <MenuItem id="menuItemFileClose" mnemonicParsing="false" text="Close" />
+              <MenuItem id="menuItemFileClose" fx:id="menuItemFileClose" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu id="menuItemEdit" mnemonicParsing="false" text="Edit">
+          <Menu id="menuItemEdit" fx:id="menuItemEdit" mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem id="menuItemEditDelete" mnemonicParsing="false" text="Delete" />
+              <MenuItem id="menuItemEditDelete" fx:id="menuItemEditDelete" mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu id="menuItemHelp" mnemonicParsing="false" text="Help">
+          <Menu id="menuItemHelp" fx:id="menuItemHelp" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem id="menuItemHelpAbout" mnemonicParsing="false" text="About" />
+              <MenuItem id="menuItemHelpAbout" fx:id="menuItemHelpAbout" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
    <bottom>
-      <Pane id="panelControleurFenetre" prefHeight="56.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <Pane id="panelControleurFenetre" fx:id="panelControleur" prefHeight="56.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button id="boutonPlayPause" fx:id="boutonPlayPause" layoutX="36.0" layoutY="14.0" mnemonicParsing="false" onAction="#afficherMessage" prefHeight="29.0" prefWidth="52.0" text="Play">
+            <Button id="boutonPlayPause" fx:id="boutonPlayPause" layoutX="36.0" layoutY="14.0" mnemonicParsing="false" onAction="#afficherMessage" onMouseClicked="#renommerBouton" prefHeight="29.0" prefWidth="52.0" text="Play">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -44,18 +44,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Slider id="sliderProgression" layoutX="207.0" layoutY="21.0" prefHeight="14.0" prefWidth="313.0" />
-            <Button id="boutonArreter" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="Stop">
+            <Slider id="sliderProgression" fx:id="sliderProgression" layoutX="207.0" layoutY="21.0" prefHeight="14.0" prefWidth="313.0" />
+            <Button id="boutonArreter" fx:id="boutonArreter" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="Stop">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button id="boutonSuivant" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="Next">
+            <Button id="boutonSuivant" fx:id="boutonSuivant" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="Next">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Slider id="sliderVolume" layoutX="554.0" layoutY="7.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="14.0" />
+            <Slider id="sliderVolume" fx:id="sliderVolume" layoutX="554.0" layoutY="7.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="14.0" />
          </children>
       </Pane>
    </bottom>
@@ -63,6 +63,6 @@
       <Cursor fx:constant="S_RESIZE" />
    </cursor>
    <left>
-      <Pane id="panelEcranFenetre" prefHeight="319.0" prefWidth="640.0" BorderPane.alignment="CENTER" />
+      <Pane id="panelEcranFenetre" fx:id="panelEcran" prefHeight="319.0" prefWidth="640.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>

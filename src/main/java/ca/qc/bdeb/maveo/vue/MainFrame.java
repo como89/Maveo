@@ -1,8 +1,16 @@
 package ca.qc.bdeb.maveo.vue;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -33,8 +41,66 @@ public class MainFrame {
     private static final String STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE = "Enregistrer Liste de lecture";
     private static final String STR_MEDIA_OPTION_QUITTER = "Quitter";
 
+    @FXML
+    Button boutonPlayPause;
+
+    @FXML
+    Button boutonArreter;
+
+    @FXML
+    Button boutonPrecedent;
+
+    @FXML
+    Button boutonSuivant;
+
+    @FXML
+    Slider sliderProgression;
+
+    @FXML
+    Slider sliderVolume;
+
+    @FXML
+    Pane panelControleur;
+
+    @FXML
+    Pane panelEcran;
+
+    @FXML
+    BorderPane fenetrePrincipale;
+
+    @FXML
+    MenuBar menuBar;
+
+    @FXML
+    MenuItem menuItemFile;
+
+    @FXML
+    MenuItem menuItemEdit;
+
+    @FXML
+    MenuItem menuItemHelp;
+
+    @FXML
+    MenuItem menuItemFileClose;
+
+    @FXML
+    MenuItem menuItemEditDelete;
+
+    @FXML
+    MenuItem menuItemHelpAbout;
+
     public MainFrame() {
         
+    }
+
+    public void afficherMessage(){
+        System.out.println("Ca marche");
+
+    }
+
+    public void renommerBouton(){
+        boutonPlayPause.setText("Allahu");
+
     }
 
     /**
