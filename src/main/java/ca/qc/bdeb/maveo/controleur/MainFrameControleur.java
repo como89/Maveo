@@ -3,10 +3,11 @@ package ca.qc.bdeb.maveo.controleur;
 import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import ca.qc.bdeb.maveo.vue.TypeComposant;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
@@ -35,9 +36,9 @@ public class MainFrameControleur {
      */
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        this.mainFrame.addListenerJMenuItemOuvrirFichier(new JMenuItemOuvrirFichierListener());
-        this.mainFrame.addListenerBtnJouerPause(new BtnJouerPauseListener());
-        this.mainFrame.addListenerBtnArreter(new BtnArreterListener());
+        this.mainFrame.addEventHandler(new MenuItemOuvrirEventHandler(), TypeComposant.MENU_BUTTON);
+        this.mainFrame.addEventHandler(new BtnJouerPauseEventHandler(), TypeComposant.BUTTON);
+        this.mainFrame.addEventHandler(new BtnArreterEventHandler(), TypeComposant.BUTTON);
     }
 
     /**
@@ -68,10 +69,11 @@ public class MainFrameControleur {
     }
 
     /**
-     * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouerture de fichier
+     * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouverture de fichier
      */
-    class JMenuItemOuvrirFichierListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+    class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent event) {
             File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             gestionMusique.setCheminFichier(fichier.getAbsolutePath());
             mainFrame.getLabelNomChanson().setText(fichier.getName());
@@ -83,8 +85,8 @@ public class MainFrameControleur {
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton de Jouer/Pause
      */
-    class BtnJouerPauseListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+    class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
+        public void handle(ActionEvent event) {
             if (gestionMusique.enLecture()) {
                 gestionMusique.pause();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
@@ -98,8 +100,9 @@ public class MainFrameControleur {
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'arrêt
      */
-    class BtnArreterListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+    class BtnArreterEventHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent event) {
             gestionMusique.arreter();
             mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
         }

@@ -1,10 +1,11 @@
 package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
@@ -151,11 +152,11 @@ public class MainFrame {
         media.add(enregistrerListeDeLecture);
         media.add(quitter);
 
-        jMenuItemOuvrirUnFichier.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-        ouvrirPlusieursFichiers.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK |
-                KeyEvent.SHIFT_DOWN_MASK));
-        enregistrerListeDeLecture.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
-        quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+        // jMenuItemOuvrirUnFichier.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+        //  ouvrirPlusieursFichiers.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK |
+        //           KeyEvent.SHIFT_DOWN_MASK));
+        //    enregistrerListeDeLecture.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
+        //   quitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 
         menu.add(media);
         menu.add(lecture);
@@ -170,30 +171,20 @@ public class MainFrame {
     }
 
     /**
-     * Ajoute un Listener à jMenuItemOuvrirUnFichier
-     *
-     * @param listener Le listener à ajouter à jMenuItemOuvrirUnFichier
+     * Cette méthode permet d'ajouter un eventHandler au composant selon le type du composant.
+     * @param eventHandler - l'eventHandler à ajouter.
+     * @param typeComposant - Le type du composant.
      */
-    public void addListenerJMenuItemOuvrirFichier(ActionListener listener) {
-        jMenuItemOuvrirUnFichier.addActionListener(listener);
-    }
-
-    /**
-     * Ajoute un Listener à btnJouerPause
-     *
-     * @param listener Le listener à ajouter à btnJouerPause
-     */
-    public void addListenerBtnJouerPause(ActionListener listener) {
-        btnJouerPause.addActionListener(listener);
-    }
-
-    /**
-     * Ajoute un Listener à btnArreter
-     *
-     * @param listener Le listener à ajouter à btnArreter
-     */
-    public void addListenerBtnArreter(ActionListener listener) {
-        btnArreter.addActionListener(listener);
+    //TODO : replacer l'eventHandler selon les composants de la frame principale en JAVA FX.
+    public void addEventHandler(EventHandler<?> eventHandler, TypeComposant typeComposant) {
+        switch (typeComposant) {
+            case BUTTON:
+                break;
+            case MENU_BUTTON:
+                break;
+            case SLIDER:
+                break;
+        }
     }
 
     /**
