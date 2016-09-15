@@ -5,8 +5,8 @@ import uk.co.caprica.vlcj.player.MediaPlayer;
 
 /**
  * @author Nicholas
- * @since 08/09/2016
  * @doc http://caprica.github.io/vlcj/javadoc/3.0.0/uk/co/caprica/vlcj/player/MediaPlayer.html
+ * @since 08/09/2016
  */
 public class GestionnaireMusique {
 
@@ -20,12 +20,11 @@ public class GestionnaireMusique {
     }
 
     /**
-     * Méthode qui permet de démarrer une musique selon le path du fichier.
-     *
-     * @return true, si l'exécution a eu succès, false si pas de succès.
+     * Méthode qui permet de préparer le média sans le jouer
+     * @return Retourne true, si le fichier existe, false, le fichier n'existe pas.
      */
-    public boolean demarrer() {
-        return mediaPlayer.startMedia(cheminFichier);
+    public boolean preparerMedia() {
+        return mediaPlayer.prepareMedia(cheminFichier);
     }
 
     /**
@@ -47,14 +46,14 @@ public class GestionnaireMusique {
      *
      * @return true si en lecture, false si pas en lecture
      */
-    public boolean enLecture(){
+    public boolean enLecture() {
         return mediaPlayer.isPlaying();
     }
 
     /**
-     * Méthode qui permet de reprendre la musique.
+     * Méthode qui permet de jouer la musique.
      */
-    public void reprendre() {
+    public void jouerMedia() {
         mediaPlayer.play();
     }
 
@@ -87,6 +86,7 @@ public class GestionnaireMusique {
 
     /**
      * Méthode pour obtenir le temps total d'une musique.
+     *
      * @return le temps total de la musique en millisecondes.
      */
     public long getTempsTotal() {

@@ -52,7 +52,7 @@ public class GestionnaireMusiqueTest {
         gestionMusique.demarrer();
         gestionMusique.pause();
         Thread.currentThread().join(10);
-        gestionMusique.reprendre();
+        gestionMusique.jouerMedia();
         Thread.currentThread().join(10);
         Assert.assertTrue(gestionMusique.enLecture());
     }

@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class MainFrameTest {
 
-    //  MainFrame testFrame = new MainFrame();
+
     private int test = 0;
 
     @Before
@@ -35,12 +35,12 @@ public class MainFrameTest {
         bot.mousePress(InputEvent.BUTTON1_MASK);
 //add time between press and release or the input event system may
 //not think it is a click
+
+        bot.mouseRelease(InputEvent.BUTTON1_MASK);
         try {
             Thread.sleep(250);
         } catch (InterruptedException e) {
         }
-        bot.mouseRelease(InputEvent.BUTTON1_MASK);
-
 
       /*  testFrame.getBtnArreter().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

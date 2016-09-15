@@ -75,11 +75,11 @@ public class MainFrameControleur {
     class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
+
             File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             gestionMusique.setCheminFichier(fichier.getAbsolutePath());
-            //mainFrame.getLabelNomChanson().setText(fichier.getName());
-            gestionMusique.demarrer();
-            gestionMusique.pause();
+            // mainFrame.getLabelNomChanson().setText(fichier.getName());
+            gestionMusique.preparerMedia();
         }
     }
 
@@ -87,12 +87,13 @@ public class MainFrameControleur {
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton de Jouer/Pause
      */
     class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
+
         public void handle(ActionEvent event) {
             if (gestionMusique.enLecture()) {
                 gestionMusique.pause();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
             } else {
-                gestionMusique.reprendre();
+            //    gestionMusique.jouerMedia();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
             }
         }
