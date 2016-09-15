@@ -6,6 +6,8 @@ import ca.qc.bdeb.maveo.vue.MainFrame;
 import ca.qc.bdeb.maveo.vue.TypeComposant;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.*;
+import javafx.stage.Window;
 
 import java.awt.*;
 import java.io.File;
@@ -36,9 +38,8 @@ public class MainFrameControleur {
      */
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        this.mainFrame.addEventHandler(new MenuItemOuvrirEventHandler(), TypeComposant.MENU_BUTTON);
-        this.mainFrame.addEventHandler(new BtnJouerPauseEventHandler(), TypeComposant.BUTTON);
-        this.mainFrame.addEventHandler(new BtnArreterEventHandler(), TypeComposant.BUTTON);
+        this.mainFrame.addEventHandlerBtnPlay(new BtnJouerPauseEventHandler());
+        this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
     }
 
     /**
@@ -64,7 +65,7 @@ public class MainFrameControleur {
      *
      * @param parent fenêtre dans laquelle la fenêtre d'ouverture du fichier s'affiche
      */
-    public void activerOuvertureFichier(Component parent) {
+    public void activerOuvertureFichier(Window parent) {
         fileOpener.activerOuvertureFichier(parent);
     }
 
@@ -74,11 +75,11 @@ public class MainFrameControleur {
     class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-           /* File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             gestionMusique.setCheminFichier(fichier.getAbsolutePath());
-            mainFrame.getLabelNomChanson().setText(fichier.getName());
+            //mainFrame.getLabelNomChanson().setText(fichier.getName());
             gestionMusique.demarrer();
-            gestionMusique.pause();*/
+            gestionMusique.pause();
         }
     }
 
@@ -87,13 +88,13 @@ public class MainFrameControleur {
      */
     class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
-           /* if (gestionMusique.enLecture()) {
+            if (gestionMusique.enLecture()) {
                 gestionMusique.pause();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
             } else {
                 gestionMusique.reprendre();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
-            }*/
+            }
         }
     }
 

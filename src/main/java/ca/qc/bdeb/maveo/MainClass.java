@@ -23,20 +23,16 @@ public class MainClass extends Application {
         //chargement des libs
         UtilLib.chargerLibSysteme();
 
+
         // vue
-        try {
             URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
-            BorderPane page = FXMLLoader.load(ressource);
+            FXMLLoader loader = new FXMLLoader(ressource);
+            BorderPane page = loader.load();
+            MainFrame mainFrame = loader.getController();
             Scene scene = new Scene(page);
             stage.setScene(scene);
             stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
             stage.show();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-
 
         // modele
         FileOpener fileOpener = new FileOpener();
@@ -45,7 +41,7 @@ public class MainClass extends Application {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
 
         MainFrameControleur mainFrameControleur = new MainFrameControleur();
-        // mainFrameControleur.ajouterMainFrame(mainFrame);
+        mainFrameControleur.ajouterMainFrame(mainFrame);
         mainFrameControleur.ajouterFileOpener(fileOpener);
         mainFrameControleur.ajouterGestionnaireMusique(gestionMusique);
     }

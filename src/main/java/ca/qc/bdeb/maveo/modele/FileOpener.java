@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.modele;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.stage.*;
 import java.io.File;
 
 /**
@@ -9,27 +8,20 @@ import java.io.File;
  */
 public class FileOpener {
 
-    JFileChooser fileChooser;
+    FileChooser fileChooser;
 
     public FileOpener() {
-        fileChooser = new JFileChooser();
+        fileChooser = new FileChooser();
     }
 
 
     /**
      * Active la fenêtre d'ouverture d'un fichier.
+     *
      * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
      * @return le chemin du fichier à ouvrir
      */
-    public File activerOuvertureFichier(Component parent) {
-
-        int returnVal = 0;
-        returnVal = fileChooser.showOpenDialog(parent);
-
-        File fichier = null;
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            fichier = fileChooser.getSelectedFile();
-        }
-        return fichier;
+    public File activerOuvertureFichier(Window parent) {
+        return fileChooser.showOpenDialog(parent);
     }
 }

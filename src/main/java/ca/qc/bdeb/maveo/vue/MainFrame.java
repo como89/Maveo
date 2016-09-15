@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.net.URL;
 
@@ -75,6 +77,9 @@ public class MainFrame {
     MenuItem menuItemFile;
 
     @FXML
+    MenuItem menuItemFileOpen;
+
+    @FXML
     MenuItem menuItemEdit;
 
     @FXML
@@ -90,33 +95,24 @@ public class MainFrame {
     MenuItem menuItemHelpAbout;
 
     public MainFrame() {
-        
-    }
-
-    public void afficherMessage(){
-        System.out.println("Ca marche");
 
     }
 
-    public void renommerBouton(){
-        boutonPlayPause.setText("Allahu");
-
+    public Window getFenetre() {
+        return fenetrePrincipale.getScene().getWindow();
     }
 
-    /**
-     * Cette méthode permet d'ajouter un eventHandler au composant selon le type du composant.
-     * @param eventHandler - l'eventHandler à ajouter.
-     * @param typeComposant - Le type du composant.
-     */
-    //TODO : replacer l'eventHandler selon les composants de la frame principale en JAVA FX.
-    public void addEventHandler(EventHandler<?> eventHandler, TypeComposant typeComposant) {
-        switch (typeComposant) {
-            case BUTTON:
-                break;
-            case MENU_BUTTON:
-                break;
-            case SLIDER:
-                break;
-        }
+    public Button getBtnJouerPause() {
+        return boutonPlayPause;
     }
+
+    public void addEventHandlerBtnPlay(EventHandler<ActionEvent> actionEvent) {
+        boutonPlayPause.setOnAction(actionEvent);
+    }
+
+    public void addEventHandlerOuvrirFichier(EventHandler<ActionEvent> actionEvent) {
+        menuItemFileOpen.setOnAction(actionEvent);
+    }
+
+    
 }
