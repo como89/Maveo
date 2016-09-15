@@ -93,7 +93,7 @@ public class MainFrameControleur {
                 gestionMusique.pause();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
             } else {
-            //    gestionMusique.jouerMedia();
+                gestionMusique.jouerMedia();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
             }
         }
