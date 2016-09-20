@@ -15,8 +15,6 @@ public class GestionnaireMusique {
     private String cheminFichier;
 
     public GestionnaireMusique() {
-        AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
-        mediaPlayer = audioEcouteur.getMediaPlayer();
     }
 
     /**
@@ -25,6 +23,8 @@ public class GestionnaireMusique {
      * @return Retourne true, si le fichier existe, false, le fichier n'existe pas.
      */
     public boolean preparerMedia() {
+        AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
+        mediaPlayer = audioEcouteur.getMediaPlayer();
         return mediaPlayer.prepareMedia(cheminFichier);
     }
 

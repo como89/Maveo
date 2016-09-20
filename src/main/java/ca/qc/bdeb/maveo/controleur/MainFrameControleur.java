@@ -78,6 +78,11 @@ public class MainFrameControleur {
     }
 
 
+    void fixVolumePosition(int volumePourcentage) {
+        gestionMusique.setVolume(volumePourcentage);
+    }
+
+
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouverture de fichier
      */
@@ -135,7 +140,7 @@ public class MainFrameControleur {
     class SliderVolumeChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            System.out.println("Volume Slider Value Changed to: " + newValue.intValue());
+            fixVolumePosition(newValue.intValue());
         }
     }
 }
