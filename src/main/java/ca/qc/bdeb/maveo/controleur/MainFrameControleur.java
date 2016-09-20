@@ -19,6 +19,9 @@ import java.io.File;
  */
 public class MainFrameControleur {
 
+    boolean isFreeMutexLockSlider = true;
+
+
     public MainFrameControleur() {
     }
 
@@ -135,9 +138,11 @@ public class MainFrameControleur {
     class SliderPositionChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            float position = newValue.floatValue();
-            float diviseur = 100;
-            fixerSliderPosition(position / diviseur);
+            if (isFreeMutexLockSlider) {
+                float position = newValue.floatValue();
+                float diviseur = 100;
+                fixerSliderPosition(position / diviseur);
+            }
         }
     }
 
@@ -155,9 +160,11 @@ public class MainFrameControleur {
 
         @Override
         public void positionChanged(MediaPlayer mediaPlayer, float v) {
+            isFreeMutexLockSlider = false;
             double position = v;
             double multiplier = 100;
             mainFrame.getSliderProgression().setValue(position * multiplier);
+            isFreeMutexLockSlider = true;
         }
 
         @Override
