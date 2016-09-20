@@ -60,7 +60,6 @@ public class MainFrameControleur {
      */
     public void ajouterGestionnaireMusique(GestionnaireMusique gestionMusique) {
         this.gestionMusique = gestionMusique;
-        this.gestionMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
     }
 
     /**
@@ -98,6 +97,7 @@ public class MainFrameControleur {
             gestionMusique.setCheminFichier(fichier.getAbsolutePath());
             // mainFrame.getLabelNomChanson().setText(fichier.getName());
             gestionMusique.preparerMedia();
+            gestionMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
         }
     }
 
