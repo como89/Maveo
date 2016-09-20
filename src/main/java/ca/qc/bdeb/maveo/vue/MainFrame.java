@@ -123,4 +123,12 @@ public class MainFrame {
         sliderVolume.valueProperty().addListener(changeListener);
     }
 
+
+    public Slider getSliderProgression() {
+        return sliderProgression;
+    }
+
+    public Slider getSliderVolume() {
+        return sliderVolume;
+    }
 }

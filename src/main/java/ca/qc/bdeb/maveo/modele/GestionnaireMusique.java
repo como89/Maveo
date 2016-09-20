@@ -2,6 +2,7 @@ package ca.qc.bdeb.maveo.modele;
 
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
 /**
  * @author Nicholas
@@ -131,5 +132,13 @@ public class GestionnaireMusique {
      */
     public void setPosition(float position) {
         mediaPlayer.setPosition(position);
+    }
+
+    /**
+     * Ajoute un Listener au lecteur média
+     * @param mediaPlayerEventListener le Listener à ajouter au lecteur média
+     */
+    public void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener){
+        mediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
     }
 }
