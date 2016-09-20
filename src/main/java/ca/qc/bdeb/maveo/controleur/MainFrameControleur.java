@@ -99,8 +99,7 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
 
             File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
-            if(fichier != null)
-            {
+            if (fichier != null) {
                 gestionMusique.setCheminFichier(fichier.getAbsolutePath());
                 // mainFrame.getLabelNomChanson().setText(fichier.getName());
                 gestionMusique.preparerMedia();
@@ -164,10 +163,15 @@ public class MainFrameControleur {
 
     /**
      * Classe qui implémente l'interface MediaPlayerEventListener pour avoir accès aux évènements nécessaires
-     *
      */
     class LecteurMediaEventListener implements MediaPlayerEventListener {
 
+        /**
+         * Lorsquela position du média a changé, le slider est ajusté en conséquence
+         *
+         * @param mediaPlayer le MediaPlayer dans lequel la position du média a changé
+         * @param v           la position, en pourcentage. Ex. 0.15 est 15%
+         */
         @Override
         public void positionChanged(MediaPlayer mediaPlayer, float v) {
             isFreeMutexLockSlider = false;
@@ -176,6 +180,25 @@ public class MainFrameControleur {
             mainFrame.getSliderProgression().setValue(position * multiplier);
             isFreeMutexLockSlider = true;
         }
+
+        /**
+         * Remet le slider de position au debut lorsque le média a terminé de jouer
+         *
+         * @param mediaPlayer le MediaPlayer dans lequel le média s'est arrêté
+         */
+        @Override
+        public void finished(MediaPlayer mediaPlayer) {
+            isFreeMutexLockSlider = false;
+            mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
+            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
+            isFreeMutexLockSlider = true;
+        }
+
+
+        @Override
+        public void stopped(MediaPlayer mediaPlayer) {
+        }
+
 
         @Override
         public void mediaChanged(MediaPlayer mediaPlayer, libvlc_media_t libvlc_media_t, String s) {
@@ -190,16 +213,11 @@ public class MainFrameControleur {
         }
 
         @Override
-        public void playing(MediaPlayer mediaPlayer) {
-
-        }
-
-        @Override
         public void paused(MediaPlayer mediaPlayer) {
         }
 
         @Override
-        public void stopped(MediaPlayer mediaPlayer) {
+        public void playing(MediaPlayer mediaPlayer) {
         }
 
         @Override
@@ -210,9 +228,7 @@ public class MainFrameControleur {
         public void backward(MediaPlayer mediaPlayer) {
         }
 
-        @Override
-        public void finished(MediaPlayer mediaPlayer) {
-        }
+
 
         @Override
         public void timeChanged(MediaPlayer mediaPlayer, long l) {
