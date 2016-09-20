@@ -46,6 +46,7 @@ public class MainFrameControleur {
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
+        this.mainFrame.getBtnJouerPause().setDisable(true);
     }
 
     /**
@@ -98,10 +99,15 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
 
             File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
-            gestionMusique.setCheminFichier(fichier.getAbsolutePath());
-            // mainFrame.getLabelNomChanson().setText(fichier.getName());
-            gestionMusique.preparerMedia();
-            gestionMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
+            if(fichier != null)
+            {
+                gestionMusique.setCheminFichier(fichier.getAbsolutePath());
+                // mainFrame.getLabelNomChanson().setText(fichier.getName());
+                gestionMusique.preparerMedia();
+                gestionMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
+                mainFrame.getBtnJouerPause().setDisable(false);
+            }
+
         }
     }
 
@@ -156,6 +162,10 @@ public class MainFrameControleur {
         }
     }
 
+    /**
+     * Classe qui implémente l'interface MediaPlayerEventListener pour avoir accès aux évènements nécessaires
+     *
+     */
     class LecteurMediaEventListener implements MediaPlayerEventListener {
 
         @Override
