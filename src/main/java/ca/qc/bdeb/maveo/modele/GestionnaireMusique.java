@@ -115,7 +115,6 @@ public class GestionnaireMusique {
         return cheminFichier;
     }
 
-
     /**
      * Fixe le chemin du fichier média
      *
@@ -136,9 +135,10 @@ public class GestionnaireMusique {
 
     /**
      * Ajoute un Listener au lecteur média
+     *
      * @param mediaPlayerEventListener le Listener à ajouter au lecteur média
      */
-    public void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener){
+    public void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
         mediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
     }
 }

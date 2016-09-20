@@ -42,6 +42,7 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
+        this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
     }
 
     /**
@@ -134,7 +135,9 @@ public class MainFrameControleur {
     class SliderPositionChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            fixerSliderPosition(newValue.floatValue() / 100);
+            float position = newValue.floatValue();
+            float diviseur = 100;
+            fixerSliderPosition(position / diviseur);
         }
     }
 
