@@ -4,10 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
@@ -87,6 +84,15 @@ public class MainFrame {
 
     @FXML
     MenuItem menuItemHelpAbout;
+
+    @FXML
+    Label lblTxtVolume;
+
+    @FXML
+    Label lblNomMedia;
+
+    @FXML
+    Label lblProgression;
 
     public MainFrame() {
 
