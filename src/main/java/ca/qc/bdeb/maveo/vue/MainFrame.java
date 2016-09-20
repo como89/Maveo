@@ -1,22 +1,16 @@
 package ca.qc.bdeb.maveo.vue;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.stage.Window;
-
-import java.net.URL;
 
 
 /**
@@ -114,5 +108,13 @@ public class MainFrame {
         menuItemFileOpen.setOnAction(actionEvent);
     }
 
-    
+    // Listen for Slider value changes
+    public void addChangeListenerSliderProgression(ChangeListener<Number> changeListener) {
+        sliderProgression.valueProperty().addListener(changeListener);
+    }
+
+    public void addChangeListenerSliderVolume(ChangeListener<Number> changeListener) {
+        sliderVolume.valueProperty().addListener(changeListener);
+    }
+
 }

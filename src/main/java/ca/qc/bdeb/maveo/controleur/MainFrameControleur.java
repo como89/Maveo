@@ -3,13 +3,12 @@ package ca.qc.bdeb.maveo.controleur;
 import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
-import ca.qc.bdeb.maveo.vue.TypeComposant;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.*;
 import javafx.stage.Window;
 
-import java.awt.*;
 import java.io.File;
 
 /**
@@ -18,7 +17,6 @@ import java.io.File;
 public class MainFrameControleur {
 
     public MainFrameControleur() {
-
     }
 
     // vue MainFrame
@@ -30,7 +28,6 @@ public class MainFrameControleur {
     // Gestionnaire média
     private GestionnaireMusique gestionMusique;
 
-
     /**
      * Ajoute la fenêtre principale au contrôleur
      *
@@ -40,6 +37,8 @@ public class MainFrameControleur {
         this.mainFrame = mainFrame;
         this.mainFrame.addEventHandlerBtnPlay(new BtnJouerPauseEventHandler());
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
+        this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
+        this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
     }
 
     /**
@@ -68,6 +67,16 @@ public class MainFrameControleur {
     public void activerOuvertureFichier(Window parent) {
         fileOpener.activerOuvertureFichier(parent);
     }
+
+    /**
+     * Fixe la position du média en cours
+     *
+     * @param positionPourcentage la nouvelle position, en pourcentage
+     */
+    void fixerSliderPosition(float positionPourcentage) {
+        gestionMusique.setPosition(positionPourcentage);
+    }
+
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouverture de fichier
@@ -107,6 +116,26 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
            /* gestionMusique.arreter();
             mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);*/
+        }
+    }
+
+    /**
+     * Déclencheur qui s'active lorsque l'utilisateur change le slider de progression
+     */
+    class SliderPositionChangeListener implements ChangeListener<Number> {
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            fixerSliderPosition(newValue.floatValue() / 100);
+        }
+    }
+
+    /**
+     * Déclencheur qui s'active lorsque l'utilisateur change le slider de volume
+     */
+    class SliderVolumeChangeListener implements ChangeListener<Number> {
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            System.out.println("Volume Slider Value Changed to: " + newValue.intValue());
         }
     }
 }
