@@ -25,6 +25,7 @@ public class GestionnaireMusique {
     public boolean preparerMedia() {
         AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
         mediaPlayer = audioEcouteur.getMediaPlayer();
+
         return mediaPlayer.prepareMedia(cheminFichier);
     }
 

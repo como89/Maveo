@@ -96,6 +96,7 @@ public class MainFrame {
 
     public MainFrame() {
 
+
     }
 
     public Window getFenetre() {

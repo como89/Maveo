@@ -1,32 +1,28 @@
 package ca.qc.bdeb.maveo.vue;
 
-import org.junit.Assert;
-import org.junit.Test;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
-import javafx.scene.layout.Border;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+import org.junit.Assert;
+import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.matcher.base.NodeMatchers;
+
+import static org.testfx.api.FxAssert.verifyThat;
 
 import java.net.URL;
 
+import static org.junit.Assert.*;
 
 /**
- * Created by Cedric Wu Tchan Ki on 2016-09-07.
+ * Created by WuTchanKi on 2016-09-20.
  */
-public class MainFrameTest {
-
-
+public class MainFrameTest extends ApplicationTest {
 
     @FXML
     Button boutonPlayPause;
@@ -79,34 +75,40 @@ public class MainFrameTest {
     @FXML
     MenuItem menuItemHelpAbout;
 
-    Window fenetreTest;
+    @FXML
+    Label lblTxtVolume;
+
+    @FXML
+    Label lblNomMedia;
+
+    @FXML
+    Label lblProgression;
 
 
-public void MainFrameTest (){
+    @Override
+    public void start(Stage stage) throws Exception {
+        URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
+        FXMLLoader loader = new FXMLLoader(ressource);
+        BorderPane page = loader.load();
+        Scene sceneTest = new Scene(page);
+        stage.setScene(sceneTest);
+        stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
+        stage.show();
+    }
 
-    fenetreTest = fenetrePrincipale.getScene().getWindow();
-
-}
-
-@Test
-public void verifierPresenceFenetre() {
-
-}
-
+    /**
+     * Test qui verifie que le bouton existe
+     */
     @Test
-    public void verifierBoutons() throws Exception {
-
+    public void verifierExistenceBoutonPlay(){
 
     }
 
+    /**
+     * Test qui verifie que le bouton change de texte quand il est clique
+     */
     @Test
-    public void addEventHandlerBtnPlay() throws Exception {
+    public void verifierTexteBoutonPlay(){
 
     }
-
-    @Test
-    public void addEventHandlerOuvrirFichier() throws Exception {
-
-    }
-
 }
