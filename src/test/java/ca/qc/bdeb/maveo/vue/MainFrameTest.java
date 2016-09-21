@@ -31,7 +31,7 @@ public class MainFrameTest extends ApplicationTest {
         Scene sceneTest = new Scene(page);
         stage.setScene(sceneTest);
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
-       stage.show();
+    //   stage.show();
     }
 
     /**
@@ -39,7 +39,7 @@ public class MainFrameTest extends ApplicationTest {
      */
     @Test
     public void verifierExistenceBoutonPlay(){
-        Assert.assertEquals(testFrame.boutonPlayPause.getText(), testFrame.STR_BOUTON_JOUER);
+Assert.assertNotNull(testFrame.boutonPlayPause);
     }
 
     /**
@@ -47,6 +47,6 @@ public class MainFrameTest extends ApplicationTest {
      */
     @Test
     public void verifierTexteBoutonPlay(){
-
+        Assert.assertEquals(testFrame.boutonPlayPause.getText(), testFrame.STR_BOUTON_JOUER);
     }
 }
