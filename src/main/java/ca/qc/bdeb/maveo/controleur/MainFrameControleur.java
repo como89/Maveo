@@ -84,7 +84,11 @@ public class MainFrameControleur {
         gestionMusique.setPosition(positionPourcentage);
     }
 
-
+    /**
+     * Fixe le volume pour le média.
+     *
+     * @param volumePourcentage - Le volume en pourcentage
+     */
     void fixVolumePosition(int volumePourcentage) {
         gestionMusique.setVolume(volumePourcentage);
     }

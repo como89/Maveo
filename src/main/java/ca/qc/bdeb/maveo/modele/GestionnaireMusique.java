@@ -7,7 +7,6 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 /**
  * @author Nicholas
  * @doc http://caprica.github.io/vlcj/javadoc/3.0.0/uk/co/caprica/vlcj/player/MediaPlayer.html
- * @since 08/09/2016
  */
 public class GestionnaireMusique {
 

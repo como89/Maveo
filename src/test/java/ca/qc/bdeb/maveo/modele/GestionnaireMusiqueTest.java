@@ -2,6 +2,12 @@ package ca.qc.bdeb.maveo.modele;
 
 import ca.qc.bdeb.maveo.util.UtilLib;
 import org.junit.Assert;
+import uk.co.caprica.vlcj.binding.internal.libvlc_media_t;
+import uk.co.caprica.vlcj.player.MediaPlayer;
+import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
+
+import java.util.concurrent.*;
 
 /**
  * Created by Nicholas on 10/09/16.
@@ -15,46 +21,50 @@ public class GestionnaireMusiqueTest {
     }
 
     @org.junit.Test
-    public void testDemarer() throws Exception {
+    public void testPreparerMedia() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
-       // boolean success = gestionMusique.demarrer();
-        Thread.currentThread().join(10);
-       // Assert.assertTrue(success);
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
     }
 
     @org.junit.Test
     public void testArreter() throws Exception {
-        GestionnaireMusique gestionMusique = new GestionnaireMusique();
+        final GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
-       // gestionMusique.demarrer();
-        Thread.currentThread().join(10);
+        gestionMusique.preparerMedia();
+        gestionMusique.jouerMedia();
         gestionMusique.arreter();
-        Thread.currentThread().join(10);
-        Assert.assertFalse(gestionMusique.enLecture());
+        final CompletableFuture<Boolean> future = new CompletableFuture<Boolean>();
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+        executorService.schedule(new Runnable() {
+            @Override
+            public void run() {
+                future.complete(gestionMusique.enLecture());
+            }
+        }, 10, TimeUnit.MILLISECONDS);
+        Assert.assertFalse(future.get());
     }
 
     @org.junit.Test
     public void testPause() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
-      //  gestionMusique.demarrer();
-        Thread.currentThread().join(10);
+        gestionMusique.preparerMedia();
+        gestionMusique.jouerMedia();
+        Thread.currentThread().join(250);
         gestionMusique.pause();
         Thread.currentThread().join(10);
         Assert.assertFalse(gestionMusique.enLecture());
     }
 
     @org.junit.Test
-    public void testReprendre() throws Exception {
+    public void testJouerMedia() throws Exception {
         GestionnaireMusique gestionMusique = new GestionnaireMusique();
         gestionMusique.setCheminFichier(TXT_LINK_MUSIQUE_TEST);
-       // gestionMusique.demarrer();
-        gestionMusique.pause();
-        Thread.currentThread().join(10);
+        gestionMusique.preparerMedia();
         gestionMusique.jouerMedia();
-        Thread.currentThread().join(10);
-        Assert.assertTrue(gestionMusique.enLecture());
+
     }
 
     @org.junit.Test

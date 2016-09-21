@@ -6,7 +6,6 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
  * @author Nicholas
- * @since 10/09/2016
  */
 public class UtilLib {
 
