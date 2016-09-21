@@ -131,4 +131,5 @@ public class MainFrame {
     public Slider getSliderVolume() {
         return sliderVolume;
     }
+
 }

@@ -47,7 +47,9 @@ public class MainFrameControleur {
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
+        this.mainFrame.getSliderProgression().setDisable(true);
         this.mainFrame.getBtnJouerPause().setDisable(true);
+
     }
 
     /**
@@ -110,6 +112,7 @@ public class MainFrameControleur {
                 gestionMusique.preparerMedia();
                 gestionMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
                 mainFrame.getBtnJouerPause().setDisable(false);
+                mainFrame.getSliderProgression().setDisable(false);
             }
 
         }
