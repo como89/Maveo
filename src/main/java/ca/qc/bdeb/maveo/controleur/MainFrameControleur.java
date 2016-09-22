@@ -17,7 +17,9 @@ import java.io.File;
  */
 public class MainFrameControleur {
 
-    boolean isFreeMutexLockSlider = true;
+    boolean isFreeMutexLockSliderProgression = true;
+
+    boolean isFreeMutexLockSliderVolume = false;
 
 
     public MainFrameControleur() {
@@ -65,8 +67,8 @@ public class MainFrameControleur {
      */
     public void ajouterGestionnaireMusique(GestionnaireMusique gestionMusique) {
         this.gestionnaireMusique = gestionMusique;
+        isFreeMutexLockSliderVolume = true;
     }
-
 
 
     /**
@@ -84,7 +86,9 @@ public class MainFrameControleur {
      * @param volumePourcentage - Le volume en pourcentage
      */
     void fixerVolumePosition(int volumePourcentage) {
-        gestionnaireMusique.setVolume(volumePourcentage);
+        if (isFreeMutexLockSliderVolume) {
+            gestionnaireMusique.setVolume(volumePourcentage);
+        }
     }
 
 
@@ -104,7 +108,6 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
             }
-
         }
     }
 
@@ -141,7 +144,7 @@ public class MainFrameControleur {
     class SliderPositionChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            if (isFreeMutexLockSlider) {
+            if (isFreeMutexLockSliderProgression) {
                 float position = newValue.floatValue();
                 float diviseur = 100;
                 fixerSliderPosition(position / diviseur);
@@ -172,11 +175,11 @@ public class MainFrameControleur {
          */
         @Override
         public void positionChanged(MediaPlayer mediaPlayer, float v) {
-            isFreeMutexLockSlider = false;
+            isFreeMutexLockSliderProgression = false;
             double position = v;
             double multiplier = 100;
             mainFrame.getSliderProgression().setValue(position * multiplier);
-            isFreeMutexLockSlider = true;
+            isFreeMutexLockSliderProgression = true;
         }
 
         /**
@@ -186,10 +189,10 @@ public class MainFrameControleur {
          */
         @Override
         public void finished(MediaPlayer mediaPlayer) {
-            isFreeMutexLockSlider = false;
+            isFreeMutexLockSliderProgression = false;
             mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
             mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
-            isFreeMutexLockSlider = true;
+            isFreeMutexLockSliderProgression = true;
         }
     }
 }

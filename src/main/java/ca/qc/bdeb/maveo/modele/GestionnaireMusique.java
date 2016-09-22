@@ -15,6 +15,8 @@ public class GestionnaireMusique {
     private String cheminFichier;
 
     public GestionnaireMusique() {
+
+
     }
 
     /**

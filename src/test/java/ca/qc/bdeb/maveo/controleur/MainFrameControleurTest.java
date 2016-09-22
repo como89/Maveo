@@ -107,4 +107,9 @@ public class MainFrameControleurTest extends ApplicationTest {
 
     }
 
+  //  @Test
+    public void MenuItemOuvrirEventHandlerTest(){
+        //mainFrameControleur.MenuItemOuvrirEventHandler h = new  mainFrameControleur.MenuItemOuvrirEventHandler();
+    }
+
 }

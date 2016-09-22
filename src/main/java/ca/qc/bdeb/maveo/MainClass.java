@@ -25,14 +25,14 @@ public class MainClass extends Application {
 
 
         // vue
-            URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
-            FXMLLoader loader = new FXMLLoader(ressource);
-            BorderPane page = loader.load();
-            MainFrame mainFrame = loader.getController();
-            Scene scene = new Scene(page);
-            stage.setScene(scene);
-            stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
-            stage.show();
+        URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
+        FXMLLoader loader = new FXMLLoader(ressource);
+        BorderPane page = loader.load();
+        MainFrame mainFrame = loader.getController();
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+        stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
+        stage.show();
 
         // modele
         FileOpener fileOpener = new FileOpener();
@@ -44,5 +44,6 @@ public class MainClass extends Application {
         mainFrameControleur.ajouterMainFrame(mainFrame);
         mainFrameControleur.ajouterFileOpener(fileOpener);
         mainFrameControleur.ajouterGestionnaireMusique(gestionMusique);
+
     }
 }
