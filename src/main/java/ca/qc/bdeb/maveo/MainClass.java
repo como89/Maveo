@@ -5,6 +5,7 @@ import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import com.mpatric.mp3agic.Mp3File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class MainClass extends Application {
 
     public static void main(String[] args) {
         Application.launch(MainClass.class, (java.lang.String[]) null);
+       
     }
 
     public void start(Stage stage) throws Exception {

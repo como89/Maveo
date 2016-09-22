@@ -3,6 +3,7 @@ package ca.qc.bdeb.maveo.vue;
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import sun.applet.Main;
 import static org.testfx.api.FxAssert.verifyThat;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.net.URL;
@@ -40,8 +42,8 @@ public class MainFrameTest extends ApplicationTest {
         Scene sceneTest = new Scene(page);
         stage.setScene(sceneTest);
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
-        testFrame.boutonPlayPause.setId("boutonPlay");
-        //   stage.show();
+
+        stage.show();
     }
 
     @Test
@@ -56,35 +58,39 @@ public class MainFrameTest extends ApplicationTest {
         Assert.assertEquals(testFrame.boutonPlayPause.getText(), testFrame.STR_BOUTON_JOUER);
     }
 
-    /**
-     *
-     * @throws Exception
 
     @Test
     public void addEventHandlerBtnPlay() throws Exception {
-        Robot robot = new Robot();
-        testFrame.boutonPlayPause.setLayoutX(25);
-        testFrame.boutonPlayPause.setLayoutY(25);
+    //    testFrame.boutonPlayPause.setId("btnPlay");
+        verifyThat("#boutonPlayPause" , NodeMatchers.isNotNull());
+        verifyThat("#boutonPlayPause", NodeMatchers.hasText("JOUER"));
 
-        robot.mouseMove(27, 27);
-        robot.mousePress(InputEvent.BUTTON1_MASK);
-        Thread.sleep(2000);
-        robot.mouseRelease(InputEvent.BUTTON1_MASK);
+
+
+//testFrame.boutonPlayPause.setDisable(false);
+
 
         testFrame.boutonPlayPause.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+
                 testFrame.boutonPlayPause.setText("TEST");
+
+
             }
         });
 
-
-
-
+        clickOn(testFrame.boutonPlayPause);
+        Thread.sleep(200);
+        System.out.println("tttttttt " + testFrame.boutonPlayPause.getText());
         Assert.assertEquals(testFrame.boutonPlayPause.getText(), "TEST");
 
+
+
+
     }
-     */
+
 
     @Test
     public void addEventHandlerOuvrirFichier() throws Exception {

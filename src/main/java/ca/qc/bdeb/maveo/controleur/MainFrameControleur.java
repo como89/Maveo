@@ -3,13 +3,25 @@ package ca.qc.bdeb.maveo.controleur;
 import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import com.mpatric.mp3agic.ID3v2;
+
+import javax.imageio.ImageIO;
 import java.io.File;
 
 /**
@@ -17,9 +29,12 @@ import java.io.File;
  */
 public class MainFrameControleur {
 
-    boolean isFreeMutexLockSliderProgression = true;
+    boolean isFreeMutexLockSliderPosition = true;
 
     boolean isFreeMutexLockSliderVolume = false;
+
+
+    private File fichier;
 
 
     public MainFrameControleur() {
@@ -42,12 +57,16 @@ public class MainFrameControleur {
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.mainFrame.addEventHandlerBtnPlay(new BtnJouerPauseEventHandler());
+        this.mainFrame.addEventHandlerBtnStop(new BtnArreterEventHandler());
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
         this.mainFrame.getSliderProgression().setDisable(true);
+        this.mainFrame.getBtnArreter().setDisable(true);
         this.mainFrame.getBtnJouerPause().setDisable(true);
+        this.mainFrame.getBoutonPrecedent().setDisable(true);
+        this.mainFrame.getBoutonSuivant().setDisable(true);
 
     }
 
@@ -97,18 +116,51 @@ public class MainFrameControleur {
      */
     class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
 
+
         public void handle(ActionEvent event) {
 
-            File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             if (fichier != null) {
                 gestionnaireMusique.setCheminFichier(fichier.getAbsolutePath());
+
+
                 // mainFrame.getLabelNomChanson().setText(fichier.getName());
                 gestionnaireMusique.preparerMedia();
                 gestionnaireMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
+
+
+
+            }
+
+        }
+
+        public void placerImageAlbum() throws IOException {
+            ID3v2 id3v2tag;
+            Mp3File file = null;
+            try {
+                file = new Mp3File(fichier.getName());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            }
+
+            id3v2tag = file.getId3v2Tag();
+            if (id3v2tag != null) {
+                String mimeType = id3v2tag.getAlbumImageMimeType();
+                byte[] data = id3v2tag.getAlbumImage();
+                BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
+                Image photoAlbum = SwingFXUtils.toFXImage(image, null);
+                mainFrame.setImageLblEcran(photoAlbum);
+            } else {
+                //mettre image par defaut.
             }
         }
+
     }
 
     /**
@@ -133,8 +185,8 @@ public class MainFrameControleur {
     class BtnArreterEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-           /* gestionnaireMusique.arreter();
-            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);*/
+            gestionnaireMusique.arreter();
+            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
         }
     }
 
@@ -144,7 +196,7 @@ public class MainFrameControleur {
     class SliderPositionChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            if (isFreeMutexLockSliderProgression) {
+            if (isFreeMutexLockSliderPosition) {
                 float position = newValue.floatValue();
                 float diviseur = 100;
                 fixerSliderPosition(position / diviseur);
@@ -175,11 +227,11 @@ public class MainFrameControleur {
          */
         @Override
         public void positionChanged(MediaPlayer mediaPlayer, float v) {
-            isFreeMutexLockSliderProgression = false;
+            isFreeMutexLockSliderPosition = false;
             double position = v;
             double multiplier = 100;
             mainFrame.getSliderProgression().setValue(position * multiplier);
-            isFreeMutexLockSliderProgression = true;
+            isFreeMutexLockSliderPosition = true;
         }
 
         /**
@@ -189,10 +241,12 @@ public class MainFrameControleur {
          */
         @Override
         public void finished(MediaPlayer mediaPlayer) {
-            isFreeMutexLockSliderProgression = false;
+            isFreeMutexLockSliderPosition = false;
             mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
             mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
-            isFreeMutexLockSliderProgression = true;
+            isFreeMutexLockSliderPosition = true;
         }
+
+
     }
 }

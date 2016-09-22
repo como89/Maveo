@@ -28,6 +28,7 @@ public class GestionnaireMusique {
         AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
         mediaPlayer = audioEcouteur.getMediaPlayer();
 
+
         return mediaPlayer.prepareMedia(cheminFichier);
     }
 
@@ -143,4 +144,6 @@ public class GestionnaireMusique {
     public void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
         mediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
     }
+
+
 }
