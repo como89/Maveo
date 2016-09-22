@@ -7,11 +7,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Window;
-import uk.co.caprica.vlcj.binding.internal.libvlc_media_t;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
 import java.io.File;
 
@@ -27,13 +24,13 @@ public class MainFrameControleur {
     }
 
     // vue MainFrame
-    private MainFrame mainFrame;
+    MainFrame mainFrame;
 
     // modele FileOpener
-    private FileOpener fileOpener;
+    FileOpener fileOpener;
 
     // Gestionnaire média
-    private GestionnaireMusique gestionMusique;
+    GestionnaireMusique gestionnaireMusique;
 
     /**
      * Ajoute la fenêtre principale au contrôleur
@@ -67,17 +64,10 @@ public class MainFrameControleur {
      * @param gestionMusique gesionnaire de média à ajouter
      */
     public void ajouterGestionnaireMusique(GestionnaireMusique gestionMusique) {
-        this.gestionMusique = gestionMusique;
+        this.gestionnaireMusique = gestionMusique;
     }
 
-    /**
-     * Active l'ouverture d'un fichier
-     *
-     * @param parent fenêtre dans laquelle la fenêtre d'ouverture du fichier s'affiche
-     */
-    public void activerOuvertureFichier(Window parent) {
-        fileOpener.activerOuvertureFichier(parent);
-    }
+
 
     /**
      * Fixe la position du média en cours
@@ -85,7 +75,7 @@ public class MainFrameControleur {
      * @param positionPourcentage la nouvelle position, en pourcentage
      */
     void fixerSliderPosition(float positionPourcentage) {
-        gestionMusique.setPosition(positionPourcentage);
+        gestionnaireMusique.setPosition(positionPourcentage);
     }
 
     /**
@@ -93,8 +83,8 @@ public class MainFrameControleur {
      *
      * @param volumePourcentage - Le volume en pourcentage
      */
-    void fixVolumePosition(int volumePourcentage) {
-        gestionMusique.setVolume(volumePourcentage);
+    void fixerVolumePosition(int volumePourcentage) {
+        gestionnaireMusique.setVolume(volumePourcentage);
     }
 
 
@@ -107,10 +97,10 @@ public class MainFrameControleur {
 
             File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             if (fichier != null) {
-                gestionMusique.setCheminFichier(fichier.getAbsolutePath());
+                gestionnaireMusique.setCheminFichier(fichier.getAbsolutePath());
                 // mainFrame.getLabelNomChanson().setText(fichier.getName());
-                gestionMusique.preparerMedia();
-                gestionMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
+                gestionnaireMusique.preparerMedia();
+                gestionnaireMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
             }
@@ -124,11 +114,11 @@ public class MainFrameControleur {
     class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-            if (gestionMusique.enLecture()) {
-                gestionMusique.pause();
+            if (gestionnaireMusique.enLecture()) {
+                gestionnaireMusique.pause();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
             } else {
-                gestionMusique.jouerMedia();
+                gestionnaireMusique.jouerMedia();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
             }
         }
@@ -140,7 +130,7 @@ public class MainFrameControleur {
     class BtnArreterEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-           /* gestionMusique.arreter();
+           /* gestionnaireMusique.arreter();
             mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);*/
         }
     }
@@ -165,7 +155,7 @@ public class MainFrameControleur {
     class SliderVolumeChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            fixVolumePosition(newValue.intValue());
+            fixerVolumePosition(newValue.intValue());
         }
     }
 
@@ -175,7 +165,7 @@ public class MainFrameControleur {
     class LecteurMediaEventListener extends MediaPlayerEventAdapter {
 
         /**
-         * Lorsquela position du média a changé, le slider est ajusté en conséquence
+         * Lorsque la position du média a changé, le slider est ajusté en conséquence
          *
          * @param mediaPlayer le MediaPlayer dans lequel la position du média a changé
          * @param v           la position, en pourcentage. Ex. 0.15 est 15%
