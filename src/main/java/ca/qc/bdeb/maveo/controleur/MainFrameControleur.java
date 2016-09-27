@@ -3,16 +3,25 @@ package ca.qc.bdeb.maveo.controleur;
 import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Window;
-import uk.co.caprica.vlcj.binding.internal.libvlc_media_t;
+import javafx.scene.image.Image;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
-import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import com.mpatric.mp3agic.ID3v2;
+
+import javax.imageio.ImageIO;
 import java.io.File;
 
 /**
@@ -20,20 +29,25 @@ import java.io.File;
  */
 public class MainFrameControleur {
 
-    boolean isFreeMutexLockSlider = true;
+    boolean isFreeMutexLockSliderPosition = true;
+
+    boolean isFreeMutexLockSliderVolume = false;
+
+
+    private File fichier;
 
 
     public MainFrameControleur() {
     }
 
     // vue MainFrame
-    private MainFrame mainFrame;
+    MainFrame mainFrame;
 
     // modele FileOpener
-    private FileOpener fileOpener;
+    FileOpener fileOpener;
 
     // Gestionnaire média
-    private GestionnaireMusique gestionMusique;
+    GestionnaireMusique gestionnaireMusique;
 
     /**
      * Ajoute la fenêtre principale au contrôleur
@@ -43,12 +57,16 @@ public class MainFrameControleur {
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.mainFrame.addEventHandlerBtnPlay(new BtnJouerPauseEventHandler());
+        this.mainFrame.addEventHandlerBtnStop(new BtnArreterEventHandler());
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
         this.mainFrame.getSliderProgression().setDisable(true);
+        this.mainFrame.getBtnArreter().setDisable(true);
         this.mainFrame.getBtnJouerPause().setDisable(true);
+        this.mainFrame.getBoutonPrecedent().setDisable(true);
+        this.mainFrame.getBoutonSuivant().setDisable(true);
 
     }
 
@@ -67,17 +85,10 @@ public class MainFrameControleur {
      * @param gestionMusique gesionnaire de média à ajouter
      */
     public void ajouterGestionnaireMusique(GestionnaireMusique gestionMusique) {
-        this.gestionMusique = gestionMusique;
+        this.gestionnaireMusique = gestionMusique;
+        isFreeMutexLockSliderVolume = true;
     }
 
-    /**
-     * Active l'ouverture d'un fichier
-     *
-     * @param parent fenêtre dans laquelle la fenêtre d'ouverture du fichier s'affiche
-     */
-    public void activerOuvertureFichier(Window parent) {
-        fileOpener.activerOuvertureFichier(parent);
-    }
 
     /**
      * Fixe la position du média en cours
@@ -85,7 +96,7 @@ public class MainFrameControleur {
      * @param positionPourcentage la nouvelle position, en pourcentage
      */
     void fixerSliderPosition(float positionPourcentage) {
-        gestionMusique.setPosition(positionPourcentage);
+        gestionnaireMusique.setPosition(positionPourcentage);
     }
 
     /**
@@ -93,8 +104,10 @@ public class MainFrameControleur {
      *
      * @param volumePourcentage - Le volume en pourcentage
      */
-    void fixVolumePosition(int volumePourcentage) {
-        gestionMusique.setVolume(volumePourcentage);
+    void fixerVolumePosition(int volumePourcentage) {
+        if (isFreeMutexLockSliderVolume) {
+            gestionnaireMusique.setVolume(volumePourcentage);
+        }
     }
 
 
@@ -103,19 +116,51 @@ public class MainFrameControleur {
      */
     class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
 
+
         public void handle(ActionEvent event) {
 
-            File fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             if (fichier != null) {
-                gestionMusique.setCheminFichier(fichier.getAbsolutePath());
+                gestionnaireMusique.setCheminFichier(fichier.getAbsolutePath());
+
+
                 // mainFrame.getLabelNomChanson().setText(fichier.getName());
-                gestionMusique.preparerMedia();
-                gestionMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
+                gestionnaireMusique.preparerMedia();
+                gestionnaireMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
+
+
+
             }
 
         }
+
+        public void placerImageAlbum() throws IOException {
+            ID3v2 id3v2tag;
+            Mp3File file = null;
+            try {
+                file = new Mp3File(fichier.getName());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            }
+
+            id3v2tag = file.getId3v2Tag();
+            if (id3v2tag != null) {
+                String mimeType = id3v2tag.getAlbumImageMimeType();
+                byte[] data = id3v2tag.getAlbumImage();
+                BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
+                Image photoAlbum = SwingFXUtils.toFXImage(image, null);
+                mainFrame.setImageLblEcran(photoAlbum);
+            } else {
+                //mettre image par defaut.
+            }
+        }
+
     }
 
     /**
@@ -124,11 +169,11 @@ public class MainFrameControleur {
     class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-            if (gestionMusique.enLecture()) {
-                gestionMusique.pause();
+            if (gestionnaireMusique.enLecture()) {
+                gestionnaireMusique.pause();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
             } else {
-                gestionMusique.jouerMedia();
+                gestionnaireMusique.jouerMedia();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
             }
         }
@@ -140,8 +185,8 @@ public class MainFrameControleur {
     class BtnArreterEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-           /* gestionMusique.arreter();
-            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);*/
+            gestionnaireMusique.arreter();
+            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
         }
     }
 
@@ -151,7 +196,7 @@ public class MainFrameControleur {
     class SliderPositionChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            if (isFreeMutexLockSlider) {
+            if (isFreeMutexLockSliderPosition) {
                 float position = newValue.floatValue();
                 float diviseur = 100;
                 fixerSliderPosition(position / diviseur);
@@ -165,7 +210,7 @@ public class MainFrameControleur {
     class SliderVolumeChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            fixVolumePosition(newValue.intValue());
+            fixerVolumePosition(newValue.intValue());
         }
     }
 
@@ -175,18 +220,18 @@ public class MainFrameControleur {
     class LecteurMediaEventListener extends MediaPlayerEventAdapter {
 
         /**
-         * Lorsquela position du média a changé, le slider est ajusté en conséquence
+         * Lorsque la position du média a changé, le slider est ajusté en conséquence
          *
          * @param mediaPlayer le MediaPlayer dans lequel la position du média a changé
          * @param v           la position, en pourcentage. Ex. 0.15 est 15%
          */
         @Override
         public void positionChanged(MediaPlayer mediaPlayer, float v) {
-            isFreeMutexLockSlider = false;
+            isFreeMutexLockSliderPosition = false;
             double position = v;
             double multiplier = 100;
             mainFrame.getSliderProgression().setValue(position * multiplier);
-            isFreeMutexLockSlider = true;
+            isFreeMutexLockSliderPosition = true;
         }
 
         /**
@@ -196,10 +241,12 @@ public class MainFrameControleur {
          */
         @Override
         public void finished(MediaPlayer mediaPlayer) {
-            isFreeMutexLockSlider = false;
+            isFreeMutexLockSliderPosition = false;
             mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
             mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
-            isFreeMutexLockSlider = true;
+            isFreeMutexLockSliderPosition = true;
         }
+
+
     }
 }

@@ -5,9 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
+
+import java.awt.image.BufferedImage;
 
 
 /**
@@ -25,8 +29,8 @@ public class MainFrame {
 
     public static final String STR_NOM_PROGRAMME = "M A V E O";
 
-    public final String STR_BOUTON_PAUSE = "PAUSE";
-    public final String STR_BOUTON_JOUER = "JOUER";
+    public final String STR_BOUTON_PAUSE = "\u23F8" ;
+    public final String STR_BOUTON_JOUER = "▶";
     private final String STR_BOUTON_STOP = "STOP";
     private final String STR_MENU_ITEM_MEDIA = "Média";
     private final String STR_MEDIA_OPTION_OUVRIR = "Ouvrir un fichier...";
@@ -107,8 +111,24 @@ public class MainFrame {
         return boutonPlayPause;
     }
 
+    public Button getBtnArreter() {
+        return boutonArreter;
+    }
+
+    public Button getBoutonPrecedent() {
+        return boutonPrecedent;
+    }
+
+    public Button getBoutonSuivant() {
+        return boutonSuivant;
+    }
+
     public void addEventHandlerBtnPlay(EventHandler<ActionEvent> actionEvent) {
         boutonPlayPause.setOnAction(actionEvent);
+    }
+
+    public void addEventHandlerBtnStop(EventHandler<ActionEvent> actionEvent) {
+        boutonArreter.setOnAction(actionEvent);
     }
 
     public void addEventHandlerOuvrirFichier(EventHandler<ActionEvent> actionEvent) {
@@ -132,5 +152,13 @@ public class MainFrame {
     public Slider getSliderVolume() {
         return sliderVolume;
     }
+
+    public void setImageLblEcran(Image image){
+lblNomMedia.setGraphic(new ImageView(image));
+
+    }
+
+
+
 
 }
