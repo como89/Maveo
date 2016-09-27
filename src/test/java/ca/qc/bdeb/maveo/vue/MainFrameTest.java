@@ -2,7 +2,6 @@ package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 import ca.qc.bdeb.maveo.modele.FileOpener;
-import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
