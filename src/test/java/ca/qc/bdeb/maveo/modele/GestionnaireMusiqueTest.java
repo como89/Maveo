@@ -1,6 +1,8 @@
 package ca.qc.bdeb.maveo.modele;
 
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.util.UtilLib;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
@@ -108,5 +110,10 @@ public class GestionnaireMusiqueTest {
             long tempsTotal = gestionMusique.getTempsTotal();
             Assert.assertTrue(gestionMusique.getTempsRestant() <= tempsTotal);
         }
+    }
+
+    @After
+    public void unloadAfter() {
+        gestionMusique.arreter();
     }
 }

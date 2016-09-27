@@ -1,20 +1,23 @@
-package ca.qc.bdeb.maveo.modele;
+package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
 /**
+ * Cette classe permet de pouvoir gérer une musique (Jouer, pause, stop, volume et la position).
  * @author Nicholas
  * @doc http://caprica.github.io/vlcj/javadoc/3.0.0/uk/co/caprica/vlcj/player/MediaPlayer.html
  */
-public class GestionnaireMusique {
+public class GestionnaireMusique extends GestionnaireMedia {
 
     private MediaPlayer mediaPlayer;
 
     private String cheminFichier;
 
     public GestionnaireMusique() {
+        AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
+        mediaPlayer = audioEcouteur.getMediaPlayer();
     }
 
     /**
@@ -23,10 +26,25 @@ public class GestionnaireMusique {
      * @return Retourne true, si le fichier existe, false, le fichier n'existe pas.
      */
     public boolean preparerMedia() {
-        AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
-        mediaPlayer = audioEcouteur.getMediaPlayer();
-
         return mediaPlayer.prepareMedia(cheminFichier);
+    }
+
+    /**
+     * Retourne le chemin absolu du fichier média en cours
+     *
+     * @return le chemin absolu du fichier média en cours
+     */
+    public String getCheminFichier() {
+        return cheminFichier;
+    }
+
+    /**
+     * Fixe le chemin du fichier média
+     *
+     * @param cheminFichier chaîne de caractères contenant le chemin absolu du fichier
+     */
+    public void setCheminFichier(String cheminFichier) {
+        this.cheminFichier = cheminFichier;
     }
 
     /**
@@ -107,24 +125,6 @@ public class GestionnaireMusique {
     }
 
     /**
-     * Retourne le chemin absolu du fichier média en cours
-     *
-     * @return le chemin absolu du fichier média en cours
-     */
-    public String getCheminFichier() {
-        return cheminFichier;
-    }
-
-    /**
-     * Fixe le chemin du fichier média
-     *
-     * @param cheminFichier chaîne de caractères contenant le chemin absolu du fichier
-     */
-    public void setCheminFichier(String cheminFichier) {
-        this.cheminFichier = cheminFichier;
-    }
-
-    /**
      * Fixe la position du média
      *
      * @param position valeur de la position, pourcentage. Ex. 0.15 c'est 15%
@@ -141,4 +141,6 @@ public class GestionnaireMusique {
     public void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
         mediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
     }
+
+
 }
