@@ -119,6 +119,7 @@ public class MainFrame {
 
     public Button getBtnArreter() {
         return boutonArreter;
+
     }
 
     public Button getBoutonPrecedent() {
@@ -170,8 +171,6 @@ public class MainFrame {
     public void setImageLblEcran(Image image) {
         lblNomMedia.setGraphic(new ImageView(image));
     }
-
-
 
 
 }
