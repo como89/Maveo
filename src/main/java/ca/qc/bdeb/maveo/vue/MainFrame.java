@@ -29,7 +29,7 @@ public class MainFrame {
 
     public static final String STR_NOM_PROGRAMME = "M A V E O";
 
-    public final String STR_BOUTON_PAUSE = "\u23F8" ;
+    public final String STR_BOUTON_PAUSE = "\u23F8";
     public final String STR_BOUTON_JOUER = "▶";
     private final String STR_BOUTON_STOP = "STOP";
     private final String STR_MENU_ITEM_MEDIA = "Média";
@@ -153,8 +153,8 @@ public class MainFrame {
         return sliderVolume;
     }
 
-    public void setImageLblEcran(Image image){
-lblNomMedia.setGraphic(new ImageView(image));
+    public void setImageLblEcran(Image image) {
+        lblNomMedia.setGraphic(new ImageView(image));
 
     }
 

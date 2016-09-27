@@ -61,10 +61,9 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void addEventHandlerBtnPlay() throws Exception {
-    //    testFrame.boutonPlayPause.setId("btnPlay");
-        verifyThat("#boutonPlayPause" , NodeMatchers.isNotNull());
+        //    testFrame.boutonPlayPause.setId("btnPlay");
+        verifyThat("#boutonPlayPause", NodeMatchers.isNotNull());
         verifyThat("#boutonPlayPause", NodeMatchers.hasText("JOUER"));
-
 
 
 //testFrame.boutonPlayPause.setDisable(false);
@@ -85,8 +84,6 @@ public class MainFrameTest extends ApplicationTest {
         Thread.sleep(200);
         System.out.println("tttttttt " + testFrame.boutonPlayPause.getText());
         Assert.assertEquals(testFrame.boutonPlayPause.getText(), "TEST");
-
-
 
 
     }
@@ -134,7 +131,6 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void verifierTexteBoutonPlay() {
-
 
 
         Assert.assertEquals(testFrame.boutonPlayPause.getText(), testFrame.STR_BOUTON_JOUER);

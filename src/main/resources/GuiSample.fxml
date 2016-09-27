@@ -54,18 +54,21 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button id="boutonPrecedent" fx:id="boutonPrecedent" layoutX="107.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="⏮">
+             <Button id="boutonPrecedent" fx:id="boutonPrecedent" layoutX="107.0" layoutY="14.0" mnemonicParsing="false"
+                     prefHeight="28.0" prefWidth="28.0" text="⏮">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <Slider id="sliderProgression" fx:id="sliderProgression" layoutX="207.0" layoutY="21.0" prefHeight="14.0" prefWidth="313.0" />
-            <Button id="boutonArreter" fx:id="boutonArreter" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="⏹">
+             <Button id="boutonArreter" fx:id="boutonArreter" layoutX="135.0" layoutY="14.0" mnemonicParsing="false"
+                     prefHeight="28.0" prefWidth="28.0" text="⏹">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button id="boutonSuivant" fx:id="boutonSuivant" layoutX="163.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="⏭">
+             <Button id="boutonSuivant" fx:id="boutonSuivant" layoutX="163.0" layoutY="14.0" mnemonicParsing="false"
+                     prefHeight="28.0" prefWidth="28.0" text="⏭">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

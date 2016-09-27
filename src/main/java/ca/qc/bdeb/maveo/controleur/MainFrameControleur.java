@@ -1,7 +1,7 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.FileOpener;
-import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -129,7 +129,6 @@ public class MainFrameControleur {
                 gestionnaireMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
-
 
 
             }

@@ -1,7 +1,7 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.FileOpener;
-import ca.qc.bdeb.maveo.modele.GestionnaireMusique;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -107,8 +107,8 @@ public class MainFrameControleurTest extends ApplicationTest {
 
     }
 
-  //  @Test
-    public void MenuItemOuvrirEventHandlerTest(){
+    //  @Test
+    public void MenuItemOuvrirEventHandlerTest() {
         //mainFrameControleur.MenuItemOuvrirEventHandler h = new  mainFrameControleur.MenuItemOuvrirEventHandler();
     }
 
