@@ -1,6 +1,8 @@
 package ca.qc.bdeb.maveo.modele;
 
 import javafx.stage.*;
+import org.json.simple.parser.JSONParser;
+
 import java.io.File;
 
 /**
@@ -14,6 +16,15 @@ public class FileOpener {
         fileChooser = new FileChooser();
     }
 
+
+    private void ouvrirJSON() {
+
+        JSONParser parser = new JSONParser();
+
+
+
+
+    }
 
     /**
      * Active la fenêtre d'ouverture d'un fichier.

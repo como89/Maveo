@@ -5,7 +5,6 @@ import ca.qc.bdeb.maveo.modele.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
-import com.mpatric.mp3agic.Mp3File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

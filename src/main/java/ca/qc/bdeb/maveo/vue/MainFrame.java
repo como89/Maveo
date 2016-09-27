@@ -1,6 +1,7 @@
 package ca.qc.bdeb.maveo.vue;
 
 import javafx.beans.value.ChangeListener;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,7 +12,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 /**
@@ -153,9 +159,16 @@ public class MainFrame {
         return sliderVolume;
     }
 
+    public Label getLblNomMedia() {
+        return lblNomMedia;
+    }
+
+    public void setLblNomMedia(Label lblNomMedia) {
+        this.lblNomMedia = lblNomMedia;
+    }
+
     public void setImageLblEcran(Image image) {
         lblNomMedia.setGraphic(new ImageView(image));
-
     }
 
 

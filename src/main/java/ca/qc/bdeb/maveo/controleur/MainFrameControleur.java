@@ -130,33 +130,37 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
 
+                placerImageAlbum();
+
 
             }
 
         }
 
-        public void placerImageAlbum() throws IOException {
+        public void placerImageAlbum() {
             ID3v2 id3v2tag;
             Mp3File file = null;
             try {
-                file = new Mp3File(fichier.getName());
+                file = new Mp3File(fichier.getAbsolutePath());
+                id3v2tag = file.getId3v2Tag();
+                if (id3v2tag != null) {
+                    String mimeType = id3v2tag.getAlbumImageMimeType();
+                    byte[] data = id3v2tag.getAlbumImage();
+                    Image photoAlbum = null;
+                    if (data != null) {
+                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
+                        photoAlbum = SwingFXUtils.toFXImage(image, null);
+                    } else {
+                        photoAlbum  = new Image("file:res/noart.png");
+                    }
+                    mainFrame.setImageLblEcran(photoAlbum);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedTagException e) {
                 e.printStackTrace();
             } catch (InvalidDataException e) {
                 e.printStackTrace();
-            }
-
-            id3v2tag = file.getId3v2Tag();
-            if (id3v2tag != null) {
-                String mimeType = id3v2tag.getAlbumImageMimeType();
-                byte[] data = id3v2tag.getAlbumImage();
-                BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
-                Image photoAlbum = SwingFXUtils.toFXImage(image, null);
-                mainFrame.setImageLblEcran(photoAlbum);
-            } else {
-                //mettre image par defaut.
             }
         }
 
