@@ -1,24 +1,36 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
-import uk.co.caprica.vlcj.component.DirectMediaPlayerComponent;
+import ca.qc.bdeb.maveo.vue.ComposantVideo;
+import javafx.scene.layout.Pane;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 
 /**
- * Created by nicholas on 26/09/16.
+ * @author Nicholas
+ * @doc http://caprica.github.io/vlcj/javadoc/3.10.1/uk/co/caprica/vlcj/player/direct/DirectMediaPlayer.html
  */
 public class GestionnaireVideo extends GestionnaireMedia {
 
-    private DirectMediaPlayerComponent directMediaPlayerComponent;
     private DirectMediaPlayer embeddedMediaPlayer;
+    private ComposantVideo composantVideo;
 
     private String linkFichier;
 
-    public GestionnaireVideo() {
-        // directMediaPlayerComponent = new DirectMediaPlayerComponent();
-        //embeddedMediaPlayer = directMediaPlayerComponent.getMediaPlayer();
+    public GestionnaireVideo(Pane videoPane) {
+        this.composantVideo = new ComposantVideo();
+        composantVideo.setVideoPane(videoPane);
+        this.embeddedMediaPlayer = composantVideo.getMediaPlayer();
     }
 
+    @Override
+    public String getCheminFichier() {
+        return linkFichier;
+    }
+
+    @Override
+    public void setCheminFichier(String linkFichier) {
+        this.linkFichier = linkFichier;
+    }
 
     @Override
     public boolean preparerMedia() {
@@ -37,46 +49,46 @@ public class GestionnaireVideo extends GestionnaireMedia {
 
     @Override
     public boolean enLecture() {
-        return false;
+        return embeddedMediaPlayer.isPlaying();
     }
 
     @Override
     public void jouerMedia() {
-
+        embeddedMediaPlayer.play();
     }
 
     @Override
     public int getVolume() {
-        return 0;
+        return embeddedMediaPlayer.getVolume();
     }
 
     @Override
     public void setVolume(int volume) {
-
+        embeddedMediaPlayer.setVolume(volume);
     }
 
     @Override
     public long getTempsRestant() {
-        return 0;
+        return embeddedMediaPlayer.getLength() - embeddedMediaPlayer.getTime();
     }
 
     @Override
     public long getTempsTotal() {
-        return 0;
+        return embeddedMediaPlayer.getLength();
     }
 
     @Override
     public long getTempsEcoule() {
-        return 0;
+        return embeddedMediaPlayer.getTime();
     }
 
     @Override
     public void setPosition(float position) {
-
+        embeddedMediaPlayer.setPosition(position);
     }
 
     @Override
     public void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
-
+        embeddedMediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
     }
 }

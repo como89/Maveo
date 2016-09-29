@@ -68,22 +68,10 @@ public class MainFrameControleurTest extends ApplicationTest {
     }
 
     @Test
-    public void ajouterGestionnaireMusiqueTest() {
-
-        mainFrameControleur = new MainFrameControleur();
-        gestionnaireMusique = new GestionnaireMusique();
-        mainFrameControleur.ajouterGestionnaireMusique(gestionnaireMusique);
-
-        Assert.assertEquals(mainFrameControleur.gestionnaireMusique, gestionnaireMusique);
-    }
-
-    @Test
     public void fixerSliderPositionTest() {
 
         double positionSliderTest = -1;
         mainFrameControleur = new MainFrameControleur();
-        gestionnaireMusique = new GestionnaireMusique();
-        mainFrameControleur.ajouterGestionnaireMusique(gestionnaireMusique);
 
         positionSliderTest = mainFrame.getSliderProgression().getMax() / Math.PI;
         mainFrame.getSliderProgression().setValue(positionSliderTest);
@@ -96,8 +84,6 @@ public class MainFrameControleurTest extends ApplicationTest {
         double positionSliderTest = -1;
 
         mainFrameControleur = new MainFrameControleur();
-        gestionnaireMusique = new GestionnaireMusique();
-        mainFrameControleur.ajouterGestionnaireMusique(gestionnaireMusique);
 
         positionSliderTest = mainFrame.getSliderVolume().getMax() / Math.PI;
 

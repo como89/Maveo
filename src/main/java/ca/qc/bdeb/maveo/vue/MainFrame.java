@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
 import javafx.beans.value.ChangeListener;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,13 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 /**
@@ -104,8 +96,9 @@ public class MainFrame {
     @FXML
     Label lblProgression;
 
-    public MainFrame() {
+    BorderPane videoPane;
 
+    public MainFrame() {
 
     }
 
@@ -128,6 +121,11 @@ public class MainFrame {
 
     public Button getBoutonSuivant() {
         return boutonSuivant;
+    }
+
+    public Pane getVideoPane() {
+        Pane pane = (Pane) fenetrePrincipale.getScene().lookup("#panelEcranFenetre");
+        return pane;
     }
 
     public void addEventHandlerBtnPlay(EventHandler<ActionEvent> actionEvent) {

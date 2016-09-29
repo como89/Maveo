@@ -17,7 +17,6 @@ public class MainClass extends Application {
 
     public static void main(String[] args) {
         Application.launch(MainClass.class, (java.lang.String[]) null);
-
     }
 
     public void start(Stage stage) throws Exception {
@@ -38,13 +37,8 @@ public class MainClass extends Application {
         // modele
         FileOpener fileOpener = new FileOpener();
 
-        // Lecteur média
-        GestionnaireMusique gestionMusique = new GestionnaireMusique();
-
         MainFrameControleur mainFrameControleur = new MainFrameControleur();
         mainFrameControleur.ajouterMainFrame(mainFrame);
         mainFrameControleur.ajouterFileOpener(fileOpener);
-        mainFrameControleur.ajouterGestionnaireMusique(gestionMusique);
-
     }
 }

@@ -1,7 +1,9 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.FileOpener;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -47,7 +49,7 @@ public class MainFrameControleur {
     FileOpener fileOpener;
 
     // Gestionnaire média
-    GestionnaireMusique gestionnaireMusique;
+    GestionnaireMedia gestionnaireMedia;
 
     /**
      * Ajoute la fenêtre principale au contrôleur
@@ -79,16 +81,6 @@ public class MainFrameControleur {
         this.fileOpener = fileOpener;
     }
 
-    /**
-     * Ajoute un gestionnaire de média
-     *
-     * @param gestionMusique gesionnaire de média à ajouter
-     */
-    public void ajouterGestionnaireMusique(GestionnaireMusique gestionMusique) {
-        this.gestionnaireMusique = gestionMusique;
-        isFreeMutexLockSliderVolume = true;
-    }
-
 
     /**
      * Fixe la position du média en cours
@@ -96,7 +88,7 @@ public class MainFrameControleur {
      * @param positionPourcentage la nouvelle position, en pourcentage
      */
     void fixerSliderPosition(float positionPourcentage) {
-        gestionnaireMusique.setPosition(positionPourcentage);
+        gestionnaireMedia.setPosition(positionPourcentage);
     }
 
     /**
@@ -106,7 +98,7 @@ public class MainFrameControleur {
      */
     void fixerVolumePosition(int volumePourcentage) {
         if (isFreeMutexLockSliderVolume) {
-            gestionnaireMusique.setVolume(volumePourcentage);
+            gestionnaireMedia.setVolume(volumePourcentage);
         }
     }
 
@@ -121,16 +113,22 @@ public class MainFrameControleur {
 
             fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             if (fichier != null) {
-                gestionnaireMusique.setCheminFichier(fichier.getAbsolutePath());
+                isFreeMutexLockSliderVolume = true;
+                String path = fichier.getAbsolutePath();
+                if (path.endsWith(".mp4")) {
+                    gestionnaireMedia = new GestionnaireVideo(mainFrame.getVideoPane());
+                } else if (path.endsWith(".mp3")) {
+                    gestionnaireMedia = new GestionnaireMusique();
+                }
+                gestionnaireMedia.setCheminFichier(fichier.getAbsolutePath());
 
-
-                // mainFrame.getLabelNomChanson().setText(fichier.getName());
-                gestionnaireMusique.preparerMedia();
-                gestionnaireMusique.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
+                //mainFrame.getLabelNomChanson().setText(fichier.getName());
+                gestionnaireMedia.preparerMedia();
+                gestionnaireMedia.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
 
-                placerImageAlbum();
+                //  placerImageAlbum();
 
 
             }
@@ -172,11 +170,12 @@ public class MainFrameControleur {
     class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-            if (gestionnaireMusique.enLecture()) {
-                gestionnaireMusique.pause();
+            if (gestionnaireMedia.enLecture()) {
+                gestionnaireMedia.pause();
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
             } else {
-                gestionnaireMusique.jouerMedia();
+                gestionnaireMedia.jouerMedia();
+                mainFrame.getBtnArreter().setDisable(false);
                 mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
             }
         }
@@ -188,7 +187,8 @@ public class MainFrameControleur {
     class BtnArreterEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-            gestionnaireMusique.arreter();
+            gestionnaireMedia.arreter();
+            mainFrame.getBtnArreter().setDisable(true);
             mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
         }
     }

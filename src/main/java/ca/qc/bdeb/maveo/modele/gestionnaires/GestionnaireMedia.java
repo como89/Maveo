@@ -5,7 +5,24 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 /**
  * Created by nicholas on 26/09/16.
  */
-abstract class GestionnaireMedia {
+public abstract class GestionnaireMedia {
+
+    GestionnaireMedia() {
+    }
+
+    /**
+     * Retourne le chemin absolu du fichier média en cours
+     *
+     * @return le chemin absolu du fichier média en cours
+     */
+    public abstract String getCheminFichier();
+
+    /**
+     * Fixe le chemin du fichier média
+     *
+     * @param cheminFichier chaîne de caractères contenant le chemin absolu du fichier
+     */
+    public abstract void setCheminFichier(String cheminFichier);
 
     /**
      * Méthode qui permet de préparer le média sans le jouer
