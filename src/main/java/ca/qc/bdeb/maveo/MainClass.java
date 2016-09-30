@@ -15,6 +15,10 @@ import java.net.URL;
 
 public class MainClass extends Application {
 
+    public final double MIN_HEGHT_STAGE = 200;
+    public final double MIN_WIDTH_STAGE = 400;
+
+
     public static void main(String[] args) {
         ControleurExtensions a = new ControleurExtensions(); // erase this now!!
         Application.launch(MainClass.class, (java.lang.String[]) null);
@@ -33,7 +37,11 @@ public class MainClass extends Application {
         Scene scene = new Scene(page);
         stage.setScene(scene);
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
+        stage.setMinHeight(MIN_HEGHT_STAGE);
+        stage.setMinWidth(MIN_WIDTH_STAGE);
+
         stage.show();
+
 
         // modele
         FileOpener fileOpener = new FileOpener();

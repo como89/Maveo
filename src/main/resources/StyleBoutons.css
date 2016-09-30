@@ -1,0 +1,51 @@
+.buttonPlay {
+    -fx-background-image: url("IconesBoutons/play.png");
+    -fx-background-size: 30px;
+    -fx-background-radius: 60px;
+    -fx-max-width: 40px;
+    -fx-max-height: 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.buttonPause {
+    -fx-background-image: url("IconesBoutons/pause.png");
+    -fx-background-size: 30px 30px;
+    -fx-background-radius: 60px;
+    -fx-max-width: 40px;
+    -fx-max-height: 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.buttonPrecedent {
+    -fx-background-image: url("IconesBoutons/previous.png");
+    -fx-background-size: 30px 30px;
+    -fx-background-radius: 45px;
+    -fx-max-width: 40px;
+    -fx-max-height: 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.buttonStop {
+    -fx-background-image: url("IconesBoutons/stop.png");
+    -fx-background-size: 30px 30px;
+    -fx-background-radius: 60px;
+    -fx-max-width: 40px;
+    -fx-max-height: 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.buttonNext {
+    -fx-background-image: url("IconesBoutons/next.png");
+    -fx-background-size: 30px 30px;
+    -fx-background-radius: 45px;
+    -fx-max-width: 40px;
+    -fx-max-height: 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+

@@ -128,7 +128,7 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
 
-                //  placerImageAlbum();
+                placerImageAlbum();
 
 
             }
@@ -149,7 +149,7 @@ public class MainFrameControleur {
                         BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
                         photoAlbum = SwingFXUtils.toFXImage(image, null);
                     } else {
-                        photoAlbum  = new Image("file:res/noart.png");
+                        photoAlbum = new Image("file:res/noart.png");
                     }
                     mainFrame.setImageLblEcran(photoAlbum);
                 }
@@ -170,13 +170,16 @@ public class MainFrameControleur {
     class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
-            if (gestionnaireMedia.enLecture()) {
+            if (gestionnaireMedia.enLecture()) { // En lecture -> pause
                 gestionnaireMedia.pause();
-                mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
-            } else {
+                mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
+                mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
+            } else { // En pause -> lecture
                 gestionnaireMedia.jouerMedia();
                 mainFrame.getBtnArreter().setDisable(false);
-                mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_PAUSE);
+                mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPlay");
+                mainFrame.getBtnJouerPause().getStyleClass().add("buttonPause");
+
             }
         }
     }
@@ -189,7 +192,8 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
             gestionnaireMedia.arreter();
             mainFrame.getBtnArreter().setDisable(true);
-            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
+            mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
+            mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
         }
     }
 
@@ -246,7 +250,8 @@ public class MainFrameControleur {
         public void finished(MediaPlayer mediaPlayer) {
             isFreeMutexLockSliderPosition = false;
             mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
-            mainFrame.getBtnJouerPause().setText(mainFrame.STR_BOUTON_JOUER);
+            mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
+            mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
             isFreeMutexLockSliderPosition = true;
         }
 
