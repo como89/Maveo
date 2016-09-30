@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,9 +28,6 @@ public class MainFrame {
 
     public static final String STR_NOM_PROGRAMME = "M A V E O";
 
-    public final String STR_BOUTON_PAUSE = "\u23F8";
-    public final String STR_BOUTON_JOUER = "▶";
-    private final String STR_BOUTON_STOP = "STOP";
     private final String STR_MENU_ITEM_MEDIA = "Média";
     private final String STR_MEDIA_OPTION_OUVRIR = "Ouvrir un fichier...";
     private static final String STR_MEDIA_OPTION_OUVRIRPLUSIEURS = "Ouvrir plusieurs fichiers...";
@@ -38,6 +36,9 @@ public class MainFrame {
 
     @FXML
     Button boutonPlayPause;
+
+    @FXML
+    Image imageBtnPlay, imageBtnStop, imageBtnSuivant, imageBtnPrecedent, imageBtnPause;
 
     @FXML
     Button boutonArreter;
@@ -100,6 +101,21 @@ public class MainFrame {
 
     public MainFrame() {
 
+
+    }
+
+    private void arrondirBoutons() {
+        boutonArreter.setStyle("-fx-background-radius: 5em; "+
+                "-fx-min-width: 3px; "
+                + "-fx-min-height: 3px; "
+                + "-fx-max-width: 3px; "
+                + "-fx-max-height: 3px;");
+    }
+
+    private void initialiserBoutons() {
+
+
+
     }
 
     public Window getFenetre() {
@@ -127,6 +143,8 @@ public class MainFrame {
         Pane pane = (Pane) fenetrePrincipale.getScene().lookup("#panelEcranFenetre");
         return pane;
     }
+
+
 
     public void addEventHandlerBtnPlay(EventHandler<ActionEvent> actionEvent) {
         boutonPlayPause.setOnAction(actionEvent);
@@ -168,6 +186,7 @@ public class MainFrame {
 
     public void setImageLblEcran(Image image) {
         lblNomMedia.setGraphic(new ImageView(image));
+
     }
 
 
