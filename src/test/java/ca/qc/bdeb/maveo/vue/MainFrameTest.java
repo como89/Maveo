@@ -1,32 +1,21 @@
 package ca.qc.bdeb.maveo.vue;
 
-import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
-import ca.qc.bdeb.maveo.modele.FileOpener;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
-import sun.applet.Main;
 
 import static org.testfx.api.FxAssert.verifyThat;
 
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.io.File;
 import java.net.URL;
 
 /**

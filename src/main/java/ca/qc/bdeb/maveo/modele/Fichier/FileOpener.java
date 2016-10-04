@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.modele;
+package ca.qc.bdeb.maveo.modele.Fichier;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -11,9 +11,13 @@ import java.io.File;
 public class FileOpener {
 
     FileChooser fileChooser;
+    AccesExtensions accesExtensions;
 
     public FileOpener() {
         fileChooser = new FileChooser();
+        accesExtensions = new AccesExtensions();
+        activerFiltresAudio();
+        activerFiltresVideo();
     }
 
     /**
@@ -24,5 +28,19 @@ public class FileOpener {
      */
     public File activerOuvertureFichier(Window parent) {
         return fileChooser.showOpenDialog(parent);
+    }
+
+    /**
+     * Active les filtres audio
+     */
+    public void activerFiltresAudio() {
+        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresAudio());
+    }
+
+    /**
+     * Active les flitres vidéo
+     */
+    public void activerFiltresVideo() {
+        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresVideo());
     }
 }

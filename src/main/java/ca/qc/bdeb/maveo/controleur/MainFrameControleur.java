@@ -1,30 +1,18 @@
 package ca.qc.bdeb.maveo.controleur;
 
-import ca.qc.bdeb.maveo.modele.FileOpener;
+import ca.qc.bdeb.maveo.modele.Fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-
-import com.mpatric.mp3agic.ID3v2;
-
-import javax.imageio.ImageIO;
 import java.io.File;
 
 /**

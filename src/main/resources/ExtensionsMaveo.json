@@ -1,13 +1,17 @@
 {
   "ExtensionsAudio": [
     {
-      "Texte": "Fichiers mp3",
+      "Description": "Fichiers mp3",
       "Extension": "*.mp3"
+    },
+    {
+      "Description": "Fichiers ogg",
+      "Extension": "*.ogg"
     }
   ],
   "ExtensionsVideo": [
     {
-      "Texte": "Fichiers mp4",
+      "Description": "Fichiers mp4",
       "Extension": "*.mp4"
     }
   ]

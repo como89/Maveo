@@ -1,8 +1,7 @@
 package ca.qc.bdeb.maveo;
 
-import ca.qc.bdeb.maveo.controleur.ControleurExtensions;
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
-import ca.qc.bdeb.maveo.modele.FileOpener;
+import ca.qc.bdeb.maveo.modele.Fichier.FileOpener;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Application;
@@ -20,7 +19,6 @@ public class MainClass extends Application {
 
 
     public static void main(String[] args) {
-        ControleurExtensions a = new ControleurExtensions(); // erase this now!!
         Application.launch(MainClass.class, (java.lang.String[]) null);
     }
 
