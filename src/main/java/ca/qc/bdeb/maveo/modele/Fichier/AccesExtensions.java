@@ -17,20 +17,19 @@ import java.util.ArrayList;
 public class AccesExtensions {
 
     public final String NOM_RESSOURCE_FICHIER_EXTENSIONS = "ExtensionsMaveo.json";
-    public final String NOM_TAB_EXTENSIONS_AUDIO = "ExtensionsAudio";
-    public final String NOM_TAB_EXTENSIONS_VIDEO = "ExtensionsVideo";
+    public final String NOM_JSON_EXTENSIONS_OUVERTURE = "ExtensionsOuverture";
     public final String DESCRIPTION = "Description";
-    public final String EXTENSION = "Extension";
+    public final String EXTENSIONS = "Extensions";
 
 
     private URL urlFichierExtensions;
 
-    ArrayList<FileChooser.ExtensionFilter> listeFiltresAudio;
+    ArrayList<FileChooser.ExtensionFilter> listeFiltresOuverture;
     ArrayList<FileChooser.ExtensionFilter> listeFiltresVideo;
 
 
     public AccesExtensions() {
-        this.urlFichierExtensions = getClass().getClassLoader().getResource("ExtensionsMaveo.json");
+        this.urlFichierExtensions = getClass().getClassLoader().getResource(NOM_RESSOURCE_FICHIER_EXTENSIONS);
         ouvrirFichierExtensions();
     }
 
@@ -39,7 +38,7 @@ public class AccesExtensions {
      */
     void ouvrirFichierExtensions() {
         JSONParser jsonParser = new JSONParser();
-        listeFiltresAudio = new ArrayList<FileChooser.ExtensionFilter>();
+        listeFiltresOuverture = new ArrayList<FileChooser.ExtensionFilter>();
         listeFiltresVideo = new ArrayList<FileChooser.ExtensionFilter>();
 
         try {
@@ -48,37 +47,24 @@ public class AccesExtensions {
             JSONObject jsonObject =
                     (JSONObject) jsonParser.parse(new InputStreamReader(new FileInputStream(file.getAbsolutePath())));
 
-            JSONArray tabExtensionsAudio = (JSONArray) jsonObject.get(NOM_TAB_EXTENSIONS_AUDIO);
-            JSONObject ligneJson = new JSONObject();
+            JSONObject jsonObjectExtensionsOuverture = (JSONObject) jsonObject.get(NOM_JSON_EXTENSIONS_OUVERTURE);
 
-            // Remplit la liste des extensions audio
-            FileChooser.ExtensionFilter extensionFilterTmp;
-            for (int i = 0; i < tabExtensionsAudio.size(); i++) {
-                ligneJson = (JSONObject) tabExtensionsAudio.get(i);
-                extensionFilterTmp =
-                        new FileChooser.ExtensionFilter((String) ligneJson.get(DESCRIPTION),
-                                (String) ligneJson.get(EXTENSION));
-                listeFiltresAudio.add(extensionFilterTmp);
-            }
+            String description = (String) jsonObjectExtensionsOuverture.get(DESCRIPTION);
 
-            JSONArray tabExtensionsVideo = (JSONArray) jsonObject.get(NOM_TAB_EXTENSIONS_VIDEO);
+            JSONArray tabExtensionsMedia = (JSONArray) jsonObjectExtensionsOuverture.get(EXTENSIONS);
 
-            // Remplit la liste des extensions vidéo
-            for (int i = 0; i < tabExtensionsVideo.size(); i++) {
-                ligneJson = (JSONObject) tabExtensionsVideo.get(i);
-                extensionFilterTmp = new FileChooser.ExtensionFilter((String) ligneJson.get(DESCRIPTION),
-                        (String) ligneJson.get(EXTENSION));
-
-                listeFiltresVideo.add(extensionFilterTmp);
-            }
+            FileChooser.ExtensionFilter extensionFilterTmp =
+                    new FileChooser.ExtensionFilter(description,
+                            tabExtensionsMedia);
+            listeFiltresOuverture.add(extensionFilterTmp);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<FileChooser.ExtensionFilter> getListeFiltresAudio() {
-        return listeFiltresAudio;
+    public ArrayList<FileChooser.ExtensionFilter> getListeFiltresOuverture() {
+        return listeFiltresOuverture;
     }
 
     public ArrayList<FileChooser.ExtensionFilter> getListeFiltresVideo() {

@@ -1,18 +1,20 @@
 {
-  "ExtensionsAudio": [
+  "ExtensionsOuverture": {
+    "Description": "Fichiers média",
+    "Extensions": [
+      "*.mp3",
+      "*.ogg",
+      "*.mp4"
+    ]
+  },
+  "ExtensionsEcriture": [
     {
-      "Description": "Fichiers mp3",
-      "Extension": "*.mp3"
+      "Description": "Fichier Maveo (*.maveo)",
+      "Extension": "*.maveo"
     },
     {
-      "Description": "Fichiers ogg",
-      "Extension": "*.ogg"
-    }
-  ],
-  "ExtensionsVideo": [
-    {
-      "Description": "Fichiers mp4",
-      "Extension": "*.mp4"
+      "Description": "Fichier JSON (*.json)",
+      "Extension": "*.json"
     }
   ]
 }

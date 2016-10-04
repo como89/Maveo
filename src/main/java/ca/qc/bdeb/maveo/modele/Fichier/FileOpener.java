@@ -34,7 +34,7 @@ public class FileOpener {
      * Active les filtres audio
      */
     public void activerFiltresAudio() {
-        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresAudio());
+        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresOuverture());
     }
 
     /**
