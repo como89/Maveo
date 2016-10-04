@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Playlist implements Serializable {
     private String titrePlaylist;
     private int idPlaylist;
-    private static ArrayList<Chanson> listeChanson;
+    private static ArrayList<Media> listeMedia;
 
     public String getTitrePlaylist() {
         return titrePlaylist;
@@ -27,26 +27,30 @@ public class Playlist implements Serializable {
         this.idPlaylist = idPlaylist;
     }
 
-    public static ArrayList<Chanson> getListeChanson() {
-        return listeChanson;
+    public static ArrayList<Media> getListeMedia() {
+        return listeMedia;
     }
 
-    public static void setListeChanson(ArrayList<Chanson> listeChanson) {
-        Playlist.listeChanson = listeChanson;
+    public static void setListeMedia(ArrayList<Media> listeMedia) {
+        Playlist.listeMedia = listeMedia;
     }
 
-    public void ajouterChansonAListe(Chanson chanson){
-        listeChanson.add(chanson);
+    public void ajouterChansonAListe(Media media){
+        listeMedia.add(media);
     }
 
-    public void retirerChansonAListe(Chanson chanson){
-        listeChanson.remove(chanson);
+    public void retirerChansonAListe(Media media){
+        listeMedia.remove(media);
+    }
+
+    public int recupererLongueurListe(){
+        return listeMedia.size();
     }
 
     public Playlist(String nom, int id){
         this.titrePlaylist = nom;
         this.idPlaylist = id;
-        this.listeChanson = new ArrayList<Chanson>();
+        this.listeMedia = new ArrayList<Media>();
 
 
 

@@ -1,6 +1,7 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.FileOpener;
+import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
@@ -115,12 +116,13 @@ public class MainFrameControleur {
             if (fichier != null) {
                 isFreeMutexLockSliderVolume = true;
                 String path = fichier.getAbsolutePath();
-                if (path.endsWith(".mp4")) {
+                Media media = new Media(fichier.getName(),path);
+                if (media.getPathMedia().endsWith(".mp4")) {
                     gestionnaireMedia = new GestionnaireVideo(mainFrame.getVideoPane());
-                } else if (path.endsWith(".mp3")) {
+                } else if (media.getPathMedia().endsWith(".mp3")) {
                     gestionnaireMedia = new GestionnaireMusique();
                 }
-                gestionnaireMedia.setCheminFichier(fichier.getAbsolutePath());
+                gestionnaireMedia.setCheminFichier(media.getPathMedia());
 
                 //mainFrame.getLabelNomChanson().setText(fichier.getName());
                 gestionnaireMedia.preparerMedia();
@@ -128,7 +130,7 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
 
-                placerImageAlbum();
+               // placerImageAlbum();
 
 
             }
@@ -136,7 +138,7 @@ public class MainFrameControleur {
         }
 
         public void placerImageAlbum() {
-            ID3v2 id3v2tag;
+         /**   ID3v2 id3v2tag;
             Mp3File file = null;
             try {
                 file = new Mp3File(fichier.getAbsolutePath());
@@ -160,6 +162,14 @@ public class MainFrameControleur {
             } catch (InvalidDataException e) {
                 e.printStackTrace();
             }
+        }
+          */
+            /*Mp3File song = new Mp3File(fichier.);
+            if (song.hasId3v2Tag()){
+                ID3v2 id3v2tag = song.getId3v2Tag();
+                byte[] imageData = id3v2tag.getAlbumImage();
+                //converting the bytes to an image
+                BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));*/
         }
 
     }
