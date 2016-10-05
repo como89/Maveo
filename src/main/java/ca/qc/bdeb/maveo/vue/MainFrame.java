@@ -1,5 +1,11 @@
 package ca.qc.bdeb.maveo.vue;
 
+import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
+import ca.qc.bdeb.maveo.modele.Fichier.FileOpener;
+import ca.qc.bdeb.maveo.modele.Media;
+import ca.qc.bdeb.maveo.modele.Playlist;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -11,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
+
+import java.io.File;
 
 
 /**
@@ -104,13 +112,6 @@ public class MainFrame {
 
     }
 
-    private void arrondirBoutons() {
-        boutonArreter.setStyle("-fx-background-radius: 5em; "+
-                "-fx-min-width: 3px; "
-                + "-fx-min-height: 3px; "
-                + "-fx-max-width: 3px; "
-                + "-fx-max-height: 3px;");
-    }
 
     private void initialiserBoutons() {
 
@@ -190,4 +191,27 @@ public class MainFrame {
     }
 
 
+    public void openFilePlaylist(ActionEvent actionEvent) {
+        FileOpener opener = new FileOpener();
+      File fichier =  opener.activerOuvertureFichier(this.getFenetre());
+        if (fichier != null) {
+
+            String path = fichier.getAbsolutePath();
+
+            //On doit maintenant lire le fichier json et inserer les infos du fichier dans un tableau
+
+            //infos = recupererInfosPlaylist();
+            //afficherInfosPlaylist(infos);
+
+
+
+
+
+
+        }
+    }
+
+    public void ajouterALaPlaylist(){
+
+    }
 }
