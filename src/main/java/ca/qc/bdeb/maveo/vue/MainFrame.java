@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
+import org.json.simple.JSONObject;
 
 import java.io.File;
 
@@ -213,5 +214,10 @@ public class MainFrame {
 
     public void ajouterALaPlaylist(){
 
+
+    }
+
+    public void createNewPlaylist(ActionEvent actionEvent) {
+        //Playlist playlist = new Playlist();
     }
 }
