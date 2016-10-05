@@ -104,13 +104,6 @@ public class MainFrame {
 
     }
 
-    private void arrondirBoutons() {
-        boutonArreter.setStyle("-fx-background-radius: 5em; "+
-                "-fx-min-width: 3px; "
-                + "-fx-min-height: 3px; "
-                + "-fx-max-width: 3px; "
-                + "-fx-max-height: 3px;");
-    }
 
     private void initialiserBoutons() {
 
