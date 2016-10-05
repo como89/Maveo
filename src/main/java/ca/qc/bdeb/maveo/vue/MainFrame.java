@@ -183,4 +183,10 @@ public class MainFrame {
     }
 
 
+    public void openFilePlaylist(ActionEvent actionEvent) {
+    }
+
+    public void ajouterALaPlaylist(){
+
+    }
 }
