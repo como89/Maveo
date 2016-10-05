@@ -5,6 +5,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by C A T A on 2016-10-04.
@@ -22,33 +24,36 @@ public class AccesExtensionsTest {
     private URL urlFichierExtensions;
     private AccesExtensions accesExtensions;
 
+    @Before
+    public void setUp() throws Exception {
+        accesExtensions = new AccesExtensions();
+    }
+
     @Test
     public void ouvrirFichierExtensions() throws Exception {
-        accesExtensions = new AccesExtensions();
+
         lireFichierExtensions(accesExtensions);
 
         Assert.assertTrue(comparerDeuxArrayLists(accesExtensions.getListeFiltresOuverture(), listeFiltresOuverture));
 
     }
 
+
     @Test
     public void getListeFiltresOuverture() throws Exception {
-
-    }
-
-    @Test
-    public void getListeFiltresVideo() throws Exception {
-
+        Assert.assertEquals(accesExtensions.listeFiltresOuverture,accesExtensions.getListeFiltresOuverture());
     }
 
     @Test
     public void getUrlFichierExtensions() throws Exception {
-
+        Assert.assertEquals(accesExtensions.getUrlFichierExtensions(), accesExtensions.urlFichierExtensions);
     }
 
     @Test
     public void setUrlFichierExtensions() throws Exception {
-
+        urlFichierExtensions = new URL("http://www.google.ca");
+        accesExtensions.setUrlFichierExtensions(urlFichierExtensions);
+        Assert.assertEquals(urlFichierExtensions, accesExtensions.getUrlFichierExtensions());;
     }
 
     void lireFichierExtensions(AccesExtensions accesExtensions) {
@@ -94,21 +99,12 @@ public class AccesExtensionsTest {
         // On effectue une copie de la première liste pour ne pas altérer le contenu de celle-ci
         ArrayList<FileChooser.ExtensionFilter> copieListe1 = new ArrayList<FileChooser.ExtensionFilter>(liste1);
 
+        Iterator<FileChooser.ExtensionFilter> it1 = liste1.iterator();
+        Iterator<FileChooser.ExtensionFilter> it2 = liste2.iterator();
 
 
-
-        for (Object filtre : liste2) {
-            // Si l'item trouvé dans la deuxième liste ne se retrouve pas dans la première liste alors arrête la boucle
-            if (!copieListe1.remove(filtre)) {
-                sontIdentiques = false;
-                break;
-            }
-        }
-
-        // Si le tous les éléments de la deuxième liste se retrouvent dans la première liste on vérifie qu'il n'y a pas
-        // des éléments de plus dans la première liste
-        if (sontIdentiques) {
-            sontIdentiques = copieListe1.isEmpty();
+        while (it1.hasNext() && it2.hasNext() && sontIdentiques == true){
+            sontIdentiques = verifierContenuFiltresIdentique(it1.next(), it2.next());
         }
 
         return sontIdentiques;
@@ -118,7 +114,7 @@ public class AccesExtensionsTest {
     private boolean verifierContenuFiltresIdentique(FileChooser.ExtensionFilter filtre1, FileChooser.ExtensionFilter filtre2) {
         boolean contenuIdentique = true;
 
-        if (filtre1.getDescription() != filtre2.getDescription()) {
+        if (!filtre1.getDescription().equals(filtre2.getDescription())) {
             contenuIdentique = false;
         }
 
@@ -127,7 +123,6 @@ public class AccesExtensionsTest {
                 filtre1.getExtensions().size() == filtre2.getExtensions().size())) {
             contenuIdentique = false;
         }
-
 
         return contenuIdentique;
     }

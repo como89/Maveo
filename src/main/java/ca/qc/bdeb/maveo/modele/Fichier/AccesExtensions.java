@@ -23,9 +23,9 @@ public class AccesExtensions {
     public final String EXTENSIONS = "Extensions";
 
 
-    private URL urlFichierExtensions;
+    URL urlFichierExtensions;
 
-    private ArrayList<FileChooser.ExtensionFilter> listeFiltresOuverture;
+    ArrayList<FileChooser.ExtensionFilter> listeFiltresOuverture;
 
 
     public AccesExtensions() {
