@@ -16,8 +16,7 @@ public class FileOpener {
     public FileOpener() {
         fileChooser = new FileChooser();
         accesExtensions = new AccesExtensions();
-        activerFiltresAudio();
-        activerFiltresVideo();
+        activerFiltresOuverture();
     }
 
     /**
@@ -31,16 +30,9 @@ public class FileOpener {
     }
 
     /**
-     * Active les filtres audio
+     * Active les filtres d'ouverture de fichier
      */
-    public void activerFiltresAudio() {
+    public void activerFiltresOuverture() {
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresOuverture());
-    }
-
-    /**
-     * Active les flitres vidéo
-     */
-    public void activerFiltresVideo() {
-        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresVideo());
     }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by C A T A on 2016-10-04.
  */
+
 public class AccesExtensions {
 
     public final String NOM_RESSOURCE_FICHIER_EXTENSIONS = "ExtensionsMaveo.json";
@@ -24,8 +25,7 @@ public class AccesExtensions {
 
     private URL urlFichierExtensions;
 
-    ArrayList<FileChooser.ExtensionFilter> listeFiltresOuverture;
-    ArrayList<FileChooser.ExtensionFilter> listeFiltresVideo;
+    private ArrayList<FileChooser.ExtensionFilter> listeFiltresOuverture;
 
 
     public AccesExtensions() {
@@ -39,7 +39,6 @@ public class AccesExtensions {
     void ouvrirFichierExtensions() {
         JSONParser jsonParser = new JSONParser();
         listeFiltresOuverture = new ArrayList<FileChooser.ExtensionFilter>();
-        listeFiltresVideo = new ArrayList<FileChooser.ExtensionFilter>();
 
         try {
             File file = new File(urlFichierExtensions.toURI());
@@ -65,10 +64,6 @@ public class AccesExtensions {
 
     public ArrayList<FileChooser.ExtensionFilter> getListeFiltresOuverture() {
         return listeFiltresOuverture;
-    }
-
-    public ArrayList<FileChooser.ExtensionFilter> getListeFiltresVideo() {
-        return listeFiltresVideo;
     }
 
     public URL getUrlFichierExtensions() {
