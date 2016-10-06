@@ -57,6 +57,7 @@ public class MainFrameControleur {
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
         this.mainFrame.addEventHandlerCreatePlaylist(new MenuCreatePlaylistEventHandler());
+        this.mainFrame.addEventHandlerOpenPlaylist(new OpenPlaylistEventHandler());
         this.mainFrame.addEventHandlerAddMediaInPlayList(new MenuAddToPlaylistEventHandler());
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
@@ -192,6 +193,19 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
             Media media = getMediaFromFile();
             playList.ajouterMediaListe(media);
+        }
+    }
+
+    class OpenPlaylistEventHandler implements  EventHandler<ActionEvent>{
+
+        @Override
+        public void handle(ActionEvent event) {
+          File file = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            //verifier que c est bien un fichier .json
+            //ouvrir nouvelle fenetre
+            //lire fichier json et mettre dans un tableau ou liste.
+            //afficherPlaylist
+
         }
     }
 
