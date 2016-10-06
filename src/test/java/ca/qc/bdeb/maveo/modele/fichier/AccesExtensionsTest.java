@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.modele.Fichier;
+package ca.qc.bdeb.maveo.modele.fichier;
 
 import javafx.stage.FileChooser;
 import org.json.simple.JSONArray;

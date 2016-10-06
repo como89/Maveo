@@ -1,5 +1,6 @@
-package ca.qc.bdeb.maveo.modele.Fichier;
+package ca.qc.bdeb.maveo.modele.fichier;
 
+import ca.qc.bdeb.maveo.modele.fichier.AccesExtensions;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 

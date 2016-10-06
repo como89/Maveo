@@ -1,6 +1,6 @@
 package ca.qc.bdeb.maveo.controleur;
 
-import ca.qc.bdeb.maveo.modele.Fichier.FileOpener;
+import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.fxml.FXMLLoader;

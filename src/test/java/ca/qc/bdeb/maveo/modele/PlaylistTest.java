@@ -19,7 +19,7 @@ public class PlaylistTest {
         Media media = new Media("Tokyo.mp3", "res/Tokyo.mp3");
 
         Playlist liste = new Playlist("test", 1);
-        liste.ajouterChansonAListe(media);
+        liste.ajouterMediaListe(media);
         Assert.assertEquals(liste.recupererLongueurListe(), 1);
 
     }
@@ -29,7 +29,7 @@ public class PlaylistTest {
         Playlist liste = new Playlist("test", 2);
 
         for(int i = 0; i < LENGTH_MEDIA; i++) {
-            liste.ajouterChansonAListe(new Media(NAME_MEDIA,PATH_MEDIA));
+            liste.ajouterMediaListe(new Media(NAME_MEDIA, PATH_MEDIA));
         }
 
         Assert.assertEquals(liste.recupererLongueurListe(), LENGTH_MEDIA);

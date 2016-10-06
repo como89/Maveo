@@ -27,19 +27,11 @@ public class Playlist implements Serializable {
         this.idPlaylist = idPlaylist;
     }
 
-    public static ArrayList<Media> getListeMedia() {
-        return listeMedia;
-    }
-
-    public static void setListeMedia(ArrayList<Media> listeMedia) {
-        Playlist.listeMedia = listeMedia;
-    }
-
-    public void ajouterChansonAListe(Media media){
+    public void ajouterMediaListe(Media media) {
         listeMedia.add(media);
     }
 
-    public void retirerChansonAListe(Media media){
+    public void retirerMediaListe(Media media) {
         listeMedia.remove(media);
     }
 

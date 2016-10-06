@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Class-Path: gson-2.7.jar jna-3.5.2.jar vlcj-3.10.1.jar json-simple-1.1
+ .jar slf4j-api-1.7.10.jar jna-platform-4.1.0.jar org.json.simple-0.4.
+ jar testfx-core-4.0.1-alpha.jar guava-18.0.jar hamcrest-all-1.3.jar t
+ estfx-core-4.0.1-alpha.jar guava-18.0.jar hamcrest-all-1.3.jar testfx
+ -junit-4.0.1-alpha.jar testfx-core-4.0.1-alpha.jar guava-18.0.jar ham
+ crest-all-1.3.jar junit-4.12.jar testfx-junit-4.0.1-alpha.jar testfx-
+ core-4.0.1-alpha.jar guava-18.0.jar hamcrest-all-1.3.jar junit-4.12.j
+ ar gson-2.7.jar mp3agic-0.8.4.jar mp3agic-0.8.4.jar mp3agic-0.8.4.jar
+  mp3agic-0.8.4.jar mp3agic-0.8.4.jar mp3agic-0.8.4.jar jna-platform-4
+ .1.0.jar org.json.simple-0.4.jar json-simple-1.1.jar
+Main-Class: ca.qc.bdeb.maveo.MainClass
+

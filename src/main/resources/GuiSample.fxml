@@ -20,10 +20,10 @@
           <Menu id="menuItemFile" fx:id="menuItemFile" mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="menuItemFileOpen" mnemonicParsing="false" text="Open" />
-                  <MenuItem mnemonicParsing="false" onAction="#createNewPlaylist" text="Create a playlist" />
-                  <MenuItem mnemonicParsing="false" onAction="#openFilePlaylist" text="Open Playlist" />
-                  <MenuItem mnemonicParsing="false" onAction="#ajouterALaPlaylist" text="Add to Playlist" />
-                  <MenuItem mnemonicParsing="false" text="Save Playlist" />
+                <MenuItem fx:id="menuItemCreatePlaylist" mnemonicParsing="false" text="Create a playlist"/>
+                <MenuItem fx:id="menuItemOpenPlaylist" mnemonicParsing="false" text="Open Playlist"/>
+                <MenuItem fx:id="menuItemAddToPlaylist" mnemonicParsing="false" text="Add to Playlist"/>
+                <MenuItem fx:id="menuItemSavePlaylist" mnemonicParsing="false" text="Save Playlist"/>
               <MenuItem id="menuItemFileClose" fx:id="menuItemFileClose" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
