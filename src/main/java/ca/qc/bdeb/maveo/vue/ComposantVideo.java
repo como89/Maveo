@@ -45,7 +45,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         videoBufferCallBack.videoPane = videoPane;
         videoPane.getChildren().clear();
             videoPane.getChildren().add(imageView);
-        videoPane.heightProperty().addListener(new ChangeListener<Number>() {
+        videoPane.widthProperty().addListener(new ChangeListener<Number>() {
                 @Override
                 public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                     fitImageWithSize(newValue.floatValue(), (float) videoPane.getHeight());
@@ -66,9 +66,6 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
     }
 
     void fitImageWithSize(final float originalWidth, final float originalHeight) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
                 Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
 
                 float boundWidth = (float) videoBounds.getWidth();
@@ -85,13 +82,12 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
                     newHeight = boundHeight;
                     newWidth = (newHeight * originalWidth) / originalHeight;
                 }
+                
 
                 imageView.setFitHeight(newHeight);
                 imageView.setFitWidth(newWidth);
                 imageView.setX(0);
                 imageView.setY(0);
-            }
-        });
     }
 
     PixelWriter getPixWriter() {
