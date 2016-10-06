@@ -1,12 +1,7 @@
 package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
-import ca.qc.bdeb.maveo.modele.Fichier.FileOpener;
-import ca.qc.bdeb.maveo.modele.Media;
-import ca.qc.bdeb.maveo.modele.Playlist;
-import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
-import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
-import javafx.application.Platform;
+import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
-import org.json.simple.JSONObject;
 
 import java.io.File;
 
@@ -98,6 +92,18 @@ public class MainFrame {
     MenuItem menuItemHelpAbout;
 
     @FXML
+    MenuItem menuItemCreatePlaylist;
+
+    @FXML
+    MenuItem menuItemOpenPlaylist;
+
+    @FXML
+    MenuItem menuItemAddToPlaylist;
+
+    @FXML
+    MenuItem menuItemSavePlaylist;
+
+    @FXML
     Label lblTxtVolume;
 
     @FXML
@@ -169,6 +175,14 @@ public class MainFrame {
         sliderVolume.valueProperty().addListener(changeListener);
     }
 
+    public void addEventHandlerCreatePlaylist(EventHandler<ActionEvent> menuCreatePlaylistEventHandler) {
+        menuItemCreatePlaylist.setOnAction(menuCreatePlaylistEventHandler);
+    }
+
+    public void addEventHandlerAddMediaInPlayList(EventHandler<ActionEvent> menuAddToPlaylistEventHandler) {
+        menuItemAddToPlaylist.setOnAction(menuAddToPlaylistEventHandler);
+    }
+
 
     public Slider getSliderProgression() {
         return sliderProgression;
@@ -189,35 +203,5 @@ public class MainFrame {
     public void setImageLblEcran(Image image) {
         lblNomMedia.setGraphic(new ImageView(image));
 
-    }
-
-
-    public void openFilePlaylist(ActionEvent actionEvent) {
-        FileOpener opener = new FileOpener();
-      File fichier =  opener.activerOuvertureFichier(this.getFenetre());
-        if (fichier != null) {
-
-            String path = fichier.getAbsolutePath();
-
-            //On doit maintenant lire le fichier json et inserer les infos du fichier dans un tableau
-
-            //infos = recupererInfosPlaylist();
-            //afficherInfosPlaylist(infos);
-
-
-
-
-
-
-        }
-    }
-
-    public void ajouterALaPlaylist(){
-
-
-    }
-
-    public void createNewPlaylist(ActionEvent actionEvent) {
-        //Playlist playlist = new Playlist();
     }
 }

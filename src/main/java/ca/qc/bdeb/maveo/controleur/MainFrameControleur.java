@@ -1,6 +1,7 @@
 package ca.qc.bdeb.maveo.controleur;
 
-import ca.qc.bdeb.maveo.modele.Fichier.FileOpener;
+import ca.qc.bdeb.maveo.modele.Playlist;
+import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
@@ -24,8 +25,9 @@ public class MainFrameControleur {
 
     boolean isFreeMutexLockSliderVolume = false;
 
-
-    private File fichier;
+    //Ces deux variables sont temporaires.
+    private final String PLAYLIST_NAME = "PlayList";
+    private final int PLAYLIST_ID = 0;
 
 
     public MainFrameControleur() {
@@ -40,6 +42,8 @@ public class MainFrameControleur {
     // Gestionnaire média
     GestionnaireMedia gestionnaireMedia;
 
+    Playlist playList;
+
     /**
      * Ajoute la fenêtre principale au contrôleur
      *
@@ -52,6 +56,9 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
+        this.mainFrame.addEventHandlerCreatePlaylist(new MenuCreatePlaylistEventHandler());
+        this.mainFrame.addEventHandlerAddMediaInPlayList(new MenuAddToPlaylistEventHandler());
+
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
         this.mainFrame.getSliderProgression().setDisable(true);
         this.mainFrame.getBtnArreter().setDisable(true);
@@ -100,11 +107,9 @@ public class MainFrameControleur {
 
         public void handle(ActionEvent event) {
 
-            fichier = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
-            if (fichier != null) {
+            Media media = getMediaFromFile();
+            if (media != null) {
                 isFreeMutexLockSliderVolume = true;
-                String path = fichier.getAbsolutePath();
-                Media media = new Media(fichier.getName(),path);
                 if (media.getPathMedia().endsWith(".mp4")) {
                     gestionnaireMedia = new GestionnaireVideo(mainFrame.getVideoPane());
                 } else if (media.getPathMedia().endsWith(".mp3")) {
@@ -161,6 +166,35 @@ public class MainFrameControleur {
         }
 
     }
+
+    Media getMediaFromFile() {
+        File file = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+        Media media = null;
+        if (file != null) {
+            media = new Media(file.getName(), file.getAbsolutePath());
+        }
+        return media;
+    }
+
+    /**
+     * Déclencheur qui s'active lorsqu'un utilisateur appuie sur le menu de la création d'une playlist.
+     */
+    class MenuCreatePlaylistEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            playList = new Playlist(PLAYLIST_NAME, PLAYLIST_ID);
+        }
+    }
+
+    class MenuAddToPlaylistEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            Media media = getMediaFromFile();
+            playList.ajouterMediaListe(media);
+        }
+    }
+
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton de Jouer/Pause

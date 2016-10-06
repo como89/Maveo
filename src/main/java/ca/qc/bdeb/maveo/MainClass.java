@@ -1,7 +1,7 @@
 package ca.qc.bdeb.maveo;
 
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
-import ca.qc.bdeb.maveo.modele.Fichier.FileOpener;
+import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Application;
