@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.modele;
+package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.util.UtilLib;

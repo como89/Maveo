@@ -1,14 +1,10 @@
 package ca.qc.bdeb.maveo.vue;
 
-import javafx.application.Platform;
-import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.image.PixelWriter;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -28,6 +24,7 @@ public class ComposantVideoTest extends ApplicationTest {
     private final float HEIGHT_ADD = 400;
 
     private Pane videoPane;
+    private Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -35,6 +32,7 @@ public class ComposantVideoTest extends ApplicationTest {
         composant = new ComposantVideo();
         Scene scene = new Scene(videoPane, WIDTH, HEIGHT);
         stage.setScene(scene);
+        this.stage = stage;
     }
 
     @Test
@@ -46,13 +44,14 @@ public class ComposantVideoTest extends ApplicationTest {
         Assert.assertNotNull(pixel);
     }
 
+    //TODO : À vérifier
     @Test
     public void testFitImage() throws ExecutionException, InterruptedException {
         composant.setVideoPane(videoPane);
         final float width = (float) videoPane.getWidth();
         final float height = (float) videoPane.getHeight();
-        composant.fitImageWithSize(width + WIDTH_ADD,
-                height + HEIGHT_ADD);
+        composant.fitImageWithSize(width,
+                height);
         final CompletableFuture<Boolean> future = new CompletableFuture<Boolean>();
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         executorService.schedule(new Runnable() {
@@ -62,10 +61,8 @@ public class ComposantVideoTest extends ApplicationTest {
             }
         }, 20, TimeUnit.MILLISECONDS);
         if (future.get()) {
-            System.out.println(width + WIDTH_ADD);
-            System.out.println(composant.imageView.getFitWidth());
-            Assert.assertTrue(width + WIDTH_ADD == (float) composant.imageView.getFitWidth());
-            Assert.assertTrue(height + HEIGHT_ADD == (float) videoPane.getHeight());
+            Assert.assertTrue(width == (float) composant.imageView.getFitWidth());
+            Assert.assertTrue(height == (float) videoPane.getHeight());
         }
     }
 }

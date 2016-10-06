@@ -15,14 +15,13 @@ public class GuiPlaylist {
     @FXML
     Pane panelPlaylist;
 
-    public GuiPlaylist(){
+    public GuiPlaylist() {
 
     }
 
-    public Window getFenetre(){
+    public Window getFenetre() {
         return panelPlaylist.getScene().getWindow();
     }
-
 
 
 }
