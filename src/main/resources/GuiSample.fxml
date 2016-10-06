@@ -56,10 +56,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Slider id="sliderProgression" fx:id="sliderProgression" layoutX="241.0" layoutY="25.0" prefHeight="14.0" prefWidth="313.0" styleClass="sliderChanson" stylesheets="@StyleBoutons.css">
-               <effect>
-                  <ColorInput paint="#0200ff" />
-               </effect></Slider>
              <Button id="boutonArreter" fx:id="boutonArreter" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="40.0" styleClass="buttonStop" stylesheets="@StyleBoutons.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -70,6 +66,8 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+             <Slider id="sliderProgression" fx:id="sliderProgression" layoutX="241.0" layoutY="25.0" prefHeight="14.0"
+                     prefWidth="313.0"/>
             <Slider id="sliderVolume" fx:id="sliderVolume" layoutX="593.0" layoutY="11.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="14.0" />
             <Label fx:id="lblProgression" layoutX="220.0" layoutY="6.0" prefHeight="17.0" prefWidth="66.0" />
             <Label fx:id="lblTxtVolume" layoutX="568.0" layoutY="15.0" />
@@ -86,15 +84,6 @@
         <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0" />
-            <TitledPane animated="false" prefHeight="422.0" prefWidth="202.0" text="untitled">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="134.0" layoutY="357.0" mnemonicParsing="false" text="Button" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </TitledPane>
          </children>
           <cursor>
               <Cursor fx:constant="DEFAULT" />

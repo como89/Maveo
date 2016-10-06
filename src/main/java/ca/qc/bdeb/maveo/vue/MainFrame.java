@@ -148,8 +148,7 @@ public class MainFrame {
     }
 
     public Pane getVideoPane() {
-        Pane pane = (Pane) fenetrePrincipale.getScene().lookup("#panelEcranFenetre");
-        return pane;
+        return panelEcran;
     }
 
 

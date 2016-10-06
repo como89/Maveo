@@ -6,10 +6,9 @@ import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Rectangle2D;
+import javafx.geometry.Bounds;
 import javafx.scene.image.*;
 import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
 import uk.co.caprica.vlcj.component.DirectMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.direct.BufferFormat;
 import uk.co.caprica.vlcj.player.direct.BufferFormatCallback;
@@ -27,11 +26,11 @@ import java.nio.ByteBuffer;
 public class ComposantVideo extends DirectMediaPlayerComponent {
 
     static final VideoBufferCallBack videoBufferCallBack = new VideoBufferCallBack();
-    static final FloatProperty propertyFloat = new SimpleFloatProperty(2.0f);
+    static final FloatProperty propertyFloat = new SimpleFloatProperty(0.4f);
 
-    private PixelWriter pixWriter;
-    private WritableImage writableImage;
-    private ImageView imageView;
+    PixelWriter pixWriter;
+    WritableImage writableImage;
+    ImageView imageView;
 
     private WritablePixelFormat<ByteBuffer> pixelFormat;
 
@@ -46,7 +45,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         videoBufferCallBack.videoPane = videoPane;
         videoPane.getChildren().clear();
             videoPane.getChildren().add(imageView);
-            videoPane.widthProperty().addListener(new ChangeListener<Number>() {
+        videoPane.heightProperty().addListener(new ChangeListener<Number>() {
                 @Override
                 public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                     fitImageWithSize(newValue.floatValue(), (float) videoPane.getHeight());
@@ -66,23 +65,31 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
             });
     }
 
-    private void fitImageWithSize(final float width, final float height) {
+    void fitImageWithSize(final float originalWidth, final float originalHeight) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                float fitHeight = propertyFloat.get() * width;
-                if (fitHeight > height) {
-                    imageView.setFitHeight(fitHeight - 200);
-                    double fitWidth = height / propertyFloat.get();
-                    imageView.setFitWidth(fitWidth + 333);
-                    imageView.setX(0);
-                    imageView.setY(0);
-                } else {
-                    imageView.setFitWidth(width);
-                    imageView.setFitHeight(fitHeight + 30);
-                    imageView.setY(0);
-                    imageView.setX(0);
+                Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
+
+                float boundWidth = (float) videoBounds.getWidth();
+                float boundHeight = (float) videoBounds.getHeight();
+                float newWidth = originalWidth;
+                float newHeight = originalHeight;
+
+                if (originalWidth > boundWidth) {
+                    newWidth = boundWidth;
+                    newHeight = (newWidth * originalHeight) / originalWidth;
                 }
+
+                if (newHeight > boundHeight) {
+                    newHeight = boundHeight;
+                    newWidth = (newHeight * originalWidth) / originalHeight;
+                }
+
+                imageView.setFitHeight(newHeight);
+                imageView.setFitWidth(newWidth);
+                imageView.setX(0);
+                imageView.setY(0);
             }
         });
     }
