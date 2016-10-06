@@ -20,7 +20,8 @@ import java.util.Iterator;
  */
 public class AccesExtensionsTest {
 
-    private ArrayList<FileChooser.ExtensionFilter> listeFiltresOuverture;
+    private ArrayList<FileChooser.ExtensionFilter> listeFiltresMedia;
+    ArrayList<FileChooser.ExtensionFilter> listeFiltresPlaylist;
     private URL urlFichierExtensions;
     private AccesExtensions accesExtensions;
 
@@ -34,14 +35,14 @@ public class AccesExtensionsTest {
 
         lireFichierExtensions(accesExtensions);
 
-        Assert.assertTrue(comparerDeuxArrayLists(accesExtensions.getListeFiltresOuverture(), listeFiltresOuverture));
-
+        Assert.assertTrue(comparerDeuxArrayLists(accesExtensions.getListeFiltresMedia(), listeFiltresMedia));
+        Assert.assertTrue(comparerDeuxArrayLists(accesExtensions.getListeFiltresPlaylist(), listeFiltresPlaylist));
     }
 
 
     @Test
     public void getListeFiltresOuverture() throws Exception {
-        Assert.assertEquals(accesExtensions.listeFiltresOuverture,accesExtensions.getListeFiltresOuverture());
+        Assert.assertEquals(accesExtensions.listeFiltresMedia, accesExtensions.getListeFiltresMedia());
     }
 
     @Test
@@ -53,31 +54,48 @@ public class AccesExtensionsTest {
     public void setUrlFichierExtensions() throws Exception {
         urlFichierExtensions = new URL("http://www.google.ca");
         accesExtensions.setUrlFichierExtensions(urlFichierExtensions);
-        Assert.assertEquals(urlFichierExtensions, accesExtensions.getUrlFichierExtensions());;
+        Assert.assertEquals(urlFichierExtensions, accesExtensions.getUrlFichierExtensions());
+        ;
     }
 
     void lireFichierExtensions(AccesExtensions accesExtensions) {
         JSONParser jsonParser = new JSONParser();
-        listeFiltresOuverture = new ArrayList<FileChooser.ExtensionFilter>();
-
+        listeFiltresMedia = new ArrayList<FileChooser.ExtensionFilter>();
+        listeFiltresPlaylist = new ArrayList<FileChooser.ExtensionFilter>();
         try {
             urlFichierExtensions = getClass().getClassLoader().getResource(accesExtensions.NOM_RESSOURCE_FICHIER_EXTENSIONS);
+
             File file = new File(urlFichierExtensions.toURI());
 
             JSONObject jsonObject =
                     (JSONObject) jsonParser.parse(new InputStreamReader(new FileInputStream(file.getAbsolutePath())));
 
-            JSONObject jsonObjectExtensionsOuverture =
-                    (JSONObject) jsonObject.get(accesExtensions.NOM_JSON_EXTENSIONS_OUVERTURE);
+            JSONArray jsonArrayExtensionsMedia = (JSONArray) jsonObject.get(accesExtensions.NOM_JSON_EXTENSIONS_MEDIA);
 
-            String description = (String) jsonObjectExtensionsOuverture.get(accesExtensions.DESCRIPTION);
+            JSONObject jsonObjectExtensionsMedia;
+            String description;
+            JSONArray tabExtensionsMedia;
+            FileChooser.ExtensionFilter extensionFilterTmp;
+            for (int i = 0; i < jsonArrayExtensionsMedia.size(); i++) {
+                jsonObjectExtensionsMedia = (JSONObject) jsonArrayExtensionsMedia.get(i);
+                description = (String) jsonObjectExtensionsMedia.get(accesExtensions.DESCRIPTION);
+                tabExtensionsMedia = (JSONArray) jsonObjectExtensionsMedia.get(accesExtensions.EXTENSIONS);
+                extensionFilterTmp =
+                        new FileChooser.ExtensionFilter(description, tabExtensionsMedia);
+                listeFiltresMedia.add(extensionFilterTmp);
+            }
 
-            JSONArray tabExtensionsMedia = (JSONArray) jsonObjectExtensionsOuverture.get(accesExtensions.EXTENSIONS);
+            JSONArray jsonArrayExtensionsPlaylist = (JSONArray) jsonObject.get(accesExtensions.NOM_JSON_EXTENSIONS_PLAYLIST);
 
-            FileChooser.ExtensionFilter extensionFilterTmp =
-                    new FileChooser.ExtensionFilter(description,
-                            tabExtensionsMedia);
-            listeFiltresOuverture.add(extensionFilterTmp);
+            JSONObject jsonObjectExtensionsPlaylist;
+            JSONArray tabExtensionsPlaylist;
+            for (int i = 0; i < jsonArrayExtensionsPlaylist.size(); i++) {
+                jsonObjectExtensionsPlaylist = (JSONObject) jsonArrayExtensionsPlaylist.get(i);
+                description = (String) jsonObjectExtensionsPlaylist.get(accesExtensions.DESCRIPTION);
+                tabExtensionsPlaylist = (JSONArray) jsonObjectExtensionsPlaylist.get(accesExtensions.EXTENSIONS);
+                extensionFilterTmp = new FileChooser.ExtensionFilter(description, tabExtensionsPlaylist);
+                listeFiltresPlaylist.add(extensionFilterTmp);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,7 +121,7 @@ public class AccesExtensionsTest {
         Iterator<FileChooser.ExtensionFilter> it2 = liste2.iterator();
 
 
-        while (it1.hasNext() && it2.hasNext() && sontIdentiques == true){
+        while (it1.hasNext() && it2.hasNext() && sontIdentiques == true) {
             sontIdentiques = verifierContenuFiltresIdentique(it1.next(), it2.next());
         }
 

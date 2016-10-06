@@ -1,6 +1,5 @@
 package ca.qc.bdeb.maveo.modele.fichier;
 
-import ca.qc.bdeb.maveo.modele.fichier.AccesExtensions;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -34,6 +33,6 @@ public class FileOpener {
      * Active les filtres d'ouverture de fichier
      */
     public void activerFiltresOuverture() {
-        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresOuverture());
+        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresMedia());
     }
 }
