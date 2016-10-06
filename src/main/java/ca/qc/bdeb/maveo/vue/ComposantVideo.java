@@ -82,7 +82,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
                     newHeight = boundHeight;
                     newWidth = (newHeight * originalWidth) / originalHeight;
                 }
-                
+
 
                 imageView.setFitHeight(newHeight);
                 imageView.setFitWidth(newWidth);

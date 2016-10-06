@@ -41,8 +41,13 @@ public class AccesExtensionsTest {
 
 
     @Test
-    public void getListeFiltresOuverture() throws Exception {
+    public void getListeFiltresMedia() throws Exception {
         Assert.assertEquals(accesExtensions.listeFiltresMedia, accesExtensions.getListeFiltresMedia());
+    }
+
+    @Test
+    public void getListeFiltresPlaylist() throws Exception {
+        Assert.assertEquals(accesExtensions.listeFiltresPlaylist, accesExtensions.getListeFiltresPlaylist());
     }
 
     @Test
