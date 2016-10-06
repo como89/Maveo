@@ -39,6 +39,10 @@ public class Playlist implements Serializable {
         return listeMedia.size();
     }
 
+    public ArrayList<Media> getListeMedia(){
+        return listeMedia;
+    }
+
     public Playlist(String nom, int id){
         this.titrePlaylist = nom;
         this.idPlaylist = id;

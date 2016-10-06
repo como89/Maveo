@@ -14,10 +14,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by 1379708 on 2016-09-08.
@@ -62,6 +68,7 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerCreatePlaylist(new MenuCreatePlaylistEventHandler());
         this.mainFrame.addEventHandlerOpenPlaylist(new OpenPlaylistEventHandler());
         this.mainFrame.addEventHandlerAddMediaInPlayList(new MenuAddToPlaylistEventHandler());
+        this.mainFrame.addEventHandlerSavePlaylist(new MenuSavePlaylistEventHandler() );
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
         this.mainFrame.getSliderProgression().setDisable(true);
@@ -116,6 +123,7 @@ public class MainFrameControleur {
      */
     class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
 
+
         public void handle(ActionEvent event) {
 
             Media media = getMediaFromFile();
@@ -146,10 +154,90 @@ public class MainFrameControleur {
                 gestionnaireMedia.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
+
+               // placerImageAlbum();
+
+
             }
 
         }
 
+
+        public void placerImageAlbum() {
+            /**   ID3v2 id3v2tag;
+             Mp3File file = null;
+             try {
+             file = new Mp3File(fichier.getAbsolutePath());
+             id3v2tag = file.getId3v2Tag();
+             if (id3v2tag != null) {
+             String mimeType = id3v2tag.getAlbumImageMimeType();
+             byte[] data = id3v2tag.getAlbumImage();
+             Image photoAlbum = null;
+             if (data != null) {
+             BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
+             photoAlbum = SwingFXUtils.toFXImage(image, null);
+             } else {
+             photoAlbum = new Image("file:res/noart.png");
+             }
+             mainFrame.setImageLblEcran(photoAlbum);
+             }
+             } catch (IOException e) {
+             e.printStackTrace();
+             } catch (UnsupportedTagException e) {
+             e.printStackTrace();
+             } catch (InvalidDataException e) {
+             e.printStackTrace();
+             }
+             }
+             */
+            /*Mp3File song = new Mp3File(fichier.);
+            if (song.hasId3v2Tag()){
+                ID3v2 id3v2tag = song.getId3v2Tag();
+                byte[] imageData = id3v2tag.getAlbumImage();
+                //converting the bytes to an image
+                BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));*/
+        }
+
+    }
+
+
+    class MenuSavePlaylistEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+
+            if (playList == null) {
+                playList = new Playlist("test", 2);
+            } else {
+                playList.setIdPlaylist(3);
+            }
+
+            JSONObject obj = new JSONObject();
+            obj.put("ID", playList.getIdPlaylist());
+            obj.put("LENGTH", playList.recupererLongueurListe());
+            JSONArray list = new JSONArray();
+            JSONArray listeMedia = new JSONArray();
+            ArrayList<Media> listMed = playList.getListeMedia();
+            for (Media media : listMed) {
+                listeMedia.add(media.getTitre());
+                list.add(media.getPathMedia());
+            }
+            // list.add(playList.getListeMedia());
+            obj.put("Media", listeMedia);
+            obj.put("Liste", list);
+
+
+            try {
+                FileWriter file = new FileWriter("c:\\test.json");
+                file.write(obj.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     /**
@@ -166,20 +254,50 @@ public class MainFrameControleur {
 
         @Override
         public void handle(ActionEvent event) {
+            if (playList == null) {
+                playList = new Playlist("TestAdd", 5);
+            }
+
             Media media = getMediaFromFile();
             playList.ajouterMediaListe(media);
         }
     }
 
-    class OpenPlaylistEventHandler implements EventHandler<ActionEvent> {
+    class OpenPlaylistEventHandler implements  EventHandler<ActionEvent>{
 
         @Override
         public void handle(ActionEvent event) {
-            File file = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
-            //verifier que c est bien un fichier .json
-            //ouvrir nouvelle fenetre
-            //lire fichier json et mettre dans un tableau ou liste.
-            //afficherPlaylist
+            FileOpener fo = new FileOpener();
+            fo.activerFiltresPlaylist();
+            File file = fo.activerOuvertureFichier(mainFrame.getFenetre());
+            if(file != null){
+                JSONParser parser = new JSONParser();
+
+                try{
+                    Object obj = parser.parse(new FileReader(file.getPath()));
+
+                    JSONObject jsonObject = (JSONObject) obj;
+
+                    String nomMedia = (String) jsonObject.get("Media");
+                    System.out.println(nomMedia);
+
+                    String pathMedia = (String) jsonObject.get("Liste");
+                    System.out.println(pathMedia);
+
+                    JSONArray msg = (JSONArray) jsonObject.get("Media");
+                    Iterator<String> iterator = msg.iterator();
+                    while (iterator.hasNext()){
+                        System.out.println(iterator.next());
+                    }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
         }
     }

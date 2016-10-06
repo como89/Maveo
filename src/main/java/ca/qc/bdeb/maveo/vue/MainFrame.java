@@ -182,6 +182,13 @@ public class MainFrame {
         menuItemAddToPlaylist.setOnAction(menuAddToPlaylistEventHandler);
     }
 
+    public void addEventHandlerOpenPlaylist(EventHandler<ActionEvent> OpenPlaylistEventHandler) {
+        menuItemOpenPlaylist.setOnAction(OpenPlaylistEventHandler);
+    }
+
+    public void addEventHandlerSavePlaylist(EventHandler<ActionEvent> SavePlaylistEventHandler) {
+        menuItemSavePlaylist.setOnAction(SavePlaylistEventHandler);
+    }
 
     public Slider getSliderProgression() {
         return sliderProgression;
@@ -204,8 +211,6 @@ public class MainFrame {
 
     }
 
-    public void addEventHandlerOpenPlaylist(EventHandler<ActionEvent> OpenPlaylistEventHandler) {
-        menuItemOpenPlaylist.setOnAction(OpenPlaylistEventHandler);
-    }
+
 
 }
