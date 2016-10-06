@@ -5,7 +5,8 @@
       "Extensions": [
         "*.mp3",
         "*.ogg",
-        "*.mp4"
+        "*.mp4",
+        "*.wmv"
       ]
     },
     {
@@ -18,7 +19,8 @@
     {
       "Description": "Fichiers vidéo",
       "Extensions": [
-        "*.mp4"
+        "*.mp4",
+        "*.wmv"
       ]
     }
   ],

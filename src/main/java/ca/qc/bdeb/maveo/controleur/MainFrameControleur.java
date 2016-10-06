@@ -1,16 +1,19 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.Playlist;
+import ca.qc.bdeb.maveo.modele.fichier.AccesExtensions;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import com.google.common.io.Files;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.FileChooser;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
@@ -99,75 +102,6 @@ public class MainFrameControleur {
         }
     }
 
-
-    /**
-     * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouverture de fichier
-     */
-    class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
-
-
-        public void handle(ActionEvent event) {
-
-            Media media = getMediaFromFile();
-            if (media != null) {
-                isFreeMutexLockSliderVolume = true;
-                if (media.getPathMedia().endsWith(".mp4")) {
-                    gestionnaireMedia = new GestionnaireVideo(mainFrame.getVideoPane());
-                } else if (media.getPathMedia().endsWith(".mp3")) {
-                    gestionnaireMedia = new GestionnaireMusique();
-                }
-                gestionnaireMedia.setCheminFichier(media.getPathMedia());
-
-                //mainFrame.getLabelNomChanson().setText(fichier.getName());
-                gestionnaireMedia.preparerMedia();
-                gestionnaireMedia.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
-                mainFrame.getBtnJouerPause().setDisable(false);
-                mainFrame.getSliderProgression().setDisable(false);
-
-               // placerImageAlbum();
-
-
-            }
-
-        }
-
-        public void placerImageAlbum() {
-         /**   ID3v2 id3v2tag;
-            Mp3File file = null;
-            try {
-                file = new Mp3File(fichier.getAbsolutePath());
-                id3v2tag = file.getId3v2Tag();
-                if (id3v2tag != null) {
-                    String mimeType = id3v2tag.getAlbumImageMimeType();
-                    byte[] data = id3v2tag.getAlbumImage();
-                    Image photoAlbum = null;
-                    if (data != null) {
-                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
-                        photoAlbum = SwingFXUtils.toFXImage(image, null);
-                    } else {
-                        photoAlbum = new Image("file:res/noart.png");
-                    }
-                    mainFrame.setImageLblEcran(photoAlbum);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (UnsupportedTagException e) {
-                e.printStackTrace();
-            } catch (InvalidDataException e) {
-                e.printStackTrace();
-            }
-        }
-          */
-            /*Mp3File song = new Mp3File(fichier.);
-            if (song.hasId3v2Tag()){
-                ID3v2 id3v2tag = song.getId3v2Tag();
-                byte[] imageData = id3v2tag.getAlbumImage();
-                //converting the bytes to an image
-                BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));*/
-        }
-
-    }
-
     Media getMediaFromFile() {
         File file = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
         Media media = null;
@@ -175,6 +109,47 @@ public class MainFrameControleur {
             media = new Media(file.getName(), file.getAbsolutePath());
         }
         return media;
+    }
+
+    /**
+     * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouverture de fichier
+     */
+    class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent event) {
+
+            Media media = getMediaFromFile();
+            if (media != null) {
+                isFreeMutexLockSliderVolume = true;
+
+                AccesExtensions accesExtensions = new AccesExtensions();
+                String extensionFichier = Files.getFileExtension(media.getPathMedia());
+
+                // Cherche les extensions vidéo
+                FileChooser.ExtensionFilter extensionFilter = accesExtensions.getListeFiltresMedia()
+                        .get(accesExtensions.INDICE_LISTE_FILTRES_MEDIA_FICHIERS_VIDEO);
+
+                extensionFichier = "*." + extensionFichier;
+
+                // Si vidéo
+                if (extensionFilter.getExtensions().contains(extensionFichier)) {
+                    gestionnaireMedia = new GestionnaireVideo(mainFrame.getVideoPane());
+                } else {
+                    gestionnaireMedia = new GestionnaireMusique();
+                }
+
+
+                gestionnaireMedia.setCheminFichier(media.getPathMedia());
+
+                //mainFrame.getLabelNomChanson().setText(fichier.getName());
+                gestionnaireMedia.preparerMedia();
+                gestionnaireMedia.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
+                mainFrame.getBtnJouerPause().setDisable(false);
+                mainFrame.getSliderProgression().setDisable(false);
+            }
+
+        }
+
     }
 
     /**
@@ -196,11 +171,11 @@ public class MainFrameControleur {
         }
     }
 
-    class OpenPlaylistEventHandler implements  EventHandler<ActionEvent>{
+    class OpenPlaylistEventHandler implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
-          File file = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+            File file = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
             //verifier que c est bien un fichier .json
             //ouvrir nouvelle fenetre
             //lire fichier json et mettre dans un tableau ou liste.

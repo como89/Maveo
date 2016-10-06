@@ -23,6 +23,12 @@ public class AccesExtensions {
     public final String DESCRIPTION = "Description";
     public final String EXTENSIONS = "Extensions";
 
+    public final int INDICE_LISTE_FILTRES_MEDIA_TOUS_FICHIERS_MEDIA = 0;
+    public final int INDICE_LISTE_FILTRES_MEDIA_FICHIERS_AUDIO = 1;
+    public final int INDICE_LISTE_FILTRES_MEDIA_FICHIERS_VIDEO = 2;
+
+    public final int INDICE_LISTE_FILTRES_PLAYLIST_FICHIERS_MAVEO = 0;
+    public final int INDICE_LISTE_FILTRES_PLAYLIST_FICHIERS_JSON = 1;
 
     URL urlFichierExtensions;
 
