@@ -203,4 +203,9 @@ public class MainFrame {
         lblNomMedia.setGraphic(new ImageView(image));
 
     }
+
+    public void addEventHandlerOpenPlaylist(EventHandler<ActionEvent> OpenPlaylistEventHandler) {
+        menuItemOpenPlaylist.setOnAction(OpenPlaylistEventHandler);
+    }
+
 }
