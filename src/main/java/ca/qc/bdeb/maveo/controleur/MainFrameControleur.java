@@ -1,9 +1,9 @@
 package ca.qc.bdeb.maveo.controleur;
 
+import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.Playlist;
 import ca.qc.bdeb.maveo.modele.fichier.AccesExtensions;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
-import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
@@ -23,7 +23,6 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by 1379708 on 2016-09-08.
@@ -68,7 +67,7 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerCreatePlaylist(new MenuCreatePlaylistEventHandler());
         this.mainFrame.addEventHandlerOpenPlaylist(new OpenPlaylistEventHandler());
         this.mainFrame.addEventHandlerAddMediaInPlayList(new MenuAddToPlaylistEventHandler());
-        this.mainFrame.addEventHandlerSavePlaylist(new MenuSavePlaylistEventHandler() );
+        this.mainFrame.addEventHandlerSavePlaylist(new MenuSavePlaylistEventHandler());
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
         this.mainFrame.getSliderProgression().setDisable(true);
@@ -155,7 +154,7 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
 
-               // placerImageAlbum();
+                // placerImageAlbum();
 
 
             }
@@ -228,15 +227,21 @@ public class MainFrameControleur {
 
 
             try {
-                FileWriter file = new FileWriter("c:\\test.json");
-                file.write(obj.toJSONString());
-                file.flush();
-                file.close();
+                final String pathTestPlaylist = "e:\\testPlaylist.json";
+                PrintWriter writer = new PrintWriter(pathTestPlaylist, "UTF-8");
+                File file = new File(pathTestPlaylist);
+                FileWriter fw;
+
+                if (file.exists()) {
+                    fw = new FileWriter(pathTestPlaylist);
+                    fw.write(obj.toJSONString());
+                    fw.flush();
+                    fw.close();
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -263,32 +268,53 @@ public class MainFrameControleur {
         }
     }
 
-    class OpenPlaylistEventHandler implements  EventHandler<ActionEvent>{
+    class OpenPlaylistEventHandler implements EventHandler<ActionEvent> {
+
+        ArrayList<String> listePath = new ArrayList<String>();
+        ArrayList<String> listenomMedia = new ArrayList<String>();
 
         @Override
         public void handle(ActionEvent event) {
             FileOpener fo = new FileOpener();
             fo.activerFiltresPlaylist();
             File file = fo.activerOuvertureFichier(mainFrame.getFenetre());
-            if(file != null){
-                JSONParser parser = new JSONParser();
+            if (file != null) {
+                JSONParser jsonParser = new JSONParser();
 
-                try{
-                    Object obj = parser.parse(new FileReader(file.getPath()));
+                try {
+                    JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
 
-                    JSONObject jsonObject = (JSONObject) obj;
+                    String nomJsonMedia = "Media";
+                    String pathJsonMedia = "Liste";
+                    String idJsonMedia = "ID";
 
-                    String nomMedia = (String) jsonObject.get("Media");
-                    System.out.println(nomMedia);
+                    long idPlaylist = (Long) jsonObject.get(idJsonMedia);
 
-                    String pathMedia = (String) jsonObject.get("Liste");
-                    System.out.println(pathMedia);
-
-                    JSONArray msg = (JSONArray) jsonObject.get("Media");
-                    Iterator<String> iterator = msg.iterator();
-                    while (iterator.hasNext()){
-                        System.out.println(iterator.next());
+                    JSONArray jsonArrayPathsMedia = (JSONArray) jsonObject.get(pathJsonMedia);
+                    String pathMediaTmp;
+                    // Récupère les chemins absolus des fichiers
+                    for (int i = 0; i < jsonArrayPathsMedia.size(); i++) {
+                        pathMediaTmp = (String) jsonArrayPathsMedia.get(i);
+                        listePath.add(pathJsonMedia);
                     }
+
+                    JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(nomJsonMedia);
+                    String nomMediaTmp;
+                    // Récupère les noms des chansons
+                    for (int i = 0; i < jsonArrayNomMedia.size(); i++) {
+                        nomMediaTmp = (String) jsonArrayNomMedia.get(i);
+                        listenomMedia.add(nomJsonMedia);
+                    }
+
+
+                    Playlist playlist = new Playlist(file.getName(), (int) idPlaylist);
+
+                    playList = playlist;
+
+                    /*Iterator<String> iterator = jsonArrayPathsMedia.iterator();
+                    while (iterator.hasNext()) {
+                        System.out.println(iterator.next());
+                    }*/
 
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -387,11 +413,11 @@ public class MainFrameControleur {
          */
         @Override
         public void finished(MediaPlayer mediaPlayer) {
-            isFreeMutexLockSliderPosition = false;
+            isFreeMutexLockSliderPosition = false; // active le verrou sur le slider de position
             mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
             mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
             mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
-            isFreeMutexLockSliderPosition = true;
+            isFreeMutexLockSliderPosition = true; // libère le verrou sur le slieder de position
         }
 
 

@@ -11,6 +11,12 @@ public class Playlist implements Serializable {
     private int idPlaylist;
     private static ArrayList<Media> listeMedia;
 
+    public Playlist(String nom, int id) {
+        this.titrePlaylist = nom;
+        this.idPlaylist = id;
+        this.listeMedia = new ArrayList<Media>();
+    }
+
     public String getTitrePlaylist() {
         return titrePlaylist;
     }
@@ -35,20 +41,13 @@ public class Playlist implements Serializable {
         listeMedia.remove(media);
     }
 
-    public int recupererLongueurListe(){
+    public int recupererLongueurListe() {
         return listeMedia.size();
     }
 
-    public ArrayList<Media> getListeMedia(){
+    public ArrayList<Media> getListeMedia() {
         return listeMedia;
     }
 
-    public Playlist(String nom, int id){
-        this.titrePlaylist = nom;
-        this.idPlaylist = id;
-        this.listeMedia = new ArrayList<Media>();
 
-
-
-    }
 }
