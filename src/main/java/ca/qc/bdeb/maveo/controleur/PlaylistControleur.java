@@ -73,18 +73,16 @@ public class PlaylistControleur {
 
 
             try {
-                final String pathTestPlaylist = "e:\\testPlaylist.json";
-                PrintWriter writer = new PrintWriter(pathTestPlaylist, "UTF-8");
-                File file = new File(pathTestPlaylist);
-                FileWriter fw;
+                File file = fileOpener.afficherFenetreSauvegardePlaylist(mainframe.getFenetre());
 
-                if (file.exists()) {
-                    fw = new FileWriter(pathTestPlaylist);
+                if (file != null) {
+                    PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
+                    FileWriter fw;
+                    fw = new FileWriter(file.getAbsolutePath());
                     fw.write(obj.toJSONString());
                     fw.flush();
                     fw.close();
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,7 +91,7 @@ public class PlaylistControleur {
 
 
     Media getMediaFromFile(Stage stage) {
-        File file = fileOpener.activerOuvertureFichier(stage);
+        File file = fileOpener.activerOuvertureMedia(stage);
         Media media = null;
         if (file != null) {
             media = new Media(file.getName(), file.getAbsolutePath());
@@ -105,6 +103,7 @@ public class PlaylistControleur {
      * Déclencheur qui s'active lorsqu'un utilisateur appuie sur le menu de la création d'une playlist.
      */
     class MenuCreatePlaylistEventHandler implements EventHandler<ActionEvent> {
+
         @Override
         public void handle(ActionEvent event) {
             playList = new Playlist(PLAYLIST_NAME, PLAYLIST_ID);
@@ -134,13 +133,12 @@ public class PlaylistControleur {
         public void handle(ActionEvent event) {
             FileOpener fo = new FileOpener();
             fo.activerFiltresPlaylist();
-            File file = fo.activerOuvertureFichier(mainframe.getFenetre());
+            File file = fo.activerOuverturePlaylist(mainframe.getFenetre());
             if (file != null) {
                 JSONParser jsonParser = new JSONParser();
 
                 try {
                     JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
-
 
                     String nomJsonMedia = "Media";
                     String pathJsonMedia = "Liste";

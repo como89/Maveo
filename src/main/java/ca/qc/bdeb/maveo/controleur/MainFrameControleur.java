@@ -101,7 +101,7 @@ public class MainFrameControleur {
     }
 
     Media getMediaFromFile() {
-        File file = fileOpener.activerOuvertureFichier(mainFrame.getFenetre());
+        File file = fileOpener.activerOuvertureMedia(mainFrame.getFenetre());
         Media media = null;
         if (file != null) {
             media = new Media(file.getName(), file.getAbsolutePath());
@@ -113,7 +113,6 @@ public class MainFrameControleur {
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'ouverture de fichier
      */
     class MenuItemOuvrirEventHandler implements EventHandler<ActionEvent> {
-
 
         public void handle(ActionEvent event) {
 
