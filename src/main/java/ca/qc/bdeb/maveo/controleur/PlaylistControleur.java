@@ -1,8 +1,9 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.Media;
-import ca.qc.bdeb.maveo.modele.Playlist;
+import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
+import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +15,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by WuTchanKi on 2016-10-11.
@@ -33,7 +35,7 @@ public class PlaylistControleur {
     }
 
     public void ajouterMainFrame(MainFrame mainFrame) {
-this.mainframe = mainFrame;
+        this.mainframe = mainFrame;
         this.mainframe.addEventHandlerCreatePlaylist(new MenuCreatePlaylistEventHandler());
         this.mainframe.addEventHandlerOpenPlaylist(new OpenPlaylistEventHandler());
         this.mainframe.addEventHandlerAddMediaInPlayList(new MenuAddToPlaylistEventHandler());
@@ -124,8 +126,9 @@ this.mainframe = mainFrame;
 
     class OpenPlaylistEventHandler implements EventHandler<ActionEvent> {
 
-        ArrayList<String> listePath = new ArrayList<String>();
-        ArrayList<String> listenomMedia = new ArrayList<String>();
+        ArrayList<String> listePathsMedia = new ArrayList<String>();
+        ArrayList<String> listeNomsMedia = new ArrayList<String>();
+        ArrayList<Media> listeMedia = new ArrayList<Media>();
 
         @Override
         public void handle(ActionEvent event) {
@@ -138,6 +141,7 @@ this.mainframe = mainFrame;
                 try {
                     JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
 
+
                     String nomJsonMedia = "Media";
                     String pathJsonMedia = "Liste";
                     String idJsonMedia = "ID";
@@ -149,7 +153,7 @@ this.mainframe = mainFrame;
                     // Récupère les chemins absolus des fichiers
                     for (int i = 0; i < jsonArrayPathsMedia.size(); i++) {
                         pathMediaTmp = (String) jsonArrayPathsMedia.get(i);
-                        listePath.add(pathJsonMedia);
+                        listePathsMedia.add(pathJsonMedia);
                     }
 
                     JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(nomJsonMedia);
@@ -157,18 +161,22 @@ this.mainframe = mainFrame;
                     // Récupère les noms des chansons
                     for (int i = 0; i < jsonArrayNomMedia.size(); i++) {
                         nomMediaTmp = (String) jsonArrayNomMedia.get(i);
-                        listenomMedia.add(nomJsonMedia);
+                        listeNomsMedia.add(nomJsonMedia);
                     }
 
 
+                    Iterator<String> itChemins = listePathsMedia.iterator();
+                    Iterator<String> itNomsFichiers = listeNomsMedia.iterator();
+                    // Crée la liste de média à partir des lsites des chemins et noms
+                    while (itChemins.hasNext() && itNomsFichiers.hasNext()) {
+                        listeMedia.add(new Media(itChemins.next(), itNomsFichiers.next()));
+                    }
+
                     Playlist playlist = new Playlist(file.getName(), (int) idPlaylist);
 
-                    playList = playlist;
+                    playlist.getListeMedia().addAll(listeMedia);
 
-                    /*Iterator<String> iterator = jsonArrayPathsMedia.iterator();
-                    while (iterator.hasNext()) {
-                        System.out.println(iterator.next());
-                    }*/
+                    playList = playlist;
 
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -178,7 +186,6 @@ this.mainframe = mainFrame;
                     e.printStackTrace();
                 }
             }
-
         }
     }
 }

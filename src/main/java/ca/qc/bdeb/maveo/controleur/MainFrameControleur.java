@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.Media;
-import ca.qc.bdeb.maveo.modele.Playlist;
 import ca.qc.bdeb.maveo.modele.fichier.AccesExtensions;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
@@ -47,8 +46,6 @@ public class MainFrameControleur {
 
     // Gestionnaire média
     GestionnaireMedia gestionnaireMedia;
-
-    Playlist playList;
 
     /**
      * Ajoute la fenêtre principale au contrôleur

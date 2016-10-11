@@ -1,4 +1,6 @@
-package ca.qc.bdeb.maveo.modele;
+package ca.qc.bdeb.maveo.modele.playlist;
+
+import ca.qc.bdeb.maveo.modele.Media;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.ArrayList;
  * Created by WuTchanKi on 2016-09-29.
  */
 public class Playlist implements Serializable {
+
     private String titrePlaylist;
     private int idPlaylist;
     private static ArrayList<Media> listeMedia;
