@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import ca.qc.bdeb.maveo.vue.ComposantVideo;
-import javafx.scene.layout.Pane;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 
@@ -16,9 +15,8 @@ public class GestionnaireVideo extends GestionnaireMedia {
 
     private String linkFichier;
 
-    public GestionnaireVideo(Pane videoPane) {
-        this.composantVideo = new ComposantVideo();
-        composantVideo.setVideoPane(videoPane);
+    public GestionnaireVideo(ComposantVideo composantVideo) {
+        this.composantVideo = composantVideo;
         this.embeddedMediaPlayer = composantVideo.getMediaPlayer();
     }
 
@@ -40,6 +38,7 @@ public class GestionnaireVideo extends GestionnaireMedia {
     @Override
     public void arreter() {
         embeddedMediaPlayer.stop();
+        composantVideo.clearPixelWriter();
     }
 
     @Override

@@ -66,8 +66,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-             <Slider id="sliderProgression" fx:id="sliderProgression" layoutX="241.0" layoutY="25.0" prefHeight="14.0" prefWidth="313.0" />
-            <Slider id="sliderVolume" fx:id="sliderVolume" layoutX="593.0" layoutY="11.0" orientation="VERTICAL" prefHeight="42.0" prefWidth="14.0" />
+             <Slider id="sliderProgression" fx:id="sliderProgression" layoutX="241.0" layoutY="25.0" prefHeight="14.0"
+                     prefWidth="313.0">
+                 <cursor>
+                     <Cursor fx:constant="H_RESIZE"/>
+                 </cursor>
+             </Slider>
+             <Slider id="sliderVolume" fx:id="sliderVolume" layoutX="593.0" layoutY="11.0" orientation="VERTICAL"
+                     prefHeight="42.0" prefWidth="14.0">
+                 <cursor>
+                     <Cursor fx:constant="V_RESIZE"/>
+                 </cursor>
+             </Slider>
             <Label fx:id="lblProgression" layoutX="220.0" layoutY="6.0" prefHeight="17.0" prefWidth="66.0" />
             <Label fx:id="lblTxtVolume" layoutX="568.0" layoutY="15.0" />
          </children>
@@ -76,22 +86,19 @@
           </cursor>
       </Pane>
    </bottom>
-   <cursor>
-      <Cursor fx:constant="S_RESIZE" />
-   </cursor>
     <center>
         <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
          <children>
+             <TitledPane fx:id="playlistPane" prefHeight="421.0" prefWidth="202.0" text="Playlist">
+                 <content>
+                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                         <children>
+                             <ListView fx:id="listviewPlaylist" prefHeight="398.0" prefWidth="200.0"/>
+                         </children>
+                     </AnchorPane>
+                 </content>
+             </TitledPane>
             <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0" />
-            <TitledPane id="playlistPane" animated="false" prefHeight="421.0" prefWidth="202.0" text="Playlst">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ListView id="listviewPlaylist" prefHeight="398.0" prefWidth="200.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </TitledPane>
          </children>
           <cursor>
               <Cursor fx:constant="DEFAULT" />

@@ -25,44 +25,70 @@ import java.nio.ByteBuffer;
  */
 public class ComposantVideo extends DirectMediaPlayerComponent {
 
-    static final VideoBufferCallBack videoBufferCallBack = new VideoBufferCallBack();
+    static final VideoBufferedCallBack videoBufferCallBack = new VideoBufferedCallBack();
     static final FloatProperty propertyFloat = new SimpleFloatProperty(0.4f);
 
     PixelWriter pixWriter;
     WritableImage writableImage;
-    ImageView imageView;
+    ImageView videoView;
 
     private WritablePixelFormat<ByteBuffer> pixelFormat;
 
-    public ComposantVideo() {
+    public ComposantVideo(final Pane videoPane) {
         super(videoBufferCallBack);
         pixelFormat = PixelFormat.getByteBgraPreInstance();
+        writableImage = new WritableImage((int) videoPane.getWidth(), (int) videoPane.getHeight());
+        videoView = new ImageView(writableImage);
+        videoView.setSmooth(true);
+        //  videoView.setPreserveRatio(true);
+        videoBufferCallBack.videoPane = videoPane;
+        videoPane.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                fitImageWithSize(newValue.floatValue(), (float) videoPane.getHeight());
+            }
+        });
+        videoPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                fitImageWithSize((float) videoPane.getWidth(), newValue.floatValue());
+            }
+        });
+        propertyFloat.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                fitImageWithSize((long) videoPane.getWidth(), (long) videoPane.getHeight());
+            }
+        });
     }
 
-    public void setVideoPane(final Pane videoPane) {
-            writableImage = new WritableImage((int) videoPane.getWidth(), (int) videoPane.getHeight());
-            imageView = new ImageView(writableImage);
-        videoBufferCallBack.videoPane = videoPane;
-        videoPane.getChildren().clear();
-            videoPane.getChildren().add(imageView);
-        videoPane.widthProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    fitImageWithSize(newValue.floatValue(), (float) videoPane.getHeight());
+    public ImageView getVideoView() {
+        return videoView;
+    }
+
+    public void clearPixelWriter() {
+
+    }
+
+    @Override
+    public void display(final DirectMediaPlayer mediaPlayer, final Memory[] nativeBuffers, final BufferFormat bufferFormat) {
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    Memory buffMem = mediaPlayer.lock()[0];
+                    ByteBuffer bytebuff = buffMem.getByteBuffer(0, buffMem.size());
+                    ComposantVideo.this.getPixWriter().setPixels(0, 0, bufferFormat.getWidth(),
+                            bufferFormat.getHeight(), pixelFormat, bytebuff, bufferFormat.getPitches()[0]);
+                } catch (Exception e) {
+                } finally {
+                    if (mediaPlayer != null) {
+                        mediaPlayer.unlock();
+                    }
                 }
-            });
-            videoPane.heightProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    fitImageWithSize((float) videoPane.getWidth(), newValue.floatValue());
-                }
-            });
-            propertyFloat.addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    fitImageWithSize((long) videoPane.getWidth(), (long) videoPane.getHeight());
-                }
-            });
+            }
+        });
     }
 
     void fitImageWithSize(final float originalWidth, final float originalHeight) {
@@ -83,11 +109,10 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
                     newWidth = (newHeight * originalWidth) / originalHeight;
                 }
 
-
-                imageView.setFitHeight(newHeight);
-                imageView.setFitWidth(newWidth);
-                imageView.setX(0);
-                imageView.setY(0);
+        videoView.setFitHeight(newHeight);
+        videoView.setFitWidth(newWidth);
+        videoView.setX(0);
+        videoView.setY(0);
     }
 
     PixelWriter getPixWriter() {
@@ -97,40 +122,20 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         return pixWriter;
     }
 
-    @Override
-    public void display(final DirectMediaPlayer mediaPlayer, final Memory[] nativeBuffers, final BufferFormat bufferFormat) {
-        Platform.runLater(new Runnable() {
+    static class VideoBufferedCallBack implements BufferFormatCallback {
 
-            @Override
-            public void run() {
-                    try {
-                        Memory buffMem = mediaPlayer.lock()[0];
-                        ByteBuffer bytebuff = buffMem.getByteBuffer(0, buffMem.size());
-                        ComposantVideo.this.getPixWriter().setPixels(0, 0, bufferFormat.getWidth(),
-                                bufferFormat.getHeight(), pixelFormat, bytebuff, bufferFormat.getPitches()[0]);
-                    } catch (Exception e) {
-                    } finally {
-                        if (mediaPlayer != null) {
-                            mediaPlayer.unlock();
-                        }
-                    }
+        Pane videoPane;
+
+        @Override
+        public BufferFormat getBufferFormat(final int width, final int height) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    ComposantVideo.propertyFloat.set((float) height / (float) width);
                 }
-        });
+            });
+            return new RV32BufferFormat((int) videoPane.getWidth(), (int) videoPane.getHeight());
+        }
     }
 }
 
-class VideoBufferCallBack implements BufferFormatCallback {
-
-    Pane videoPane;
-
-    @Override
-    public BufferFormat getBufferFormat(final int width, final int height) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                ComposantVideo.propertyFloat.set((float) height / (float) width);
-            }
-        });
-        return new RV32BufferFormat((int) videoPane.getWidth(), (int) videoPane.getHeight());
-    }
-}

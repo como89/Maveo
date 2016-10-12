@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Playlist implements Serializable {
     private String titrePlaylist;
     private int idPlaylist;
-    private static ArrayList<Media> listeMedia;
+    private ArrayList<Media> listeMedia;
 
     public Playlist(String nom, int id) {
         this.titrePlaylist = nom;

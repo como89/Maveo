@@ -7,6 +7,7 @@ import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
+import ca.qc.bdeb.maveo.vue.ComposantVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import com.google.common.io.Files;
 import javafx.beans.value.ChangeListener;
@@ -140,9 +141,12 @@ public class MainFrameControleur {
 
                 // Si vidéo
                 if (extensionFilter.getExtensions().contains(extensionFichier)) {
-                    gestionnaireMedia = new GestionnaireVideo(mainFrame.getVideoPane());
+                    ComposantVideo composantVideo = new ComposantVideo(mainFrame.getPanelEcran());
+                    mainFrame.actualiseEcranPane(composantVideo.getVideoView());
+                    gestionnaireMedia = new GestionnaireVideo(composantVideo);
                 } else {
                     gestionnaireMedia = new GestionnaireMusique();
+                    mainFrame.actualiseEcranPane(null);
                 }
 
 

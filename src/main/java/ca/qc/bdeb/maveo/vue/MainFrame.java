@@ -3,12 +3,15 @@ package ca.qc.bdeb.maveo.vue;
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
@@ -112,17 +115,13 @@ public class MainFrame {
     @FXML
     Label lblProgression;
 
-    BorderPane videoPane;
+    @FXML
+    TitledPane playlistPane;
+
+    @FXML
+    ListView listviewPlaylist;
 
     public MainFrame() {
-
-
-    }
-
-
-    private void initialiserBoutons() {
-
-
 
     }
 
@@ -147,11 +146,44 @@ public class MainFrame {
         return boutonSuivant;
     }
 
-    public Pane getVideoPane() {
+    public Pane getPanelEcran() {
         return panelEcran;
     }
 
+    public Slider getSliderProgression() {
+        return sliderProgression;
+    }
 
+    public Slider getSliderVolume() {
+        return sliderVolume;
+    }
+
+    public Label getLblNomMedia() {
+        return lblNomMedia;
+    }
+
+    public void setLblNomMedia(Label lblNomMedia) {
+        this.lblNomMedia = lblNomMedia;
+    }
+
+    public void setImageLblEcran(Image image) {
+        lblNomMedia.setGraphic(new ImageView(image));
+
+    }
+
+    public void actualiseEcranPane(ImageView imageVideo) {
+
+        if (imageVideo != null) {
+            panelEcran.getChildren().clear();
+            panelEcran.getChildren().add(imageVideo);
+            panelEcran.getChildren().add(playlistPane);
+        } else {
+            panelEcran.getChildren().clear();
+            panelEcran.getChildren().add(playlistPane);
+        }
+
+        fenetrePrincipale.setCenter(panelEcran);
+    }
 
     public void addEventHandlerBtnPlay(EventHandler<ActionEvent> actionEvent) {
         boutonPlayPause.setOnAction(actionEvent);
@@ -189,28 +221,4 @@ public class MainFrame {
     public void addEventHandlerSavePlaylist(EventHandler<ActionEvent> SavePlaylistEventHandler) {
         menuItemSavePlaylist.setOnAction(SavePlaylistEventHandler);
     }
-
-    public Slider getSliderProgression() {
-        return sliderProgression;
-    }
-
-    public Slider getSliderVolume() {
-        return sliderVolume;
-    }
-
-    public Label getLblNomMedia() {
-        return lblNomMedia;
-    }
-
-    public void setLblNomMedia(Label lblNomMedia) {
-        this.lblNomMedia = lblNomMedia;
-    }
-
-    public void setImageLblEcran(Image image) {
-        lblNomMedia.setGraphic(new ImageView(image));
-
-    }
-
-
-
 }
