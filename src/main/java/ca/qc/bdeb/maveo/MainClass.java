@@ -1,6 +1,7 @@
 package ca.qc.bdeb.maveo;
 
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
+import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
@@ -45,7 +46,11 @@ public class MainClass extends Application {
         FileOpener fileOpener = new FileOpener();
 
         MainFrameControleur mainFrameControleur = new MainFrameControleur();
+        PlaylistControleur playlistControleur = new PlaylistControleur();
+
         mainFrameControleur.ajouterMainFrame(mainFrame);
         mainFrameControleur.ajouterFileOpener(fileOpener);
+
+        playlistControleur.ajouterMainFrame(mainFrame);
     }
 }

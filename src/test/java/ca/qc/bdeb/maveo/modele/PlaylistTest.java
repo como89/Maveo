@@ -1,9 +1,8 @@
 package ca.qc.bdeb.maveo.modele;
 
+import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by 1379708 on 2016-10-04.

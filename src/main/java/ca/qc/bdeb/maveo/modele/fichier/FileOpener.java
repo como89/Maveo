@@ -20,13 +20,47 @@ public class FileOpener {
     }
 
     /**
+     * Active la fenêtre d'ouverture de média
+     *
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
+     * @return le chemin du fichier à ouvrir
+     */
+    public File activerOuvertureMedia(Window parent) {
+        activerFiltresMedia();
+        return fileChooser.showOpenDialog(parent);
+    }
+
+    /**
      * Active la fenêtre d'ouverture d'un fichier.
      *
      * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
      * @return le chemin du fichier à ouvrir
      */
-    public File activerOuvertureFichier(Window parent) {
+    public File activerOuverturePlaylist(Window parent) {
+        activerFiltresPlaylist();
         return fileChooser.showOpenDialog(parent);
+    }
+
+    /**
+     * Active la fenêtre de sauveagarde de média
+     *
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
+     * @return le chemin du fichier à ouvrir
+     */
+    public File afficherFenetreSauvegardeMedia(Window parent) {
+        activerFiltresMedia();
+        return fileChooser.showSaveDialog(parent);
+    }
+
+    /**
+     * Active la fenêtre de sauveagarde de playlist
+     *
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
+     * @return le chemin du fichier à ouvrir
+     */
+    public File afficherFenetreSauvegardePlaylist(Window parent) {
+        activerFiltresPlaylist();
+        return fileChooser.showSaveDialog(parent);
     }
 
     /**
@@ -37,11 +71,8 @@ public class FileOpener {
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresMedia());
     }
 
-    public void activerFiltresPlaylist(){
+    public void activerFiltresPlaylist() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresPlaylist());
     }
-
-
-
 }
