@@ -184,7 +184,6 @@ public class MainFrameControleur {
                 mainFrame.getBtnArreter().setDisable(false);
                 mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPlay");
                 mainFrame.getBtnJouerPause().getStyleClass().add("buttonPause");
-
             }
         }
     }
@@ -197,9 +196,6 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
             GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
             gestionnaireMedia.arreter();
-            mainFrame.getBtnArreter().setDisable(true);
-            mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
-            mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
         }
     }
 

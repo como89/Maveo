@@ -41,6 +41,13 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
         isFreeMutexLockSliderPosition = true;
     }
 
+    @Override
+    public void stopped(MediaPlayer mediaPlayer) {
+        mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
+        mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
+        mainFrame.getBtnArreter().setDisable(true);
+    }
+
     /**
      * Remet le slider de position au debut lorsque le média a terminé de jouer
      *
