@@ -54,36 +54,6 @@ public class MainFrameTest extends ApplicationTest {
 
 
     @Test
-    public void addEventHandlerBtnPlay() throws Exception {
-        //    testFrame.boutonPlayPause.setId("btnPlay");
-        verifyThat("#boutonPlayPause", NodeMatchers.isNotNull());
-        verifyThat("#boutonPlayPause", NodeMatchers.hasText("JOUER"));
-
-
-//testFrame.boutonPlayPause.setDisable(false);
-
-
-        testFrame.boutonPlayPause.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-
-                testFrame.boutonPlayPause.setText("TEST");
-
-
-            }
-        });
-
-        clickOn(testFrame.boutonPlayPause);
-        Thread.sleep(200);
-        System.out.println("tttttttt " + testFrame.boutonPlayPause.getText());
-        Assert.assertEquals(testFrame.boutonPlayPause.getText(), "TEST");
-
-
-    }
-
-
-    @Test
     public void addEventHandlerOuvrirFichier() throws Exception {
 
 

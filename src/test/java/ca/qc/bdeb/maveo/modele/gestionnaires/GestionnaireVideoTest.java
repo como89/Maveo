@@ -70,6 +70,7 @@ public class GestionnaireVideoTest extends ApplicationTest {
 
     @Test
     public void testPause() throws ExecutionException, InterruptedException {
+        gestionnaireVideo.jouerMedia();
         final CompletableFuture<Boolean> future = new CompletableFuture<Boolean>();
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         executorService.schedule(new Runnable() {
@@ -80,7 +81,7 @@ public class GestionnaireVideoTest extends ApplicationTest {
                 future.complete(gestionnaireVideo.enLecture());
             }
 
-        }, 20, TimeUnit.MILLISECONDS);
+        }, 600, TimeUnit.MILLISECONDS);
         Assert.assertFalse(future.get());
     }
 

@@ -2,6 +2,7 @@ package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -43,7 +44,12 @@ public class GestionnaireFactoryTest extends ApplicationTest {
 
     @Before
     public void before() {
-        gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
+            }
+        });
     }
 
     @Test
