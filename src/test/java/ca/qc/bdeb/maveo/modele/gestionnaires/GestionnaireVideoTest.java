@@ -1,6 +1,8 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
+import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.util.UtilLib;
+import ca.qc.bdeb.maveo.vue.ComposantVideo;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,7 +20,7 @@ import static org.junit.Assert.*;
  */
 public class GestionnaireVideoTest extends ApplicationTest {
 
-    static final String FILE_PATH = "res/test.mp4";
+    static final String PATH = "res/test.mp4";
     static GestionnaireVideo gestionnaireVideo;
 
     @Override
@@ -27,8 +29,9 @@ public class GestionnaireVideoTest extends ApplicationTest {
         final Pane pane = new Pane();
         Scene scene = new Scene(pane, 400, 400);
         stage.setScene(scene);
-        //gestionnaireVideo = new GestionnaireVideo(pane);
-        gestionnaireVideo.setCheminFichier(FILE_PATH);
+        ComposantVideo composantVideo = new ComposantVideo(pane);
+        gestionnaireVideo = new GestionnaireVideo(composantVideo);
+        gestionnaireVideo.setCheminFichier(PATH);
     }
 
     @Before
@@ -77,7 +80,7 @@ public class GestionnaireVideoTest extends ApplicationTest {
                 future.complete(gestionnaireVideo.enLecture());
             }
 
-        }, 100, TimeUnit.MILLISECONDS);
+        }, 110, TimeUnit.MILLISECONDS);
         Assert.assertFalse(future.get());
     }
 
@@ -94,8 +97,8 @@ public class GestionnaireVideoTest extends ApplicationTest {
     @Test
     public void testTemps() throws ExecutionException, InterruptedException {
         gestionnaireVideo.pause();
-        gestionnaireVideo.setPosition(0.20f);
-        long pourcentage_courant = 20L;
+        gestionnaireVideo.setPosition(0.30f);
+        long pourcentage_courant = 30L;
         long pourcentage_total = 100L;
         long tempsEcoule = gestionnaireVideo.getTempsTotal() * pourcentage_courant / pourcentage_total;
         assertEquals(tempsEcoule, gestionnaireVideo.getTempsEcoule());
