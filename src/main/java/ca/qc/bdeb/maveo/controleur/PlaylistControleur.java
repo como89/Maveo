@@ -5,7 +5,7 @@ import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
-import ca.qc.bdeb.maveo.modele.playlist.Playlist;
+import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +30,7 @@ public class PlaylistControleur {
     LecteurMediaControleur controleurLecteurMedia;
     Playlist playList;
     ObservableList<String> listTitle;
+    PlaylistIO playlistIO;
 
     //Ces deux variables sont temporaires.
     private final String PLAYLIST_NAME = "PlayList";
@@ -60,53 +61,33 @@ public class PlaylistControleur {
 
         @Override
         public void handle(ActionEvent event) {
-
             sauvegarderPlaylist();
-
         }
     }
 
-    private void sauvegarderPlaylist() {
+    /**
+     * Ajoute un PlayliatIO
+     *
+     * @param plistIo le PlaylistIO à ajouter
+     */
+    public void ajouterPlaylistIo(PlaylistIO plistIo) {
+        this.playlistIO = plistIo;
+    }
 
-
-        if (playList == null) {
-            playList = new Playlist("test", 2);
-        } else {
-            playList.setIdPlaylist(3);
-        }
-
-        JSONObject obj = new JSONObject();
-        obj.put("ID", playList.getIdPlaylist());
-        obj.put("LENGTH", playList.recupererLongueurListe());
-        JSONArray list = new JSONArray();
-        JSONArray listeMedia = new JSONArray();
-        ArrayList<Media> listMed = playList.getListeMedia();
-        for (Media media : listMed) {
-            listeMedia.add(media.getTitre());
-            list.add(media.getPathMedia());
-        }
-        // list.add(playList.getListeMedia());
-        obj.put("Media", listeMedia);
-        obj.put("Liste", list);
-
-
-        try {
-            File file = fileOpener.afficherFenetreSauvegardePlaylist(mainframe.getFenetre());
-
-            if (file != null) {
-                PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
-                FileWriter fw;
-                fw = new FileWriter(file.getAbsolutePath());
-                fw.write(obj.toJSONString());
-                fw.flush();
-                fw.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    /**
+     * Ouvre une fenêtre de sauvegarde de Playlist
+     */
+    void sauvegarderPlaylist() {
+        playlistIO.sauvegarderPlaylist((Stage) mainframe.getFenetre(), playList);
     }
 
 
+    /**
+     * Affiche fenêtre ouverture média
+     *
+     * @param stage le contexte où afficher la fenêtre d'ouverture
+     * @return le média ouvert (null si pas de média sélectionné)
+     */
     Media getMediaFromFile(Stage stage) {
         File file = fileOpener.activerOuvertureMedia(stage);
         Media media = null;
@@ -129,7 +110,7 @@ public class PlaylistControleur {
     }
 
     private void creerPlaylist() {
-        playList = new Playlist(PLAYLIST_NAME, PLAYLIST_ID);
+        playList = new Playlist(PLAYLIST_NAME);
 
     }
 
@@ -139,23 +120,21 @@ public class PlaylistControleur {
         @Override
         public void handle(ActionEvent event) {
             ajouterAlaPlaylist();
-
         }
     }
 
     private void ajouterAlaPlaylist() {
         if (playList == null) {
-            playList = new Playlist("TestAdd", 5);
+            playList = new Playlist("Playlist");
         }
 
-            Media media = getMediaFromFile((Stage) mainframe.getFenetre());
-            playList.ajouterMediaListe(media);
-            listTitle.add(media.getTitre());
+        Media media = getMediaFromFile((Stage) mainframe.getFenetre());
+        playList.ajouterMediaListe(media);
+        listTitle.add(media.getTitre());
 
     }
 
     class OpenPlaylistEventHandler implements EventHandler<ActionEvent> {
-
 
         @Override
         public void handle(ActionEvent event) {
@@ -164,76 +143,21 @@ public class PlaylistControleur {
 
     }
 
-
+    /**
+     * Affiche une fenêtre d'ouverture de playlist
+     */
     private void ouvrirPlaylist() {
-        ArrayList<String> listePathsMedia = new ArrayList<String>();
-        ArrayList<String> listeNomsMedia = new ArrayList<String>();
-        ArrayList<Media> listeMedia = new ArrayList<Media>();
+        playList = playlistIO.ouvrirPlaylist((Stage) mainframe.getFenetre());
 
-        FileOpener fo = new FileOpener();
-        fo.activerFiltresPlaylist();
-        File file = fo.activerOuverturePlaylist(mainframe.getFenetre());
-        if (file != null) {
-            JSONParser jsonParser = new JSONParser();
-
-            try {
-                JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
-
-                String nomJsonMedia = "Media";
-                String pathJsonMedia = "Liste";
-                String idJsonMedia = "ID";
-
-                long idPlaylist = (Long) jsonObject.get(idJsonMedia);
-
-                    JSONArray jsonArrayPathsMedia = (JSONArray) jsonObject.get(pathJsonMedia);
-                    String pathMediaTmp;
-                    // Récupère les chemins absolus des fichiers
-                    for (int i = 0; i < jsonArrayPathsMedia.size(); i++) {
-                        pathMediaTmp = (String) jsonArrayPathsMedia.get(i);
-                        listePathsMedia.add(pathMediaTmp);
-                    }
-
-                    JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(nomJsonMedia);
-                    String nomMediaTmp;
-                    // Récupère les noms des chansons
-                    for (int i = 0; i < jsonArrayNomMedia.size(); i++) {
-                        nomMediaTmp = (String) jsonArrayNomMedia.get(i);
-                        listeNomsMedia.add(nomMediaTmp);
-                    }
-
-
-                    Iterator<String> itChemins = listePathsMedia.iterator();
-                    Iterator<String> itNomsFichiers = listeNomsMedia.iterator();
-                    // Crée la liste de média à partir des lsites des chemins et noms
-                    while (itChemins.hasNext() && itNomsFichiers.hasNext()) {
-                        listeMedia.add(new Media(itNomsFichiers.next(), itChemins.next()));
-                    }
-
-                Playlist playlist = new Playlist(file.getName(), (int) idPlaylist);
-
-                playlist.getListeMedia().addAll(listeMedia);
-
-                    listTitle.clear();
-
-                    for (Media media : listeMedia) {
-                        listTitle.add(media.getTitre());
-                    }
-
-                    playList = playlist;
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        listTitle.clear();
+        for (Media media : playList.getListeMedia()) {
+            listTitle.add(media.getTitre());
         }
 
     }
 
     /**
-     * Évènement lorsqu'on clique sur un item dans la playlist.
+     * Évènement qui se déclenche lorsqu'on clique sur un item dans la playlist.
      */
     class PlayListItemSelectedEventHandler implements EventHandler<MouseEvent> {
 

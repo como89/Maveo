@@ -59,12 +59,14 @@ public class PlaylistControleurTest extends ApplicationTest {
 
     @Test
     public void AjouterALaPlaylist(){
-        Playlist playlistTest = new Playlist("TEST", 1);
+        Playlist playlistTest = new Playlist("TEST");
         Media mediaTest1 = new Media("CELINE DION", "X:/test");
         Media mediaTest2 = new Media("GAROU", "X:/test");
 
         playlistTest.ajouterMediaListe(mediaTest1);
         playlistTest.ajouterMediaListe(mediaTest2);
+
+
 
         Assert.assertEquals(playlistTest.getListeMedia().size(), 2);
 
@@ -72,7 +74,7 @@ public class PlaylistControleurTest extends ApplicationTest {
 
     @Test
     public void SauvegarderPlaylistTest() throws IOException {
-        Playlist playlistTest = new Playlist("TEST", 1);
+        Playlist playlistTest = new Playlist("TEST");
         Media mediaTest1 = new Media("CELINE DION", "X:/test");
         Media mediaTest2 = new Media("GAROU", "X:/test");
         playlistTest.ajouterMediaListe(mediaTest1);
@@ -108,7 +110,7 @@ public class PlaylistControleurTest extends ApplicationTest {
 
         JSONObject jsonObject = (JSONObject) jp.parse(new FileReader(file.getAbsolutePath()));
 
-       Playlist playlist = new Playlist("TEST", 2);
+       Playlist playlist = new Playlist("TEST");
        ArrayList<Media> liste =new ArrayList<Media>();
         liste.add((Media)jsonObject.get("GAROU"));
 
@@ -123,7 +125,7 @@ public class PlaylistControleurTest extends ApplicationTest {
 
     @Test
     public void creerPlaylistTest(){
-        Playlist playlistTest = new Playlist("newPlaylist",2 );
+        Playlist playlistTest = new Playlist("newPlaylist");
         Assert.assertNotNull(playlistTest);
     }
 

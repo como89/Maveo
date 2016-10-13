@@ -11,12 +11,21 @@ import java.util.ArrayList;
 public class Playlist implements Serializable {
 
     private String titrePlaylist;
-    private int idPlaylist;
     private ArrayList<Media> listeMedia;
 
-    public Playlist(String nom, int id) {
+    /**
+     * Constructeur par défaut ne nécessitant aucun paramètre
+     */
+    public Playlist() {
+    }
+
+    /**
+     * Constructeur nécessitant tous les paramètres
+     *
+     * @param nom le nom de la palylist
+     */
+    public Playlist(String nom) {
         this.titrePlaylist = nom;
-        this.idPlaylist = id;
         this.listeMedia = new ArrayList<Media>();
     }
 
@@ -26,14 +35,6 @@ public class Playlist implements Serializable {
 
     public void setTitrePlaylist(String titrePlaylist) {
         this.titrePlaylist = titrePlaylist;
-    }
-
-    public int getIdPlaylist() {
-        return idPlaylist;
-    }
-
-    public void setIdPlaylist(int idPlaylist) {
-        this.idPlaylist = idPlaylist;
     }
 
     public void ajouterMediaListe(Media media) {

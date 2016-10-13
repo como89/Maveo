@@ -64,14 +64,17 @@ public class FileOpener {
     }
 
     /**
-     * Active les filtres d'ouverture de fichier
+     * Active les filtres d'ouverture de fichier média
      */
-    public void activerFiltresMedia() {
+    private void activerFiltresMedia() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresMedia());
     }
 
-    public void activerFiltresPlaylist() {
+    /**
+     * Active les filtres d'ouverture de fichier playlist
+     */
+    private void activerFiltresPlaylist() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresPlaylist());
     }
