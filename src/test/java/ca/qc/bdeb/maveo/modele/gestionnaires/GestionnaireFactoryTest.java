@@ -2,6 +2,7 @@ package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -23,8 +24,8 @@ public class GestionnaireFactoryTest extends ApplicationTest {
     static Media media = new Media("test", "res/test.mp4");
     static GestionnaireMedia gestionnaireMedia;
 
-    public final double MIN_HEGHT_STAGE = 200;
-    public final double MIN_WIDTH_STAGE = 400;
+    public final double HEIGHT_STAGE = 200;
+    public final double WIDTH_STAGE = 400;
 
 
     MainFrame mainFrame;
@@ -35,15 +36,20 @@ public class GestionnaireFactoryTest extends ApplicationTest {
         FXMLLoader loader = new FXMLLoader(ressource);
         BorderPane page = loader.load();
         mainFrame = loader.getController();
-        mainFrame.getPanelEcran().resize(600, 600);
-        Scene scene = new Scene(page, 600, 600);
+        mainFrame.getPanelEcran().resize(WIDTH_STAGE, HEIGHT_STAGE);
+        Scene scene = new Scene(page, WIDTH_STAGE, HEIGHT_STAGE);
         stage.setScene(scene);
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
     }
 
     @Before
     public void before() {
-        gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
+            }
+        });
     }
 
     @Test

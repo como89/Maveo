@@ -65,16 +65,16 @@ public class GestionnaireMusiqueTest {
     public void testPause() throws Exception {
         gestionMusique.preparerMedia();
         gestionMusique.jouerMedia();
-        gestionMusique.pause();
         final CompletableFuture<Boolean> future = new CompletableFuture<Boolean>();
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         executorService.schedule(new Runnable() {
 
             @Override
             public void run() {
+                gestionMusique.pause();
                 future.complete(gestionMusique.enLecture());
             }
-        }, 50, TimeUnit.MILLISECONDS);
+        }, 20, TimeUnit.MILLISECONDS);
         Assert.assertFalse(future.get());
     }
 
