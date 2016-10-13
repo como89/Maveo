@@ -8,7 +8,7 @@ import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
  * @author Nicholas
  * @doc http://caprica.github.io/vlcj/javadoc/3.10.1/uk/co/caprica/vlcj/player/direct/DirectMediaPlayer.html
  */
-public class GestionnaireVideo extends GestionnaireMedia {
+class GestionnaireVideo extends GestionnaireMedia {
 
     private DirectMediaPlayer embeddedMediaPlayer;
     private ComposantVideo composantVideo;
@@ -87,7 +87,7 @@ public class GestionnaireVideo extends GestionnaireMedia {
     }
 
     @Override
-    public void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
+    public void addMediaPlayerEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
         embeddedMediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
     }
 }

@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo;
 
+import ca.qc.bdeb.maveo.controleur.LecteurMediaControleur;
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
@@ -47,10 +48,15 @@ public class MainClass extends Application {
 
         MainFrameControleur mainFrameControleur = new MainFrameControleur();
         PlaylistControleur playlistControleur = new PlaylistControleur();
+        LecteurMediaControleur controleurLecteurMedia = new LecteurMediaControleur();
 
         mainFrameControleur.ajouterMainFrame(mainFrame);
         mainFrameControleur.ajouterFileOpener(fileOpener);
+        mainFrameControleur.ajouterControleurLecteurMedia(controleurLecteurMedia);
 
         playlistControleur.ajouterMainFrame(mainFrame);
+        playlistControleur.ajouterControleurLecteurMedia(controleurLecteurMedia);
+
+        controleurLecteurMedia.ajouterMainFrame(mainFrame);
     }
 }

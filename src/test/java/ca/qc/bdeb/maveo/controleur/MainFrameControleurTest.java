@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
-import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,7 +19,6 @@ public class MainFrameControleurTest extends ApplicationTest {
 
     MainFrameControleur mainFrameControleur;
     MainFrame mainFrame;
-    GestionnaireMusique gestionnaireMusique;
     FileOpener fileOpener;
     float floatTest;
 

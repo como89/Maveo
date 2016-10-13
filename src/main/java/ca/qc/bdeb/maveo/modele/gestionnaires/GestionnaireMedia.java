@@ -102,5 +102,5 @@ public abstract class GestionnaireMedia {
      *
      * @param mediaPlayerEventListener le Listener à ajouter au lecteur média
      */
-    public abstract void addMediaPlayerEventEventListener(MediaPlayerEventListener mediaPlayerEventListener);
+    public abstract void addMediaPlayerEventListener(MediaPlayerEventListener mediaPlayerEventListener);
 }

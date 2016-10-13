@@ -1,12 +1,16 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.Media;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
-import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,7 +26,9 @@ import java.util.Iterator;
  */
 public class PlaylistControleur {
     MainFrame mainframe;
+    LecteurMediaControleur controleurLecteurMedia;
     Playlist playList;
+    ObservableList<String> listTitle;
 
     //Ces deux variables sont temporaires.
     private final String PLAYLIST_NAME = "PlayList";
@@ -31,7 +37,7 @@ public class PlaylistControleur {
     FileOpener fileOpener;
 
     public PlaylistControleur() {
-
+        listTitle = FXCollections.observableList(new ArrayList<String>());
     }
 
     public void ajouterMainFrame(MainFrame mainFrame) {
@@ -40,10 +46,13 @@ public class PlaylistControleur {
         this.mainframe.addEventHandlerOpenPlaylist(new OpenPlaylistEventHandler());
         this.mainframe.addEventHandlerAddMediaInPlayList(new MenuAddToPlaylistEventHandler());
         this.mainframe.addEventHandlerSavePlaylist(new MenuSavePlaylistEventHandler());
-
+        this.mainframe.addEventHandlerPlayListSelected(new PlayListItemSelectedEventHandler());
+        mainframe.getListPlayList().setItems(listTitle);
         fileOpener = new FileOpener();
+    }
 
-
+    public void ajouterControleurLecteurMedia(LecteurMediaControleur controleurLecteurMedia) {
+        this.controleurLecteurMedia = controleurLecteurMedia;
     }
 
     class MenuSavePlaylistEventHandler implements EventHandler<ActionEvent> {
@@ -120,6 +129,7 @@ public class PlaylistControleur {
 
             Media media = getMediaFromFile((Stage) mainframe.getFenetre());
             playList.ajouterMediaListe(media);
+            listTitle.add(media.getTitre());
         }
     }
 
@@ -151,7 +161,7 @@ public class PlaylistControleur {
                     // Récupère les chemins absolus des fichiers
                     for (int i = 0; i < jsonArrayPathsMedia.size(); i++) {
                         pathMediaTmp = (String) jsonArrayPathsMedia.get(i);
-                        listePathsMedia.add(pathJsonMedia);
+                        listePathsMedia.add(pathMediaTmp);
                     }
 
                     JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(nomJsonMedia);
@@ -159,7 +169,7 @@ public class PlaylistControleur {
                     // Récupère les noms des chansons
                     for (int i = 0; i < jsonArrayNomMedia.size(); i++) {
                         nomMediaTmp = (String) jsonArrayNomMedia.get(i);
-                        listeNomsMedia.add(nomJsonMedia);
+                        listeNomsMedia.add(nomMediaTmp);
                     }
 
 
@@ -167,12 +177,18 @@ public class PlaylistControleur {
                     Iterator<String> itNomsFichiers = listeNomsMedia.iterator();
                     // Crée la liste de média à partir des lsites des chemins et noms
                     while (itChemins.hasNext() && itNomsFichiers.hasNext()) {
-                        listeMedia.add(new Media(itChemins.next(), itNomsFichiers.next()));
+                        listeMedia.add(new Media(itNomsFichiers.next(), itChemins.next()));
                     }
 
                     Playlist playlist = new Playlist(file.getName(), (int) idPlaylist);
 
                     playlist.getListeMedia().addAll(listeMedia);
+
+                    listTitle.clear();
+
+                    for (Media media : listeMedia) {
+                        listTitle.add(media.getTitre());
+                    }
 
                     playList = playlist;
 
@@ -184,6 +200,27 @@ public class PlaylistControleur {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    /**
+     * Évènement lorsqu'on clique sur un item dans la playlist.
+     */
+    class PlayListItemSelectedEventHandler implements EventHandler<MouseEvent> {
+
+        @Override
+        public void handle(MouseEvent event) {
+            GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+            if (gestionnaireMedia != null && gestionnaireMedia.enLecture()) {
+                gestionnaireMedia.arreter();
+            }
+            String mediaName = mainframe.getListPlayList().getSelectionModel().getSelectedItem();
+            Media media = playList.getMediaByName(mediaName);
+            gestionnaireMedia = GestionnaireFactory.createInstance(media, mainframe);
+            gestionnaireMedia.preparerMedia();
+            gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
+            mainframe.getBtnJouerPause().setDisable(false);
+            mainframe.getSliderProgression().setDisable(false);
         }
     }
 }

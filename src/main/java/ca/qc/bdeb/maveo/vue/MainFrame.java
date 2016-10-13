@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -119,7 +120,7 @@ public class MainFrame {
     TitledPane playlistPane;
 
     @FXML
-    ListView listviewPlaylist;
+    ListView<String> listviewPlaylist;
 
     public MainFrame() {
 
@@ -156,6 +157,10 @@ public class MainFrame {
 
     public Slider getSliderVolume() {
         return sliderVolume;
+    }
+
+    public ListView<String> getListPlayList() {
+        return listviewPlaylist;
     }
 
     public Label getLblNomMedia() {
@@ -220,5 +225,9 @@ public class MainFrame {
 
     public void addEventHandlerSavePlaylist(EventHandler<ActionEvent> SavePlaylistEventHandler) {
         menuItemSavePlaylist.setOnAction(SavePlaylistEventHandler);
+    }
+
+    public void addEventHandlerPlayListSelected(EventHandler<MouseEvent> playListSelectedEventHandler) {
+        listviewPlaylist.setOnMouseClicked(playListSelectedEventHandler);
     }
 }

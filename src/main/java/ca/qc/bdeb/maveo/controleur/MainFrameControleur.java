@@ -1,40 +1,23 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.Media;
-import ca.qc.bdeb.maveo.modele.fichier.AccesExtensions;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
-import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
-import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
-import ca.qc.bdeb.maveo.vue.ComposantVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
-import com.google.common.io.Files;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.FileChooser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import uk.co.caprica.vlcj.player.MediaPlayer;
-import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
 import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Created by 1379708 on 2016-09-08.
  */
 public class MainFrameControleur {
 
-    boolean isFreeMutexLockSliderPosition = true;
-
     boolean isFreeMutexLockSliderVolume = false;
-
-
-
 
     public MainFrameControleur() {
     }
@@ -45,8 +28,7 @@ public class MainFrameControleur {
     // modele FileOpener
     FileOpener fileOpener;
 
-    // Gestionnaire média
-    GestionnaireMedia gestionnaireMedia;
+    LecteurMediaControleur controleurLecteurMedia;
 
     /**
      * Ajoute la fenêtre principale au contrôleur
@@ -68,7 +50,6 @@ public class MainFrameControleur {
         this.mainFrame.getBtnJouerPause().setDisable(true);
         this.mainFrame.getBoutonPrecedent().setDisable(true);
         this.mainFrame.getBoutonSuivant().setDisable(true);
-
     }
 
     /**
@@ -80,6 +61,15 @@ public class MainFrameControleur {
         this.fileOpener = fileOpener;
     }
 
+    /**
+     * Ajoute le controleur d'évènement pour le lecteur média.
+     *
+     * @param lecteurMediaEventListener - Controleur d'évènement du lecteur média.
+     */
+    public void ajouterControleurLecteurMedia(LecteurMediaControleur lecteurMediaEventListener) {
+        this.controleurLecteurMedia = lecteurMediaEventListener;
+    }
+
 
     /**
      * Fixe la position du média en cours
@@ -87,7 +77,7 @@ public class MainFrameControleur {
      * @param positionPourcentage la nouvelle position, en pourcentage
      */
     void fixerSliderPosition(float positionPourcentage) {
-        gestionnaireMedia.setPosition(positionPourcentage);
+        GestionnaireFactory.getCurrentInstance().setPosition(positionPourcentage);
     }
 
     /**
@@ -97,7 +87,7 @@ public class MainFrameControleur {
      */
     void fixerVolumePosition(int volumePourcentage) {
         if (isFreeMutexLockSliderVolume) {
-            gestionnaireMedia.setVolume(volumePourcentage);
+            GestionnaireFactory.getCurrentInstance().setVolume(volumePourcentage);
         }
     }
 
@@ -121,31 +111,11 @@ public class MainFrameControleur {
             if (media != null) {
                 isFreeMutexLockSliderVolume = true;
 
-                AccesExtensions accesExtensions = new AccesExtensions();
-                String extensionFichier = Files.getFileExtension(media.getPathMedia());
-
-                // Cherche les extensions vidéo
-                FileChooser.ExtensionFilter extensionFilter = accesExtensions.getListeFiltresMedia()
-                        .get(accesExtensions.INDICE_LISTE_FILTRES_MEDIA_FICHIERS_VIDEO);
-
-                extensionFichier = "*." + extensionFichier;
-
-                // Si vidéo
-                if (extensionFilter.getExtensions().contains(extensionFichier)) {
-                    ComposantVideo composantVideo = new ComposantVideo(mainFrame.getPanelEcran());
-                    mainFrame.actualiseEcranPane(composantVideo.getVideoView());
-                    gestionnaireMedia = new GestionnaireVideo(composantVideo);
-                } else {
-                    gestionnaireMedia = new GestionnaireMusique();
-                    mainFrame.actualiseEcranPane(null);
-                }
-
-
-                gestionnaireMedia.setCheminFichier(media.getPathMedia());
+                GestionnaireMedia gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
 
                 //mainFrame.getLabelNomChanson().setText(fichier.getName());
                 gestionnaireMedia.preparerMedia();
-                gestionnaireMedia.addMediaPlayerEventEventListener(new LecteurMediaEventListener());
+                gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
 
@@ -204,6 +174,7 @@ public class MainFrameControleur {
     class BtnJouerPauseEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
+            GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
             if (gestionnaireMedia.enLecture()) { // En lecture -> pause
                 gestionnaireMedia.pause();
                 mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
@@ -224,6 +195,7 @@ public class MainFrameControleur {
     class BtnArreterEventHandler implements EventHandler<ActionEvent> {
 
         public void handle(ActionEvent event) {
+            GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
             gestionnaireMedia.arreter();
             mainFrame.getBtnArreter().setDisable(true);
             mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
@@ -237,7 +209,7 @@ public class MainFrameControleur {
     class SliderPositionChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            if (isFreeMutexLockSliderPosition) {
+            if (controleurLecteurMedia.isFreeMutexLockSliderPosition) {
                 float position = newValue.floatValue();
                 float diviseur = 100;
                 fixerSliderPosition(position / diviseur);
@@ -255,40 +227,4 @@ public class MainFrameControleur {
         }
     }
 
-    /**
-     * Classe qui implémente l'interface MediaPlayerEventListener pour avoir accès aux évènements nécessaires
-     */
-    class LecteurMediaEventListener extends MediaPlayerEventAdapter {
-
-        /**
-         * Lorsque la position du média a changé, le slider est ajusté en conséquence
-         *
-         * @param mediaPlayer le MediaPlayer dans lequel la position du média a changé
-         * @param v           la position, en pourcentage. Ex. 0.15 est 15%
-         */
-        @Override
-        public void positionChanged(MediaPlayer mediaPlayer, float v) {
-            isFreeMutexLockSliderPosition = false;
-            double position = v;
-            double multiplier = 100;
-            mainFrame.getSliderProgression().setValue(position * multiplier);
-            isFreeMutexLockSliderPosition = true;
-        }
-
-        /**
-         * Remet le slider de position au debut lorsque le média a terminé de jouer
-         *
-         * @param mediaPlayer le MediaPlayer dans lequel le média s'est arrêté
-         */
-        @Override
-        public void finished(MediaPlayer mediaPlayer) {
-            isFreeMutexLockSliderPosition = false; // active le verrou sur le slider de position
-            mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
-            mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
-            mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
-            isFreeMutexLockSliderPosition = true; // libère le verrou sur le slieder de position
-        }
-
-
-    }
 }
