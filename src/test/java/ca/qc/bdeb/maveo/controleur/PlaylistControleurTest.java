@@ -2,7 +2,6 @@ package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
-import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +28,6 @@ public class PlaylistControleurTest extends ApplicationTest {
 
     PlaylistControleur playlistControleur;
     MainFrame mainFrame;
-    GestionnaireMusique gestionnaireMusique;
     FileOpener fileOpener;
     float floatTest;
 

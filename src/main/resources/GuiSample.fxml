@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.GridPane?>
 <BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" minHeight="500.0" minWidth="600.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.qc.bdeb.maveo.vue.MainFrame">
    <top>
       <MenuBar id="menuBarFenetre" fx:id="menuBar" BorderPane.alignment="CENTER">
@@ -43,66 +44,89 @@
           </cursor>
       </MenuBar>
    </top>
+    <center>
+        <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+            <children>
+                <TitledPane fx:id="playlistPane" prefHeight="421.0" prefWidth="202.0" text="Playlist">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ListView fx:id="listviewPlaylist" prefHeight="398.0" prefWidth="200.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+                <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0"/>
+            </children>
+            <cursor>
+                <Cursor fx:constant="DEFAULT"/>
+            </cursor>
+        </Pane>
+    </center>
    <bottom>
-       <Pane id="panelControleurFenetre" fx:id="panelControleur" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="651.0">
-         <children>
-             <Button id="boutonPlayPause" fx:id="boutonPlayPause" layoutX="24.0" layoutY="14.0" maxHeight="59.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="62.0" styleClass="buttonPlay" stylesheets="@StyleBoutons.css">
+       <Pane fx:id="panelControleur">
+           <children>
+               <Button fx:id="boutonPlayPause"
+                       maxHeight="59.0"
+                       mnemonicParsing="false"
+                       prefHeight="42.0" prefWidth="62.0"
+                       styleClass="buttonPlay"
+                       stylesheets="@StyleBoutons.css"
+                       GridPane.halignment="LEFT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-             <Button id="buttonPrecedent" fx:id="boutonPrecedent" layoutX="89.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="46.0" styleClass="buttonPrecedent" stylesheets="@StyleBoutons.css">
+               <Button fx:id="boutonPrecedent"
+                       mnemonicParsing="false"
+                       prefHeight="40.0"
+                       prefWidth="46.0"
+                       styleClass="buttonPrecedent"
+                       stylesheets="@StyleBoutons.css"
+                       GridPane.halignment="LEFT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-             <Button id="boutonArreter" fx:id="boutonArreter" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="40.0" styleClass="buttonStop" stylesheets="@StyleBoutons.css">
+               <Button fx:id="boutonArreter"
+                       mnemonicParsing="false"
+                       prefHeight="41.0"
+                       prefWidth="40.0"
+                       styleClass="buttonStop"
+                       stylesheets="@StyleBoutons.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-             <Button id="boutonSuivant" fx:id="boutonSuivant" layoutX="175.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="45.0" styleClass="buttonNext" stylesheets="@StyleBoutons.css" textOverrun="CLIP">
+               <Button fx:id="boutonSuivant"
+                       mnemonicParsing="false"
+                       prefHeight="41.0"
+                       prefWidth="45.0"
+                       styleClass="buttonNext"
+                       stylesheets="@StyleBoutons.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-             <Slider id="sliderProgression" fx:id="sliderProgression" layoutX="241.0" layoutY="25.0" prefHeight="14.0"
-                     prefWidth="313.0">
+               <Slider fx:id="sliderProgression"
+                       prefHeight="14.0"
+                       prefWidth="313.0">
                  <cursor>
                      <Cursor fx:constant="H_RESIZE"/>
                  </cursor>
              </Slider>
-             <Slider id="sliderVolume" fx:id="sliderVolume" layoutX="593.0" layoutY="11.0" orientation="VERTICAL"
-                     prefHeight="42.0" prefWidth="14.0">
+               <Slider fx:id="sliderVolume"
+                       orientation="VERTICAL"
+                       prefHeight="42.0"
+                       prefWidth="14.0">
                  <cursor>
                      <Cursor fx:constant="V_RESIZE"/>
                  </cursor>
              </Slider>
-            <Label fx:id="lblProgression" layoutX="220.0" layoutY="6.0" prefHeight="17.0" prefWidth="66.0" />
-            <Label fx:id="lblTxtVolume" layoutX="568.0" layoutY="15.0" />
-         </children>
-          <cursor>
-              <Cursor fx:constant="DEFAULT" />
-          </cursor>
+               <Label fx:id="lblProgression"
+                      prefHeight="17.0" prefWidth="66.0"/>
+               <Label fx:id="lblTxtVolume"/>
+           </children>
       </Pane>
    </bottom>
-    <center>
-        <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-         <children>
-             <TitledPane fx:id="playlistPane" prefHeight="421.0" prefWidth="202.0" text="Playlist">
-                 <content>
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                         <children>
-                             <ListView fx:id="listviewPlaylist" prefHeight="398.0" prefWidth="200.0"/>
-                         </children>
-                     </AnchorPane>
-                 </content>
-             </TitledPane>
-            <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0" />
-         </children>
-          <cursor>
-              <Cursor fx:constant="DEFAULT" />
-          </cursor>
-      </Pane>
-    </center>
 </BorderPane>
