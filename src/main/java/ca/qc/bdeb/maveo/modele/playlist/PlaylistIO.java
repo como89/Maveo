@@ -17,6 +17,9 @@ import java.util.Iterator;
  */
 public class PlaylistIO {
 
+    public final static String NOM_JSON_LISTE_CHEMINS_MEDIA = "CheminsMedia";
+    public final static String NOM_JSON_LISTE_NOMS_MEDIA = "NomsMedia";
+
     FileOpener fileOpener;
 
     /**
@@ -27,26 +30,30 @@ public class PlaylistIO {
     }
 
     /**
-     * Ouvre une fenêtre de sauvegarde de Playlist
+     * Ouvre une fenêtre de sauvegarde de Playlist où l'utilisateur peut choisir de sauvegarder une playlist.
+     * Le format de la sauvegarde est JSON, peu importe l'extension.
+     *
+     * @param context  le contexte (la fenêtre) dans lequel le FileChooser sera affiché.
+     * @param playlist la liste de lecture à sauvegarder.
      */
     public void sauvegarderPlaylist(Stage context, Playlist playlist) {
-
-        JSONObject obj = new JSONObject();
-        JSONArray listeChemins = new JSONArray();
-        JSONArray listeNomsMedia = new JSONArray();
-        ArrayList<Media> listMed = playlist.getListeMedia();
-        for (Media media : listMed) {
-            listeNomsMedia.add(media.getTitre());
-            listeChemins.add(media.getPathMedia());
-        }
-
-        obj.put("Media", listeNomsMedia);
-        obj.put("Liste", listeChemins);
-
         try {
             File file = fileOpener.afficherFenetreSauvegardePlaylist(context);
 
             if (file != null) {
+
+                JSONObject obj = new JSONObject();
+                JSONArray listeChemins = new JSONArray();
+                JSONArray listeNomsMedia = new JSONArray();
+                ArrayList<Media> listeMediaPlaylist = playlist.getListeMedia();
+                for (Media media : listeMediaPlaylist) {
+                    listeNomsMedia.add(media.getTitre());
+                    listeChemins.add(media.getPathMedia());
+                }
+
+                obj.put(NOM_JSON_LISTE_NOMS_MEDIA, listeNomsMedia);
+                obj.put(NOM_JSON_LISTE_CHEMINS_MEDIA, listeChemins);
+
                 PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
                 FileWriter fw;
                 fw = new FileWriter(file.getAbsolutePath());
@@ -60,30 +67,31 @@ public class PlaylistIO {
     }
 
     /**
-     * Affiche une fenêtre d'ouverture de playlist
+     * Ouvre une fenêtre d'ouverture de playlist dans laquelle l'utilisateur peut choisir d'ouvrir une playlist.
+     * La méthode lit le fichier choisi par l'utilisateur (si celui-ci en a choisi un) et crée un objet Playlist avec
+     * l'information lue dedans. La méthode retourne l'objet Playlist crée.
+     *
+     * @param context le contexte (la fenêtre) dans lequel le FileChooser sera affiché.
+     * @return l'objet Playlist crée. Null si l'utilisateur ne choisit pas de fichier
      */
     public Playlist ouvrirPlaylist(Stage context) {
-        ArrayList<String> listePathsMedia = new ArrayList<String>();
-        ArrayList<String> listeNomsMedia = new ArrayList<String>();
-        ArrayList<Media> listeMedia = new ArrayList<Media>();
 
         FileOpener fo = new FileOpener();
         File file = fo.activerOuverturePlaylist(context);
 
         Playlist playlist = null;
         if (file != null) {
+            ArrayList<String> listePathsMedia = new ArrayList<String>();
+            ArrayList<String> listeNomsMedia = new ArrayList<String>();
+            ArrayList<Media> listeMedia = new ArrayList<Media>();
+
             JSONParser jsonParser = new JSONParser();
 
             try {
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
 
-                String nomJsonMedia = "Media";
-                String pathJsonMedia = "Liste";
-                String idJsonMedia = "ID";
 
-                long idPlaylist = (Long) jsonObject.get(idJsonMedia);
-
-                JSONArray jsonArrayPathsMedia = (JSONArray) jsonObject.get(pathJsonMedia);
+                JSONArray jsonArrayPathsMedia = (JSONArray) jsonObject.get(NOM_JSON_LISTE_CHEMINS_MEDIA);
                 String pathMediaTmp;
                 // Récupère les chemins absolus des fichiers
                 for (int i = 0; i < jsonArrayPathsMedia.size(); i++) {
@@ -91,7 +99,7 @@ public class PlaylistIO {
                     listePathsMedia.add(pathMediaTmp);
                 }
 
-                JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(nomJsonMedia);
+                JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(NOM_JSON_LISTE_NOMS_MEDIA);
                 String nomMediaTmp;
                 // Récupère les noms des chansons
                 for (int i = 0; i < jsonArrayNomMedia.size(); i++) {

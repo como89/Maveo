@@ -1,10 +1,10 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.modele.Media;
+import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.playlist.Playlist;
-import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.collections.FXCollections;
@@ -13,14 +13,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by WuTchanKi on 2016-10-11.
@@ -34,7 +29,6 @@ public class PlaylistControleur {
 
     //Ces deux variables sont temporaires.
     private final String PLAYLIST_NAME = "PlayList";
-    private final int PLAYLIST_ID = 0;
 
     FileOpener fileOpener;
 
@@ -109,9 +103,11 @@ public class PlaylistControleur {
         }
     }
 
+    /**
+     * Crée une playlist
+     */
     private void creerPlaylist() {
         playList = new Playlist(PLAYLIST_NAME);
-
     }
 
 
@@ -124,8 +120,10 @@ public class PlaylistControleur {
     }
 
     private void ajouterAlaPlaylist() {
+
+        // patron singleton
         if (playList == null) {
-            playList = new Playlist("Playlist");
+            playList = new Playlist(PLAYLIST_NAME);
         }
 
         Media media = getMediaFromFile((Stage) mainframe.getFenetre());
@@ -144,16 +142,18 @@ public class PlaylistControleur {
     }
 
     /**
-     * Affiche une fenêtre d'ouverture de playlist
+     * Affiche une fenêtre d'ouverture de playlist. Remplace la liste des tires avec la nouvelle
+     * liste si
      */
     private void ouvrirPlaylist() {
         playList = playlistIO.ouvrirPlaylist((Stage) mainframe.getFenetre());
 
-        listTitle.clear();
-        for (Media media : playList.getListeMedia()) {
-            listTitle.add(media.getTitre());
+        if (playList != null) {
+            listTitle.clear();
+            for (Media media : playList.getListeMedia()) {
+                listTitle.add(media.getTitre());
+            }
         }
-
     }
 
     /**
