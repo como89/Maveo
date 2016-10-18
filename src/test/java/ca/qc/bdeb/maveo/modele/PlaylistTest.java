@@ -19,7 +19,7 @@ public class PlaylistTest {
 
         Playlist liste = new Playlist("test");
         liste.ajouterMediaListe(media);
-        Assert.assertEquals(liste.recupererLongueurListe(), 1);
+        Assert.assertEquals(liste.getLongueurListe(), 1);
 
     }
 
@@ -31,7 +31,7 @@ public class PlaylistTest {
             liste.ajouterMediaListe(new Media(NAME_MEDIA, PATH_MEDIA));
         }
 
-        Assert.assertEquals(liste.recupererLongueurListe(), LENGTH_MEDIA);
+        Assert.assertEquals(liste.getLongueurListe(), LENGTH_MEDIA);
     }
 
 

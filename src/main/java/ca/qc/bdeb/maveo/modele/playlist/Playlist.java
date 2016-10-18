@@ -45,23 +45,21 @@ public class Playlist implements Serializable {
         listeMedia.remove(media);
     }
 
-    public int recupererLongueurListe() {
+    public int getLongueurListe() {
         return listeMedia.size();
     }
 
     public Media getMediaByName(String name) {
-        Media mediafound = null;
+        Media mediaFound = null;
         for (Media media : listeMedia) {
             if (media.getTitre().equals(name)) {
-                mediafound = media;
+                mediaFound = media;
             }
         }
-        return mediafound;
+        return mediaFound;
     }
 
     public ArrayList<Media> getListeMedia() {
         return listeMedia;
     }
-
-
 }

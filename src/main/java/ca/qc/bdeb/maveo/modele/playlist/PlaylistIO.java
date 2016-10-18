@@ -54,9 +54,7 @@ public class PlaylistIO {
                 obj.put(NOM_JSON_LISTE_NOMS_MEDIA, listeNomsMedia);
                 obj.put(NOM_JSON_LISTE_CHEMINS_MEDIA, listeChemins);
 
-                PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
-                FileWriter fw;
-                fw = new FileWriter(file.getAbsolutePath());
+                FileWriter fw = new FileWriter(file.getAbsolutePath());
                 fw.write(obj.toJSONString());
                 fw.flush();
                 fw.close();

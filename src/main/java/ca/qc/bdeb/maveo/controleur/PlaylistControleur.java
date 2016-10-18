@@ -30,6 +30,8 @@ public class PlaylistControleur {
     //Ces deux variables sont temporaires.
     private final String PLAYLIST_NAME = "PlayList";
 
+    private final int TAILLE_MINIMALE_PLAYLIST_ACTIVATION_BOUTONS_SUIVANT_PRECEDENT = 2;
+
     FileOpener fileOpener;
 
     public PlaylistControleur() {
@@ -38,11 +40,11 @@ public class PlaylistControleur {
 
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainframe = mainFrame;
-        this.mainframe.addEventHandlerCreatePlaylist(new MenuCreatePlaylistEventHandler());
         this.mainframe.addEventHandlerOpenPlaylist(new OpenPlaylistEventHandler());
         this.mainframe.addEventHandlerAddMediaInPlayList(new MenuAddToPlaylistEventHandler());
         this.mainframe.addEventHandlerSavePlaylist(new MenuSavePlaylistEventHandler());
         this.mainframe.addEventHandlerPlayListSelected(new PlayListItemSelectedEventHandler());
+        this.mainframe.addEventHandlerBoutonSuivant(new BoutonSuivantEventHandler());
         mainframe.getListPlayList().setItems(listTitle);
         fileOpener = new FileOpener();
     }
@@ -91,26 +93,6 @@ public class PlaylistControleur {
         return media;
     }
 
-    /**
-     * Déclencheur qui s'active lorsqu'un utilisateur appuie sur le menu de la création d'une playlist.
-     */
-    class MenuCreatePlaylistEventHandler implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
-            creerPlaylist();
-
-        }
-    }
-
-    /**
-     * Crée une playlist
-     */
-    private void creerPlaylist() {
-        playList = new Playlist(PLAYLIST_NAME);
-    }
-
-
     class MenuAddToPlaylistEventHandler implements EventHandler<ActionEvent> {
 
         @Override
@@ -119,6 +101,9 @@ public class PlaylistControleur {
         }
     }
 
+    /**
+     * Ouvre une fenêtre d'ouverture de fichier média que l'utilisateur peut utiliser pour
+     */
     private void ajouterAlaPlaylist() {
 
         // patron singleton
@@ -126,10 +111,18 @@ public class PlaylistControleur {
             playList = new Playlist(PLAYLIST_NAME);
         }
 
+        // Ajoute le fichier sélectionné par l'utilisateur à la playlist
         Media media = getMediaFromFile((Stage) mainframe.getFenetre());
-        playList.ajouterMediaListe(media);
-        listTitle.add(media.getTitre());
+        if (media != null) {
+            playList.ajouterMediaListe(media);
+            listTitle.add(media.getTitre());
+        }
 
+        // Si la taille de la palylist permet l'utilisation des boutons suivant et précédent, active ces boutons
+        if (playList.getLongueurListe() >= TAILLE_MINIMALE_PLAYLIST_ACTIVATION_BOUTONS_SUIVANT_PRECEDENT) {
+            mainframe.getBoutonSuivant().setDisable(false);
+            mainframe.getBoutonPrecedent().setDisable(false);
+        }
     }
 
     class OpenPlaylistEventHandler implements EventHandler<ActionEvent> {
@@ -178,4 +171,18 @@ public class PlaylistControleur {
             mainframe.getSliderProgression().setDisable(false);
         }
     }
+
+    /**
+     * Évènement qui se déclenche lorsque on clique sur le bouton suivant
+     */
+    class BoutonSuivantEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            int indiceSelectionne = mainframe.getListPlayList().getSelectionModel().getSelectedIndex();
+            mainframe.getListPlayList().getSelectionModel().select(indiceSelectionne + 1);
+        }
+    }
+
+
 }

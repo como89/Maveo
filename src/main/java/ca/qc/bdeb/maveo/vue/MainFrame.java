@@ -93,9 +93,6 @@ public class MainFrame {
     MenuItem menuItemHelpAbout;
 
     @FXML
-    MenuItem menuItemCreatePlaylist;
-
-    @FXML
     MenuItem menuItemOpenPlaylist;
 
     @FXML
@@ -208,10 +205,6 @@ public class MainFrame {
         sliderVolume.valueProperty().addListener(changeListener);
     }
 
-    public void addEventHandlerCreatePlaylist(EventHandler<ActionEvent> menuCreatePlaylistEventHandler) {
-        menuItemCreatePlaylist.setOnAction(menuCreatePlaylistEventHandler);
-    }
-
     public void addEventHandlerAddMediaInPlayList(EventHandler<ActionEvent> menuAddToPlaylistEventHandler) {
         menuItemAddToPlaylist.setOnAction(menuAddToPlaylistEventHandler);
     }
@@ -226,5 +219,13 @@ public class MainFrame {
 
     public void addEventHandlerPlayListSelected(EventHandler<MouseEvent> playListSelectedEventHandler) {
         listviewPlaylist.setOnMouseClicked(playListSelectedEventHandler);
+    }
+
+    public void addEventHandlerBoutonSuivant(EventHandler<ActionEvent> boutonSuivantActionEvent) {
+        boutonSuivant.setOnAction(boutonSuivantActionEvent);
+    }
+
+    public void addEventHandlerBoutonPrecedent(EventHandler<ActionEvent> boutonPrecedentActionEvent) {
+        boutonPrecedent.setOnAction(boutonPrecedentActionEvent);
     }
 }
