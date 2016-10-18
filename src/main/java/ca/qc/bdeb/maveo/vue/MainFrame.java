@@ -45,9 +45,6 @@ public class MainFrame {
     Button boutonPlayPause;
 
     @FXML
-    Image imageBtnPlay, imageBtnStop, imageBtnSuivant, imageBtnPrecedent, imageBtnPause;
-
-    @FXML
     Button boutonArreter;
 
     @FXML

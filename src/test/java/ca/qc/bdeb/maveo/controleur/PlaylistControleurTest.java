@@ -65,7 +65,6 @@ public class PlaylistControleurTest extends ApplicationTest {
         playlistTest.ajouterMediaListe(mediaTest2);
 
 
-
         Assert.assertEquals(playlistTest.getListeMedia().size(), 2);
 
     }
@@ -108,7 +107,7 @@ public class PlaylistControleurTest extends ApplicationTest {
 
         JSONObject jsonObject = (JSONObject) jp.parse(new FileReader(file.getAbsolutePath()));
 
-       Playlist playlist = new Playlist("TEST");
+        Playlist playlist = new Playlist("TEST");
        ArrayList<Media> liste =new ArrayList<Media>();
         liste.add((Media)jsonObject.get("GAROU"));
 

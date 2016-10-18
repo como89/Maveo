@@ -1,6 +1,6 @@
 .buttonPlay {
     -fx-background-image: url("IconesBoutons/play.png");
-    -fx-background-size: 30px;
+    -fx-background-size: 30px 30px;
     -fx-background-radius: 60px;
     -fx-max-width: 40px;
     -fx-max-height: 50px;
