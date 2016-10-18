@@ -45,11 +45,11 @@ public class MainFrameControleur {
 
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
-        // this.mainFrame.getSliderProgression().setDisable(true);
-        //  this.mainFrame.getBtnArreter().setDisable(true);
-        // this.mainFrame.getBtnJouerPause().setDisable(true);
-        //  this.mainFrame.getBoutonPrecedent().setDisable(true);
-        // this.mainFrame.getBoutonSuivant().setDisable(true);
+        this.mainFrame.getSliderProgression().setDisable(true);
+        this.mainFrame.getBtnArreter().setDisable(true);
+        this.mainFrame.getBtnJouerPause().setDisable(true);
+        this.mainFrame.getBoutonPrecedent().setDisable(true);
+        this.mainFrame.getBoutonSuivant().setDisable(true);
     }
 
     /**
@@ -172,7 +172,7 @@ public class MainFrameControleur {
     class SliderVolumeChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            if (isFreeMutexLockSliderVolume == true) {
+            if (isFreeMutexLockSliderVolume) {
                 fixerVolumePosition(newValue.intValue());
             }
         }
