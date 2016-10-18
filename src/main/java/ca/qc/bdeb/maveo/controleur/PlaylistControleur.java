@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -45,6 +46,7 @@ public class PlaylistControleur {
         this.mainframe.addEventHandlerSavePlaylist(new MenuSavePlaylistEventHandler());
         this.mainframe.addEventHandlerPlayListSelected(new PlayListItemSelectedEventHandler());
         this.mainframe.addEventHandlerBoutonSuivant(new BoutonSuivantEventHandler());
+        this.mainframe.addEventHandlerBoutonPrecedent(new BoutonPrecedentEventHandler());
         mainframe.getListPlayList().setItems(listTitle);
         fileOpener = new FileOpener();
     }
@@ -156,33 +158,83 @@ public class PlaylistControleur {
 
         @Override
         public void handle(MouseEvent event) {
-
-            GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
-            if (gestionnaireMedia != null && gestionnaireMedia.enLecture()) {
-                gestionnaireMedia.arreter();
-            }
-
-            String mediaName = mainframe.getListPlayList().getSelectionModel().getSelectedItem();
-            Media media = playList.getMediaByName(mediaName);
-            gestionnaireMedia = GestionnaireFactory.createInstance(media, mainframe);
-            gestionnaireMedia.preparerMedia();
-            gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
-            mainframe.getBtnJouerPause().setDisable(false);
-            mainframe.getSliderProgression().setDisable(false);
+            effectuerActionsSelectionItemPlaylist();
         }
     }
 
     /**
-     * Évènement qui se déclenche lorsque on clique sur le bouton suivant
+     * Les actions à effecctuer lorsqu'un item a été sélectionné dans la playlist:
+     * 1. Arrête la lecture de média en cours, si c'est le cas
+     * 2. Prépare le nouveau média sélectionné
+     * 3. Joue le nouveau média sélectionné
+     * 4. Active le bouton Jouer/Pause
+     * 5. Active la barre de position
+     */
+    private void effectuerActionsSelectionItemPlaylist() {
+        GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+        if (gestionnaireMedia != null && gestionnaireMedia.enLecture()) {
+            gestionnaireMedia.arreter();
+        }
+
+        String mediaName = mainframe.getListPlayList().getSelectionModel().getSelectedItem();
+        Media media = playList.getMediaByName(mediaName);
+        gestionnaireMedia = GestionnaireFactory.createInstance(media, mainframe);
+        gestionnaireMedia.preparerMedia();
+        gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
+        mainframe.getBtnJouerPause().setDisable(false);
+        mainframe.getSliderProgression().setDisable(false);
+    }
+
+
+    /**
+     * Évènement qui se déclenche lorsque on clique sur le bouton suivant:
+     * 1. Vérifie où est rendu à la dans la playlist. Si on est rendu à la fin, enregistre qu'on doit sélectionner le
+     * premier élément de la liste. Sinon, enregistre qu'on doit sélectionner l'élément suivant.
+     * 2. Sélectionne l'élément approprié dans la playlist.
+     * 3. Appelle la méthode qui effectue les actions de sélection d'item dans playlist.
      */
     class BoutonSuivantEventHandler implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
-            int indiceSelectionne = mainframe.getListPlayList().getSelectionModel().getSelectedIndex();
-            mainframe.getListPlayList().getSelectionModel().select(indiceSelectionne + 1);
+            ListView<String> lvwPlaylist = mainframe.getListPlayList();
+            int indiceSelectionne = lvwPlaylist.getSelectionModel().getSelectedIndex();
+
+            // Par défaut, sélectionne une incrémentation de l'indice actuel
+            int nouveauIndiceASelectionner = indiceSelectionne + 1;
+
+            // Si l'indice de sélection est arrivé à la fin de la Playlist, sélectionne le premier item
+            if (indiceSelectionne >= lvwPlaylist.getItems().size() - 1) {
+                nouveauIndiceASelectionner = 0;
+            }
+            mainframe.getListPlayList().getSelectionModel().select(nouveauIndiceASelectionner);
+            effectuerActionsSelectionItemPlaylist();
         }
     }
 
+    /**
+     * Évènement qui se déclenche lorsque on clique sur le bouton précédent:
+     * 1. Vérifie où est rendu à la dans la playlist. Si on est rendu au debut, enregistre qu'on doit sélectionner le
+     * dernier élément de la liste. Sinon, enregistre qu'on doit sélectionner l'élément précédent.
+     * 2. Sélectionne l'élément approprié dans la playlist.
+     * 3. Appelle la méthode qui effectue les actions de sélection d'item dans playlist.
+     */
+    class BoutonPrecedentEventHandler implements EventHandler<ActionEvent> {
 
+        @Override
+        public void handle(ActionEvent event) {
+            ListView<String> lvwPlaylist = mainframe.getListPlayList();
+            int indiceSelectionne = lvwPlaylist.getSelectionModel().getSelectedIndex();
+
+            // Par défaut, sélectionne une décrementation de l'indice actuel
+            int nouveauIndiceASelectionner = indiceSelectionne - 1;
+
+            // Si l'indice de sélection est au début de la playlist, sélectionne le dernier élémnt
+            if (indiceSelectionne == 0) {
+                nouveauIndiceASelectionner = lvwPlaylist.getItems().size() - 1;
+            }
+            mainframe.getListPlayList().getSelectionModel().select(nouveauIndiceASelectionner);
+            effectuerActionsSelectionItemPlaylist();
+        }
+    }
 }
