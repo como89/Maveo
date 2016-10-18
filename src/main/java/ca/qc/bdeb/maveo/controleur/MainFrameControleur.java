@@ -70,7 +70,6 @@ public class MainFrameControleur {
         this.controleurLecteurMedia = lecteurMediaEventListener;
     }
 
-
     /**
      * Fixe la position du média en cours
      *
@@ -87,7 +86,9 @@ public class MainFrameControleur {
      */
     void fixerVolumePosition(int volumePourcentage) {
         if (isFreeMutexLockSliderVolume) {
+            isFreeMutexLockSliderVolume = false;
             GestionnaireFactory.getCurrentInstance().setVolume(volumePourcentage);
+            isFreeMutexLockSliderVolume = true;
         }
     }
 
@@ -112,61 +113,13 @@ public class MainFrameControleur {
                 isFreeMutexLockSliderVolume = true;
 
                 GestionnaireMedia gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
-
-                //mainFrame.getLabelNomChanson().setText(fichier.getName());
                 gestionnaireMedia.preparerMedia();
                 gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
-
-                // placerImageAlbum();
-
-
             }
-
         }
-
-
-        public void placerImageAlbum() {
-            /**   ID3v2 id3v2tag;
-             Mp3File file = null;
-             try {
-             file = new Mp3File(fichier.getAbsolutePath());
-             id3v2tag = file.getId3v2Tag();
-             if (id3v2tag != null) {
-             String mimeType = id3v2tag.getAlbumImageMimeType();
-             byte[] data = id3v2tag.getAlbumImage();
-             Image photoAlbum = null;
-             if (data != null) {
-             BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
-             photoAlbum = SwingFXUtils.toFXImage(image, null);
-             } else {
-             photoAlbum = new Image("file:res/noart.png");
-             }
-             mainFrame.setImageLblEcran(photoAlbum);
-             }
-             } catch (IOException e) {
-             e.printStackTrace();
-             } catch (UnsupportedTagException e) {
-             e.printStackTrace();
-             } catch (InvalidDataException e) {
-             e.printStackTrace();
-             }
-             }
-             */
-            /*Mp3File song = new Mp3File(fichier.);
-            if (song.hasId3v2Tag()){
-                ID3v2 id3v2tag = song.getId3v2Tag();
-                byte[] imageData = id3v2tag.getAlbumImage();
-                //converting the bytes to an image
-                BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageData));*/
-        }
-
     }
-
-
-
-
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton de Jouer/Pause
@@ -219,7 +172,9 @@ public class MainFrameControleur {
     class SliderVolumeChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            fixerVolumePosition(newValue.intValue());
+            if (isFreeMutexLockSliderVolume == true) {
+                fixerVolumePosition(newValue.intValue());
+            }
         }
     }
 

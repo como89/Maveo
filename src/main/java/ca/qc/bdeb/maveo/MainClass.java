@@ -4,6 +4,7 @@ import ca.qc.bdeb.maveo.controleur.LecteurMediaControleur;
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
+import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Application;
@@ -47,7 +48,11 @@ public class MainClass extends Application {
         FileOpener fileOpener = new FileOpener();
 
         MainFrameControleur mainFrameControleur = new MainFrameControleur();
+
         PlaylistControleur playlistControleur = new PlaylistControleur();
+        PlaylistIO playlistIO = new PlaylistIO();
+        playlistControleur.ajouterPlaylistIo(playlistIO);
+
         LecteurMediaControleur controleurLecteurMedia = new LecteurMediaControleur();
 
         mainFrameControleur.ajouterMainFrame(mainFrame);
