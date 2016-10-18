@@ -1,6 +1,7 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import javafx.application.Platform;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
@@ -33,12 +34,17 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
      * @param v           la position, en pourcentage. Ex. 0.15 est 15%
      */
     @Override
-    public void positionChanged(MediaPlayer mediaPlayer, float v) {
+    public void positionChanged(MediaPlayer mediaPlayer, final float v) {
         isFreeMutexLockSliderPosition = false;
-        double position = v;
-        double multiplier = 100;
-        mainFrame.getSliderProgression().setValue(position * multiplier);
-        isFreeMutexLockSliderPosition = true;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                double position = v;
+                double multiplier = 100;
+                mainFrame.getSliderProgression().setValue(position * multiplier);
+                isFreeMutexLockSliderPosition = true;
+            }
+        });
     }
 
     @Override

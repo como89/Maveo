@@ -172,7 +172,7 @@ public class MainFrameControleur {
     class SliderVolumeChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            if (isFreeMutexLockSliderVolume == true) {
+            if (isFreeMutexLockSliderVolume) {
                 fixerVolumePosition(newValue.intValue());
             }
         }
