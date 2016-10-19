@@ -104,7 +104,7 @@ public class PlaylistControleur {
     }
 
     /**
-     * Ouvre une fenêtre d'ouverture de fichier média que l'utilisateur peut utiliser pour
+     * Ouvre une fenêtre d'ouverture de fichier média que l'utilisateur peut utiliser pour ajouter un item à la playlist
      */
     private void ajouterAlaPlaylist() {
 
@@ -152,17 +152,6 @@ public class PlaylistControleur {
     }
 
     /**
-     * Évènement qui se déclenche lorsqu'on clique sur un item dans la playlist.
-     */
-    class PlayListItemSelectedEventHandler implements EventHandler<MouseEvent> {
-
-        @Override
-        public void handle(MouseEvent event) {
-            effectuerActionsSelectionItemPlaylist();
-        }
-    }
-
-    /**
      * Les actions à effecctuer lorsqu'un item a été sélectionné dans la playlist:
      * 1. Arrête la lecture de média en cours, si c'est le cas
      * 2. Prépare le nouveau média sélectionné
@@ -183,6 +172,17 @@ public class PlaylistControleur {
         gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
         mainframe.getBtnJouerPause().setDisable(false);
         mainframe.getSliderProgression().setDisable(false);
+    }
+
+    /**
+     * Évènement qui se déclenche lorsqu'on clique sur un item dans la playlist.
+     */
+    class PlayListItemSelectedEventHandler implements EventHandler<MouseEvent> {
+
+        @Override
+        public void handle(MouseEvent event) {
+            effectuerActionsSelectionItemPlaylist();
+        }
     }
 
 
