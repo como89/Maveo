@@ -111,7 +111,7 @@ public class MainFrameControleur {
             if (event.getEventType() == WindowEvent.WINDOW_CLOSE_REQUEST) {
                 GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
                 if (gestionnaireMedia != null) {
-                    Platform.exit();
+                    System.exit(0);
                 }
             }
         }
