@@ -8,9 +8,9 @@ import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -42,6 +42,7 @@ public class MainClass extends Application {
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
         stage.setMinHeight(MIN_HEGHT_STAGE);
         stage.setMinWidth(MIN_WIDTH_STAGE);
+        stage.getIcons().add(new Image(MainClass.class.getResourceAsStream("/Maveo_icon.png")));
 
         stage.show();
 

@@ -31,7 +31,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
 
     PixelWriter pixWriter;
     WritableImage writableImage;
-    ImageView videoView;
+    ImageView videoView; // L'endroit dans lequel la vidéo s'affiche
 
     private WritablePixelFormat<ByteBuffer> pixelFormat;
 
@@ -96,6 +96,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
         DefaultDirectMediaPlayer defaultDirectMediaPlayer = (DefaultDirectMediaPlayer) this.getMediaPlayer();
         BufferFormat bufferFormat = defaultDirectMediaPlayer.getBufferFormat();
+
 
         videoView.setFitHeight(newPaneHeight);
         videoView.setFitWidth(newPaneWidth);
