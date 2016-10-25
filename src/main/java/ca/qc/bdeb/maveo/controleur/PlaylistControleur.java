@@ -104,8 +104,16 @@ public class PlaylistControleur {
     }
 
     private void cacherPlaylist() {
-        mainframe.getPlaylistPane().setVisible(false);
-      //  mainframe.getMenuItemHidePlaylist().setText("Afficher Playlist");
+
+
+        if(mainframe.getPlaylistPane().isVisible()){
+            mainframe.getPlaylistPane().setVisible(false);
+            mainframe.getMenuItemHidePlaylist().setText("Show Playlist");
+        }
+        else{
+            mainframe.getPlaylistPane().setVisible(true);
+            mainframe.getMenuItemHidePlaylist().setText("Hide Playlist");
+        }
 
 
 
