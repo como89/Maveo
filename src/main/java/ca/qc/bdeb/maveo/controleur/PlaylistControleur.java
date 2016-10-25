@@ -47,6 +47,7 @@ public class PlaylistControleur {
         this.mainframe.addEventHandlerPlayListSelected(new PlayListItemSelectedEventHandler());
         this.mainframe.addEventHandlerBoutonSuivant(new BoutonSuivantEventHandler());
         this.mainframe.addEventHandlerBoutonPrecedent(new BoutonPrecedentEventHandler());
+        this.mainframe.addEventHandlerHidePlaylist(new MenuHidePlaylistEventHandler());
         mainframe.getListPlayList().setItems(listTitle);
         fileOpener = new FileOpener();
     }
@@ -94,6 +95,30 @@ public class PlaylistControleur {
         }
         return media;
     }
+    public class MenuHidePlaylistEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+           cacherPlaylist();
+        }
+    }
+
+    private void cacherPlaylist() {
+
+
+        if(mainframe.getPlaylistPane().isVisible()){
+            mainframe.getPlaylistPane().setVisible(false);
+            mainframe.getMenuItemHidePlaylist().setText("Show Playlist");
+        }
+        else{
+            mainframe.getPlaylistPane().setVisible(true);
+            mainframe.getMenuItemHidePlaylist().setText("Hide Playlist");
+        }
+
+
+
+    }
+
 
     class MenuAddToPlaylistEventHandler implements EventHandler<ActionEvent> {
 

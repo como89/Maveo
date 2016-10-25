@@ -47,6 +47,7 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerCloseWindow(new WindowCloseEventHandler());
 
 
+
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
         this.mainFrame.getSliderProgression().setDisable(true);
         this.mainFrame.getBtnArreter().setDisable(true);

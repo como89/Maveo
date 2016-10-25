@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
+import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -95,6 +96,17 @@ public class MainFrame {
     @FXML
     MenuItem menuItemSavePlaylist;
 
+    public MenuItem getMenuItemHidePlaylist() {
+        return menuItemHidePlaylist;
+    }
+
+    public void setMenuItemHidePlaylist(MenuItem menuItemHidePlaylist) {
+        this.menuItemHidePlaylist = menuItemHidePlaylist;
+    }
+
+    @FXML
+    MenuItem menuItemHidePlaylist;
+
     @FXML
     Label lblTxtVolume;
 
@@ -103,6 +115,14 @@ public class MainFrame {
 
     @FXML
     Label lblProgression;
+
+    public TitledPane getPlaylistPane() {
+        return playlistPane;
+    }
+
+    public void setPlaylistPane(TitledPane playlistPane) {
+        this.playlistPane = playlistPane;
+    }
 
     @FXML
     TitledPane playlistPane;
@@ -225,5 +245,10 @@ public class MainFrame {
 
     public void addEventHandlerCloseWindow(EventHandler<WindowEvent> closeWindowEvent) {
         getFenetre().setOnCloseRequest(closeWindowEvent);
+    }
+
+
+    public void addEventHandlerHidePlaylist(EventHandler<ActionEvent> MenuHidePlaylistEventHandler ) {
+        menuItemHidePlaylist.setOnAction(MenuHidePlaylistEventHandler);
     }
 }
