@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.geometry.Insets?>
 <BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" minHeight="500.0" minWidth="600.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.qc.bdeb.maveo.vue.MainFrame">
    <top>
       <MenuBar id="menuBarFenetre" fx:id="menuBar" BorderPane.alignment="CENTER">
@@ -22,13 +21,17 @@
           <Menu id="menuItemFile" fx:id="menuItemFile" mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="menuItemFileOpen" mnemonicParsing="false" text="Open" />
-                <MenuItem fx:id="menuItemCreatePlaylist" mnemonicParsing="false" text="Create a playlist" />
-                <MenuItem fx:id="menuItemOpenPlaylist" mnemonicParsing="false" text="Open Playlist" />
-                <MenuItem fx:id="menuItemAddToPlaylist" mnemonicParsing="false" text="Add to Playlist" />
-                <MenuItem fx:id="menuItemSavePlaylist" mnemonicParsing="false" text="Save Playlist" />
               <MenuItem id="menuItemFileClose" fx:id="menuItemFileClose" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Playlist">
+              <items>
+                <MenuItem fx:id="menuItemOpenPlaylist" mnemonicParsing="false" text="Open Playlist" />
+                <MenuItem fx:id="menuItemAddToPlaylist" mnemonicParsing="false" text="Add to Playlist" />
+                <MenuItem fx:id="menuItemSavePlaylist" mnemonicParsing="false" text="Save Playlist" />
+                  <MenuItem fx:id="menuItemHidePlaylist" mnemonicParsing="false" text="Hide Playlist" />
+              </items>
+            </Menu>
           <Menu id="menuItemEdit" fx:id="menuItemEdit" mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem id="menuItemEditDelete" fx:id="menuItemEditDelete" mnemonicParsing="false" text="Delete" />
@@ -52,103 +55,81 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <ListView fx:id="listviewPlaylist" prefHeight="350.0" prefWidth="200.0"/>
+                                <ListView fx:id="listviewPlaylist" prefHeight="350.0" prefWidth="200.0" />
                             </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0"/>
+                <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0" />
             </children>
             <cursor>
-                <Cursor fx:constant="DEFAULT"/>
+                <Cursor fx:constant="DEFAULT" />
             </cursor>
         </Pane>
     </center>
    <bottom>
        <BorderPane fx:id="panelControleur">
            <padding>
-               <Insets top="25" right="25" bottom="25" left="25"/>
+               <Insets bottom="25" left="25" right="25" top="25" />
            </padding>
            <left>
                <BorderPane>
                    <padding>
-                       <Insets right="25" left="5"/>
+                       <Insets left="5" right="25" />
                    </padding>
                    <left>
-                       <Button fx:id="boutonPlayPause"
-                               mnemonicParsing="false"
-                               prefHeight="50.0" prefWidth="50.0"
-                               styleClass="buttonPlay"
-                               stylesheets="@StyleBoutons.css">
+                       <Button fx:id="boutonPlayPause" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="buttonPlay" stylesheets="@StyleBoutons.css">
                            <cursor>
-                               <Cursor fx:constant="HAND"/>
+                               <Cursor fx:constant="HAND" />
                            </cursor>
                        </Button>
                    </left>
                    <center>
                        <BorderPane>
                            <padding>
-                               <Insets right="5" left="5"/>
+                               <Insets left="5" right="5" />
                            </padding>
                            <left>
                                <Pane>
                                    <padding>
-                                       <Insets left="5"/>
+                                       <Insets left="5" />
                                    </padding>
-                                   <Button fx:id="boutonPrecedent"
-                                           mnemonicParsing="false"
-                                           prefHeight="50.0" prefWidth="50.0"
-                                           styleClass="buttonPrecedent"
-                                           stylesheets="@StyleBoutons.css">
+                                   <Button fx:id="boutonPrecedent" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="buttonPrecedent" stylesheets="@StyleBoutons.css">
                                        <cursor>
-                                           <Cursor fx:constant="HAND"/>
+                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                    </Button>
                                </Pane>
                            </left>
                            <right>
-                               <Button fx:id="boutonArreter"
-                                       mnemonicParsing="false"
-                                       prefHeight="50.0" prefWidth="50.0"
-                                       styleClass="buttonStop"
-                                       stylesheets="@StyleBoutons.css">
+                               <Button fx:id="boutonArreter" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="buttonStop" stylesheets="@StyleBoutons.css">
                                    <cursor>
-                                       <Cursor fx:constant="HAND"/>
+                                       <Cursor fx:constant="HAND" />
                                    </cursor>
                                </Button>
                            </right>
                        </BorderPane>
                    </center>
                    <right>
-                       <Button fx:id="boutonSuivant"
-                               mnemonicParsing="false"
-                               prefHeight="50.0" prefWidth="50.0"
-                               styleClass="buttonNext"
-                               stylesheets="@StyleBoutons.css">
+                       <Button fx:id="boutonSuivant" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="buttonNext" stylesheets="@StyleBoutons.css">
                            <cursor>
-                               <Cursor fx:constant="HAND"/>
+                               <Cursor fx:constant="HAND" />
                            </cursor>
                        </Button>
                    </right>
                </BorderPane>
            </left>
            <center>
-               <Slider fx:id="sliderProgression"
-                       prefHeight="14.0"
-                       styleClass="slider"
-                       stylesheets="StyleBoutons.css">
+               <Slider fx:id="sliderProgression" prefHeight="14.0" styleClass="slider" stylesheets="StyleBoutons.css">
                    <cursor>
-                       <Cursor fx:constant="H_RESIZE"/>
+                       <Cursor fx:constant="H_RESIZE" />
                    </cursor>
                </Slider>
            </center>
            <right>
-               <Slider fx:id="sliderVolume"
-                       orientation="VERTICAL"
-                       prefHeight="42.0"
-                       prefWidth="14.0">
+               <Slider fx:id="sliderVolume" orientation="VERTICAL" prefHeight="42.0" prefWidth="14.0">
                  <cursor>
-                     <Cursor fx:constant="V_RESIZE"/>
+                     <Cursor fx:constant="V_RESIZE" />
                  </cursor>
              </Slider>
            </right>
