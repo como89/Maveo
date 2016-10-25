@@ -8,6 +8,7 @@ import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +27,7 @@ public class MainClass extends Application {
     }
 
     public void start(Stage stage) throws Exception {
+
         //chargement des libs
         UtilLib.chargerLibSysteme();
 

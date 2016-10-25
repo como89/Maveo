@@ -37,6 +37,11 @@ public abstract class GestionnaireMedia {
     public abstract void arreter();
 
     /**
+     * Méthide qui permet de vider les ressources du média. (Buffer)
+     */
+    public abstract void release();
+
+    /**
      * Méthode qui permet de mettre en pause la musique.
      */
     public abstract void pause();

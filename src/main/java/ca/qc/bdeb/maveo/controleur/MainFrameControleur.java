@@ -5,10 +5,12 @@ import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.vue.MainFrame;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 
 import java.io.*;
 
@@ -42,6 +44,7 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
+        this.mainFrame.addEventHandlerCloseWindow(new WindowCloseEventHandler());
 
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
@@ -99,6 +102,19 @@ public class MainFrameControleur {
             media = new Media(file.getName(), file.getAbsolutePath());
         }
         return media;
+    }
+
+    class WindowCloseEventHandler implements EventHandler<WindowEvent> {
+
+        @Override
+        public void handle(WindowEvent event) {
+            if (event.getEventType() == WindowEvent.WINDOW_CLOSE_REQUEST) {
+                GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+                if (gestionnaireMedia != null) {
+                    Platform.exit();
+                }
+            }
+        }
     }
 
     /**

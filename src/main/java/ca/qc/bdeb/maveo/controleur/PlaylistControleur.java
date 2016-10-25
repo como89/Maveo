@@ -164,14 +164,15 @@ public class PlaylistControleur {
         if (gestionnaireMedia != null && gestionnaireMedia.enLecture()) {
             gestionnaireMedia.arreter();
         }
-
         String mediaName = mainframe.getListPlayList().getSelectionModel().getSelectedItem();
-        Media media = playList.getMediaByName(mediaName);
-        gestionnaireMedia = GestionnaireFactory.createInstance(media, mainframe);
-        gestionnaireMedia.preparerMedia();
-        gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
-        mainframe.getBtnJouerPause().setDisable(false);
-        mainframe.getSliderProgression().setDisable(false);
+        if (playList != null && mediaName != null) {
+            Media media = playList.getMediaByName(mediaName);
+            gestionnaireMedia = GestionnaireFactory.createInstance(media, mainframe);
+            gestionnaireMedia.preparerMedia();
+            gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
+            mainframe.getBtnJouerPause().setDisable(false);
+            mainframe.getSliderProgression().setDisable(false);
+        }
     }
 
     /**

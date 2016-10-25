@@ -2,6 +2,7 @@ package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import ca.qc.bdeb.maveo.vue.ComposantVideo;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 
 /**
@@ -39,6 +40,16 @@ class GestionnaireVideo extends GestionnaireMedia {
     public void arreter() {
         embeddedMediaPlayer.stop();
         composantVideo.clearPixelWriter();
+    }
+
+    /**
+     * Méthode qui permet de vider les ressources du média. (Buffer)
+     */
+    @Override
+    public void release() {
+        MediaPlayerFactory mediaPlayerFactory = composantVideo.getMediaPlayerFactory();
+        composantVideo.release();
+        mediaPlayerFactory.release();
     }
 
     @Override

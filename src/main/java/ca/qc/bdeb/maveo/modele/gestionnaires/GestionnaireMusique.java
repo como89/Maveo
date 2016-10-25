@@ -3,6 +3,7 @@ package ca.qc.bdeb.maveo.modele.gestionnaires;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 
 /**
  * Cette classe permet de pouvoir gérer une musique (Jouer, pause, stop, volume et la position).
@@ -12,11 +13,12 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 class GestionnaireMusique extends GestionnaireMedia {
 
     private MediaPlayer mediaPlayer;
+    private AudioMediaPlayerComponent audioEcouteur;
 
     private String cheminFichier;
 
     public GestionnaireMusique() {
-        AudioMediaPlayerComponent audioEcouteur = new AudioMediaPlayerComponent();
+        audioEcouteur = new AudioMediaPlayerComponent();
         mediaPlayer = audioEcouteur.getMediaPlayer();
     }
 
@@ -52,6 +54,15 @@ class GestionnaireMusique extends GestionnaireMedia {
      */
     public void arreter() {
         mediaPlayer.stop();
+    }
+
+    /**
+     * Méthide qui permet de vider les ressources du média. (Buffer)
+     */
+    public void release() {
+        MediaPlayerFactory mediaPlayerFactory = audioEcouteur.getMediaPlayerFactory();
+        audioEcouteur.release();
+        mediaPlayerFactory.release();
     }
 
     /**

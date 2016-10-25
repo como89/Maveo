@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 
 /**
@@ -220,5 +221,9 @@ public class MainFrame {
 
     public void addEventHandlerBoutonPrecedent(EventHandler<ActionEvent> boutonPrecedentActionEvent) {
         boutonPrecedent.setOnAction(boutonPrecedentActionEvent);
+    }
+
+    public void addEventHandlerCloseWindow(EventHandler<WindowEvent> closeWindowEvent) {
+        getFenetre().setOnCloseRequest(closeWindowEvent);
     }
 }
