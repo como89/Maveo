@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
@@ -187,10 +188,14 @@ public class MainFrame {
     public void actualiseEcranPane(ImageView imageVideo) {
 
         if (imageVideo != null) {
+            panelEcran.getStyleClass().remove("paneEcranMusique");
+            panelEcran.getStyleClass().add("paneEcranVideo");
             panelEcran.getChildren().clear();
             panelEcran.getChildren().add(imageVideo);
             panelEcran.getChildren().add(playlistPane);
         } else {
+            panelEcran.getStyleClass().remove("paneEcranVideo");
+            panelEcran.getStyleClass().add("paneEcranMusique");
             panelEcran.getChildren().clear();
             panelEcran.getChildren().add(playlistPane);
         }

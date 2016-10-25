@@ -95,26 +95,25 @@ public class PlaylistControleur {
         }
         return media;
     }
+
     public class MenuHidePlaylistEventHandler implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
-           cacherPlaylist();
+            cacherPlaylist();
         }
     }
 
     private void cacherPlaylist() {
 
 
-        if(mainframe.getPlaylistPane().isVisible()){
+        if (mainframe.getPlaylistPane().isVisible()) {
             mainframe.getPlaylistPane().setVisible(false);
             mainframe.getMenuItemHidePlaylist().setText("Show Playlist");
-        }
-        else{
+        } else {
             mainframe.getPlaylistPane().setVisible(true);
             mainframe.getMenuItemHidePlaylist().setText("Hide Playlist");
         }
-
 
 
     }
@@ -173,6 +172,8 @@ public class PlaylistControleur {
             for (Media media : playList.getListeMedia()) {
                 listTitle.add(media.getTitre());
             }
+            mainframe.getBoutonPrecedent().setDisable(false);
+            mainframe.getBoutonSuivant().setDisable(false);
         }
     }
 

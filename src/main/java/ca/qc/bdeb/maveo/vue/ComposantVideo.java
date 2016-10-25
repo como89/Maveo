@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import uk.co.caprica.vlcj.component.DirectMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.direct.BufferFormat;
 import uk.co.caprica.vlcj.player.direct.BufferFormatCallback;
+import uk.co.caprica.vlcj.player.direct.DefaultDirectMediaPlayer;
 import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 import uk.co.caprica.vlcj.player.direct.format.RV32BufferFormat;
 
@@ -40,7 +41,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         writableImage = new WritableImage((int) videoPane.getWidth(), (int) videoPane.getHeight());
         videoView = new ImageView(writableImage);
         videoView.setSmooth(true);
-        //  videoView.setPreserveRatio(true);
+        // videoView.setPreserveRatio(true);
         videoBufferCallBack.videoPane = videoPane;
         videoPane.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -91,28 +92,24 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         });
     }
 
-    void fitImageWithSize(final float originalWidth, final float originalHeight) {
-                Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
+    void fitImageWithSize(float newPaneWidth, float newPaneHeight) {
+        Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
+        DefaultDirectMediaPlayer defaultDirectMediaPlayer = (DefaultDirectMediaPlayer) this.getMediaPlayer();
+        BufferFormat bufferFormat = defaultDirectMediaPlayer.getBufferFormat();
 
-                float boundWidth = (float) videoBounds.getWidth();
-                float boundHeight = (float) videoBounds.getHeight();
-                float newWidth = originalWidth;
-                float newHeight = originalHeight;
+        videoView.setFitHeight(newPaneHeight);
+        videoView.setFitWidth(newPaneWidth);
 
-                if (originalWidth > boundWidth) {
-                    newWidth = boundWidth;
-                    newHeight = (newWidth * originalHeight) / originalWidth;
-                }
+        double fitWidth = videoView.getFitWidth();
 
-                if (newHeight > boundHeight) {
-                    newHeight = boundHeight;
-                    newWidth = (newHeight * originalWidth) / originalHeight;
-                }
+        float widthEmpty = (float) (newPaneWidth - videoView.getFitWidth());
+        float heightEmpty = (float) (newPaneHeight - videoView.getFitHeight());
 
-        videoView.setFitHeight(newHeight);
-        videoView.setFitWidth(newWidth);
-        videoView.setX(0);
-        videoView.setY(0);
+        float xPosition = widthEmpty / 2;
+        float yPosition = heightEmpty / 2;
+
+        videoView.setX(xPosition);
+        videoView.setY(yPosition);
     }
 
     PixelWriter getPixWriter() {

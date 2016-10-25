@@ -1,8 +1,8 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import ca.qc.bdeb.maveo.vue.ComposantVideo;
+import uk.co.caprica.vlcj.player.DefaultMediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
-import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 
 /**
@@ -47,9 +47,8 @@ class GestionnaireVideo extends GestionnaireMedia {
      */
     @Override
     public void release() {
-        MediaPlayerFactory mediaPlayerFactory = composantVideo.getMediaPlayerFactory();
-        composantVideo.release();
-        mediaPlayerFactory.release();
+        DefaultMediaPlayer defaultMediaPlayer = (DefaultMediaPlayer) embeddedMediaPlayer;
+        defaultMediaPlayer.release();
     }
 
     @Override
