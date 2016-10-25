@@ -18,8 +18,8 @@ import java.net.URL;
 
 public class MainClass extends Application {
 
-    public final double MIN_HEGHT_STAGE = 200;
-    public final double MIN_WIDTH_STAGE = 400;
+    public final double MIN_HEGHT_STAGE = 520;
+    public final double MIN_WIDTH_STAGE = 630;
 
 
     public static void main(String[] args) {
