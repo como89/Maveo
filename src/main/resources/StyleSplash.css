@@ -1,0 +1,14 @@
+.splashLayout {
+    -fx-padding: 5;
+    -fx-background-color: #ffffff;
+    -fx-border-width: 5;
+    -fx-border-color: linear-gradient(to bottom, #ff362e, derive(#0dbcd2, 50%));
+}
+
+.lblTitle {
+    -fx-padding: 0 145;
+    -fx-font-size: 22pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: Black;
+    -fx-opacity: 0.6;
+}

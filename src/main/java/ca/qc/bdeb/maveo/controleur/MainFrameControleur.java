@@ -115,7 +115,7 @@ public class MainFrameControleur {
     }
 
     /**
-     * Terminne l'application au complet, en libérant tous les threads et
+     * Terminne l'application au complet, en libérant tous les threads et les buffers
      */
     void terminerProgramme() {
         GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
