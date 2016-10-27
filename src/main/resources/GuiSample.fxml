@@ -21,7 +21,8 @@
           <Menu id="menuItemFile" fx:id="menuItemFile" mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="menuItemFileOpen" mnemonicParsing="false" text="Open" />
-              <MenuItem id="menuItemFileClose" fx:id="menuItemFileClose" mnemonicParsing="false" text="Close" />
+                <MenuItem id="menuItemFileClose" fx:id="menuItemFileClose" mnemonicParsing="false" text="Close"
+                          visible="false"/>
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Playlist">
@@ -32,14 +33,14 @@
                   <MenuItem fx:id="menuItemHidePlaylist" mnemonicParsing="false" text="Hide Playlist" />
               </items>
             </Menu>
-          <Menu id="menuItemEdit" fx:id="menuItemEdit" mnemonicParsing="false" text="Edit">
+            <Menu id="menuItemEdit" fx:id="menuItemEdit" mnemonicParsing="false" text="Edit" visible="false">
             <items>
               <MenuItem id="menuItemEditDelete" fx:id="menuItemEditDelete" mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu id="menuItemHelp" fx:id="menuItemHelp" mnemonicParsing="false" text="Help">
+            <Menu id="menuItemHelp" fx:id="menuItemHelp" mnemonicParsing="false" text="Help" visible="false">
             <items>
-              <MenuItem id="menuItemHelpAbout" fx:id="menuItemHelpAbout" mnemonicParsing="false" text="About" />
+                <MenuItem id="menuItemHelpAbout" fx:id="menuItemHelpAbout" mnemonicParsing="false" text="About"/>
             </items>
           </Menu>
         </menus>

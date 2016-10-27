@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
+import ca.qc.bdeb.maveo.MainClass;
 import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -398,7 +399,6 @@ public class MainFrame {
 
     public void setImageLblEcran(Image image) {
         lblNomMedia.setGraphic(new ImageView(image));
-
     }
 
     public void actualiseEcranPane(ImageView imageVideo) {
@@ -413,7 +413,12 @@ public class MainFrame {
             panelEcran.getStyleClass().remove("paneEcranVideo");
             panelEcran.getStyleClass().add("paneEcranMusique");
             panelEcran.getChildren().clear();
+            panelEcran.getChildren().add(lblNomMedia);
             panelEcran.getChildren().add(playlistPane);
+            ImageView imageView = new ImageView(MainClass.LOGO_SOFTWARE);
+            imageView.setFitHeight(200);
+            imageView.setFitWidth(200);
+            lblNomMedia.setGraphic(imageView);
         }
 
         fenetrePrincipale.setCenter(panelEcran);
