@@ -73,6 +73,7 @@ public class SplashScreen {
      */
     public void showSplash() {
         splashFrame.setVisible(true);
+        splashFrame.toFront();
 
         /*
          * On applique ici un effet de fade sur le layout du splashscreen
