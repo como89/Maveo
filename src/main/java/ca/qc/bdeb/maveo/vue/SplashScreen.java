@@ -38,8 +38,9 @@ public class SplashScreen {
      */
     public SplashScreen() {
         splashImage = new ImageView(MainClass.LOGO_SOFTWARE);
-        splashImage.setFitWidth(MainClass.MIN_WIDTH_STAGE - 200);
+        splashImage.setFitWidth(447);
         splashImage.setFitHeight(MainClass.MIN_HEIGHT_STAGE - 200);
+        splashImage.setPreserveRatio(true);
 
         lblTitle = new Label(MainFrame.STR_NOM_PROGRAMME);
         lblTitle.setAlignment(Pos.CENTER);
@@ -48,6 +49,7 @@ public class SplashScreen {
         splashLayout = new VBox();
         splashLayout.getStylesheets().add("/StyleSplash.css");
         splashLayout.getStyleClass().add("splashLayout");
+        splashLayout.setAlignment(Pos.CENTER);
         splashLayout.resize(MainClass.MIN_WIDTH_STAGE, MainClass.MIN_HEIGHT_STAGE);
         splashLayout.getChildren().addAll(splashImage, lblTitle);
         splashLayout.setEffect(new DropShadow());
@@ -56,7 +58,7 @@ public class SplashScreen {
         splashFrame.setSize(MainClass.MIN_WIDTH_STAGE - 160, MainClass.MIN_HEIGHT_STAGE - 120);
         splashFrame.setLocationRelativeTo(null);
         splashFrame.setType(Window.Type.POPUP);
-        splashFrame.setUndecorated(true);
+        //splashFrame.setUndecorated(true);
 
         //On utilise un JFXPanel pour l'intercompatibilité entre le frame et le layout (Javafx)
         JFXPanel fxPanel = new JFXPanel();
