@@ -1,15 +1,18 @@
 package ca.qc.bdeb.maveo.vue;
 
+import ca.qc.bdeb.maveo.modele.playlist.Playlist;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -251,188 +254,253 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void getMenuItemFile() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemFile();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(0));
     }
 
     @Test
     public void setMenuItemFile() throws Exception {
-
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemFile(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemFile());
 
     }
 
     @Test
     public void getMenuItemFileOpen() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemFileOpen();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(0).getItems().get(0));
     }
 
     @Test
     public void setMenuItemFileOpen() throws Exception {
-
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemFileOpen(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemFileOpen());
     }
 
     @Test
     public void getMenuItemEdit() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemEdit();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(2));
     }
 
     @Test
     public void setMenuItemEdit() throws Exception {
-
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemEdit(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemEdit());
     }
 
     @Test
     public void getMenuItemHelp() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemHelp();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(3));
     }
 
     @Test
     public void setMenuItemHelp() throws Exception {
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemHelp(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemHelp());
 
     }
 
     @Test
     public void getMenuItemFileClose() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemFileClose();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(0).getItems().get(1));
     }
 
     @Test
     public void setMenuItemFileClose() throws Exception {
-
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemFileClose(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemFileClose());
     }
 
     @Test
     public void getMenuItemEditDelete() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemEditDelete();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(2).getItems().get(0));
     }
 
     @Test
     public void setMenuItemEditDelete() throws Exception {
-
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemEditDelete(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemEditDelete());
     }
 
     @Test
     public void getMenuItemHelpAbout() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemHelp();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(3).getItems().get(1));
     }
 
     @Test
     public void setMenuItemHelpAbout() throws Exception {
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemHelpAbout(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemHelpAbout());
 
     }
 
     @Test
     public void getMenuItemOpenPlaylist() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemOpenPlaylist();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(1).getItems().get(0));
     }
 
     @Test
     public void setMenuItemOpenPlaylist() throws Exception {
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemOpenPlaylist(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemOpenPlaylist());
 
     }
 
     @Test
     public void getMenuItemAddToPlaylist() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemAddToPlaylist();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(1).getItems().get(1));
     }
 
     @Test
     public void setMenuItemAddToPlaylist() throws Exception {
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemAddToPlaylist(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemAddToPlaylist());
 
     }
 
     @Test
     public void getMenuItemSavePlaylist() throws Exception {
-
+        MenuItem menuItemTest = testFrame.getMenuItemSavePlaylist();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(1).getItems().get(2));
     }
 
     @Test
     public void setMenuItemSavePlaylist() throws Exception {
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemSavePlaylist(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemSavePlaylist());
 
     }
 
     @Test
     public void getLblTxtVolume() throws Exception {
+        Label labelTest = testFrame.getLblTxtVolume();
+        Assert.assertEquals(labelTest, testFrame.getLblTxtVolume());
 
     }
 
     @Test
     public void setLblTxtVolume() throws Exception {
+        Label labelTest = new Label("TEST");
+        testFrame.setLblTxtVolume(labelTest);
+        Assert.assertEquals(labelTest, testFrame.getLblTxtVolume());
 
     }
 
     @Test
     public void getLblProgression() throws Exception {
-
+        Label labelTest = testFrame.getLblProgression();
+        Assert.assertEquals(labelTest, testFrame.getLblProgression());
     }
 
     @Test
     public void setLblProgression() throws Exception {
-
+        Label labelTest = new Label("TEST");
+        testFrame.setLblProgression(labelTest);
+        Assert.assertEquals(labelTest, testFrame.getLblProgression());
     }
 
     @Test
     public void getListviewPlaylist() throws Exception {
+        ListView listViewTest = testFrame.getListviewPlaylist();
+        Assert.assertEquals(listViewTest, testFrame.getListviewPlaylist());
 
     }
 
     @Test
     public void setListviewPlaylist() throws Exception {
+        ListView listViewTest = new ListView(null);
+        testFrame.setListviewPlaylist(listViewTest);
 
     }
 
     @Test
     public void setMenuItemHidePlaylist() throws Exception {
-
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.setMenuItemHidePlaylist(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemHidePlaylist());
     }
 
     @Test
     public void getPlaylistPane() throws Exception {
-
+        TitledPane playlistPane = testFrame.getPlaylistPane();
+        Assert.assertEquals(playlistPane, testFrame.getPlaylistPane());
     }
 
     @Test
     public void setPlaylistPane() throws Exception {
+        TitledPane titledPaneTest = new TitledPane("TESTING", null);
+        testFrame.setPlaylistPane(titledPaneTest);
+        Assert.assertEquals(titledPaneTest, testFrame.getPlaylistPane());
 
     }
 
     @Test
     public void getFenetre() throws Exception {
+        Window windowTest = testFrame.getFenetre();
+        Assert.assertNotNull(windowTest);
 
     }
 
     @Test
     public void getBtnJouerPause() throws Exception {
+        Button boutonTest = testFrame.getBoutonPlayPause();
+        Assert.assertEquals(boutonTest, testFrame.getBoutonPlayPause());
 
     }
 
     @Test
     public void getBtnArreter() throws Exception {
-
+        Button boutonTest = testFrame.getBtnArreter();
+        Assert.assertEquals(boutonTest, testFrame.getBoutonArreter());
     }
 
     @Test
     public void getBoutonPrecedent() throws Exception {
-
+        Button boutonTest = testFrame.getBoutonPrecedent();
+        Assert.assertEquals(boutonTest, testFrame.getBoutonPrecedent());
     }
 
     @Test
     public void getBoutonSuivant() throws Exception {
-
+        Button boutonTest = testFrame.getBoutonSuivant();
+        Assert.assertEquals(boutonTest, testFrame.getBoutonSuivant());
     }
 
     @Test
     public void getPanelEcran() throws Exception {
-
+        Pane panelTest = testFrame.getPanelEcran();
+        Assert.assertEquals(panelTest, testFrame.getPanelEcran());
     }
 
     @Test
     public void getSliderProgression() throws Exception {
+        Slider sliderTest = testFrame.getSliderProgression();
+        Assert.assertEquals(sliderTest, testFrame.getSliderProgression());
 
     }
 
     @Test
     public void getSliderVolume() throws Exception {
 
+        Slider sliderTest = testFrame.getSliderVolume();
+        Assert.assertEquals(sliderTest, testFrame.getSliderVolume());
     }
 
     @Test
@@ -442,16 +510,22 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void getLblNomMedia() throws Exception {
-
+        Label labelTest = testFrame.getLblNomMedia();
+        Assert.assertEquals(labelTest, testFrame.getLblNomMedia());
     }
 
     @Test
     public void setLblNomMedia() throws Exception {
-
+        Label labelTest = new Label("TEST");
+        testFrame.setLblNomMedia(labelTest);
+        Assert.assertEquals(labelTest, testFrame.getLblNomMedia());
     }
 
     @Test
     public void setImageLblEcran() throws Exception {
+        Image image = new Image("sample.jpg");
+        testFrame.setImageLblEcran(image);
+       // Assert.assertNotNull();
 
     }
 
