@@ -47,7 +47,6 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerCloseWindow(new WindowCloseEventHandler());
 
 
-
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
         this.mainFrame.getSliderProgression().setDisable(true);
         this.mainFrame.getBtnArreter().setDisable(true);
@@ -110,11 +109,18 @@ public class MainFrameControleur {
         @Override
         public void handle(WindowEvent event) {
             if (event.getEventType() == WindowEvent.WINDOW_CLOSE_REQUEST) {
-                GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
-                if (gestionnaireMedia != null) {
-                    System.exit(0);
-                }
+                terminerProgramme();
             }
+        }
+    }
+
+    /**
+     * Terminne l'application au complet, en libérant tous les threads et
+     */
+    void terminerProgramme() {
+        GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+        if (gestionnaireMedia != null) {
+            gestionnaireMedia.release();
         }
     }
 

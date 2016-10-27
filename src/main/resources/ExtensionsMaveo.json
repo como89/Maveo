@@ -23,8 +23,8 @@
       "Extensions": [
         "*.mp4",
         "*.wmv",
-        "*.mov",
-        "*.mkv"
+        "*.mkv",
+        "*.mov"
       ]
     }
   ],

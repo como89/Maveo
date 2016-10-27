@@ -49,7 +49,7 @@
       </MenuBar>
    </top>
     <center>
-        <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0">
+        <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" stylesheets="@StylePane.css">
             <children>
                 <TitledPane fx:id="playlistPane" prefHeight="350.0" prefWidth="202.0" text="Playlist">
                     <content>
