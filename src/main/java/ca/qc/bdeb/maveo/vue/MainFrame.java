@@ -101,6 +101,222 @@ public class MainFrame {
         return menuItemHidePlaylist;
     }
 
+    public static String getStrMenuItemLecture() {
+        return STR_MENU_ITEM_LECTURE;
+    }
+
+    public static String getStrMenuItemAudio() {
+        return STR_MENU_ITEM_AUDIO;
+    }
+
+    public static String getStrMenuItemVideo() {
+        return STR_MENU_ITEM_VIDEO;
+    }
+
+    public static String getStrMenuItemSoustitres() {
+        return STR_MENU_ITEM_SOUSTITRES;
+    }
+
+    public static String getStrMenuItemOutils() {
+        return STR_MENU_ITEM_OUTILS;
+    }
+
+    public static String getStrMenuItemVue() {
+        return STR_MENU_ITEM_VUE;
+    }
+
+    public static String getStrMenuItemAide() {
+        return STR_MENU_ITEM_AIDE;
+    }
+
+    public static String getStrNomProgramme() {
+        return STR_NOM_PROGRAMME;
+    }
+
+    public String getSTR_MENU_ITEM_MEDIA() {
+        return STR_MENU_ITEM_MEDIA;
+    }
+
+    public String getSTR_MEDIA_OPTION_OUVRIR() {
+        return STR_MEDIA_OPTION_OUVRIR;
+    }
+
+    public static String getStrMediaOptionOuvrirplusieurs() {
+        return STR_MEDIA_OPTION_OUVRIRPLUSIEURS;
+    }
+
+    public static String getStrMediaOptionEnregistrerlistedelecture() {
+        return STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE;
+    }
+
+    public static String getStrMediaOptionQuitter() {
+        return STR_MEDIA_OPTION_QUITTER;
+    }
+
+    public Button getBoutonPlayPause() {
+        return boutonPlayPause;
+    }
+
+    public void setBoutonPlayPause(Button boutonPlayPause) {
+        this.boutonPlayPause = boutonPlayPause;
+    }
+
+    public Button getBoutonArreter() {
+        return boutonArreter;
+    }
+
+    public void setBoutonArreter(Button boutonArreter) {
+        this.boutonArreter = boutonArreter;
+    }
+
+    public void setBoutonPrecedent(Button boutonPrecedent) {
+        this.boutonPrecedent = boutonPrecedent;
+    }
+
+    public void setBoutonSuivant(Button boutonSuivant) {
+        this.boutonSuivant = boutonSuivant;
+    }
+
+    public void setSliderProgression(Slider sliderProgression) {
+        this.sliderProgression = sliderProgression;
+    }
+
+    public void setSliderVolume(Slider sliderVolume) {
+        this.sliderVolume = sliderVolume;
+    }
+
+    public Pane getPanelControleur() {
+        return panelControleur;
+    }
+
+    public void setPanelControleur(Pane panelControleur) {
+        this.panelControleur = panelControleur;
+    }
+
+    public void setPanelEcran(Pane panelEcran) {
+        this.panelEcran = panelEcran;
+    }
+
+    public BorderPane getFenetrePrincipale() {
+        return fenetrePrincipale;
+    }
+
+    public void setFenetrePrincipale(BorderPane fenetrePrincipale) {
+        this.fenetrePrincipale = fenetrePrincipale;
+    }
+
+    public MenuBar getMenuBar() {
+        return menuBar;
+    }
+
+    public void setMenuBar(MenuBar menuBar) {
+        this.menuBar = menuBar;
+    }
+
+    public MenuItem getMenuItemFile() {
+        return menuItemFile;
+    }
+
+    public void setMenuItemFile(MenuItem menuItemFile) {
+        this.menuItemFile = menuItemFile;
+    }
+
+    public MenuItem getMenuItemFileOpen() {
+        return menuItemFileOpen;
+    }
+
+    public void setMenuItemFileOpen(MenuItem menuItemFileOpen) {
+        this.menuItemFileOpen = menuItemFileOpen;
+    }
+
+    public MenuItem getMenuItemEdit() {
+        return menuItemEdit;
+    }
+
+    public void setMenuItemEdit(MenuItem menuItemEdit) {
+        this.menuItemEdit = menuItemEdit;
+    }
+
+    public MenuItem getMenuItemHelp() {
+        return menuItemHelp;
+    }
+
+    public void setMenuItemHelp(MenuItem menuItemHelp) {
+        this.menuItemHelp = menuItemHelp;
+    }
+
+    public MenuItem getMenuItemFileClose() {
+        return menuItemFileClose;
+    }
+
+    public void setMenuItemFileClose(MenuItem menuItemFileClose) {
+        this.menuItemFileClose = menuItemFileClose;
+    }
+
+    public MenuItem getMenuItemEditDelete() {
+        return menuItemEditDelete;
+    }
+
+    public void setMenuItemEditDelete(MenuItem menuItemEditDelete) {
+        this.menuItemEditDelete = menuItemEditDelete;
+    }
+
+    public MenuItem getMenuItemHelpAbout() {
+        return menuItemHelpAbout;
+    }
+
+    public void setMenuItemHelpAbout(MenuItem menuItemHelpAbout) {
+        this.menuItemHelpAbout = menuItemHelpAbout;
+    }
+
+    public MenuItem getMenuItemOpenPlaylist() {
+        return menuItemOpenPlaylist;
+    }
+
+    public void setMenuItemOpenPlaylist(MenuItem menuItemOpenPlaylist) {
+        this.menuItemOpenPlaylist = menuItemOpenPlaylist;
+    }
+
+    public MenuItem getMenuItemAddToPlaylist() {
+        return menuItemAddToPlaylist;
+    }
+
+    public void setMenuItemAddToPlaylist(MenuItem menuItemAddToPlaylist) {
+        this.menuItemAddToPlaylist = menuItemAddToPlaylist;
+    }
+
+    public MenuItem getMenuItemSavePlaylist() {
+        return menuItemSavePlaylist;
+    }
+
+    public void setMenuItemSavePlaylist(MenuItem menuItemSavePlaylist) {
+        this.menuItemSavePlaylist = menuItemSavePlaylist;
+    }
+
+    public Label getLblTxtVolume() {
+        return lblTxtVolume;
+    }
+
+    public void setLblTxtVolume(Label lblTxtVolume) {
+        this.lblTxtVolume = lblTxtVolume;
+    }
+
+    public Label getLblProgression() {
+        return lblProgression;
+    }
+
+    public void setLblProgression(Label lblProgression) {
+        this.lblProgression = lblProgression;
+    }
+
+    public ListView<String> getListviewPlaylist() {
+        return listviewPlaylist;
+    }
+
+    public void setListviewPlaylist(ListView<String> listviewPlaylist) {
+        this.listviewPlaylist = listviewPlaylist;
+    }
+
     public void setMenuItemHidePlaylist(MenuItem menuItemHidePlaylist) {
         this.menuItemHidePlaylist = menuItemHidePlaylist;
     }
