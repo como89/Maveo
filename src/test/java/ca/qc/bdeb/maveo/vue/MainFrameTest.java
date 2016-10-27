@@ -65,7 +65,7 @@ public class MainFrameTest extends ApplicationTest {
     @Test
     public void getStrMenuItemVideo() throws Exception {
         String strTest = testFrame.getStrMenuItemVideo();
-        Assert.assertEquals(strTest, "Video");
+        Assert.assertEquals(strTest, "Vidéo");
     }
 
     @Test
@@ -107,7 +107,7 @@ public class MainFrameTest extends ApplicationTest {
     @Test
     public void getSTR_MEDIA_OPTION_OUVRIR() throws Exception {
         String strTest = testFrame.getSTR_MEDIA_OPTION_OUVRIR();
-        Assert.assertEquals(strTest, "Ouvrir");
+        Assert.assertEquals(strTest, "Ouvrir un fichier...");
     }
 
     @Test
@@ -334,8 +334,8 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void getMenuItemHelpAbout() throws Exception {
-        MenuItem menuItemTest = testFrame.getMenuItemHelp();
-        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(3).getItems().get(1));
+        MenuItem menuItemTest = testFrame.getMenuItemHelpAbout();
+        Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(3).getItems().get(0));
     }
 
     @Test
@@ -521,80 +521,80 @@ public class MainFrameTest extends ApplicationTest {
         Assert.assertEquals(labelTest, testFrame.getLblNomMedia());
     }
 
-    @Test
+    // @Test
     public void setImageLblEcran() throws Exception {
-        Image image = new Image("sample.jpg");
-        testFrame.setImageLblEcran(image);
+//        Image image = new Image("sample.jpg");
+        //     testFrame.setImageLblEcran(image);
        // Assert.assertNotNull();
 
     }
 
-    @Test
+    //  @Test
     public void actualiseEcranPane() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addEventHandlerBtnPlay() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addEventHandlerBtnStop() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addEventHandlerOuvrirFichier() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addChangeListenerSliderProgression() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addChangeListenerSliderVolume() throws Exception {
 
     }
 
-    @Test
+    // @Test
     public void addEventHandlerAddMediaInPlayList() throws Exception {
 
     }
 
-    @Test
+    //   @Test
     public void addEventHandlerOpenPlaylist() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addEventHandlerSavePlaylist() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addEventHandlerPlayListSelected() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addEventHandlerBoutonSuivant() throws Exception {
 
     }
 
-    @Test
+    //    @Test
     public void addEventHandlerBoutonPrecedent() throws Exception {
 
     }
 
-    @Test
+    //   @Test
     public void addEventHandlerCloseWindow() throws Exception {
 
     }
 
-    @Test
+    //  @Test
     public void addEventHandlerHidePlaylist() throws Exception {
 
     }
