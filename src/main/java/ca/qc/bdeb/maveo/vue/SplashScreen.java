@@ -58,7 +58,7 @@ public class SplashScreen {
         splashFrame.setSize(MainClass.MIN_WIDTH_STAGE - 160, MainClass.MIN_HEIGHT_STAGE - 120);
         splashFrame.setLocationRelativeTo(null);
         splashFrame.setType(Window.Type.POPUP);
-        //splashFrame.setUndecorated(true);
+        splashFrame.setUndecorated(true);
 
         //On utilise un JFXPanel pour l'intercompatibilité entre le frame et le layout (Javafx)
         JFXPanel fxPanel = new JFXPanel();

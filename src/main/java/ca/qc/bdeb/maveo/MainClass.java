@@ -38,13 +38,14 @@ public class MainClass extends Application {
 
         //Création du splashScreen et on l'affiche.
         SplashScreen splashScreen = new SplashScreen();
-        splashScreen.showSplash();
+
 
         //Chargement des libs
         UtilLib.chargerLibSysteme();
 
         //On affiche le stage principal.
         showMainStage(stage);
+        splashScreen.showSplash();
     }
 
     /**
