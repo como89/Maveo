@@ -5,17 +5,31 @@
       "Extensions": [
         "*.mp3",
         "*.ogg",
+        "*.aac",
+        "*.flac",
+        "*.gsm",
+        "*.m4a",
+        "*.wma",
         "*.mp4",
         "*.wmv",
+        "*.mkv",
         "*.mov",
-        "*.mkv"
+        "*.webm",
+        "*.mpg",
+        "*.3gp",
+        "*.flv"
       ]
     },
     {
       "Description": "Fichiers audio",
       "Extensions": [
         "*.mp3",
-        "*.ogg"
+        "*.ogg",
+        "*.aac",
+        "*.flac",
+        "*.gsm",
+        "*.m4a",
+        "*.wma"
       ]
     },
     {
@@ -24,7 +38,11 @@
         "*.mp4",
         "*.wmv",
         "*.mkv",
-        "*.mov"
+        "*.mov",
+        "*.webm",
+        "*.mpg",
+        "*.3gp",
+        "*.flv"
       ]
     }
   ],
