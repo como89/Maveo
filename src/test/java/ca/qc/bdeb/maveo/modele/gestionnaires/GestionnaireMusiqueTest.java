@@ -159,6 +159,13 @@ public class GestionnaireMusiqueTest {
         Assert.assertTrue(success);
     }
 
+    @Test
+    public void testFormatmp3(){
+        gestionMusique.setCheminFichier("res/example.mp3");
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
     @After
     public void unloadAfter() {
         gestionMusique.arreter();
