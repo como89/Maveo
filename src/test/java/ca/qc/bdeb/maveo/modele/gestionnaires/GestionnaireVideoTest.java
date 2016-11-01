@@ -135,4 +135,25 @@ public class GestionnaireVideoTest extends ApplicationTest {
         Assert.assertTrue(success);
     }
 
+    @Test
+    public void testFormatMOV() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.mov");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testFormatMP4() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.mp4");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testFormatWMV() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.wmv");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
 }
