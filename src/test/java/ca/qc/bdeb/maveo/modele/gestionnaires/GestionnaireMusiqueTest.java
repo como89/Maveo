@@ -5,6 +5,7 @@ import ca.qc.bdeb.maveo.util.UtilLib;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.concurrent.*;
 
@@ -110,6 +111,52 @@ public class GestionnaireMusiqueTest {
             long tempsTotal = gestionMusique.getTempsTotal();
             Assert.assertTrue(gestionMusique.getTempsRestant() <= tempsTotal);
         }
+    }
+
+    @Test
+    public void testFormatAAC(){
+        gestionMusique.setCheminFichier("res/example.aac");
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+
+    @Test
+    public void testFormatFLAC(){
+        gestionMusique.setCheminFichier("res/example.flac");
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+
+    @Test
+    public void testFormatGSM(){
+        gestionMusique.setCheminFichier("res/example.gsm");
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+
+    @Test
+    public void testFormatM4A(){
+        gestionMusique.setCheminFichier("res/example.aac");
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+
+    @Test
+    public void testFormatOGG(){
+        gestionMusique.setCheminFichier("res/example.aac");
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testFormatWMA(){
+        gestionMusique.setCheminFichier("res/example.aac");
+        boolean success = gestionMusique.preparerMedia();
+        Assert.assertTrue(success);
     }
 
     @After
