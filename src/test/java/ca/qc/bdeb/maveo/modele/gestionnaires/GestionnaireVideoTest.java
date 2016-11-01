@@ -100,5 +100,39 @@ public class GestionnaireVideoTest extends ApplicationTest {
         Assert.assertTrue(gestionnaireVideo.getTempsRestant() <= tempsTotal);
     }
 
+    @Test
+    public void testFormat3GP() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.3gp");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testFormatFLV() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.flv");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testFormatMKV() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.mkv");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testFormatMPG() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.mpg");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
+
+    @Test
+    public void testFormatWEBM() {
+        gestionnaireVideo.setCheminFichier("res/video_samples/example.webm");
+        boolean success = gestionnaireVideo.preparerMedia();
+        Assert.assertTrue(success);
+    }
 
 }
