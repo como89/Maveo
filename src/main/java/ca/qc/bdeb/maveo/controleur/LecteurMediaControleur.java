@@ -34,17 +34,38 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
      * @param v           la position, en pourcentage. Ex. 0.15 est 15%
      */
     @Override
-    public void positionChanged(MediaPlayer mediaPlayer, final float v) {
+    public void positionChanged(final MediaPlayer mediaPlayer, final float v) {
         isFreeMutexLockSliderPosition = false;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 double position = v;
                 double multiplier = 100;
+
+                long dureeEcoule = mediaPlayer.getTime();
+                long dureeTotale = mediaPlayer.getLength();
+                long dureeRestant = mediaPlayer.getLength() - mediaPlayer.getTime();
+
+               String texteDureeEcoulee = convertirDuree(dureeEcoule);
+                String texteDureeTotale = convertirDuree(dureeTotale);
+                String texteDureeRestant = convertirDuree(dureeRestant);
+                mainFrame.getLabelTempsEcoule().setText(texteDureeEcoulee);
+                mainFrame.getLabelTempsTotal().setText(texteDureeRestant + " / "+texteDureeTotale);
                 mainFrame.getSliderProgression().setValue(position * multiplier);
+
                 isFreeMutexLockSliderPosition = true;
             }
         });
+    }
+
+    private String convertirDuree(long dureeAConvertir) {
+
+        long secondes = (dureeAConvertir / 1000) % 60;
+        long minute = (dureeAConvertir / (1000 * 60)) % 60;
+
+        String dureeAffichable = String.format("%02d:%02d", minute, secondes);
+        return dureeAffichable;
+
     }
 
     @Override

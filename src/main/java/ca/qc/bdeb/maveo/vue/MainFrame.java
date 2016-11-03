@@ -334,6 +334,28 @@ public class MainFrame {
     @FXML
     Label lblProgression;
 
+    @FXML
+    Label labelTempsEcoule;
+
+    @FXML
+    Label labelTempsTotal;
+
+    public Label getLabelTempsEcoule() {
+        return labelTempsEcoule;
+    }
+
+    public void setLabelTempsEcoule(Label labelTempsEcoule) {
+        this.labelTempsEcoule = labelTempsEcoule;
+    }
+
+    public Label getLabelTempsTotal() {
+        return labelTempsTotal;
+    }
+
+    public void setLabelTempsTotal(Label labelTempsTotal) {
+        this.labelTempsTotal = labelTempsTotal;
+    }
+
     public TitledPane getPlaylistPane() {
         return playlistPane;
     }
