@@ -44,10 +44,6 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
-        this.mainFrame.addEventHandlerCloseWindow(new WindowCloseEventHandler());
-       // this.mainFrame.getLabelTempsTotal();
-
-
 
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
@@ -56,7 +52,6 @@ public class MainFrameControleur {
         this.mainFrame.getBtnJouerPause().setDisable(true);
         this.mainFrame.getBoutonPrecedent().setDisable(true);
         this.mainFrame.getBoutonSuivant().setDisable(true);
-
     }
 
     /**
@@ -84,11 +79,6 @@ public class MainFrameControleur {
      */
     void fixerSliderPosition(float positionPourcentage) {
         GestionnaireFactory.getCurrentInstance().setPosition(positionPourcentage);
-
-
-
-
-
     }
 
     /**
@@ -111,26 +101,6 @@ public class MainFrameControleur {
             media = new Media(file.getName(), file.getAbsolutePath());
         }
         return media;
-    }
-
-    class WindowCloseEventHandler implements EventHandler<WindowEvent> {
-
-        @Override
-        public void handle(WindowEvent event) {
-            if (event.getEventType() == WindowEvent.WINDOW_CLOSE_REQUEST) {
-                terminerProgramme();
-            }
-        }
-    }
-
-    /**
-     * Terminne l'application au complet, en libérant tous les threads et les buffers
-     */
-    void terminerProgramme() {
-        GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
-        if (gestionnaireMedia != null) {
-            gestionnaireMedia.release();
-        }
     }
 
     /**
@@ -193,16 +163,10 @@ public class MainFrameControleur {
             if (controleurLecteurMedia.isFreeMutexLockSliderPosition) {
                 float position = newValue.floatValue();
                 float diviseur = 100;
-
-
                 fixerSliderPosition(position / diviseur);
-                
-
             }
         }
     }
-
-
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur change le slider de volume

@@ -25,7 +25,6 @@ public abstract class GestionnaireMedia {
     public abstract void setCheminFichier(String cheminFichier);
 
 
-
     /**
      * Méthode qui permet de préparer le média sans le jouer
      *
