@@ -20,6 +20,7 @@ class GestionnaireMusique extends GestionnaireMedia {
     public GestionnaireMusique() {
         audioEcouteur = new AudioMediaPlayerComponent();
         mediaPlayer = audioEcouteur.getMediaPlayer();
+
     }
 
     /**
@@ -28,7 +29,9 @@ class GestionnaireMusique extends GestionnaireMedia {
      * @return Retourne true, si le fichier existe, false, le fichier n'existe pas.
      */
     public boolean preparerMedia() {
+
         return mediaPlayer.prepareMedia(cheminFichier);
+
     }
 
     /**

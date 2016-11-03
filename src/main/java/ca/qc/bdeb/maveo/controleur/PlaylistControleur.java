@@ -193,6 +193,7 @@ public class PlaylistControleur {
         String mediaName = mainframe.getListPlayList().getSelectionModel().getSelectedItem();
         if (playList != null && mediaName != null) {
             Media media = playList.getMediaByName(mediaName);
+
             gestionnaireMedia = GestionnaireFactory.createInstance(media, mainframe);
             gestionnaireMedia.preparerMedia();
             gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
@@ -224,18 +225,8 @@ public class PlaylistControleur {
 
         @Override
         public void handle(ActionEvent event) {
-            ListView<String> lvwPlaylist = mainframe.getListPlayList();
-            int indiceSelectionne = lvwPlaylist.getSelectionModel().getSelectedIndex();
+            selectionnerIndiceSuivant();
 
-            // Par défaut, sélectionne une incrémentation de l'indice actuel
-            int nouveauIndiceASelectionner = indiceSelectionne + 1;
-
-            // Si l'indice de sélection est arrivé à la fin de la Playlist, sélectionne le premier item
-            if (indiceSelectionne >= lvwPlaylist.getItems().size() - 1) {
-                nouveauIndiceASelectionner = 0;
-            }
-            mainframe.getListPlayList().getSelectionModel().select(nouveauIndiceASelectionner);
-            effectuerActionsSelectionItemPlaylist();
         }
     }
 
@@ -250,18 +241,40 @@ public class PlaylistControleur {
 
         @Override
         public void handle(ActionEvent event) {
-            ListView<String> lvwPlaylist = mainframe.getListPlayList();
-            int indiceSelectionne = lvwPlaylist.getSelectionModel().getSelectedIndex();
+            selectionnerIndicePrecedent();
 
-            // Par défaut, sélectionne une décrementation de l'indice actuel
-            int nouveauIndiceASelectionner = indiceSelectionne - 1;
-
-            // Si l'indice de sélection est au début de la playlist, sélectionne le dernier élémnt
-            if (indiceSelectionne == 0) {
-                nouveauIndiceASelectionner = lvwPlaylist.getItems().size() - 1;
-            }
-            mainframe.getListPlayList().getSelectionModel().select(nouveauIndiceASelectionner);
-            effectuerActionsSelectionItemPlaylist();
         }
     }
+
+    private void selectionnerIndicePrecedent() {
+        ListView<String> lvwPlaylist = mainframe.getListPlayList();
+        int indiceSelectionne = lvwPlaylist.getSelectionModel().getSelectedIndex();
+
+        // Par défaut, sélectionne une décrementation de l'indice actuel
+        int nouveauIndiceASelectionner = indiceSelectionne - 1;
+
+        // Si l'indice de sélection est au début de la playlist, sélectionne le dernier élémnt
+        if (indiceSelectionne == 0) {
+            nouveauIndiceASelectionner = lvwPlaylist.getItems().size() - 1;
+        }
+        mainframe.getListPlayList().getSelectionModel().select(nouveauIndiceASelectionner);
+        effectuerActionsSelectionItemPlaylist();
+    }
+
+
+    private void selectionnerIndiceSuivant() {
+        ListView<String> lvwPlaylist = mainframe.getListPlayList();
+        int indiceSelectionne = lvwPlaylist.getSelectionModel().getSelectedIndex();
+
+        // Par défaut, sélectionne une incrémentation de l'indice actuel
+        int nouveauIndiceASelectionner = indiceSelectionne + 1;
+
+        // Si l'indice de sélection est arrivé à la fin de la Playlist, sélectionne le premier item
+        if (indiceSelectionne >= lvwPlaylist.getItems().size() - 1) {
+            nouveauIndiceASelectionner = 0;
+        }
+        mainframe.getListPlayList().getSelectionModel().select(nouveauIndiceASelectionner);
+        effectuerActionsSelectionItemPlaylist();
+    }
+
 }
