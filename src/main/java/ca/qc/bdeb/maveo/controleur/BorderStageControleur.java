@@ -31,8 +31,7 @@ public class BorderStageControleur {
 
         @Override
         public void handle(ActionEvent event) {
-            Stage stage = borderStage.getStage();
-            stage.setIconified(true);
+            minimiseWindow();
         }
     }
 
@@ -40,27 +39,7 @@ public class BorderStageControleur {
 
         @Override
         public void handle(ActionEvent event) {
-            Stage stage = borderStage.getStage();
-
-            if (!borderStage.isMaximized()) {
-                borderStage.setMaximized(true);
-                Screen screen = Screen.getPrimary();
-                Rectangle2D bounds = screen.getVisualBounds();
-
-                borderStage.setPosition(stage.getX(), stage.getY());
-                borderStage.setSize(stage.getHeight(), stage.getWidth());
-
-                stage.setX(bounds.getMinX());
-                stage.setY(bounds.getMinY());
-                stage.setWidth(bounds.getWidth());
-                stage.setHeight(bounds.getHeight());
-            } else {
-                borderStage.setMaximized(false);
-                stage.setX(borderStage.getX());
-                stage.setY(borderStage.getY());
-                stage.setWidth(borderStage.getWidth());
-                stage.setHeight(borderStage.getHeight());
-            }
+            maximiseWindow();
         }
     }
 
@@ -76,8 +55,7 @@ public class BorderStageControleur {
 
         @Override
         public void handle(MouseEvent event) {
-            borderStage.setXOffSet(event.getSceneX());
-            borderStage.setYOffSet(event.getSceneY());
+            pressMouse(event.getSceneX(), event.getSceneY());
         }
     }
 
@@ -85,9 +63,49 @@ public class BorderStageControleur {
 
         @Override
         public void handle(MouseEvent event) {
+            dragMouse(event.getScreenX(), event.getScreenY());
+        }
+    }
+
+    void minimiseWindow() {
+        Stage stage = borderStage.getStage();
+        stage.setIconified(true);
+    }
+
+    void maximiseWindow() {
+        Stage stage = borderStage.getStage();
+
+        if (!borderStage.isMaximized()) {
+            borderStage.setMaximized(true);
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
+
+            borderStage.setPosition(stage.getX(), stage.getY());
+            borderStage.setSize(stage.getHeight(), stage.getWidth());
+
+            stage.setX(bounds.getMinX());
+            stage.setY(bounds.getMinY());
+            stage.setWidth(bounds.getWidth());
+            stage.setHeight(bounds.getHeight());
+        } else {
+            borderStage.setMaximized(false);
+            stage.setX(borderStage.getX());
+            stage.setY(borderStage.getY());
+            stage.setWidth(borderStage.getWidth());
+            stage.setHeight(borderStage.getHeight());
+        }
+    }
+
+    void pressMouse(double x, double y) {
+        borderStage.setXOffSet(x);
+        borderStage.setYOffSet(y);
+    }
+
+    void dragMouse(double xWindow, double yWindow) {
+        if (!borderStage.isMaximized()) {
             Stage stage = borderStage.getStage();
-            stage.setX(event.getScreenX() - borderStage.getXOffSet());
-            stage.setY(event.getScreenY() - borderStage.getYOffSet());
+            stage.setX(xWindow - borderStage.getXOffSet());
+            stage.setY(yWindow - borderStage.getYOffSet());
         }
     }
 }
