@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" minHeight="500.0" minWidth="600.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.qc.bdeb.maveo.vue.MainFrame">
    <top>
@@ -69,6 +68,7 @@
         </Pane>
     </center>
    <bottom>
+
        <BorderPane fx:id="panelControleur" prefHeight="122.0" prefWidth="638.0">
            <padding>
                <Insets bottom="25" left="25" right="25" top="25" />
@@ -121,18 +121,18 @@
                </BorderPane>
            </left>
            <center>
-               <VBox alignment="CENTER" prefHeight="110.0" prefWidth="329.0">
+               <Pane prefHeight="110.0" prefWidth="329.0" >
 
-                   <Label fx:id="labelTempsEcoule" alignment="BOTTOM_LEFT" text="-- : --" BorderPane.alignment="BOTTOM_LEFT" />
-               <Slider fx:id="sliderProgression" prefHeight="14.0" styleClass="slider" stylesheets="StyleBoutons.css">
+                   <Label fx:id="labelTempsEcoule" alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="43.0" text="-- : --" BorderPane.alignment="BOTTOM_LEFT" />
+               <Slider fx:id="sliderProgression" layoutX="7.0" layoutY="29.0" prefHeight="14.0" prefWidth="315.0" styleClass="slider" stylesheets="StyleBoutons.css">
                    <cursor>
                        <Cursor fx:constant="H_RESIZE" />
                    </cursor>
                </Slider>
 
 
-               <Label fx:id="labelTempsTotal" alignment="BOTTOM_RIGHT" text="-- : --" BorderPane.alignment="BOTTOM_RIGHT" />
-               </VBox>
+               <Label fx:id="labelTempsTotal" alignment="BOTTOM_RIGHT" layoutX="233.0" layoutY="43.0" text="-- : --" BorderPane.alignment="BOTTOM_RIGHT" />
+               </Pane>
            </center>
            <right>
                <Slider fx:id="sliderVolume" orientation="VERTICAL" prefHeight="42.0" prefWidth="14.0">
@@ -144,5 +144,6 @@
 
 
        </BorderPane>
+
    </bottom>
 </BorderPane>

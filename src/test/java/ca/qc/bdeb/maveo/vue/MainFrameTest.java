@@ -521,6 +521,18 @@ public class MainFrameTest extends ApplicationTest {
         Assert.assertEquals(labelTest, testFrame.getLblNomMedia());
     }
 
+    @Test
+    public void getLabelTempsEcoule(){
+        Label labelTest = testFrame.getLabelTempsEcoule();
+        Assert.assertEquals(labelTest ,testFrame.getLabelTempsEcoule() );
+    }
+
+    @Test
+    public void getLabelTempsTotal(){
+        Label labelTest = testFrame.getLabelTempsTotal();
+        Assert.assertEquals(labelTest ,testFrame.getLabelTempsTotal() );
+    }
+
     // @Test
     public void setImageLblEcran() throws Exception {
 //        Image image = new Image("sample.jpg");
