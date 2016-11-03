@@ -46,11 +46,11 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
                 long dureeTotale = mediaPlayer.getLength();
                 long dureeRestant = mediaPlayer.getLength() - mediaPlayer.getTime();
 
-               String texteDureeEcoulee = convertirDuree(dureeEcoule);
+                String texteDureeEcoulee = convertirDuree(dureeEcoule);
                 String texteDureeTotale = convertirDuree(dureeTotale);
                 String texteDureeRestant = convertirDuree(dureeRestant);
                 mainFrame.getLabelTempsEcoule().setText(texteDureeEcoulee);
-                mainFrame.getLabelTempsTotal().setText(texteDureeRestant + " / "+texteDureeTotale);
+                mainFrame.getLabelTempsTotal().setText(texteDureeRestant + " / " + texteDureeTotale);
                 mainFrame.getSliderProgression().setValue(position * multiplier);
 
                 isFreeMutexLockSliderPosition = true;
