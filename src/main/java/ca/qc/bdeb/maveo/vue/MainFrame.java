@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
@@ -61,6 +62,9 @@ public class MainFrame {
 
     @FXML
     Pane panelEcran;
+
+    @FXML
+    BorderPane boxBorder;
 
     @FXML
     BorderPane fenetrePrincipale;
@@ -322,6 +326,14 @@ public class MainFrame {
         this.menuItemHidePlaylist = menuItemHidePlaylist;
     }
 
+    public void setBoxBorder(BorderPane boxBorder) {
+        this.boxBorder.setPrefSize(boxBorder.getPrefWidth(), boxBorder.getPrefHeight());
+        this.boxBorder.setCenter(boxBorder.getCenter());
+        this.boxBorder.setLeft(boxBorder.getLeft());
+        this.boxBorder.setRight(boxBorder.getRight());
+        this.boxBorder.getStylesheets().addAll(boxBorder.getStylesheets());
+    }
+
     @FXML
     MenuItem menuItemHidePlaylist;
 
@@ -468,11 +480,6 @@ public class MainFrame {
     public void addEventHandlerBoutonPrecedent(EventHandler<ActionEvent> boutonPrecedentActionEvent) {
         boutonPrecedent.setOnAction(boutonPrecedentActionEvent);
     }
-
-    public void addEventHandlerCloseWindow(EventHandler<WindowEvent> closeWindowEvent) {
-        getFenetre().setOnCloseRequest(closeWindowEvent);
-    }
-
 
     public void addEventHandlerHidePlaylist(EventHandler<ActionEvent> MenuHidePlaylistEventHandler ) {
         menuItemHidePlaylist.setOnAction(MenuHidePlaylistEventHandler);

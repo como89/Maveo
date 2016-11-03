@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane id="borderPane" fx:id="borderPane"
+            xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ca.qc.bdeb.maveo.vue.BorderStage" prefHeight="32" stylesheets="StyleMainStage.css">
+    <right>
+        <HBox fx:id="boxButtons">
+            <children>
+                <Pane>
+                    <padding>
+                        <Insets left="5" right="5"/>
+                    </padding>
+                    <ToggleButton fx:id="btnHide"
+                                  prefWidth="32"
+                                  prefHeight="32"
+                                  styleClass="decorate_button_hide">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </ToggleButton>
+                </Pane>
+                <Pane>
+                    <padding>
+                        <Insets left="5" right="5"/>
+                    </padding>
+                    <ToggleButton fx:id="btnMaximise"
+                                  prefWidth="32"
+                                  prefHeight="32"
+                                  styleClass="decorate_button_maximum">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </ToggleButton>
+                </Pane>
+                <Pane>
+                    <padding>
+                        <Insets left="5" right="5"/>
+                    </padding>
+                    <ToggleButton fx:id="btnClose"
+                                  prefWidth="32"
+                                  prefHeight="32"
+                                  styleClass="decorate_button_close">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </ToggleButton>
+                </Pane>
+            </children>
+        </HBox>
+    </right>
+    <left>
+        <HBox fx:id="boxTitle">
+            <padding>
+                <Insets top="5" left="5" right="267"/>
+            </padding>
+            <children>
+                <ImageView fitHeight="32" fitWidth="32" styleClass="decorate_img_logo"/>
+                <Text fx:id="textTitle"
+                      textAlignment="CENTER">
+                    <font>
+                        <Font name="Arial Black" size="25"/>
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+    </left>
+</BorderPane>

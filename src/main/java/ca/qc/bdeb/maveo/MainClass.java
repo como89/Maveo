@@ -1,11 +1,13 @@
 package ca.qc.bdeb.maveo;
 
+import ca.qc.bdeb.maveo.controleur.BorderStageControleur;
 import ca.qc.bdeb.maveo.controleur.LecteurMediaControleur;
 import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
 import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.util.UtilLib;
+import ca.qc.bdeb.maveo.vue.BorderStage;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import ca.qc.bdeb.maveo.vue.SplashScreen;
 import javafx.application.Application;
@@ -13,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -36,7 +39,7 @@ public class MainClass extends Application {
 
     public void start(Stage stage) throws Exception {
 
-        //Création du splashScreen et on l'affiche.
+        //Création du splashScreen.
         SplashScreen splashScreen = new SplashScreen();
 
 
@@ -45,6 +48,7 @@ public class MainClass extends Application {
 
         //On affiche le stage principal.
         showMainStage(stage);
+        //On affiche le splashScreen
         splashScreen.showSplash();
     }
 
@@ -55,21 +59,37 @@ public class MainClass extends Application {
         try {
             mainStage.initStyle(StageStyle.DECORATED);
             // vue
-            URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
-            FXMLLoader loader = new FXMLLoader(ressource);
-            BorderPane page = null;
-            page = loader.load();
+            URL ressourceMainGUI = getClass().getClassLoader().getResource("GuiSample.fxml");
+            FXMLLoader loader = new FXMLLoader(ressourceMainGUI);
+            BorderPane page = loader.load();
+
+            //Controller of fxml
             MainFrame mainFrame = loader.getController();
-            Scene scene = new Scene(page);
-            mainStage.setScene(scene);
+
+            //Load BorderStage
+            URL ressourceBorderStage = getClass().getClassLoader().getResource("BorderStage.fxml");
+            loader = new FXMLLoader(ressourceBorderStage);
+            BorderPane boxBorder = loader.load();
+            BorderStage borderStage = loader.getController();
+            borderStage.setStage(mainStage);
+            borderStage.setTitle(MainFrame.STR_NOM_PROGRAMME);
+            //Set it to MainFrame.
+            mainFrame.setBoxBorder(boxBorder);
+
             mainStage.setTitle(MainFrame.STR_NOM_PROGRAMME);
+            mainStage.initStyle(StageStyle.UNDECORATED);
             mainStage.setMinHeight(MIN_HEIGHT_STAGE);
             mainStage.setMinWidth(MIN_WIDTH_STAGE);
             mainStage.getIcons().add(LOGO_SOFTWARE);
+            Scene scene = new Scene(page);
+            mainStage.setScene(scene);
             mainStage.show();
 
             // modele
             FileOpener fileOpener = new FileOpener();
+
+            BorderStageControleur borderStageControleur = new BorderStageControleur();
+            borderStageControleur.setBorderStage(borderStage);
 
             MainFrameControleur mainFrameControleur = new MainFrameControleur();
 
