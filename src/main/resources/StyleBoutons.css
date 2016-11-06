@@ -1,47 +1,54 @@
 .buttonPlay {
     -fx-background-image: url("IconesBoutons/play.png");
+    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 60px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
 .buttonPause {
     -fx-background-image: url("IconesBoutons/pause.png");
+    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 60px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
 .buttonPrecedent {
     -fx-background-image: url("IconesBoutons/previous.png");
+    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 45px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
 .buttonStop {
     -fx-background-image: url("IconesBoutons/stop.png");
+    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 60px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
 .buttonNext {
     -fx-background-image: url("IconesBoutons/next.png");
+    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 45px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
-.slider .track {
-    -fx-background-insets: 1 0 -1 0, 0, 1;
-    -fx-background-radius: 2.5, 2.5, 1.5;
-    -fx-padding: 4px
+.buttonNext:hover, .buttonPause:hover, .buttonPlay:hover, .buttonPrecedent:hover, .buttonStop:hover {
+    -fx-background-color: linear-gradient(#717070, #B6B4B4);
 }
-
 

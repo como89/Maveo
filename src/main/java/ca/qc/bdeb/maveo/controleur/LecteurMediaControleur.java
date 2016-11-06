@@ -2,6 +2,7 @@ package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Platform;
+import sun.applet.Main;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
@@ -52,6 +53,7 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
                 mainFrame.getLabelTempsEcoule().setText(texteDureeEcoulee);
                 mainFrame.getLabelTempsTotal().setText(texteDureeRestant + " / " + texteDureeTotale);
                 mainFrame.getSliderProgression().setValue(position * multiplier);
+                mainFrame.getTraitProgress().setProgress(position);
 
                 isFreeMutexLockSliderPosition = true;
             }
@@ -63,16 +65,13 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
         long secondes = (dureeAConvertir / 1000) % 60;
         long minute = (dureeAConvertir / (1000 * 60)) % 60;
 
-        String dureeAffichable = String.format("%02d:%02d", minute, secondes);
-        return dureeAffichable;
+        return String.format("%02d:%02d", minute, secondes);
 
     }
 
     @Override
     public void stopped(MediaPlayer mediaPlayer) {
-        mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
-        mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
-        mainFrame.getBtnArreter().setDisable(true);
+        stopMedia();
     }
 
     /**
@@ -82,10 +81,23 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
      */
     @Override
     public void finished(MediaPlayer mediaPlayer) {
-        isFreeMutexLockSliderPosition = false; // active le verrou sur le slider de position
-        mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
-        mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
-        mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
-        isFreeMutexLockSliderPosition = true; // libère le verrou sur le slieder de position
+        stopMedia();
+    }
+
+    void stopMedia() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                isFreeMutexLockSliderPosition = false; // active le verrou sur le slider de position
+                mainFrame.getSliderProgression().setValue(mainFrame.getSliderProgression().getMin());
+                mainFrame.getTraitProgress().setProgress(0);
+                mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPause");
+                mainFrame.getBtnJouerPause().getStyleClass().add("buttonPlay");
+                mainFrame.getLabelTempsEcoule().setText(MainFrame.DEFAULT_TEMPS_ECOULE);
+                mainFrame.getLabelTempsTotal().setText(MainFrame.DEFAULT_TEMPS_TOTAL);
+                mainFrame.getBtnArreter().setDisable(true);
+                isFreeMutexLockSliderPosition = true; // libère le verrou sur le slieder de position
+            }
+        });
     }
 }

@@ -10,12 +10,14 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.stage.Screen?>
 <BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" minHeight="500.0"
             minWidth="600.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
@@ -23,14 +25,13 @@
     <top>
         <VBox>
             <BorderPane fx:id="boxBorder"/>
-            <MenuBar id="menuBarFenetre" fx:id="menuBar">
+            <MenuBar id="menuBarFenetre" fx:id="menuBar" stylesheets="StyleMenu.css" styleClass="context-menu">
                 <menus>
                     <Menu id="menuItemFile" fx:id="menuItemFile" mnemonicParsing="false" text="File">
                         <items>
                             <MenuItem fx:id="menuItemFileOpen" mnemonicParsing="false" text="Open"/>
                             <MenuItem id="menuItemFileClose" fx:id="menuItemFileClose" mnemonicParsing="false"
-                                      text="Close"
-                                      visible="false"/>
+                                      text="Close"/>
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Playlist">
@@ -41,13 +42,13 @@
                             <MenuItem fx:id="menuItemHidePlaylist" mnemonicParsing="false" text="Hide Playlist"/>
                         </items>
                     </Menu>
-                    <Menu id="menuItemEdit" fx:id="menuItemEdit" mnemonicParsing="false" text="Edit" visible="false">
+                    <Menu id="menuItemEdit" fx:id="menuItemEdit" mnemonicParsing="false" text="Edit">
                         <items>
                             <MenuItem id="menuItemEditDelete" fx:id="menuItemEditDelete" mnemonicParsing="false"
                                       text="Delete"/>
                         </items>
                     </Menu>
-                    <Menu id="menuItemHelp" fx:id="menuItemHelp" mnemonicParsing="false" text="Help" visible="false">
+                    <Menu id="menuItemHelp" fx:id="menuItemHelp" mnemonicParsing="false" text="Help">
                         <items>
                             <MenuItem id="menuItemHelpAbout" fx:id="menuItemHelpAbout" mnemonicParsing="false"
                                       text="About"/>
@@ -61,15 +62,13 @@
         </VBox>
     </top>
     <center>
-        <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" stylesheets="@StylePane.css">
+        <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" stylesheets="@StylePane.css"
+              styleClass="paneEcran">
             <children>
-                <TitledPane fx:id="playlistPane" prefHeight="350.0" prefWidth="202.0" text="Playlist">
+                <TitledPane fx:id="playlistPane" prefHeight="325.0" prefWidth="202.0" text="Playlist"
+                            styleClass="decorate_title_pane">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <ListView fx:id="listviewPlaylist" prefHeight="350.0" prefWidth="200.0"/>
-                            </children>
-                        </AnchorPane>
+                        <ListView fx:id="listviewPlaylist" prefHeight="325.0" prefWidth="200.0"/>
                     </content>
                 </TitledPane>
                 <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0"/>
@@ -80,7 +79,8 @@
         </Pane>
     </center>
     <bottom>
-        <BorderPane fx:id="panelControleur" prefHeight="122.0" prefWidth="638.0">
+        <BorderPane fx:id="panelControleur" prefHeight="122.0" prefWidth="638.0"
+                    stylesheets="StylePane.css,StyleBoutons.css" styleClass="decorate_pane_controleur">
             <padding>
                 <Insets bottom="25" left="25" right="25" top="25"/>
             </padding>
@@ -91,7 +91,7 @@
                     </padding>
                     <left>
                         <Button fx:id="boutonPlayPause" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0"
-                                styleClass="buttonPlay" stylesheets="@StyleBoutons.css">
+                                styleClass="buttonPlay">
                             <cursor>
                                 <Cursor fx:constant="HAND"/>
                             </cursor>
@@ -108,8 +108,7 @@
                                         <Insets left="5"/>
                                     </padding>
                                     <Button fx:id="boutonPrecedent" mnemonicParsing="false" prefHeight="50.0"
-                                            prefWidth="50.0" styleClass="buttonPrecedent"
-                                            stylesheets="@StyleBoutons.css">
+                                            prefWidth="50.0" styleClass="buttonPrecedent">
                                         <cursor>
                                             <Cursor fx:constant="HAND"/>
                                         </cursor>
@@ -118,7 +117,7 @@
                             </left>
                             <right>
                                 <Button fx:id="boutonArreter" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0"
-                                        styleClass="buttonStop" stylesheets="@StyleBoutons.css">
+                                        styleClass="buttonStop">
                                     <cursor>
                                         <Cursor fx:constant="HAND"/>
                                     </cursor>
@@ -128,7 +127,7 @@
                     </center>
                     <right>
                         <Button fx:id="boutonSuivant" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0"
-                                styleClass="buttonNext" stylesheets="@StyleBoutons.css">
+                                styleClass="buttonNext">
                             <cursor>
                                 <Cursor fx:constant="HAND"/>
                             </cursor>
@@ -137,31 +136,48 @@
                 </BorderPane>
             </left>
             <center>
-                <VBox alignment="CENTER" prefHeight="110.0" prefWidth="329.0">
-
-                    <Label fx:id="labelTempsEcoule" alignment="BOTTOM_LEFT" text="-- : --"
-                           BorderPane.alignment="BOTTOM_LEFT"/>
-                    <Slider fx:id="sliderProgression" prefHeight="14.0" styleClass="slider"
-                            stylesheets="StyleBoutons.css">
-                        <cursor>
-                            <Cursor fx:constant="H_RESIZE"/>
-                        </cursor>
-                    </Slider>
-
-
-                    <Label fx:id="labelTempsTotal" alignment="BOTTOM_RIGHT" text="-- : --"
-                           BorderPane.alignment="BOTTOM_RIGHT"/>
+                <VBox alignment="CENTER" prefHeight="110.0" prefWidth="${screen.visualBounds.width}">
+                    <StackPane>
+                        <fx:define>
+                            <Screen fx:factory="getPrimary" fx:id="screen"/>
+                        </fx:define>
+                        <ProgressBar fx:id="traitProgress" prefHeight="14.0" prefWidth="${screen.visualBounds.width}"
+                                     stylesheets="StylePane.css" styleClass="progress_bar_position" progress="0"
+                                     disable="true"/>
+                        <Slider fx:id="sliderProgression" prefHeight="14.0" prefWidth="${screen.visualBounds.width}"
+                                styleClass="slider_bar">
+                            <cursor>
+                                <Cursor fx:constant="H_RESIZE"/>
+                            </cursor>
+                        </Slider>
+                    </StackPane>
+                    <BorderPane>
+                        <left>
+                            <Label fx:id="labelTempsEcoule" alignment="BOTTOM_LEFT" text="-- : --"
+                                   BorderPane.alignment="BOTTOM_LEFT" styleClass="decorate_text_temps"/>
+                        </left>
+                        <right>
+                            <Label fx:id="labelTempsTotal" alignment="BOTTOM_RIGHT" text="-- : -- / -- : --"
+                                   BorderPane.alignment="BOTTOM_RIGHT" styleClass="decorate_text_temps"/>
+                        </right>
+                    </BorderPane>
                 </VBox>
             </center>
             <right>
-                <Slider fx:id="sliderVolume" orientation="VERTICAL" prefHeight="42.0" prefWidth="14.0">
+                <StackPane>
+                    <padding>
+                        <Insets left="10"/>
+                    </padding>
+                    <ProgressBar fx:id="progressVolume" rotate="-90"
+                                 progress="1"
+                                 prefHeight="14.0" prefWidth="70.0" styleClass="progress_bar_volume"/>
+                    <Slider fx:id="sliderVolume" orientation="VERTICAL" styleClass="slider_bar">
                     <cursor>
                         <Cursor fx:constant="V_RESIZE"/>
                     </cursor>
                 </Slider>
+                </StackPane>
             </right>
-
-
         </BorderPane>
     </bottom>
 </BorderPane>

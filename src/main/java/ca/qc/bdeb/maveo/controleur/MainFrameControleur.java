@@ -19,7 +19,7 @@ import java.io.*;
  */
 public class MainFrameControleur {
 
-    boolean isFreeMutexLockSliderVolume = false;
+    static boolean isFreeMutexLockSliderVolume = false;
 
     public MainFrameControleur() {
     }
@@ -87,11 +87,7 @@ public class MainFrameControleur {
      * @param volumePourcentage - Le volume en pourcentage
      */
     void fixerVolumePosition(int volumePourcentage) {
-        if (isFreeMutexLockSliderVolume) {
-            isFreeMutexLockSliderVolume = false;
-            GestionnaireFactory.getCurrentInstance().setVolume(volumePourcentage);
-            isFreeMutexLockSliderVolume = true;
-        }
+        GestionnaireFactory.getCurrentInstance().setVolume(volumePourcentage);
     }
 
     Media getMediaFromFile() {
@@ -113,12 +109,16 @@ public class MainFrameControleur {
             Media media = getMediaFromFile();
             if (media != null) {
                 isFreeMutexLockSliderVolume = true;
-
-                GestionnaireMedia gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
+                GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+                if (gestionnaireMedia != null && gestionnaireMedia.enLecture()) {
+                    gestionnaireMedia.arreter();
+                }
+                gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
                 gestionnaireMedia.preparerMedia();
                 gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
+                mainFrame.getTraitProgress().setDisable(false);
             }
         }
     }
@@ -164,6 +164,7 @@ public class MainFrameControleur {
                 float position = newValue.floatValue();
                 float diviseur = 100;
                 fixerSliderPosition(position / diviseur);
+                mainFrame.getTraitProgress().setProgress(position / diviseur);
             }
         }
     }
@@ -174,9 +175,13 @@ public class MainFrameControleur {
     class SliderVolumeChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            int volumePourcentage = newValue.intValue();
             if (isFreeMutexLockSliderVolume) {
-                fixerVolumePosition(newValue.intValue());
+                isFreeMutexLockSliderVolume = false;
+                fixerVolumePosition(volumePourcentage);
+                isFreeMutexLockSliderVolume = true;
             }
+            mainFrame.getProgressVolume().setProgress(volumePourcentage / 100.0);
         }
     }
 }

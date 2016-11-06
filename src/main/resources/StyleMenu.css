@@ -1,0 +1,7 @@
+.context-menu {
+    -fx-background-color: linear-gradient(#B6B4B4, #2893C9);
+}
+
+.context-menu :focused {
+    -fx-background-color: linear-gradient(#B6B4B4, #4B9EC8);
+}
