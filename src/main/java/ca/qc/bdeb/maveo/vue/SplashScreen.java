@@ -86,6 +86,7 @@ public class SplashScreen {
         fadeSplash.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                splashFrame.toBack();
                 splashFrame.setVisible(false);
             }
         });

@@ -49,7 +49,7 @@ public class MainClass extends Application {
         //On affiche le stage principal.
         showMainStage(stage);
         //On affiche le splashScreen
-        splashScreen.showSplash();
+        //splashScreen.showSplash();
     }
 
     /**
