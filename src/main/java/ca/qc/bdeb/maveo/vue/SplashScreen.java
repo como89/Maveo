@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javax.swing.*;
@@ -33,10 +34,14 @@ public class SplashScreen {
     private Label lblTitle;
     private VBox splashLayout;
 
+    private Stage mainStage;
+
     /**
      * On construit le splashScreen, avec un frame, un layout, une image et un texte.
      */
-    public SplashScreen() {
+    public SplashScreen(Stage mainStage) {
+        this.mainStage = mainStage;
+
         splashImage = new ImageView(MainClass.LOGO_SOFTWARE);
         splashImage.setFitWidth(447);
         splashImage.setFitHeight(MainClass.MIN_HEIGHT_STAGE - 200);
@@ -88,6 +93,7 @@ public class SplashScreen {
             public void handle(ActionEvent event) {
                 splashFrame.toBack();
                 splashFrame.setVisible(false);
+                mainStage.requestFocus();
             }
         });
         fadeSplash.play();
