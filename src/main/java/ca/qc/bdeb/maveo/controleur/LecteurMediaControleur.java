@@ -13,6 +13,8 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
 
     boolean isFreeMutexLockSliderPosition = true;
 
+    static final double PROGRESS_BAR_POSITION_CORRECTION = 0.003;
+
     public LecteurMediaControleur() {
 
     }
@@ -53,7 +55,7 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
                 mainFrame.getLabelTempsEcoule().setText(texteDureeEcoulee);
                 mainFrame.getLabelTempsTotal().setText(texteDureeRestant + " / " + texteDureeTotale);
                 mainFrame.getSliderProgression().setValue(position * multiplier);
-                mainFrame.getTraitProgress().setProgress(position);
+                mainFrame.getTraitProgress().setProgress(position + PROGRESS_BAR_POSITION_CORRECTION);
 
                 isFreeMutexLockSliderPosition = true;
             }

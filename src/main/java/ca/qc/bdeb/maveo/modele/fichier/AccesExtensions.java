@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,14 +31,14 @@ public class AccesExtensions {
     public final int INDICE_LISTE_FILTRES_PLAYLIST_FICHIERS_MAVEO = 0;
     public final int INDICE_LISTE_FILTRES_PLAYLIST_FICHIERS_JSON = 1;
 
-    URL urlFichierExtensions;
+    InputStream streamFichierExtension;
 
     ArrayList<FileChooser.ExtensionFilter> listeFiltresMedia;
     ArrayList<FileChooser.ExtensionFilter> listeFiltresPlaylist;
 
 
     public AccesExtensions() {
-        this.urlFichierExtensions = getClass().getClassLoader().getResource(NOM_RESSOURCE_FICHIER_EXTENSIONS);
+        this.streamFichierExtension = getClass().getClassLoader().getResourceAsStream(NOM_RESSOURCE_FICHIER_EXTENSIONS);
         ouvrirFichierExtensions();
     }
 
@@ -50,10 +51,8 @@ public class AccesExtensions {
         listeFiltresPlaylist = new ArrayList<FileChooser.ExtensionFilter>();
 
         try {
-            File file = new File(urlFichierExtensions.toURI());
-
             JSONObject jsonObject =
-                    (JSONObject) jsonParser.parse(new InputStreamReader(new FileInputStream(file.getAbsolutePath())));
+                    (JSONObject) jsonParser.parse(new InputStreamReader(streamFichierExtension));
 
             JSONArray jsonArrayExtensionsMedia = (JSONArray) jsonObject.get(NOM_JSON_EXTENSIONS_MEDIA);
 
@@ -98,10 +97,10 @@ public class AccesExtensions {
     }
 
     public URL getUrlFichierExtensions() {
-        return urlFichierExtensions;
+        return null;
     }
 
     public void setUrlFichierExtensions(URL urlFichierExtensions) {
-        this.urlFichierExtensions = urlFichierExtensions;
+
     }
 }
