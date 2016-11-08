@@ -25,6 +25,9 @@ public class BorderStage {
     HBox boxTitle;
 
     @FXML
+    HBox boxCenter;
+
+    @FXML
     ToggleButton btnHide;
 
     @FXML
@@ -140,13 +143,13 @@ public class BorderStage {
     }
 
     public void setMouseDragEventHandler(EventHandler<MouseEvent> eventDrag) {
-        borderPane.setOnMouseDragged(eventDrag);
+        boxCenter.setOnMouseDragged(eventDrag);
         boxButtons.setOnMouseDragged(eventDrag);
         boxTitle.setOnMouseDragged(eventDrag);
     }
 
     public void setMouseClickEventHandler(EventHandler<MouseEvent> eventClick) {
-        borderPane.setOnMousePressed(eventClick);
+        boxCenter.setOnMousePressed(eventClick);
         boxButtons.setOnMousePressed(eventClick);
         boxTitle.setOnMousePressed(eventClick);
     }

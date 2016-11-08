@@ -1,0 +1,37 @@
+.decorate_button {
+    -fx-background-color: linear-gradient(#B6B4B4, #717070);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+.decorate_pane {
+    -fx-background-color: linear-gradient(#B6B4B4, #90C4DF);
+}
+
+.decorate_text {
+    -fx-font-size: 25px;
+    -fx-font-family: "Arial";
+    -fx-fill: linear-gradient(#7196A9, #2F3D44);
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+
+.decorate_button_hide {
+    -fx-background-image: url("IconesBoutons/hide_btn.png");
+}
+
+.decorate_button_maximum {
+    -fx-background-image: url("IconesBoutons/maximise_btn.png");
+}
+
+.decorate_button_close {
+    -fx-background-image: url("IconesBoutons/close_btn.png");
+}
+
+.decorate_button_close:hover, .decorate_button_hide:hover, .decorate_button_maximum:hover {
+    -fx-background-color: linear-gradient(#717070, #B6B4B4);
+}
+
+.decorate_img_logo {
+    -fx-image: url("Maveo_icon.png");
+}

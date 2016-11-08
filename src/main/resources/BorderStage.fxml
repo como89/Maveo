@@ -10,9 +10,10 @@
 <?import javafx.scene.image.ImageView?>
 <BorderPane id="borderPane" fx:id="borderPane"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ca.qc.bdeb.maveo.vue.BorderStage" prefHeight="32" stylesheets="StyleMainStage.css">
+            fx:controller="ca.qc.bdeb.maveo.vue.BorderStage"
+            prefHeight="32" stylesheets="StyleBorderStage.css">
     <right>
-        <HBox fx:id="boxButtons">
+        <HBox fx:id="boxButtons" styleClass="decorate_pane">
             <children>
                 <Pane>
                     <padding>
@@ -21,7 +22,7 @@
                     <ToggleButton fx:id="btnHide"
                                   prefWidth="32"
                                   prefHeight="32"
-                                  styleClass="decorate_button_hide">
+                                  styleClass="decorate_button_hide,decorate_button">
                         <cursor>
                             <Cursor fx:constant="HAND"/>
                         </cursor>
@@ -34,7 +35,7 @@
                     <ToggleButton fx:id="btnMaximise"
                                   prefWidth="32"
                                   prefHeight="32"
-                                  styleClass="decorate_button_maximum">
+                                  styleClass="decorate_button_maximum,decorate_button">
                         <cursor>
                             <Cursor fx:constant="HAND"/>
                         </cursor>
@@ -47,7 +48,7 @@
                     <ToggleButton fx:id="btnClose"
                                   prefWidth="32"
                                   prefHeight="32"
-                                  styleClass="decorate_button_close">
+                                  styleClass="decorate_button_close,decorate_button">
                         <cursor>
                             <Cursor fx:constant="HAND"/>
                         </cursor>
@@ -56,19 +57,19 @@
             </children>
         </HBox>
     </right>
+    <center>
+        <HBox fx:id="boxCenter" styleClass="decorate_pane"/>
+    </center>
     <left>
-        <HBox fx:id="boxTitle">
+        <HBox fx:id="boxTitle" styleClass="decorate_pane">
             <padding>
-                <Insets top="5" left="5" right="267"/>
+                <Insets top="5" left="5" bottom="5"/>
             </padding>
             <children>
                 <ImageView fitHeight="32" fitWidth="32" styleClass="decorate_img_logo"/>
                 <Text fx:id="textTitle"
-                      textAlignment="CENTER">
-                    <font>
-                        <Font name="Arial Black" size="25"/>
-                    </font>
-                </Text>
+                      textAlignment="CENTER"
+                      styleClass="decorate_text"/>
             </children>
         </HBox>
     </left>

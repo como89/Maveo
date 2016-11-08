@@ -40,7 +40,7 @@ public class MainClass extends Application {
     public void start(Stage stage) throws Exception {
 
         //Création du splashScreen.
-        SplashScreen splashScreen = new SplashScreen();
+        SplashScreen splashScreen = new SplashScreen(stage);
 
 
         //Chargement des libs

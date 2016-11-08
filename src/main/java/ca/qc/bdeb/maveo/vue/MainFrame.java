@@ -39,6 +39,9 @@ public class MainFrame {
     private static final String STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE = "Enregistrer Liste de lecture";
     private static final String STR_MEDIA_OPTION_QUITTER = "Quitter";
 
+    public static final String DEFAULT_TEMPS_ECOULE = "-- : --";
+    public static final String DEFAULT_TEMPS_TOTAL = "-- : -- / -- : --";
+
     @FXML
     Button boutonPlayPause;
 
@@ -53,6 +56,9 @@ public class MainFrame {
 
     @FXML
     Slider sliderProgression;
+
+    @FXML
+    ProgressBar traitProgress;
 
     @FXML
     Slider sliderVolume;
@@ -101,6 +107,30 @@ public class MainFrame {
 
     @FXML
     MenuItem menuItemSavePlaylist;
+
+    @FXML
+    TitledPane playlistPane;
+
+    @FXML
+    ListView<String> listviewPlaylist;
+
+    @FXML
+    MenuItem menuItemHidePlaylist;
+
+    @FXML
+    Label lblTxtVolume;
+
+    @FXML
+    Label lblNomMedia;
+
+    @FXML
+    Label labelTempsEcoule;
+
+    @FXML
+    Label labelTempsTotal;
+
+    @FXML
+    ProgressBar progressVolume;
 
     public MenuItem getMenuItemHidePlaylist() {
         return menuItemHidePlaylist;
@@ -298,20 +328,20 @@ public class MainFrame {
         this.menuItemSavePlaylist = menuItemSavePlaylist;
     }
 
+    public ProgressBar getTraitProgress() {
+        return traitProgress;
+    }
+
+    public ProgressBar getProgressVolume() {
+        return progressVolume;
+    }
+
     public Label getLblTxtVolume() {
         return lblTxtVolume;
     }
 
     public void setLblTxtVolume(Label lblTxtVolume) {
         this.lblTxtVolume = lblTxtVolume;
-    }
-
-    public Label getLblProgression() {
-        return lblProgression;
-    }
-
-    public void setLblProgression(Label lblProgression) {
-        this.lblProgression = lblProgression;
     }
 
     public ListView<String> getListviewPlaylist() {
@@ -325,32 +355,6 @@ public class MainFrame {
     public void setMenuItemHidePlaylist(MenuItem menuItemHidePlaylist) {
         this.menuItemHidePlaylist = menuItemHidePlaylist;
     }
-
-    public void setBoxBorder(BorderPane boxBorder) {
-        this.boxBorder.setPrefSize(boxBorder.getPrefWidth(), boxBorder.getPrefHeight());
-        this.boxBorder.setCenter(boxBorder.getCenter());
-        this.boxBorder.setLeft(boxBorder.getLeft());
-        this.boxBorder.setRight(boxBorder.getRight());
-        this.boxBorder.getStylesheets().addAll(boxBorder.getStylesheets());
-    }
-
-    @FXML
-    MenuItem menuItemHidePlaylist;
-
-    @FXML
-    Label lblTxtVolume;
-
-    @FXML
-    Label lblNomMedia;
-
-    @FXML
-    Label lblProgression;
-
-    @FXML
-    Label labelTempsEcoule;
-
-    @FXML
-    Label labelTempsTotal;
 
     public Label getLabelTempsEcoule() {
         return labelTempsEcoule;
@@ -376,16 +380,6 @@ public class MainFrame {
         this.playlistPane = playlistPane;
     }
 
-    @FXML
-    TitledPane playlistPane;
-
-    @FXML
-    ListView<String> listviewPlaylist;
-
-    public MainFrame() {
-
-    }
-
     public Window getFenetre() {
         return fenetrePrincipale.getScene().getWindow();
     }
@@ -396,7 +390,6 @@ public class MainFrame {
 
     public Button getBtnArreter() {
         return boutonArreter;
-
     }
 
     public Button getBoutonPrecedent() {
@@ -435,17 +428,21 @@ public class MainFrame {
         lblNomMedia.setGraphic(new ImageView(image));
     }
 
+    public void setBoxBorder(BorderPane boxBorder) {
+        this.boxBorder.setPrefSize(boxBorder.getPrefWidth(), boxBorder.getPrefHeight());
+        this.boxBorder.setCenter(boxBorder.getCenter());
+        this.boxBorder.setLeft(boxBorder.getLeft());
+        this.boxBorder.setRight(boxBorder.getRight());
+        this.boxBorder.getStylesheets().addAll(boxBorder.getStylesheets());
+    }
+
     public void actualiseEcranPane(ImageView imageVideo) {
 
         if (imageVideo != null) {
-            panelEcran.getStyleClass().remove("paneEcranMusique");
-            panelEcran.getStyleClass().add("paneEcranVideo");
             panelEcran.getChildren().clear();
             panelEcran.getChildren().add(imageVideo);
             panelEcran.getChildren().add(playlistPane);
         } else {
-            panelEcran.getStyleClass().remove("paneEcranVideo");
-            panelEcran.getStyleClass().add("paneEcranMusique");
             panelEcran.getChildren().clear();
             panelEcran.getChildren().add(lblNomMedia);
             panelEcran.getChildren().add(playlistPane);

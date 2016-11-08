@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 
+import static ca.qc.bdeb.maveo.controleur.MainFrameControleur.isFreeMutexLockSliderVolume;
+
 /**
  * Created by WuTchanKi on 2016-10-11.
  */
@@ -197,8 +199,13 @@ public class PlaylistControleur {
             gestionnaireMedia = GestionnaireFactory.createInstance(media, mainframe);
             gestionnaireMedia.preparerMedia();
             gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
+
+            isFreeMutexLockSliderVolume = true;
+
             mainframe.getBtnJouerPause().setDisable(false);
             mainframe.getSliderProgression().setDisable(false);
+            mainframe.getTraitProgress().setDisable(false);
+
         }
     }
 

@@ -1,7 +1,35 @@
-.paneEcranVideo {
-    -fx-background-color: black
+.paneEcran {
+    -fx-background-color: black;
 }
 
-.paneEcranMusique {
-    -fx-background-color: gray;
+.decorate_pane_controleur {
+    -fx-background-color: linear-gradient(#B6B4B4, #7DAAC1);
+}
+
+.decorate_title_pane > .title {
+    -fx-background-color: linear-gradient(#B6B4B4, #FF5208);
+}
+
+.progress_bar_position {
+    -fx-box-border: #9BCAE2;
+    -fx-accent: #286786;
+}
+
+.progress_bar_volume {
+    -fx-accent: #EB500E;
+    -fx-box-border: #9BCAE2;
+}
+
+.slider_bar .track {
+    -fx-background-color: null;
+    -fx-background-insets: 1 0 -1 0, 0, 1;
+    -fx-background-radius: 2.5, 2.5, 1.5;
+    -fx-padding: 0.208333em; /* 2.5 */
+}
+
+.decorate_text_temps {
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-fill: linear-gradient(#7196A9, #2F3D44);
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
 }

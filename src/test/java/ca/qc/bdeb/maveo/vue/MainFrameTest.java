@@ -404,19 +404,6 @@ public class MainFrameTest extends ApplicationTest {
     }
 
     @Test
-    public void getLblProgression() throws Exception {
-        Label labelTest = testFrame.getLblProgression();
-        Assert.assertEquals(labelTest, testFrame.getLblProgression());
-    }
-
-    @Test
-    public void setLblProgression() throws Exception {
-        Label labelTest = new Label("TEST");
-        testFrame.setLblProgression(labelTest);
-        Assert.assertEquals(labelTest, testFrame.getLblProgression());
-    }
-
-    @Test
     public void getListviewPlaylist() throws Exception {
         ListView listViewTest = testFrame.getListviewPlaylist();
         Assert.assertEquals(listViewTest, testFrame.getListviewPlaylist());
