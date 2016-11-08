@@ -43,8 +43,8 @@
     <orderEntry type="library" name="org.testfx:testfx-junit:4.0.1-alpha" level="project" />
     <orderEntry type="library" name="com.mpatric:mp3agic:Release" level="project" />
     <orderEntry type="library" name="org.apache.clerezza.ext:org.json.simple:0.4" level="project" />
-    <orderEntry type="library" name="com.google.code.gson:gson:2.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.0" level="project" />
   </component>
 </module>
