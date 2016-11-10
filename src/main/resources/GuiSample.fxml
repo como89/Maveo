@@ -42,10 +42,10 @@
                             <MenuItem fx:id="menuItemHidePlaylist" mnemonicParsing="false" text="Hide Playlist"/>
                         </items>
                     </Menu>
-                    <Menu id="menuItemEdit" fx:id="menuItemEdit" mnemonicParsing="false" text="Edit">
+                    <Menu id="menuItemMedia" fx:id="menuItemMedia" mnemonicParsing="false" text="Média">
                         <items>
-                            <MenuItem id="menuItemEditDelete" fx:id="menuItemEditDelete" mnemonicParsing="false"
-                                      text="Delete"/>
+                            <MenuItem id="menuItemMediaLyric" fx:id="menuItemMediaLyric" mnemonicParsing="false"
+                                      text="Open Lyric"/>
                         </items>
                     </Menu>
                     <Menu id="menuItemHelp" fx:id="menuItemHelp" mnemonicParsing="false" text="Help">
@@ -73,9 +73,6 @@
                 </TitledPane>
                 <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0"/>
             </children>
-            <cursor>
-                <Cursor fx:constant="DEFAULT"/>
-            </cursor>
         </Pane>
     </center>
     <bottom>
