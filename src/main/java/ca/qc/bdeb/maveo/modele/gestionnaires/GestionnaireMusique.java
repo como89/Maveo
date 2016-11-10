@@ -1,9 +1,18 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
+import ca.qc.bdeb.maveo.modele.ChartLyricsClient;
+
+
+import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
+import org.farng.mp3.id3.AbstractID3v2;
+
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.DefaultMediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
+
+import java.io.*;
 
 /**
  * Cette classe permet de pouvoir gérer une musique (Jouer, pause, stop, volume et la position).
@@ -72,7 +81,43 @@ class GestionnaireMusique extends GestionnaireMedia {
      */
     public void pause() {
         mediaPlayer.pause();
+
+            recupererTags();
+
     }
+
+
+    public void recupererTags()  {
+        try {
+            MP3File file = new MP3File("res/uilo.mp3");
+            AbstractID3v2 id3V2 = file.getID3v2Tag();
+            String title =  id3V2.getSongTitle();
+            String artist = id3V2.getLeadArtist();
+
+            System.out.println("--------------------TITLE + ARTIST : " + title + " " + artist);
+            System.out.println(file.getID3v2Tag());
+
+            recupererParoles(title, artist);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TagException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void recupererParoles(String title, String artist) {
+        ChartLyricsClient clc = new ChartLyricsClient();
+        try {
+            String lyrics =   clc.getSongLyrics("Kelly Clarkson", "Since U Been Gone").lyrics;
+            System.out.println(lyrics);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     /**
      * Méthode pour savoir si la musique est en lecture.

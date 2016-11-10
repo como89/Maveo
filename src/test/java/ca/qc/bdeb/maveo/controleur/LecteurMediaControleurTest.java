@@ -83,6 +83,14 @@ public class LecteurMediaControleurTest extends ApplicationTest {
         assertTrue(hasStyleClass(STYLE_CLASS_BTNPLAY));
     }
 
+   @Test
+   public void testerConversionDuree(){
+       long dureeAConvertir = 100000;
+      String resultat = lecteurMediaControleur.convertirDuree(dureeAConvertir);
+       assertEquals("01:40", resultat);
+       //currentmillis.com
+   }
+
     /**
      * Méthode qui permet de vérifier si le bouton jouer à bien la styleclass du fichier css.
      *

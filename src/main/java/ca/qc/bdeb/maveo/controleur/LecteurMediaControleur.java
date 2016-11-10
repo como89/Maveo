@@ -62,7 +62,7 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
         });
     }
 
-    private String convertirDuree(long dureeAConvertir) {
+    public String convertirDuree(long dureeAConvertir) {
 
         long secondes = (dureeAConvertir / 1000) % 60;
         long minute = (dureeAConvertir / (1000 * 60)) % 60;
