@@ -1,6 +1,7 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 import ca.qc.bdeb.maveo.modele.Media;
+import ca.qc.bdeb.maveo.util.UtilLib;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,7 @@ public class GestionnaireFactoryTest extends ApplicationTest {
         Scene scene = new Scene(page, WIDTH_STAGE, HEIGHT_STAGE);
         stage.setScene(scene);
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
+        UtilLib.chargerLibSysteme();
     }
 
     @Before
