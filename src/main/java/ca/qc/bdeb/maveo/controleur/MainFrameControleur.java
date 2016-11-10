@@ -94,7 +94,7 @@ public class MainFrameControleur {
         File file = fileOpener.activerOuvertureMedia(mainFrame.getFenetre());
         Media media = null;
         if (file != null) {
-            media = new Media(file.getName(), file.getAbsolutePath());
+            media = new Media(file.getName(), file.getPath());
         }
         return media;
     }
@@ -164,7 +164,8 @@ public class MainFrameControleur {
                 float position = newValue.floatValue();
                 float diviseur = 100;
                 fixerSliderPosition(position / diviseur);
-                mainFrame.getTraitProgress().setProgress(position / diviseur);
+                mainFrame.getTraitProgress().setProgress(position / diviseur
+                        + LecteurMediaControleur.PROGRESS_BAR_POSITION_CORRECTION);
             }
         }
     }
