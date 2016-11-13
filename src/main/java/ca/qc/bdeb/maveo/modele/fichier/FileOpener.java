@@ -20,10 +20,10 @@ public class FileOpener {
     }
 
     /**
-     * Active la fenêtre d'ouverture de média
+     * Active la fenêtre d'ouverture de média.
      *
-     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
-     * @return le chemin du fichier à ouvrir
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher.
+     * @return le fichier sélectionné ou null si aucune sélection n'a été effectuée.
      */
     public File activerOuvertureMedia(Window parent) {
         activerFiltresMedia();
@@ -31,10 +31,10 @@ public class FileOpener {
     }
 
     /**
-     * Active la fenêtre d'ouverture d'un fichier.
+     * Active la fenêtre d'ouverture d'un fichier playlist.
      *
-     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
-     * @return le chemin du fichier à ouvrir
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher.
+     * @return le fichier sélectionné ou null si aucune sélection n'a été effectuée.
      */
     public File activerOuverturePlaylist(Window parent) {
         activerFiltresPlaylist();
@@ -42,10 +42,21 @@ public class FileOpener {
     }
 
     /**
-     * Active la fenêtre de sauveagarde de média
+     * Active la fenêtre d'ouverture d'un fichier paroles.
      *
-     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
-     * @return le chemin du fichier à ouvrir
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher.
+     * @return le fichier sélectionné ou null si aucune sélection n'a été effectuée.
+     */
+    public File activerOuvertureParoles(Window parent) {
+        activerFiltresParoles();
+        return fileChooser.showOpenDialog(parent);
+    }
+
+    /**
+     * Active la fenêtre de sauveagarde de média.
+     *
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher.
+     * @return le fichier sélectionné ou null si aucune sélection n'a été effectuée.
      */
     public File afficherFenetreSauvegardeMedia(Window parent) {
         activerFiltresMedia();
@@ -53,10 +64,10 @@ public class FileOpener {
     }
 
     /**
-     * Active la fenêtre de sauveagarde de playlist
+     * Active la fenêtre de sauveagarde de playlist.
      *
-     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher
-     * @return le chemin du fichier à ouvrir
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher.
+     * @return le fichier sélectionné ou null si aucune sélection n'a été effectuée.
      */
     public File afficherFenetreSauvegardePlaylist(Window parent) {
         activerFiltresPlaylist();
@@ -64,7 +75,18 @@ public class FileOpener {
     }
 
     /**
-     * Active les filtres d'ouverture de fichier média
+     * Affiche la fenêtre de sauvegarde de paroles.
+     *
+     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher.
+     * @return le fichier sélectionné ou null si aucune sélection n'a été effectuée.
+     */
+    public File afficherFenetreSauvegardeParoles(Window parent) {
+        activerFiltresParoles();
+        return fileChooser.showSaveDialog(parent);
+    }
+
+    /**
+     * Active les filtres d'ouverture de fichier média.
      */
     private void activerFiltresMedia() {
         fileChooser.getExtensionFilters().clear();
@@ -72,10 +94,18 @@ public class FileOpener {
     }
 
     /**
-     * Active les filtres d'ouverture de fichier playlist
+     * Active les filtres d'ouverture de fichier playlist.
      */
     private void activerFiltresPlaylist() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresPlaylist());
+    }
+
+    /**
+     * Active les fitres d'ouverture de fuchier paroles.
+     */
+    private void activerFiltresParoles() {
+        fileChooser.getExtensionFilters().clear();
+        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresParoles());
     }
 }
