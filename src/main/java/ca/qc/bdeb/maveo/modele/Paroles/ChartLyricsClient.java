@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.modele;
+package ca.qc.bdeb.maveo.modele.Paroles;
 
 /**
  * Created by WuTchanKi on 2016-11-10.
