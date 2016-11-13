@@ -19,6 +19,7 @@ public class AccesExtensions {
     public final String NOM_RESSOURCE_FICHIER_EXTENSIONS = "ExtensionsMaveo.json";
     public final String CLE_JSON_EXTENSIONS_MEDIA = "ExtensionsOuvertureMedia";
     public final String CLE_JSON_EXTENSIONS_PLAYLIST = "ExtensionsPlaylist";
+    public final String CLE_JSON_EXTENSIONS_PAROLES = "ExtensionsParoles";
     public final String CLE_DESCRIPTION = "Description";
     public final String CLE_EXTENSIONS = "Extensions";
 

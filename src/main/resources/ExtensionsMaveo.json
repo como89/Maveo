@@ -60,5 +60,14 @@
         "*.json"
       ]
     }
-  ]
+  ],
+
+"ExtensionsParoles" : [
+  {
+    "Description": "Fichier Maveo Paroles (*.maveop)",
+    "Extensions": [
+      "*.maveop"
+    ]
+  }
+]
 }
