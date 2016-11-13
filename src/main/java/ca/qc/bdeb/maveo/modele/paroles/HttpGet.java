@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.modele.Paroles;
+package ca.qc.bdeb.maveo.modele.paroles;
 
 /**
  * Created by WuTchanKi on 2016-11-10.
@@ -25,10 +25,7 @@ import java.net.URL;
 
         import java.io.BufferedInputStream;
         import java.io.ByteArrayOutputStream;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.net.HttpURLConnection;
-        import java.net.URL;
+import java.io.InputStream;
 
 /**
  * HTTP GET helper
