@@ -17,8 +17,8 @@ import java.util.Iterator;
  */
 public class PlaylistIO {
 
-    public final static String NOM_JSON_LISTE_CHEMINS_MEDIA = "CheminsMedia";
-    public final static String NOM_JSON_LISTE_NOMS_MEDIA = "NomsMedia";
+    public final static String CLE_JSON_PLAYLIST_LISTE_CHEMINS_MEDIA = "CheminsMedia";
+    public final static String CLE_JSON_PLAYLIST_LISTE_NOMS_MEDIA = "NomsMedia";
 
     FileOpener fileOpener;
 
@@ -51,8 +51,8 @@ public class PlaylistIO {
                     listeChemins.add(media.getPathMedia());
                 }
 
-                obj.put(NOM_JSON_LISTE_NOMS_MEDIA, listeNomsMedia);
-                obj.put(NOM_JSON_LISTE_CHEMINS_MEDIA, listeChemins);
+                obj.put(CLE_JSON_PLAYLIST_LISTE_NOMS_MEDIA, listeNomsMedia);
+                obj.put(CLE_JSON_PLAYLIST_LISTE_CHEMINS_MEDIA, listeChemins);
 
                 FileWriter fw = new FileWriter(file.getAbsolutePath());
                 fw.write(obj.toJSONString());
@@ -89,7 +89,7 @@ public class PlaylistIO {
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
 
 
-                JSONArray jsonArrayPathsMedia = (JSONArray) jsonObject.get(NOM_JSON_LISTE_CHEMINS_MEDIA);
+                JSONArray jsonArrayPathsMedia = (JSONArray) jsonObject.get(CLE_JSON_PLAYLIST_LISTE_CHEMINS_MEDIA);
                 String pathMediaTmp;
                 // Récupère les chemins absolus des fichiers
                 for (int i = 0; i < jsonArrayPathsMedia.size(); i++) {
@@ -97,7 +97,7 @@ public class PlaylistIO {
                     listePathsMedia.add(pathMediaTmp);
                 }
 
-                JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(NOM_JSON_LISTE_NOMS_MEDIA);
+                JSONArray jsonArrayNomMedia = (JSONArray) jsonObject.get(CLE_JSON_PLAYLIST_LISTE_NOMS_MEDIA);
                 String nomMediaTmp;
                 // Récupère les noms des chansons
                 for (int i = 0; i < jsonArrayNomMedia.size(); i++) {
