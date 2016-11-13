@@ -71,7 +71,6 @@ public class AccesExtensions {
             }
 
 
-
             JSONArray jsonArrayExtensionsPlaylist = (JSONArray) jsonObject.get(CLE_JSON_EXTENSIONS_PLAYLIST);
 
             JSONObject jsonObjectExtensionsPlaylist;
@@ -84,6 +83,20 @@ public class AccesExtensions {
                 listeFiltresPlaylist.add(extensionFilterTmp);
             }
 
+
+            JSONArray jsonArrayExtensionsParoles = (JSONArray) jsonObject.get(CLE_JSON_EXTENSIONS_PAROLES);
+
+            JSONObject jsonObjectExtensionsParoles;
+            JSONArray tabExtensionsParoles;
+            for (int i = 0; i < jsonArrayExtensionsParoles.size(); i++) {
+                jsonObjectExtensionsParoles = (JSONObject) jsonArrayExtensionsParoles.get(i);
+                description = (String) jsonObjectExtensionsParoles.get(CLE_DESCRIPTION);
+                tabExtensionsParoles = (JSONArray) jsonObjectExtensionsParoles.get(CLE_EXTENSIONS);
+                extensionFilterTmp = new FileChooser.ExtensionFilter(description, tabExtensionsParoles);
+                listeFiltresParoles.add(extensionFilterTmp);
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,6 +108,10 @@ public class AccesExtensions {
 
     public ArrayList<FileChooser.ExtensionFilter> getListeFiltresPlaylist() {
         return listeFiltresPlaylist;
+    }
+
+    public ArrayList<FileChooser.ExtensionFilter> getListeFiltresParoles() {
+        return listeFiltresParoles;
     }
 
     public URL getUrlFichierExtensions() {
