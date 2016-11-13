@@ -75,7 +75,7 @@ public class AccesExtensionsTest {
             JSONObject jsonObject =
                     (JSONObject) jsonParser.parse(new InputStreamReader(new FileInputStream(file.getAbsolutePath())));
 
-            JSONArray jsonArrayExtensionsMedia = (JSONArray) jsonObject.get(accesExtensions.NOM_JSON_EXTENSIONS_MEDIA);
+            JSONArray jsonArrayExtensionsMedia = (JSONArray) jsonObject.get(accesExtensions.CLE_JSON_EXTENSIONS_MEDIA);
 
             JSONObject jsonObjectExtensionsMedia;
             String description;
@@ -83,21 +83,21 @@ public class AccesExtensionsTest {
             FileChooser.ExtensionFilter extensionFilterTmp;
             for (int i = 0; i < jsonArrayExtensionsMedia.size(); i++) {
                 jsonObjectExtensionsMedia = (JSONObject) jsonArrayExtensionsMedia.get(i);
-                description = (String) jsonObjectExtensionsMedia.get(accesExtensions.DESCRIPTION);
-                tabExtensionsMedia = (JSONArray) jsonObjectExtensionsMedia.get(accesExtensions.EXTENSIONS);
+                description = (String) jsonObjectExtensionsMedia.get(accesExtensions.CLE_DESCRIPTION);
+                tabExtensionsMedia = (JSONArray) jsonObjectExtensionsMedia.get(accesExtensions.CLE_EXTENSIONS);
                 extensionFilterTmp =
                         new FileChooser.ExtensionFilter(description, tabExtensionsMedia);
                 listeFiltresMedia.add(extensionFilterTmp);
             }
 
-            JSONArray jsonArrayExtensionsPlaylist = (JSONArray) jsonObject.get(accesExtensions.NOM_JSON_EXTENSIONS_PLAYLIST);
+            JSONArray jsonArrayExtensionsPlaylist = (JSONArray) jsonObject.get(accesExtensions.CLE_JSON_EXTENSIONS_PLAYLIST);
 
             JSONObject jsonObjectExtensionsPlaylist;
             JSONArray tabExtensionsPlaylist;
             for (int i = 0; i < jsonArrayExtensionsPlaylist.size(); i++) {
                 jsonObjectExtensionsPlaylist = (JSONObject) jsonArrayExtensionsPlaylist.get(i);
-                description = (String) jsonObjectExtensionsPlaylist.get(accesExtensions.DESCRIPTION);
-                tabExtensionsPlaylist = (JSONArray) jsonObjectExtensionsPlaylist.get(accesExtensions.EXTENSIONS);
+                description = (String) jsonObjectExtensionsPlaylist.get(accesExtensions.CLE_DESCRIPTION);
+                tabExtensionsPlaylist = (JSONArray) jsonObjectExtensionsPlaylist.get(accesExtensions.CLE_EXTENSIONS);
                 extensionFilterTmp = new FileChooser.ExtensionFilter(description, tabExtensionsPlaylist);
                 listeFiltresPlaylist.add(extensionFilterTmp);
             }
