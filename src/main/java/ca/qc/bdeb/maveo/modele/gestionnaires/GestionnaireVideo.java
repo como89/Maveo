@@ -87,11 +87,6 @@ class GestionnaireVideo extends GestionnaireMedia {
     }
 
     @Override
-    public String recupererTags() {
-return null;
-    }
-
-    @Override
     public long getTempsEcoule() {
         return embeddedMediaPlayer.getTime();
     }

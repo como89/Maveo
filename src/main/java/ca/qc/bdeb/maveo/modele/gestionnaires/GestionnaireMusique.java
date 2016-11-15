@@ -88,27 +88,6 @@ class GestionnaireMusique extends GestionnaireMedia {
 
     }
 
-
-    public String recupererTags()  {
-        try {
-            MP3File file = new MP3File("res/uilo.mp3");
-            AbstractID3v2 id3V2 = file.getID3v2Tag();
-            String title =  id3V2.getSongTitle();
-            String artist = id3V2.getLeadArtist();
-
-            System.out.println("--------------------TITLE + ARTIST : " + title + " " + artist);
-            System.out.println(file.getID3v2Tag());
-
-            recupererParoles(title, artist);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TagException e) {
-            e.printStackTrace();
-        }
-        return lyrics;
-
-    }
-
     private void recupererParoles(String title, String artist) {
         ChartLyricsClient clc = new ChartLyricsClient();
         try {

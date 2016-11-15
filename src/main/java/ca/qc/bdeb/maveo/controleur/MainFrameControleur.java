@@ -150,11 +150,11 @@ public class MainFrameControleur {
 
         public void handle(ActionEvent event) {
             GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
-           String lyrics = gestionnaireMedia.recupererTags();
+           //String lyrics = gestionnaireMedia.recupererTags();
             mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
             mainFrame.getLblNomMedia().setGraphic(null);
 
-            mainFrame.getLblNomMedia().setText(lyrics);
+           // mainFrame.getLblNomMedia().setText(lyrics);
             mainFrame.getLblNomMedia().setPrefSize(1000, 1000);
 
 

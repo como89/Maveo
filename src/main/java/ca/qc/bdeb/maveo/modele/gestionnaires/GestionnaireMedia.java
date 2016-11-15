@@ -89,8 +89,6 @@ public abstract class GestionnaireMedia {
      */
     public abstract long getTempsTotal();
 
-    public abstract String recupererTags();
-
     /**
      * Méthode pour obtenir le temps écoulé de la musique.
      *
