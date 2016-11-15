@@ -1,9 +1,6 @@
 package ca.qc.bdeb.maveo;
 
-import ca.qc.bdeb.maveo.controleur.BorderStageControleur;
-import ca.qc.bdeb.maveo.controleur.LecteurMediaControleur;
-import ca.qc.bdeb.maveo.controleur.MainFrameControleur;
-import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
+import ca.qc.bdeb.maveo.controleur.*;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.util.UtilLib;
@@ -15,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -105,6 +101,9 @@ public class MainClass extends Application {
 
             playlistControleur.ajouterMainFrame(mainFrame);
             playlistControleur.ajouterControleurLecteurMedia(controleurLecteurMedia);
+
+            ParolesControleur parolesControleur = new ParolesControleur();
+            parolesControleur.ajouterMainFrame(mainFrame);
 
             controleurLecteurMedia.ajouterMainFrame(mainFrame);
         } catch (IOException e) {

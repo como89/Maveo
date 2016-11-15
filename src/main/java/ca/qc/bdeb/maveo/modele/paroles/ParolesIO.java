@@ -2,7 +2,7 @@ package ca.qc.bdeb.maveo.modele.paroles;
 
 import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
-import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -35,11 +35,11 @@ public class ParolesIO {
      * @param context le contexte (la fenêtre) dans lequel le FileChooser sera affiché.
      * @param media   le média à partir duquel le fichier de paroles sera crée
      */
-    public void sauvegarderParoles(Stage context, Media media) {
+    public void sauvegarderParoles(Window context, Media media) {
         try {
             File file = fileOpener.afficherFenetreSauvegardeParoles(context);
 
-            if (file != null) {
+            if (file != null && media != null) {
                 JSONObject objetPrincipal = new JSONObject();
 
                 objetPrincipal.put(CLE_JSON_PAROLES_NOM_MEDIA, media.getTitre());
@@ -65,28 +65,28 @@ public class ParolesIO {
      * @param context le contexte (la fenêtre) dans lequel le FileChooser sera affiché.
      * @return l'objet Media crée. Null si l'utilisateur ne choisit pas de fichier.
      */
-    public Media ouvrirFichierParoles(Stage context) {
+    public Media ouvrirFichierParoles(Window context) {
         Media media = null;
 
         FileOpener fo = new FileOpener();
         File file = fo.activerOuvertureParoles(context);
+        if (file != null) {
+            try {
+                JSONParser jsonParser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
 
-        JSONParser jsonParser = new JSONParser();
-        try {
+                media = new Media(
+                        (String) jsonObject.get(CLE_JSON_PAROLES_NOM_MEDIA),
+                        (String) jsonObject.get(CLE_JSON_PAROLES_CHEMIN_MEDIA),
+                        (String) jsonObject.get(CLE_JSON_PAROLES_PAROLES_MEDIA));
 
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file.getAbsolutePath()));
-
-            media = new Media(
-                    (String) jsonObject.get(CLE_JSON_PAROLES_NOM_MEDIA),
-                    (String) jsonObject.get(CLE_JSON_PAROLES_CHEMIN_MEDIA),
-                    (String) jsonObject.get(CLE_JSON_PAROLES_PAROLES_MEDIA));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return media;
     }
