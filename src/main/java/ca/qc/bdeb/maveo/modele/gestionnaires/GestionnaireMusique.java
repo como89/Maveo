@@ -1,8 +1,9 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
-import ca.qc.bdeb.maveo.modele.ChartLyricsClient;
 
 
+
+import ca.qc.bdeb.maveo.modele.paroles.ChartLyricsClient;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
 import org.farng.mp3.id3.AbstractID3v2;
@@ -20,6 +21,7 @@ import java.io.*;
  * @doc http://caprica.github.io/vlcj/javadoc/3.0.0/uk/co/caprica/vlcj/player/MediaPlayer.html
  */
 class GestionnaireMusique extends GestionnaireMedia {
+     public String lyrics;
 
     private MediaPlayer mediaPlayer;
     private AudioMediaPlayerComponent audioEcouteur;
@@ -82,12 +84,12 @@ class GestionnaireMusique extends GestionnaireMedia {
     public void pause() {
         mediaPlayer.pause();
 
-            recupererTags();
+
 
     }
 
 
-    public void recupererTags()  {
+    public String recupererTags()  {
         try {
             MP3File file = new MP3File("res/uilo.mp3");
             AbstractID3v2 id3V2 = file.getID3v2Tag();
@@ -103,18 +105,20 @@ class GestionnaireMusique extends GestionnaireMedia {
         } catch (TagException e) {
             e.printStackTrace();
         }
+        return lyrics;
 
     }
 
     private void recupererParoles(String title, String artist) {
         ChartLyricsClient clc = new ChartLyricsClient();
         try {
-            String lyrics =   clc.getSongLyrics("Kelly Clarkson", "Since U Been Gone").lyrics;
-            System.out.println(lyrics);
+            lyrics =   clc.getSongLyrics("Kelly Clarkson", "Miss Independant").lyrics;
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 

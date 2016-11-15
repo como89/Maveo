@@ -132,6 +132,13 @@ public class MainFrame {
     @FXML
     ProgressBar progressVolume;
 
+    public MenuItem getMenuItemMediaLyric() {
+        return menuItemMediaLyric;
+    }
+
+    @FXML
+    MenuItem menuItemMediaLyric;
+
     public MenuItem getMenuItemHidePlaylist() {
         return menuItemHidePlaylist;
     }
@@ -474,6 +481,10 @@ public class MainFrame {
 
     public void addChangeListenerSliderVolume(ChangeListener<Number> changeListener) {
         sliderVolume.valueProperty().addListener(changeListener);
+    }
+
+    public void addEventHandlerDisplayLyrics(EventHandler<ActionEvent> displayLyricsEventHandler) {
+        menuItemMediaLyric.setOnAction(displayLyricsEventHandler);
     }
 
     public void addEventHandlerAddMediaInPlayList(EventHandler<ActionEvent> menuAddToPlaylistEventHandler) {

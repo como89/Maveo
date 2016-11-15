@@ -14,6 +14,8 @@ import javafx.stage.WindowEvent;
 
 import java.io.*;
 
+import static ca.qc.bdeb.maveo.controleur.MainFrameControleur.isFreeMutexLockSliderVolume;
+
 /**
  * Created by 1379708 on 2016-09-08.
  */
@@ -44,6 +46,7 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
+        this.mainFrame.addEventHandlerDisplayLyrics(new DisplayLyricsEventHandler());
 
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
@@ -142,6 +145,23 @@ public class MainFrameControleur {
             }
         }
     }
+
+    class DisplayLyricsEventHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent event) {
+            GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+           String lyrics = gestionnaireMedia.recupererTags();
+            mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
+            mainFrame.getLblNomMedia().setGraphic(null);
+
+            mainFrame.getLblNomMedia().setText(lyrics);
+            mainFrame.getLblNomMedia().setPrefSize(1000, 1000);
+
+
+
+
+            }
+        }
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'arrêt
