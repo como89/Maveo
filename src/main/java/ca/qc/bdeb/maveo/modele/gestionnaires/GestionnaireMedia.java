@@ -1,5 +1,7 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
+import ca.qc.bdeb.maveo.modele.Media;
+import ca.qc.bdeb.maveo.modele.paroles.ParolesIO;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 
 /**
@@ -7,7 +9,10 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
  */
 public abstract class GestionnaireMedia {
 
+    private ParolesIO parolesIO;
+
     GestionnaireMedia() {
+        parolesIO = new ParolesIO();
     }
 
     /**
@@ -111,4 +116,11 @@ public abstract class GestionnaireMedia {
      * @param mediaPlayerEventListener le Listener à ajouter au lecteur média
      */
     public abstract void addMediaPlayerEventListener(MediaPlayerEventListener mediaPlayerEventListener);
+
+    public ParolesIO getParolesIO() {
+        return parolesIO;
+    }
+
+    public abstract Media recupererMedia();
+
 }

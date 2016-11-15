@@ -1,13 +1,12 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 
-
-
+import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.paroles.ChartLyricsClient;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
+import org.farng.mp3.id3.AbstractID3v1;
 import org.farng.mp3.id3.AbstractID3v2;
-
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.DefaultMediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayer;
@@ -17,11 +16,12 @@ import java.io.*;
 
 /**
  * Cette classe permet de pouvoir gérer une musique (Jouer, pause, stop, volume et la position).
+ *
  * @author Nicholas
  * @doc http://caprica.github.io/vlcj/javadoc/3.0.0/uk/co/caprica/vlcj/player/MediaPlayer.html
  */
 class GestionnaireMusique extends GestionnaireMedia {
-     public String lyrics;
+    public String lyrics;
 
     private MediaPlayer mediaPlayer;
     private AudioMediaPlayerComponent audioEcouteur;
@@ -83,18 +83,24 @@ class GestionnaireMusique extends GestionnaireMedia {
      */
     public void pause() {
         mediaPlayer.pause();
-
-
-
     }
 
 
-    public String recupererTags()  {
+    public String recupererTags() {
         try {
-            MP3File file = new MP3File("res/uilo.mp3");
+            String title = "";
+            String artist = "";
+            MP3File file = new MP3File(cheminFichier);
             AbstractID3v2 id3V2 = file.getID3v2Tag();
-            String title =  id3V2.getSongTitle();
-            String artist = id3V2.getLeadArtist();
+            AbstractID3v1 id3v1 = file.getID3v1Tag();
+
+            if (id3V2 != null) {
+                title = id3V2.getSongTitle();
+                artist = id3V2.getLeadArtist();
+            } else if (id3v1 != null){
+                title = id3v1.getSongTitle();
+                artist = id3v1.getLeadArtist();
+            }
 
             System.out.println("--------------------TITLE + ARTIST : " + title + " " + artist);
             System.out.println(file.getID3v2Tag());
@@ -109,17 +115,16 @@ class GestionnaireMusique extends GestionnaireMedia {
 
     }
 
-    private void recupererParoles(String title, String artist) {
+    private String recupererParoles(String title, String artist) {
+        String paroles = "";
         ChartLyricsClient clc = new ChartLyricsClient();
         try {
-            lyrics =   clc.getSongLyrics("Kelly Clarkson", "Miss Independant").lyrics;
-
-
+            lyrics = clc.getSongLyrics(artist, title).lyrics;
+            paroles = lyrics;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
+        return paroles;
     }
 
 
@@ -204,5 +209,28 @@ class GestionnaireMusique extends GestionnaireMedia {
         mediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
     }
 
+    /**
+     * Crée une classe Media avec les données du média en cours : titre, artiste, paroles
+     *
+     * @return classe Media avec les données courantes du média : titre, artiste, paroles
+     */
+    public Media recupererMedia() {
+        Media media = null;
 
+        MP3File file = null;
+        try {
+            file = new MP3File(cheminFichier);
+            AbstractID3v2 id3V2 = file.getID3v2Tag();
+            String titre = id3V2.getSongTitle();
+            String artiste = id3V2.getLeadArtist();
+            String paroles = recupererParoles(artiste, titre);
+            media = new Media(titre, artiste, paroles);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TagException e) {
+            e.printStackTrace();
+        }
+
+        return media;
+    }
 }

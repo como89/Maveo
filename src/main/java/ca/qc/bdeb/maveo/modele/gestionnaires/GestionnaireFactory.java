@@ -4,8 +4,9 @@ import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.fichier.AccesExtensions;
 import ca.qc.bdeb.maveo.vue.ComposantVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
-import com.google.common.io.Files;
 import javafx.stage.FileChooser;
+import com.google.common.io.Files;
+
 
 /**
  * Created by nicholas on 12/10/16.

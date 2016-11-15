@@ -44,8 +44,11 @@
                     </Menu>
                     <Menu id="menuItemMedia" fx:id="menuItemMedia" mnemonicParsing="false" text="Média">
                         <items>
-                            <MenuItem id="menuItemMediaLyric" fx:id="menuItemMediaLyric" mnemonicParsing="false"
-                                      text="Open Lyric"/>
+                            <MenuItem id="menuItemMediaLyric" fx:id="menuItemMediaOpenLyric" mnemonicParsing="false"
+                                      text="Ouvrir paroles..."/>
+                            <MenuItem id="menuItemMediaLyric" fx:id="menuItemMediaSaveLyric" mnemonicParsing="false"
+                                      text="Enregistrer paroles..."/>
+
                         </items>
                     </Menu>
                     <Menu id="menuItemHelp" fx:id="menuItemHelp" mnemonicParsing="false" text="Help">
@@ -169,10 +172,10 @@
                                  progress="1"
                                  prefHeight="14.0" prefWidth="70.0" styleClass="progress_bar_volume"/>
                     <Slider fx:id="sliderVolume" orientation="VERTICAL" styleClass="slider_bar">
-                    <cursor>
-                        <Cursor fx:constant="V_RESIZE"/>
-                    </cursor>
-                </Slider>
+                        <cursor>
+                            <Cursor fx:constant="V_RESIZE"/>
+                        </cursor>
+                    </Slider>
                 </StackPane>
             </right>
         </BorderPane>

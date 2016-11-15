@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.MainClass;
-import ca.qc.bdeb.maveo.controleur.PlaylistControleur;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,12 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 
 
 /**
@@ -132,12 +128,20 @@ public class MainFrame {
     @FXML
     ProgressBar progressVolume;
 
-    public MenuItem getMenuItemMediaLyric() {
-        return menuItemMediaLyric;
-    }
 
     @FXML
-    MenuItem menuItemMediaLyric;
+    MenuItem menuItemMediaOpenLyric;
+
+    @FXML
+    MenuItem menuItemMediaSaveLyric;
+
+    public MenuItem getMenuItemMediaSaveLyric() {
+        return menuItemMediaSaveLyric;
+    }
+
+    public MenuItem getMenuItemMediaOpenLyric() {
+        return menuItemMediaOpenLyric;
+    }
 
     public MenuItem getMenuItemHidePlaylist() {
         return menuItemHidePlaylist;
@@ -484,7 +488,7 @@ public class MainFrame {
     }
 
     public void addEventHandlerDisplayLyrics(EventHandler<ActionEvent> displayLyricsEventHandler) {
-        menuItemMediaLyric.setOnAction(displayLyricsEventHandler);
+        menuItemMediaOpenLyric.setOnAction(displayLyricsEventHandler);
     }
 
     public void addEventHandlerAddMediaInPlayList(EventHandler<ActionEvent> menuAddToPlaylistEventHandler) {
@@ -511,7 +515,15 @@ public class MainFrame {
         boutonPrecedent.setOnAction(boutonPrecedentActionEvent);
     }
 
-    public void addEventHandlerHidePlaylist(EventHandler<ActionEvent> MenuHidePlaylistEventHandler ) {
+    public void addEventHandlerHidePlaylist(EventHandler<ActionEvent> MenuHidePlaylistEventHandler) {
         menuItemHidePlaylist.setOnAction(MenuHidePlaylistEventHandler);
+    }
+
+    public void addEventHandlerMenuItemMediaOpenLyric(EventHandler<ActionEvent> MenuItemMediaOpenLyricEventHandler){
+        menuItemMediaOpenLyric.setOnAction(MenuItemMediaOpenLyricEventHandler);
+    }
+
+    public void addEventHandlerMenuItemMediaSaveLyric(EventHandler<ActionEvent> MenuItemMediaSaveLyricPlaylistEventHandler){
+        menuItemMediaSaveLyric.setOnAction(MenuItemMediaSaveLyricPlaylistEventHandler);
     }
 }

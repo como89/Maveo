@@ -15,7 +15,6 @@
       <element id="file-copy" path="$PROJECT_DIR$/lib/slf4j-api-1.7.21.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/slf4j-nop-1.7.21.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/jna-platform-4.1.0.jar" />
-      <element id="library" level="project" name="org.testfx:testfx-junit:4.0.1-alpha" />
       <element id="directory" name="lib">
         <element id="directory" name="natives">
           <element id="dir-copy" path="$PROJECT_DIR$/lib/natives" />
@@ -23,7 +22,6 @@
       </element>
       <element id="library" level="project" name="com.mpatric:mp3agic:Release" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/org.json.simple-0.4.jar" />
-      <element id="library" level="project" name="org.testfx:testfx-core:4.0.1-alpha" />
       <element id="library" level="project" name="org.apache.clerezza.ext:org.json.simple:0.4" />
       <element id="library" level="project" name="com.google.code.gson:gson:2.8.0" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/jna-3.5.2.jar" />
