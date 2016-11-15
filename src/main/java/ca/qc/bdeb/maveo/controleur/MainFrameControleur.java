@@ -150,19 +150,18 @@ public class MainFrameControleur {
 
         public void handle(ActionEvent event) {
             GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+           //String lyrics = gestionnaireMedia.recupererTags();
+            mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
+            mainFrame.getLblNomMedia().setGraphic(null);
 
-            if (gestionnaireMedia != null) {
-                // TODO code temporarire; re-faire bien
-                String lyrics = gestionnaireMedia.recupererTags();
-                mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
-                mainFrame.getLblNomMedia().setGraphic(null);
+           // mainFrame.getLblNomMedia().setText(lyrics);
+            mainFrame.getLblNomMedia().setPrefSize(1000, 1000);
 
-                mainFrame.getLblNomMedia().setText(lyrics);
-                mainFrame.getLblNomMedia().setPrefSize(1000, 1000);
+
+
 
             }
         }
-    }
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'arrêt
