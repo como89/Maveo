@@ -3,17 +3,12 @@ package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 
 
+import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.paroles.ChartLyricsClient;
-import org.farng.mp3.MP3File;
-import org.farng.mp3.TagException;
-import org.farng.mp3.id3.AbstractID3v2;
-
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.DefaultMediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
-
-import java.io.*;
 
 /**
  * Cette classe permet de pouvoir gérer une musique (Jouer, pause, stop, volume et la position).
@@ -181,6 +176,11 @@ class GestionnaireMusique extends GestionnaireMedia {
      */
     public void addMediaPlayerEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
         mediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
+    }
+
+    @Override
+    public Media recupererMedia() {
+        return null;
     }
 
 

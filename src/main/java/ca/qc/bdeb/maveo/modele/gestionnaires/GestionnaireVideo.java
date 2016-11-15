@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
+import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.vue.ComposantVideo;
 import uk.co.caprica.vlcj.player.DefaultMediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
@@ -99,5 +100,10 @@ class GestionnaireVideo extends GestionnaireMedia {
     @Override
     public void addMediaPlayerEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
         embeddedMediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
+    }
+
+    @Override
+    public Media recupererMedia() {
+        return null;
     }
 }
