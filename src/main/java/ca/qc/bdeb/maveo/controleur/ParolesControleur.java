@@ -33,30 +33,16 @@ public class ParolesControleur {
     class MenuItemMediaOpenLyricHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            ouvrirParoles();
+            media = parolesIO.afficherFenetreOuvertureFichierParoles(mainFrame.getFenetre());
         }
     }
 
-    /**
-     * Active ouverture fichier paroles
-     */
-    void ouvrirParoles() {
-        media = parolesIO.afficherFenetreOuvertureFichierParoles(mainFrame.getFenetre());
-    }
 
     class MenuItemMediaSaveLyricHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            enregistrerParoles();
+            media = GestionnaireFactory.getCurrentInstance().recupererMedia();
+            parolesIO.afficherFenetreSauvegardeParoles(mainFrame.getFenetre(), media);
         }
     }
-
-    /**
-     * Enregistre les paroles
-     */
-    void enregistrerParoles() {
-        media = GestionnaireFactory.getCurrentInstance().recupererMedia();
-        parolesIO.afficherFenetreSauvegardeParoles(mainFrame.getFenetre(), media);
-    }
-
 }
