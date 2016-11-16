@@ -41,7 +41,7 @@ public class ParolesControleur {
      * Active ouverture fichier paroles
      */
     void ouvrirParoles() {
-        media = parolesIO.ouvrirFichierParoles(mainFrame.getFenetre());
+        media = parolesIO.afficherFenetreOuvertureFichierParoles(mainFrame.getFenetre());
     }
 
     class MenuItemMediaSaveLyricHandler implements EventHandler<ActionEvent> {
@@ -56,7 +56,7 @@ public class ParolesControleur {
      */
     void enregistrerParoles() {
         media = GestionnaireFactory.getCurrentInstance().recupererMedia();
-        parolesIO.sauvegarderParoles(mainFrame.getFenetre(), media);
+        parolesIO.afficherFenetreSauvegardeParoles(mainFrame.getFenetre(), media);
     }
 
 }

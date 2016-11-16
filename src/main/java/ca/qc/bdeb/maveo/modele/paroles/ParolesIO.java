@@ -35,25 +35,34 @@ public class ParolesIO {
      * @param context le contexte (la fenêtre) dans lequel le FileChooser sera affiché.
      * @param media   le média à partir duquel le fichier de paroles sera crée
      */
-    public void sauvegarderParoles(Window context, Media media) {
-        try {
-            File file = fileOpener.afficherFenetreSauvegardeParoles(context);
+    public void afficherFenetreSauvegardeParoles(Window context, Media media) {
+        File file = fileOpener.afficherFenetreSauvegardeParoles(context);
 
-            if (file != null && media != null) {
-                JSONObject objetPrincipal = new JSONObject();
+        sauvegarderParoles(file, media);
+    }
 
-                objetPrincipal.put(CLE_JSON_PAROLES_NOM_MEDIA, media.getTitre());
-                objetPrincipal.put(CLE_JSON_PAROLES_CHEMIN_MEDIA, media.getPathMedia());
-                objetPrincipal.put(CLE_JSON_PAROLES_PAROLES_MEDIA, media.getParolesMedia());
+    /**
+     * Enregistre les parones au chemin spécifié dans le paramètre
+     */
+    void sauvegarderParoles(File file, Media media) {
+
+        if (file != null && media != null) {
+            JSONObject objetPrincipal = new JSONObject();
+
+            objetPrincipal.put(CLE_JSON_PAROLES_NOM_MEDIA, media.getTitre());
+            objetPrincipal.put(CLE_JSON_PAROLES_CHEMIN_MEDIA, media.getPathMedia());
+            objetPrincipal.put(CLE_JSON_PAROLES_PAROLES_MEDIA, media.getParolesMedia());
+
+            try {
 
                 FileWriter fw = new FileWriter(file.getAbsolutePath());
 
                 fw.write(objetPrincipal.toString());
                 fw.flush();
                 fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -65,11 +74,24 @@ public class ParolesIO {
      * @param context le contexte (la fenêtre) dans lequel le FileChooser sera affiché.
      * @return l'objet Media crée. Null si l'utilisateur ne choisit pas de fichier.
      */
-    public Media ouvrirFichierParoles(Window context) {
+    public Media afficherFenetreOuvertureFichierParoles(Window context) {
         Media media = null;
 
         FileOpener fo = new FileOpener();
         File file = fo.activerOuvertureParoles(context);
+
+        media = ouvrirFichierParoles(file);
+        return media;
+    }
+
+    /**
+     * Affiche fenêtre ouverture fichier paroles
+     *
+     * @return média avec paroles
+     */
+    Media ouvrirFichierParoles(File file) {
+        Media media = null;
+
         if (file != null) {
             try {
                 JSONParser jsonParser = new JSONParser();
