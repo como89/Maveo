@@ -37,7 +37,6 @@ public class ParolesControleur {
         }
     }
 
-
     class MenuItemMediaSaveLyricHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
