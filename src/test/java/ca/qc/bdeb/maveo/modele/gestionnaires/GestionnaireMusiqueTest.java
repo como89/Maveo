@@ -1,6 +1,5 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
-import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import org.junit.After;
 import org.junit.Assert;

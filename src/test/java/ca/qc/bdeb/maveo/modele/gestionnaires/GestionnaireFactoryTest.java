@@ -15,8 +15,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import java.net.URL;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by nicholas on 13/10/16.
  */
@@ -33,7 +31,7 @@ public class GestionnaireFactoryTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
+        URL ressource = getClass().getClassLoader().getResource("MainStage.fxml");
         FXMLLoader loader = new FXMLLoader(ressource);
         BorderPane page = loader.load();
         mainFrame = loader.getController();

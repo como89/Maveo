@@ -7,6 +7,11 @@ public class Tags {
     String title;
     String artist;
 
+    /**
+     * Constructeur pour créer un tags avec un titre et un artiste.
+     * @param title - Le titre de la musique
+     * @param artist - L'artiste de la musique
+     */
     public Tags(String title,String artist) {
         this.title = title;
         this.artist = artist;

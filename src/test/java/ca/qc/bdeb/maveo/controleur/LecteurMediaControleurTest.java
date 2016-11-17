@@ -3,7 +3,6 @@ package ca.qc.bdeb.maveo.controleur;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -12,8 +11,6 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 import java.net.URL;
-import java.util.concurrent.RunnableFuture;
-import java.util.concurrent.RunnableScheduledFuture;
 
 import static org.junit.Assert.*;
 
@@ -37,7 +34,7 @@ public class LecteurMediaControleurTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
+        URL ressource = getClass().getClassLoader().getResource("MainStage.fxml");
         FXMLLoader loader = new FXMLLoader(ressource);
         BorderPane page = loader.load();
         mainFrame = loader.getController();

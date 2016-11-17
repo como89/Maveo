@@ -1,14 +1,10 @@
 package ca.qc.bdeb.maveo.vue;
 
-import ca.qc.bdeb.maveo.modele.playlist.Playlist;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,8 +15,6 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import java.net.URL;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by WuTchanKi on 2016-10-24.
  */
@@ -30,7 +24,7 @@ public class MainFrameTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
+        URL ressource = getClass().getClassLoader().getResource("MainStage.fxml");
         FXMLLoader loader = new FXMLLoader(ressource);
         BorderPane page = loader.load();
         testFrame = (MainFrame) loader.getController();

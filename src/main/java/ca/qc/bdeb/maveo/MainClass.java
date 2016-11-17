@@ -55,7 +55,7 @@ public class MainClass extends Application {
         try {
             mainStage.initStyle(StageStyle.DECORATED);
             // vue
-            URL ressourceMainGUI = getClass().getClassLoader().getResource("GuiSample.fxml");
+            URL ressourceMainGUI = getClass().getClassLoader().getResource("MainStage.fxml");
             FXMLLoader loader = new FXMLLoader(ressourceMainGUI);
             BorderPane page = loader.load();
 

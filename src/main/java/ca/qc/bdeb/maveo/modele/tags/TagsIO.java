@@ -12,8 +12,16 @@ import java.io.IOException;
  */
 public class TagsIO {
 
+    /**
+     * Constructeur par défaut qui ne prend pas d'arguments.
+     */
     public TagsIO() {}
 
+    /**
+     * Méthode qui permet de récupérer les tags du fichier.
+     * @param pathMedia - Le path du fichier média.
+     * @return retourne les tags du fichier.
+     */
     public Tags getTagsFromMedia(String pathMedia) {
         Tags tags = null;
         File file = new File(pathMedia);
@@ -35,9 +43,7 @@ public class TagsIO {
                     System.out.println("--------------------TITLE + ARTIST : " + title + " " + artist);
                 }
                 System.out.println(id3);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (TagException e) {
+            } catch (IOException | TagException e) {
                 e.printStackTrace();
             }
         }

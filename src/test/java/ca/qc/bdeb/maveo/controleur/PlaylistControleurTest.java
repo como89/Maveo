@@ -40,7 +40,7 @@ public class PlaylistControleurTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
 
-        URL ressource = getClass().getClassLoader().getResource("GuiSample.fxml");
+        URL ressource = getClass().getClassLoader().getResource("MainStage.fxml");
         FXMLLoader loader = new FXMLLoader(ressource);
         BorderPane page = loader.load();
         mainFrame = (MainFrame) loader.getController();

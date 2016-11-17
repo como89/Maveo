@@ -1,8 +1,6 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
 
-import ca.qc.bdeb.maveo.modele.Media;
-import ca.qc.bdeb.maveo.modele.paroles.ChartLyricsClient;
 import ca.qc.bdeb.maveo.modele.tags.Tags;
 import ca.qc.bdeb.maveo.modele.tags.TagsIO;
 import uk.co.caprica.vlcj.component.AudioMediaPlayerComponent;
@@ -16,18 +14,19 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
  * @author Nicholas
  * @doc http://caprica.github.io/vlcj/javadoc/3.0.0/uk/co/caprica/vlcj/player/MediaPlayer.html
  */
-class GestionnaireMusique extends GestionnaireMedia {
-    public String lyrics;
+public class GestionnaireMusique extends GestionnaireMedia {
 
     private MediaPlayer mediaPlayer;
     private AudioMediaPlayerComponent audioEcouteur;
 
     private String cheminFichier;
+    private TagsIO tagsIO;
+    private Tags tags;
 
-    public GestionnaireMusique() {
+    GestionnaireMusique() {
         audioEcouteur = new AudioMediaPlayerComponent();
         mediaPlayer = audioEcouteur.getMediaPlayer();
-
+        tagsIO = new TagsIO();
     }
 
     /**
@@ -36,9 +35,7 @@ class GestionnaireMusique extends GestionnaireMedia {
      * @return Retourne true, si le fichier existe, false, le fichier n'existe pas.
      */
     public boolean preparerMedia() {
-
         return mediaPlayer.prepareMedia(cheminFichier);
-
     }
 
     /**
@@ -79,8 +76,6 @@ class GestionnaireMusique extends GestionnaireMedia {
      */
     public void pause() {
         mediaPlayer.pause();
-
-
     }
 
     /**
@@ -165,39 +160,11 @@ class GestionnaireMusique extends GestionnaireMedia {
     }
 
     /**
-     * Crée une classe Media avec les données du média en cours : titre, chemin, paroles
-     *
-     * @return classe Media avec les données courantes du média : titre, chemin, paroles
+     * Méthode qui permet de récupérer les tags du média.
+     * @return Retourne null, si aucun tag existe.
      */
-    public Media recupererMedia() {
-        Media media = null;
-
-        TagsIO tagsIo = new TagsIO();
-
-        Tags tags = tagsIo.getTagsFromMedia(cheminFichier);
-        String paroles = recupererParoles(tags.getArtist(), tags.getArtist());
-        media = new Media(tags.getTitle(), cheminFichier, paroles);
-
-        return media;
+    public Tags getTags() {
+        tags = tagsIO.getTagsFromMedia(cheminFichier);
+        return tags;
     }
-
-    /**
-     * Récupère les paroles du média en cours
-     *
-     * @param title  titre du média
-     * @param artist artiste du média
-     * @return paroles du média
-     */
-    private String recupererParoles(String title, String artist) {
-        String paroles = "";
-        ChartLyricsClient clc = new ChartLyricsClient();
-        try {
-            paroles = clc.getSongLyrics(artist, title).lyrics;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return paroles;
-    }
-
-
 }

@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.modele;
+package ca.qc.bdeb.maveo.modele.fichier;
 
 import org.junit.Test;
 import java.util.concurrent.ExecutionException;
