@@ -15,6 +15,7 @@ import java.io.*;
 public class ParolesIO {
 
     public final static String CLE_JSON_PAROLES_NOM_MEDIA = "NomMedia";
+    public final static String CLE_JSON_PAROLES_ARTISTE_MEDIA = "ArtisteMedia";
     public final static String CLE_JSON_PAROLES_CHEMIN_MEDIA = "CheminMedia";
     public final static String CLE_JSON_PAROLES_PAROLES_MEDIA = "ParolesMedia";
 
@@ -50,6 +51,7 @@ public class ParolesIO {
             JSONObject objetPrincipal = new JSONObject();
 
             objetPrincipal.put(CLE_JSON_PAROLES_NOM_MEDIA, media.getTitre());
+            objetPrincipal.put(CLE_JSON_PAROLES_ARTISTE_MEDIA, media.getArtiste());
             objetPrincipal.put(CLE_JSON_PAROLES_CHEMIN_MEDIA, media.getPathMedia());
             objetPrincipal.put(CLE_JSON_PAROLES_PAROLES_MEDIA, media.getParolesMedia());
 
@@ -99,6 +101,7 @@ public class ParolesIO {
 
                 media = new Media(
                         (String) jsonObject.get(CLE_JSON_PAROLES_NOM_MEDIA),
+                        (String) jsonObject.get(CLE_JSON_PAROLES_ARTISTE_MEDIA),
                         (String) jsonObject.get(CLE_JSON_PAROLES_CHEMIN_MEDIA),
                         (String) jsonObject.get(CLE_JSON_PAROLES_PAROLES_MEDIA));
 

@@ -16,6 +16,7 @@ public class ParolesIOTest {
     private final String NOM_DOSSIER_TEST_TMP = ".testTmp";
     private final String NOM_FICHIER_TEST = "tokyo_paroles_test_maveop";
     private final String NOM_CHANSON = "Space Oddity";
+    private final String NOM_ARTISTE_CHANSON = "David Bowie";
     private final String CHEMIN_CHANSON = "/champignons/magiques/David Bowie - Space Odity.mp3";
     private final String PAROLES_CHANSON = "Ground Control to Major Tom\n" +
             "Ground Control to Major Tom\n" +
@@ -59,7 +60,7 @@ public class ParolesIOTest {
 
     @Test
     public void sauvegarderParoles() throws Exception {
-        Media mediaOriginal = new Media(NOM_CHANSON, CHEMIN_CHANSON, PAROLES_CHANSON);
+        Media mediaOriginal = new Media(NOM_CHANSON, NOM_ARTISTE_CHANSON, CHEMIN_CHANSON, PAROLES_CHANSON);
 
         File dossierTest = new File(NOM_DOSSIER_TEST_TMP);
         String a = dossierTest.getAbsolutePath();
@@ -130,7 +131,7 @@ public class ParolesIOTest {
     @Test
     public void ouvrirFichierParoles() throws Exception {
         Media mediaOriginal = parolesIO.ouvrirFichierParoles(new File(CHEMIN_FICHIER_PAROLES_TEST));
-        Media mediaATester = new Media(NOM_CHANSON, CHEMIN_CHANSON, PAROLES_CHANSON);
+        Media mediaATester = new Media(NOM_CHANSON, NOM_ARTISTE_CHANSON, CHEMIN_CHANSON, PAROLES_CHANSON);
 
         Assert.assertEquals(mediaOriginal.getTitre(), mediaATester.getTitre());
         Assert.assertEquals(mediaOriginal.getPathMedia(), mediaATester.getPathMedia());

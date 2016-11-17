@@ -5,6 +5,7 @@ package ca.qc.bdeb.maveo.modele;
  */
 public class Media {
     private String titre;
+    private String artiste;
     private String pathMedia;
     private String parolesMedia;
 
@@ -20,14 +21,15 @@ public class Media {
     }
 
     /**
-     * Constructeur qui prend en paramètre le titre, le chemin et les paroles du média
+     * Constructeur qui prend en paramètre le titre, l'artiste et le chemin et les paroles du média
      *
      * @param titre        titre du média
      * @param pathMedia    chemin du média
      * @param parolesMedia paroles du média
      */
-    public Media(String titre, String pathMedia, String parolesMedia) {
+    public Media(String titre, String artiste, String pathMedia, String parolesMedia) {
         this.titre = titre;
+        this.artiste = artiste;
         this.pathMedia = pathMedia;
         this.parolesMedia = parolesMedia;
     }
@@ -38,6 +40,14 @@ public class Media {
 
     public void setTitre(String titre) {
         this.titre = titre;
+    }
+
+    public String getArtiste() {
+        return artiste;
+    }
+
+    public void setArtiste(String artiste) {
+        this.artiste = artiste;
     }
 
     public String getPathMedia() {
