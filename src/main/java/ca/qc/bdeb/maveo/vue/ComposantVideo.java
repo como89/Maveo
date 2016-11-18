@@ -2,8 +2,6 @@ package ca.qc.bdeb.maveo.vue;
 
 import com.sun.jna.Memory;
 import javafx.application.Platform;
-import javafx.beans.property.FloatProperty;
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
@@ -16,6 +14,7 @@ import uk.co.caprica.vlcj.player.direct.DefaultDirectMediaPlayer;
 import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 import uk.co.caprica.vlcj.player.direct.format.RV32BufferFormat;
 
+import java.awt.*;
 import java.nio.ByteBuffer;
 
 /**
@@ -36,12 +35,14 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
 
     public ComposantVideo(final Pane videoPane) {
         super(videoBufferCallBack);
+
         pixelFormat = PixelFormat.getByteBgraPreInstance();
         writableImage = new WritableImage((int) videoPane.getWidth(), (int) videoPane.getHeight());
         videoView = new ImageView(writableImage);
         videoView.setSmooth(true);
         // videoView.setPreserveRatio(true);
         videoBufferCallBack.videoPane = videoPane;
+
         videoPane.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -74,9 +75,10 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
 
     /**
      * Méthode qui affiche à l'écran la vidéo pixel par pixel.
-     * @param mediaPlayer - Le DirectMédiaPLayer.
+     *
+     * @param mediaPlayer   - Le DirectMédiaPLayer.
      * @param nativeBuffers - La mémoire du buffer.
-     * @param bufferFormat - Le buffer format pour la résolution de la vidéo.
+     * @param bufferFormat  - Le buffer format pour la résolution de la vidéo.
      */
     @Override
     public void display(final DirectMediaPlayer mediaPlayer, final Memory[] nativeBuffers, final BufferFormat bufferFormat) {
@@ -101,21 +103,27 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
 
     /**
      * Cette méthode permet de fit l'image de la vidéo selon la grandeur de la fenêtre.
-     * @param newPaneWidth - La nouvelle largeur de la fenêtre.
+     *
+     * @param newPaneWidth  - La nouvelle largeur de la fenêtre.
      * @param newPaneHeight - La nouvelle hauteur de la fenêtre.
-     * TODO : Pour l'instant, la vidéo s'adapte à la fenêtre au complet. Mais plus tard, on devra calculer le ratio
-     * TODO      pour bien afficher la vidéo.
+     *                      TODO : Pour l'instant, la vidéo s'adapte à la fenêtre au complet. Mais plus tard, on devra calculer le ratio
+     *                      TODO      pour bien afficher la vidéo.
      */
     void fitImageWithSize(float newPaneWidth, float newPaneHeight) {
         Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
         DefaultDirectMediaPlayer defaultDirectMediaPlayer = (DefaultDirectMediaPlayer) this.getMediaPlayer();
         BufferFormat bufferFormat = defaultDirectMediaPlayer.getBufferFormat();
 
+        float rapport = (float) calculerRapport(defaultDirectMediaPlayer.getVideoDimension());
+
+        if (newPaneWidth > newPaneHeight) {
+            newPaneWidth = rapport * newPaneHeight;
+        } else if (newPaneHeight > newPaneWidth) {
+            newPaneHeight = newPaneWidth / rapport;
+        }
 
         videoView.setFitHeight(newPaneHeight);
         videoView.setFitWidth(newPaneWidth);
-
-        double fitWidth = videoView.getFitWidth();
 
         float widthEmpty = (float) (newPaneWidth - videoView.getFitWidth());
         float heightEmpty = (float) (newPaneHeight - videoView.getFitHeight());
@@ -128,7 +136,18 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
     }
 
     /**
+     * Calcule le rapport largeur sur hauteur avec la dimension passée en paramètre
+     *
+     * @param dimension la dimension à partir de laquelle il calcule le rapport
+     * @return le rapport (largeur / hauteur)
+     */
+    private double calculerRapport(Dimension dimension) {
+        return dimension.getWidth() / dimension.getHeight();
+    }
+
+    /**
      * Méthode pour obtenir le pixelWriter afin d'afficher les pixels
+     *
      * @return un pixel writer.
      */
     PixelWriter getPixWriter() {
