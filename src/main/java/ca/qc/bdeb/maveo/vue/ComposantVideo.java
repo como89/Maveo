@@ -4,7 +4,6 @@ import com.sun.jna.Memory;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Bounds;
 import javafx.scene.image.*;
 import javafx.scene.layout.Pane;
 import uk.co.caprica.vlcj.component.DirectMediaPlayerComponent;
@@ -110,23 +109,29 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
      *                      TODO      pour bien afficher la vidéo.
      */
     void fitImageWithSize(float newPaneWidth, float newPaneHeight) {
-        Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
+        // Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
         DefaultDirectMediaPlayer defaultDirectMediaPlayer = (DefaultDirectMediaPlayer) this.getMediaPlayer();
-        BufferFormat bufferFormat = defaultDirectMediaPlayer.getBufferFormat();
+        //  BufferFormat bufferFormat = defaultDirectMediaPlayer.getBufferFormat();
 
         float rapport = (float) calculerRapport(defaultDirectMediaPlayer.getVideoDimension());
 
+        float widthEmpty = 0;
+        float heightEmpty = 0;
+
+        /**
+         * Ce bloc if()..else if() fixe la taille de l'affichage vidéo pour respecter le rapport d'aspect
+         * original de la vidéo.
+         */
         if (newPaneWidth > newPaneHeight) {
+            widthEmpty = newPaneWidth - rapport * newPaneHeight;
             newPaneWidth = rapport * newPaneHeight;
         } else if (newPaneHeight > newPaneWidth) {
+            heightEmpty = newPaneHeight - newPaneWidth / rapport;
             newPaneHeight = newPaneWidth / rapport;
         }
 
         videoView.setFitHeight(newPaneHeight);
         videoView.setFitWidth(newPaneWidth);
-
-        float widthEmpty = (float) (newPaneWidth - videoView.getFitWidth());
-        float heightEmpty = (float) (newPaneHeight - videoView.getFitHeight());
 
         float xPosition = widthEmpty / 2;
         float yPosition = heightEmpty / 2;
