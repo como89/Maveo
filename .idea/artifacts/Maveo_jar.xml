@@ -20,7 +20,6 @@
           <element id="dir-copy" path="$PROJECT_DIR$/lib/natives" />
         </element>
       </element>
-      <element id="library" level="project" name="com.mpatric:mp3agic:Release" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/org.json.simple-0.4.jar" />
       <element id="library" level="project" name="org.apache.clerezza.ext:org.json.simple:0.4" />
       <element id="library" level="project" name="com.google.code.gson:gson:2.8.0" />
