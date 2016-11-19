@@ -88,7 +88,7 @@ public class FileOpener {
     /**
      * Active les filtres d'ouverture de fichier média.
      */
-    private void activerFiltresMedia() {
+    void activerFiltresMedia() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresMedia());
     }
@@ -96,7 +96,7 @@ public class FileOpener {
     /**
      * Active les filtres d'ouverture de fichier playlist.
      */
-    private void activerFiltresPlaylist() {
+    void activerFiltresPlaylist() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresPlaylist());
     }
@@ -104,7 +104,7 @@ public class FileOpener {
     /**
      * Active les fitres d'ouverture de fuchier paroles.
      */
-    private void activerFiltresParoles() {
+    void activerFiltresParoles() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresParoles());
     }

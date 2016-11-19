@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.modele.gestionnaires;
 
+import ca.qc.bdeb.maveo.modele.tags.Tags;
 import ca.qc.bdeb.maveo.util.UtilLib;
 import org.junit.After;
 import org.junit.Assert;
@@ -10,7 +11,7 @@ import java.util.concurrent.*;
 
 public class GestionnaireMusiqueTest {
 
-    private static final String TXT_LINK_MUSIQUE_TEST = "res/Tokyo.mp3";
+    private static final String TXT_LINK_MUSIQUE_TEST = "res/audio_samples/example.mp3";
 
     private GestionnaireMusique gestionMusique;
 
@@ -110,6 +111,21 @@ public class GestionnaireMusiqueTest {
             long tempsTotal = gestionMusique.getTempsTotal();
             Assert.assertTrue(gestionMusique.getTempsRestant() <= tempsTotal);
         }
+    }
+
+    @Test
+    public void testHaveTags() {
+        gestionMusique.preparerMedia();
+        Tags tags = gestionMusique.getTags();
+        Assert.assertNotNull(tags);
+    }
+
+    @Test
+    public void testNoTags() {
+        gestionMusique.setCheminFichier("res/audio_samples/example.aac");
+        gestionMusique.preparerMedia();
+        Tags tags = gestionMusique.getTags();
+        Assert.assertNull(tags);
     }
 
     @Test

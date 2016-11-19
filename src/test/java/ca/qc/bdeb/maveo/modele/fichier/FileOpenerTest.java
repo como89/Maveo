@@ -1,9 +1,7 @@
 package ca.qc.bdeb.maveo.modele.fichier;
 
+import org.junit.Assert;
 import org.junit.Test;
-import java.util.concurrent.ExecutionException;
-
-// import java.util.concurrent.CompletableFuture;
 
 
 /**
@@ -11,20 +9,37 @@ import java.util.concurrent.ExecutionException;
  */
 public class FileOpenerTest {
 
-    @Test
-    public void testActiverOuvertureFichier() throws ExecutionException, InterruptedException {
-        // ERROR: Usage of API documented as @since 1.7+
+    FileOpener fileOpener;
 
-      /*  final CompletableFuture<File> future = new CompletableFuture<File>();
-        PlatformImpl.startup(new Runnable() {
-            @Override
-            public void run() {
-                FileOpener fileOpener = new FileOpener();
-                File file = fileOpener.activerOuvertureFichier(null);
-                future.complete(file);
-            }
-        });
-        Assert.assertNotNull(future.get());
-       */
+    @Test
+    public void testDefaultFiltreMedia() {
+        fileOpener = new FileOpener();
+        Assert.assertEquals(fileOpener.fileChooser.getExtensionFilters(),
+                fileOpener.accesExtensions.getListeFiltresMedia());
+    }
+
+    @Test
+    public void testHaveFiltreParole() {
+        fileOpener = new FileOpener();
+        fileOpener.activerFiltresParoles();
+        Assert.assertEquals(fileOpener.fileChooser.getExtensionFilters(),
+                fileOpener.accesExtensions.getListeFiltresParoles());
+    }
+
+    @Test
+    public void testHaveFiltrePlaylist() {
+        fileOpener = new FileOpener();
+        fileOpener.activerFiltresPlaylist();
+        Assert.assertEquals(fileOpener.fileChooser.getExtensionFilters(),
+                fileOpener.accesExtensions.getListeFiltresPlaylist());
+    }
+
+    @Test
+    public void testHaveFiltreMedia() {
+        fileOpener = new FileOpener();
+        fileOpener.activerFiltresPlaylist();
+        fileOpener.activerFiltresMedia();
+        Assert.assertEquals(fileOpener.fileChooser.getExtensionFilters(),
+                fileOpener.accesExtensions.getListeFiltresMedia());
     }
 }

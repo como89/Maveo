@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -51,16 +52,17 @@ public class AccesExtensionsTest {
     }
 
     @Test
-    public void getUrlFichierExtensions() throws Exception {
-        //Assert.assertEquals(accesExtensions.getUrlFichierExtensions(), accesExtensions.urlFichierExtensions);
+    public void changerChargementFichierExtensions() throws Exception {
+        urlFichierExtensions = new URL("http://www.google.ca");
+        InputStream streamTestExtension = urlFichierExtensions.openStream();
+        accesExtensions.streamFichierExtension = streamTestExtension;
+        Assert.assertEquals(streamTestExtension, accesExtensions.streamFichierExtension);
     }
 
     @Test
-    public void setUrlFichierExtensions() throws Exception {
-        urlFichierExtensions = new URL("http://www.google.ca");
-        accesExtensions.setUrlFichierExtensions(urlFichierExtensions);
-        Assert.assertEquals(urlFichierExtensions, accesExtensions.getUrlFichierExtensions());
-        ;
+    public void NonNullChargementFichierExtensions() {
+        accesExtensions = new AccesExtensions();
+        Assert.assertNotNull(accesExtensions.streamFichierExtension);
     }
 
     void lireFichierExtensions(AccesExtensions accesExtensions) {

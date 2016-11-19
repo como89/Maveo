@@ -39,7 +39,6 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         writableImage = new WritableImage((int) videoPane.getWidth(), (int) videoPane.getHeight());
         videoView = new ImageView(writableImage);
         videoView.setSmooth(true);
-        // videoView.setPreserveRatio(true);
         videoBufferCallBack.videoPane = videoPane;
 
         videoPane.widthProperty().addListener(new ChangeListener<Number>() {

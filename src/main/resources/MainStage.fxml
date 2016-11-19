@@ -42,11 +42,11 @@
                             <MenuItem fx:id="menuItemHidePlaylist" mnemonicParsing="false" text="Hide Playlist"/>
                         </items>
                     </Menu>
-                    <Menu id="menuItemMedia" fx:id="menuItemMedia" mnemonicParsing="false" text="Média">
+                    <Menu fx:id="menuItemMediaLyric" mnemonicParsing="false" text="Média">
                         <items>
-                            <MenuItem id="menuItemMediaLyric" fx:id="menuItemMediaOpenLyric" mnemonicParsing="false"
+                            <MenuItem  fx:id="menuItemMediaOpenLyric" mnemonicParsing="false"
                                       text="Ouvrir paroles..."/>
-                            <MenuItem id="menuItemMediaLyric" fx:id="menuItemMediaSaveLyric" mnemonicParsing="false"
+                            <MenuItem  fx:id="menuItemMediaSaveLyric" mnemonicParsing="false"
                                       text="Enregistrer paroles..."/>
 
                         </items>

@@ -113,12 +113,4 @@ public class AccesExtensions {
     public ArrayList<FileChooser.ExtensionFilter> getListeFiltresParoles() {
         return listeFiltresParoles;
     }
-
-    public URL getUrlFichierExtensions() {
-        return null;
-    }
-
-    public void setUrlFichierExtensions(URL urlFichierExtensions) {
-
-    }
 }

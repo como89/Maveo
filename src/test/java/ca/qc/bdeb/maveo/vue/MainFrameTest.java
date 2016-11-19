@@ -31,8 +31,6 @@ public class MainFrameTest extends ApplicationTest {
         Scene sceneTest = new Scene(page);
         stage.setScene(sceneTest);
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);
-
-        stage.show();
     }
 
     @Test
@@ -274,16 +272,16 @@ public class MainFrameTest extends ApplicationTest {
     }
 
     @Test
-    public void getMenuItemEdit() throws Exception {
-        MenuItem menuItemTest = testFrame.getMenuItemEdit();
+    public void getMenuItemMediaLyric() throws Exception {
+        MenuItem menuItemTest = testFrame.menuItemMediaLyric;
         Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(2));
     }
 
     @Test
-    public void setMenuItemEdit() throws Exception {
+    public void setMenuItemMediaLyric() throws Exception {
         MenuItem menuItemTest = new MenuItem("LISA");
-        testFrame.setMenuItemEdit(menuItemTest);
-        Assert.assertEquals(menuItemTest, testFrame.getMenuItemEdit());
+        testFrame.menuItemMediaLyric = menuItemTest;
+        Assert.assertEquals(menuItemTest, testFrame.menuItemMediaLyric);
     }
 
     @Test
@@ -314,16 +312,29 @@ public class MainFrameTest extends ApplicationTest {
     }
 
     @Test
-    public void getMenuItemEditDelete() throws Exception {
-        MenuItem menuItemTest = testFrame.getMenuItemEditDelete();
+    public void getMenuItemMediaOpenLyric() throws Exception {
+        MenuItem menuItemTest = testFrame.menuItemMediaOpenLyric;
         Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(2).getItems().get(0));
     }
 
     @Test
-    public void setMenuItemEditDelete() throws Exception {
+    public void setMenuItemMediaOpenLyric() throws Exception {
         MenuItem menuItemTest = new MenuItem("LISA");
-        testFrame.setMenuItemEditDelete(menuItemTest);
-        Assert.assertEquals(menuItemTest, testFrame.getMenuItemEditDelete());
+        testFrame.menuItemMediaOpenLyric = menuItemTest;
+        Assert.assertEquals(menuItemTest, testFrame.menuItemMediaOpenLyric);
+    }
+
+    @Test
+    public void getMenuItemMediaSaveLyric() {
+         MenuItem menuItemTest = testFrame.menuItemMediaSaveLyric;
+        Assert.assertEquals(menuItemTest,testFrame.getMenuBar().getMenus().get(2).getItems().get(1));
+    }
+
+    @Test
+    public void setMenuItemMediaSaveLyric() {
+        MenuItem menuItemTest = new MenuItem("LISA");
+        testFrame.menuItemMediaSaveLyric = menuItemTest;
+        Assert.assertEquals(menuItemTest,testFrame.menuItemMediaSaveLyric);
     }
 
     @Test

@@ -103,16 +103,10 @@ public class MainFrame {
     MenuItem menuItemFileOpen;
 
     @FXML
-    MenuItem menuItemEdit;
-
-    @FXML
     MenuItem menuItemHelp;
 
     @FXML
     MenuItem menuItemFileClose;
-
-    @FXML
-    MenuItem menuItemEditDelete;
 
     @FXML
     MenuItem menuItemHelpAbout;
@@ -150,20 +144,14 @@ public class MainFrame {
     @FXML
     ProgressBar progressVolume;
 
+    @FXML
+    MenuItem menuItemMediaLyric;
 
     @FXML
     MenuItem menuItemMediaOpenLyric;
 
     @FXML
     MenuItem menuItemMediaSaveLyric;
-
-    public MenuItem getMenuItemMediaSaveLyric() {
-        return menuItemMediaSaveLyric;
-    }
-
-    public MenuItem getMenuItemMediaOpenLyric() {
-        return menuItemMediaOpenLyric;
-    }
 
     public MenuItem getMenuItemHidePlaylist() {
         return menuItemHidePlaylist;
@@ -297,14 +285,6 @@ public class MainFrame {
         this.menuItemFileOpen = menuItemFileOpen;
     }
 
-    public MenuItem getMenuItemEdit() {
-        return menuItemEdit;
-    }
-
-    public void setMenuItemEdit(MenuItem menuItemEdit) {
-        this.menuItemEdit = menuItemEdit;
-    }
-
     public MenuItem getMenuItemHelp() {
         return menuItemHelp;
     }
@@ -319,14 +299,6 @@ public class MainFrame {
 
     public void setMenuItemFileClose(MenuItem menuItemFileClose) {
         this.menuItemFileClose = menuItemFileClose;
-    }
-
-    public MenuItem getMenuItemEditDelete() {
-        return menuItemEditDelete;
-    }
-
-    public void setMenuItemEditDelete(MenuItem menuItemEditDelete) {
-        this.menuItemEditDelete = menuItemEditDelete;
     }
 
     public MenuItem getMenuItemHelpAbout() {

@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  */
 public class GestionnaireVideoTest extends ApplicationTest {
 
-    static final String PATH = "res/test.mp4";
+    static final String PATH = "res/video_samples/example.mp4";
     static GestionnaireVideo gestionnaireVideo;
 
     @Override
@@ -37,25 +37,19 @@ public class GestionnaireVideoTest extends ApplicationTest {
     @Before
     public void before() {
         gestionnaireVideo.preparerMedia();
-        gestionnaireVideo.jouerMedia();
     }
 
     @Test
     public void testPlayVideo() throws ExecutionException, InterruptedException {
-        final CompletableFuture<Boolean> future = new CompletableFuture<Boolean>();
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-        executorService.schedule(new Runnable() {
-
-            @Override
-            public void run() {
-                future.complete(gestionnaireVideo.enLecture());
-            }
-        }, 200, TimeUnit.MILLISECONDS);
-        Assert.assertTrue(future.get());
+        gestionnaireVideo.jouerMedia();
+        Thread.sleep(1000);
+        Assert.assertTrue(gestionnaireVideo.enLecture());
     }
 
     @Test
     public void testArret() throws ExecutionException, InterruptedException {
+        gestionnaireVideo.jouerMedia();
+        Thread.sleep(500);
         gestionnaireVideo.arreter();
         final CompletableFuture<Boolean> future = new CompletableFuture<Boolean>();
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
@@ -80,6 +74,7 @@ public class GestionnaireVideoTest extends ApplicationTest {
 
     @Test
     public void testVolume() {
+        gestionnaireVideo.jouerMedia();
         int volume = gestionnaireVideo.getVolume();
         int volumeModifie = volume + 100;
         gestionnaireVideo.setVolume(volumeModifie);
@@ -90,6 +85,7 @@ public class GestionnaireVideoTest extends ApplicationTest {
 
     @Test
     public void testTemps() throws ExecutionException, InterruptedException {
+        gestionnaireVideo.jouerMedia();
         gestionnaireVideo.pause();
         gestionnaireVideo.setPosition(0.30f);
         long pourcentage_courant = 30L;
