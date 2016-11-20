@@ -44,7 +44,6 @@ public class TagsIO {
                 }
                 System.out.println(id3);
             } catch (IOException | TagException e) {
-                e.printStackTrace();
             }
         }
         return tags;

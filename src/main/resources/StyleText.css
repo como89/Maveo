@@ -1,0 +1,12 @@
+.h1{
+    -fx-font-family: fantasy;
+    -fx-font-size: 50px;
+    -fx-color: RED;
+}
+
+.h2{
+    -fx-font-family: fantasy;
+    -fx-font-size: 30px;
+    color: blue;
+    -fx-alignment: center;
+}

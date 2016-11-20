@@ -10,6 +10,11 @@ import ca.qc.bdeb.maveo.modele.tags.Tags;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.text.Text;
+
+import java.awt.*;
+
+import static java.awt.Color.*;
 
 /**
  * Created by C A T A on 2016-11-15.
@@ -50,7 +55,12 @@ public class ParolesControleur {
                 String paroles = recupererParoles(tags.getTitle(), tags.getArtist());
                 media = new Media(tags.getTitle(), tags.getArtist(), gestionnaireMusique.getCheminFichier(), paroles);
             }
-            //Afficher les paroles
+            // Afficher les paroles
+            if(media != null) {
+                mainFrame.getScrollPane().setVisible(true);
+                mainFrame.getLyricTitle().setText(media.getTitre());
+                mainFrame.getLyricText().setText(media.getParolesMedia());
+            }
         }
     }
 

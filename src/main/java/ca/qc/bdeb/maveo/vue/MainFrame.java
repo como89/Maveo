@@ -20,6 +20,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Window;
 import javafx.util.Pair;
 
@@ -62,6 +65,9 @@ public class MainFrame {
 
     @FXML
     Button boutonPlayPause;
+
+    @FXML
+    TextFlow textFlow;
 
     @FXML
     Button boutonArreter;
@@ -134,6 +140,18 @@ public class MainFrame {
 
     @FXML
     Label lblNomMedia;
+
+    @FXML
+    ScrollPane scrollText;
+
+    @FXML
+    Text lyricTitle;
+
+    @FXML
+    Text lyricText;
+
+    @FXML
+    StackPane stackPane;
 
     @FXML
     Label labelTempsEcoule;
@@ -249,7 +267,7 @@ public class MainFrame {
         this.panelControleur = panelControleur;
     }
 
-    public void setPanelEcran(Pane panelEcran) {
+    public void setPanelEcran(BorderPane panelEcran) {
         this.panelEcran = panelEcran;
     }
 
@@ -409,6 +427,22 @@ public class MainFrame {
         return panelEcran;
     }
 
+    public ScrollPane getScrollPane(){
+        return scrollText;
+    }
+
+    public TextFlow getTextFlow() {
+        return textFlow;
+    }
+
+    public Text getLyricTitle() {
+        return lyricTitle;
+    }
+
+    public Text getLyricText(){
+        return lyricText;
+    }
+
     public Slider getSliderProgression() {
         return sliderProgression;
     }
@@ -456,8 +490,9 @@ public class MainFrame {
             imageView.setFitWidth(200);
             lblNomMedia.setGraphic(imageView);
         }
-
-        fenetrePrincipale.setCenter(panelEcran);
+            stackPane.getChildren().clear();
+            stackPane.getChildren().add(panelEcran);
+            stackPane.getChildren().add(scrollText);
     }
 
     /**

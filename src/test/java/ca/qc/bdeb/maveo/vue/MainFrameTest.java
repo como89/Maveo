@@ -203,7 +203,7 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void setPanelEcran() throws Exception {
-        Pane panelTest = new Pane();
+        BorderPane panelTest = new BorderPane();
         panelTest.setBackground(Background.EMPTY);
         testFrame.setPanelEcran(panelTest);
         Assert.assertEquals(testFrame.getPanelEcran().getBackground(), panelTest.getBackground());

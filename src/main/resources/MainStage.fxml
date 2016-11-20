@@ -18,6 +18,9 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.stage.Screen?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.text.Text?>
 <BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" minHeight="500.0"
             minWidth="600.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
@@ -65,6 +68,7 @@
         </VBox>
     </top>
     <center>
+        <StackPane fx:id ="stackPane">
         <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" stylesheets="@StylePane.css"
               styleClass="paneEcran">
             <children>
@@ -77,6 +81,19 @@
                 <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0"/>
             </children>
         </Pane>
+            <ScrollPane fx:id="scrollText" visible="false">
+                <content>
+                    <TextFlow styleClass="textFlow" stylesheets="@StyleText.css" fx:id="textFlow" textAlignment="CENTER">
+                        <children>
+                            <VBox spacing="10">
+                            <Text fx:id = "lyricTitle" styleClass="h1" text="Title" textAlignment="CENTER"/>
+                            <Text fx:id = "lyricText" styleClass="h2" text="body" textAlignment="CENTER" />
+                            </VBox>
+                        </children>
+                    </TextFlow>
+                </content>
+            </ScrollPane>
+        </StackPane>
     </center>
     <bottom>
         <BorderPane fx:id="panelControleur" prefHeight="122.0" prefWidth="638.0"
