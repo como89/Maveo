@@ -4,17 +4,14 @@ import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.WindowEvent;
 
-import java.io.*;
-
-import static ca.qc.bdeb.maveo.controleur.MainFrameControleur.isFreeMutexLockSliderVolume;
+import java.io.File;
 
 /**
  * Created by 1379708 on 2016-09-08.
@@ -118,6 +115,38 @@ public class MainFrameControleur {
                 }
                 gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
                 gestionnaireMedia.preparerMedia();
+
+                /**
+                 * Si c'est une vidéo, afficher le début et:
+                 * Play -> Pause suivi de Pause -> Play pour :
+                 * 1. Initialiser certaines variables dans le framework qui permetteront à Maveo d'afficher la vidéo
+                 * avec le bon aspect ratio;
+                 * 2. Afficher le debut de la vidéo à l'écran avant que l'utilisateur ne fasse jouer.
+                 */
+                if (gestionnaireMedia instanceof GestionnaireVideo) {
+
+                    gestionnaireMedia.jouerMedia();
+
+                    // Si la vidéo n'est pas en lecture, attendre qu'il se mette en lecture
+                    while (!gestionnaireMedia.enLecture()) {
+                        // Attendre que la vidéo se mette en lecture
+                    }
+
+                    gestionnaireMedia.pause();
+
+                    /**
+                     * Attendre que les variables de dimensions dans le framework s'initialisent avant de redimensionner
+                     *  la vidéo afin qu'elle respecte son rapport d'aspect.
+                     */
+                    while (GestionnaireFactory.getComposantVideo().getMediaPlayer().getVideoDimension() == null) {
+                        // Attendre que les variables de dimensions dans le framework s'initialisent
+                    }
+
+                    // Redimensionne la vidéo afin qu'elle respecte son rapport d'aspect original
+                    GestionnaireFactory.getComposantVideo().rafraichirVideo();
+                }
+
+
                 gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
@@ -150,18 +179,16 @@ public class MainFrameControleur {
 
         public void handle(ActionEvent event) {
             GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
-           //String lyrics = gestionnaireMedia.recupererTags();
+            //String lyrics = gestionnaireMedia.recupererTags();
             mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
             mainFrame.getLblNomMedia().setGraphic(null);
 
-           // mainFrame.getLblNomMedia().setText(lyrics);
+            // mainFrame.getLblNomMedia().setText(lyrics);
             mainFrame.getLblNomMedia().setPrefSize(1000, 1000);
 
 
-
-
-            }
         }
+    }
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton d'arrêt

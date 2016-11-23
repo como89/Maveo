@@ -14,6 +14,7 @@ import com.google.common.io.Files;
 public class GestionnaireFactory {
 
     static GestionnaireMedia gestionnaireMedia;
+    static ComposantVideo composantVideo;
 
     public static GestionnaireMedia createInstance(Media media, MainFrame mainFrame) {
         AccesExtensions accesExtensions = new AccesExtensions();
@@ -27,9 +28,11 @@ public class GestionnaireFactory {
 
         // Si vidéo
         if (extensionFilter.getExtensions().contains(extensionFichier)) {
-            ComposantVideo composantVideo = new ComposantVideo(mainFrame.getPanelEcran());
+            composantVideo = new ComposantVideo(mainFrame.getPanelEcran());
             mainFrame.actualiseEcranPane(composantVideo.getVideoView());
+
             gestionnaireMedia = new GestionnaireVideo(composantVideo);
+
         } else {
             mainFrame.actualiseEcranPane(null);
             gestionnaireMedia = new GestionnaireMusique();
@@ -40,5 +43,9 @@ public class GestionnaireFactory {
 
     public static GestionnaireMedia getCurrentInstance() {
         return gestionnaireMedia;
+    }
+
+    public static ComposantVideo getComposantVideo() {
+        return composantVideo;
     }
 }

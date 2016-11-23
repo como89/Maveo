@@ -53,6 +53,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
                 fitImageWithSize((float) videoPane.getWidth(), newValue.floatValue());
             }
         });
+
     }
 
     /**
@@ -104,13 +105,9 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
      *
      * @param newPaneWidth  - La nouvelle largeur de la fenêtre.
      * @param newPaneHeight - La nouvelle hauteur de la fenêtre.
-     *                      TODO : Pour l'instant, la vidéo s'adapte à la fenêtre au complet. Mais plus tard, on devra calculer le ratio
-     *                      TODO      pour bien afficher la vidéo.
      */
     void fitImageWithSize(float newPaneWidth, float newPaneHeight) {
-        // Bounds videoBounds = videoBufferCallBack.videoPane.getLayoutBounds();
         DefaultDirectMediaPlayer defaultDirectMediaPlayer = (DefaultDirectMediaPlayer) this.getMediaPlayer();
-        //  BufferFormat bufferFormat = defaultDirectMediaPlayer.getBufferFormat();
 
         float rapport = (float) calculerRapport(defaultDirectMediaPlayer.getVideoDimension());
 
@@ -150,6 +147,15 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
     }
 
     /**
+     * Rafraîchit la vidéo : recalcule les dimensions que la vidéo devrait avoir selon le rapport
+     */
+    public void rafraichirVideo() {
+        fitImageWithSize((float) videoBufferCallBack.videoPane.getWidth(),
+                (float) videoBufferCallBack.videoPane.getHeight());
+    }
+
+
+    /**
      * Méthode pour obtenir le pixelWriter afin d'afficher les pixels
      *
      * @return un pixel writer.
@@ -159,6 +165,10 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
             pixWriter = writableImage.getPixelWriter();
         }
         return pixWriter;
+    }
+
+    public static VideoBufferedCallBack getVideoBufferCallBack() {
+        return videoBufferCallBack;
     }
 
     static class VideoBufferedCallBack implements BufferFormatCallback {

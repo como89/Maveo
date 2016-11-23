@@ -9,7 +9,7 @@ import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
  * @author Nicholas
  * @doc http://caprica.github.io/vlcj/javadoc/3.10.1/uk/co/caprica/vlcj/player/direct/DirectMediaPlayer.html
  */
-class GestionnaireVideo extends GestionnaireMedia {
+public class GestionnaireVideo extends GestionnaireMedia {
 
     private DirectMediaPlayer embeddedMediaPlayer;
     private ComposantVideo composantVideo;
