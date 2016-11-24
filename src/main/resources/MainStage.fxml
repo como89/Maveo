@@ -68,31 +68,13 @@
         </VBox>
     </top>
     <center>
-        <StackPane fx:id ="stackPane">
-        <Pane id="panelEcranFenetre" fx:id="panelEcran" minHeight="0.0" minWidth="0.0" stylesheets="@StylePane.css"
-              styleClass="paneEcran">
-            <children>
-                <TitledPane fx:id="playlistPane" prefHeight="325.0" prefWidth="202.0" text="Playlist"
-                            styleClass="decorate_title_pane">
-                    <content>
-                        <ListView fx:id="listviewPlaylist" prefHeight="325.0" prefWidth="200.0"/>
-                    </content>
-                </TitledPane>
-                <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0"/>
-            </children>
-        </Pane>
-            <ScrollPane fx:id="scrollText" visible="false">
-                <content>
-                    <TextFlow styleClass="textFlow" stylesheets="@StyleText.css" fx:id="textFlow" textAlignment="CENTER">
-                        <children>
-                            <VBox spacing="10">
-                            <Text fx:id = "lyricTitle" styleClass="h1" text="Title" textAlignment="CENTER"/>
-                            <Text fx:id = "lyricText" styleClass="h2" text="body" textAlignment="CENTER" />
-                            </VBox>
-                        </children>
-                    </TextFlow>
-                </content>
-            </ScrollPane>
+        <StackPane fx:id ="stackPane" styleClass="paneEcran" stylesheets="StylePane.css">
+            <TitledPane fx:id="playlistPane" prefHeight="325.0" prefWidth="202.0" text="Playlist"
+                                                  styleClass="decorate_title_pane">
+            <content>
+                <ListView fx:id="listviewPlaylist" prefHeight="325.0" prefWidth="200.0"/>
+            </content>
+            </TitledPane>
         </StackPane>
     </center>
     <bottom>

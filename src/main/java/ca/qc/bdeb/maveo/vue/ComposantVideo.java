@@ -109,31 +109,36 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
     void fitImageWithSize(float newPaneWidth, float newPaneHeight) {
         DefaultDirectMediaPlayer defaultDirectMediaPlayer = (DefaultDirectMediaPlayer) this.getMediaPlayer();
 
-        float rapport = (float) calculerRapport(defaultDirectMediaPlayer.getVideoDimension());
+        Dimension dimension = defaultDirectMediaPlayer.getVideoDimension();
 
-        float widthEmpty = 0;
-        float heightEmpty = 0;
+        if(dimension != null) {
 
-        /**
-         * Ce bloc if()..else if() fixe la taille de l'affichage vidéo pour respecter le rapport d'aspect
-         * original de la vidéo.
-         */
-        if (newPaneWidth > newPaneHeight) {
-            widthEmpty = newPaneWidth - rapport * newPaneHeight;
-            newPaneWidth = rapport * newPaneHeight;
-        } else if (newPaneHeight > newPaneWidth) {
-            heightEmpty = newPaneHeight - newPaneWidth / rapport;
-            newPaneHeight = newPaneWidth / rapport;
+            float rapport = (float) calculerRapport(dimension);
+
+            float widthEmpty = 0;
+            float heightEmpty = 0;
+
+            /**
+             * Ce bloc if()..else if() fixe la taille de l'affichage vidéo pour respecter le rapport d'aspect
+             * original de la vidéo.
+             */
+            if (newPaneWidth > newPaneHeight) {
+                widthEmpty = newPaneWidth - rapport * newPaneHeight;
+                newPaneWidth = rapport * newPaneHeight;
+            } else if (newPaneHeight > newPaneWidth) {
+                heightEmpty = newPaneHeight - newPaneWidth / rapport;
+                newPaneHeight = newPaneWidth / rapport;
+            }
+
+            videoView.setFitHeight(newPaneHeight);
+            videoView.setFitWidth(newPaneWidth);
+
+            float xPosition = widthEmpty / 2;
+            float yPosition = heightEmpty / 2;
+
+            videoView.setX(xPosition);
+            videoView.setY(yPosition);
         }
-
-        videoView.setFitHeight(newPaneHeight);
-        videoView.setFitWidth(newPaneWidth);
-
-        float xPosition = widthEmpty / 2;
-        float yPosition = heightEmpty / 2;
-
-        videoView.setX(xPosition);
-        videoView.setY(yPosition);
     }
 
     /**
