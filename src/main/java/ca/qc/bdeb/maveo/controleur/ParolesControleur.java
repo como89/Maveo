@@ -51,6 +51,7 @@ public class ParolesControleur {
                 Tags tags = gestionnaireMusique.getTags();
                 if (tags == null) {
                     tags = mainFrame.openRequestInformation();
+
                 }
                 String paroles = recupererParoles(tags.getTitle(), tags.getArtist());
                 media = new Media(tags.getTitle(), tags.getArtist(), gestionnaireMusique.getCheminFichier(), paroles);
