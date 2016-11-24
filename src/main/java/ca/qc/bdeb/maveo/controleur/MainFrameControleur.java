@@ -14,7 +14,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -162,14 +165,17 @@ public class MainFrameControleur {
                         stringBuilder.append("?method=album.getinfo");
                         stringBuilder.append("&api_key=");
                         stringBuilder.append("939ac33f69cba097acffdb5b025c0bb5");
-                        stringBuilder.append("&artist=" + URLEncoder.encode(((GestionnaireMusique) gestionnaireMedia).getTags().getArtist(), "UTF-8"));
-                        stringBuilder.append("&album=" + URLEncoder.encode(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum(), "UTF-8"));
+                        stringBuilder.append("&artist=" + URLEncoder.encode("Kelly Clarkson", "UTF-8"));
+                        stringBuilder.append("&album=" + URLEncoder.encode("Greatest Hits - Chapter   One", "UTF-8"));
                         stringBuilder.append("&format=json");
-
+                        System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum());
                         System.out.println(stringBuilder.toString());
+                        System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getArtist());
 
-                        URL imageLink = new URL("https://upload.wikimedia.org/wikipedia/en/2/2e/U2_War_album_cover.jpg");
+                        URL imageLink = new URL("https://lastfm-img2.akamaized.net/i/u/174s/aa0163bdf3a04ce58f113a874eda9a58.png");
                         Image image = SwingFXUtils.toFXImage(ImageIO.read(imageLink), null);
+
+
 
                         mainFrame.getLblNomMedia().setGraphic(new ImageView(image));
                     } catch (MalformedURLException e) {
@@ -190,9 +196,6 @@ public class MainFrameControleur {
     }
 
 
-
-
-
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -202,18 +205,38 @@ public class MainFrameControleur {
         return sb.toString();
     }
 
-    public static JSONObject readJsonFromUrl(String url) throws IOException {
-        InputStream is = new URL(url).openStream();
+    public static JSONObject readJsonFromUrl(String url) {
+        InputStream is = null;
         try {
+            is = new URL(url).openStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
-            JSONObject json = new JSONObject();
+            JSONParser parser = new JSONParser();
+            JSONObject lastFmJsonObject = (JSONObject) parser.parse(jsonText);
+            JSONObject albumJsonObject = (JSONObject) lastFmJsonObject.get("album");
+            JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
 
-            return json;
+
+
+            int i = 0;
+            i++;
+
+
+            return lastFmJsonObject;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
-            is.close();
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return null;
     }
+
 
     /**
      * Déclencheur qui s'active lorsque l'utilisateur appuie sur le bouton de Jouer/Pause
