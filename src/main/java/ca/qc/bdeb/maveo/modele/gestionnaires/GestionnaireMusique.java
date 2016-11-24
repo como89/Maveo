@@ -165,6 +165,7 @@ public class GestionnaireMusique extends GestionnaireMedia {
      */
     public Tags getTags() {
         tags = tagsIO.getTagsFromMedia(cheminFichier);
+
         return tags;
     }
 }

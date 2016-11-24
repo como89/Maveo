@@ -4,14 +4,24 @@ import ca.qc.bdeb.maveo.modele.Media;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.json.simple.JSONObject;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 
 /**
  * Created by 1379708 on 2016-09-08.
@@ -116,6 +126,7 @@ public class MainFrameControleur {
                 gestionnaireMedia = GestionnaireFactory.createInstance(media, mainFrame);
                 gestionnaireMedia.preparerMedia();
 
+
                 /**
                  * Si c'est une vidéo, afficher le début et:
                  * Play -> Pause suivi de Pause -> Play pour :
@@ -144,6 +155,29 @@ public class MainFrameControleur {
 
                     // Redimensionne la vidéo afin qu'elle respecte son rapport d'aspect original
                     GestionnaireFactory.getComposantVideo().rafraichirVideo();
+                } else if (gestionnaireMedia instanceof GestionnaireMusique) {
+                    try {
+
+                        StringBuilder stringBuilder = new StringBuilder("http://ws.audioscrobbler.com/2.0/");
+                        stringBuilder.append("?method=album.getinfo");
+                        stringBuilder.append("&api_key=");
+                        stringBuilder.append("939ac33f69cba097acffdb5b025c0bb5");
+                        stringBuilder.append("&artist=" + URLEncoder.encode(((GestionnaireMusique) gestionnaireMedia).getTags().getArtist(), "UTF-8"));
+                        stringBuilder.append("&album=" + URLEncoder.encode(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum(), "UTF-8"));
+                        stringBuilder.append("&format=json");
+
+                        System.out.println(stringBuilder.toString());
+
+                        URL imageLink = new URL("https://upload.wikimedia.org/wikipedia/en/2/2e/U2_War_album_cover.jpg");
+                        Image image = SwingFXUtils.toFXImage(ImageIO.read(imageLink), null);
+
+                        mainFrame.getLblNomMedia().setGraphic(new ImageView(image));
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
 
 
@@ -152,6 +186,32 @@ public class MainFrameControleur {
                 mainFrame.getSliderProgression().setDisable(false);
                 mainFrame.getTraitProgress().setDisable(false);
             }
+        }
+    }
+
+
+
+
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    public static JSONObject readJsonFromUrl(String url) throws IOException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            JSONObject json = new JSONObject();
+
+            return json;
+        } finally {
+            is.close();
         }
     }
 

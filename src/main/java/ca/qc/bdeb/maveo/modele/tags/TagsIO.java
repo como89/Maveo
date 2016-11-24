@@ -1,8 +1,11 @@
 package ca.qc.bdeb.maveo.modele.tags;
 
+import com.sun.xml.internal.ws.api.addressing.WSEndpointReference;
+import javafx.scene.image.Image;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
 import org.farng.mp3.id3.AbstractID3;
+import org.farng.mp3.id3.AbstractID3v2Frame;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,18 +32,26 @@ public class TagsIO {
             try {
                 MP3File mp3File = new MP3File(file);
                 AbstractID3 id3 = null;
+
                 if (mp3File.hasID3v1Tag()) {
                     id3 = mp3File.getID3v1Tag();
+
                 } else if (mp3File.hasID3v2Tag()) {
                     id3 = mp3File.getID3v2Tag();
+
+
                 }
+
 
                 if (id3 != null) {
                     String title = id3.getSongTitle();
                     String artist = id3.getLeadArtist();
+                    String album = id3.getAlbumTitle();
 
-                    tags = new Tags(title, artist);
-                    System.out.println("--------------------TITLE + ARTIST : " + title + " " + artist);
+
+
+                    tags = new Tags(title, artist, album);
+                    System.out.println("--------------------TITLE + ARTIST + ALBUM : " + title + " " + artist + " " +album);
                 }
                 System.out.println(id3);
             } catch (IOException | TagException e) {

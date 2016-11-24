@@ -6,15 +6,23 @@ package ca.qc.bdeb.maveo.modele.tags;
 public class Tags {
     String title;
     String artist;
+    String album;
 
     /**
      * Constructeur pour créer un tags avec un titre et un artiste.
      * @param title - Le titre de la musique
      * @param artist - L'artiste de la musique
      */
+    public Tags(String title,String artist, String album) {
+        this.title = title;
+        this.artist = artist;
+        this.album = album;
+    }
+
     public Tags(String title,String artist) {
         this.title = title;
         this.artist = artist;
+
     }
 
     public String getTitle() {
@@ -24,4 +32,9 @@ public class Tags {
     public String getArtist() {
         return artist;
     }
+
+    public String getAlbum() {
+        return album;
+    }
+
 }
