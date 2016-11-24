@@ -36,14 +36,15 @@ public class ParolesControleur {
         this.mainFrame.addEventHandlerMenuItemMediaOpenLyric(new MenuItemMediaOpenLyricHandler());
         this.mainFrame.addEventHandlerMenuItemMediaSaveLyric(new MenuItemMediaSaveLyricHandler());
     }
-        /**
+
+    /**
      * Cette méthode permet de charger les paroles, soit grâce au fichier média, dans un fichier .maveop ou
      * le programme demande à l'utilisateur les informations nécessaire pour charger les paroles.
      */
-    private void chargerLyric() {
+    public Media chargerLyric() {
+        Media media = null;
         GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
         if (gestionnaireMedia instanceof GestionnaireMusique) {
-            Media media = null;
             GestionnaireMusique gestionnaireMusique = (GestionnaireMusique) gestionnaireMedia;
             if (mainFrame.openQuestionDialog()) {
                 media = parolesIO.afficherFenetreOuvertureFichierParoles(mainFrame.getFenetre());
@@ -63,6 +64,7 @@ public class ParolesControleur {
                 mainFrame.getLyricText().setText(media.getParolesMedia());
             }
         }
+        return media;
     }
 
     /**
