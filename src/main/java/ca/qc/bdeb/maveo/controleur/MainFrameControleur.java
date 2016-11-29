@@ -21,7 +21,6 @@ import org.json.simple.parser.ParseException;
 
 import javax.imageio.ImageIO;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -32,6 +31,13 @@ import java.nio.charset.Charset;
 public class MainFrameControleur {
 
     static boolean isFreeMutexLockSliderVolume = false;
+
+    /**
+     * Tableau contenant les indices des images en ordre décroissant (de la plus grande à la plus petite) du JSONArray
+     * récupéré dans le fichier JSON obtenu à partir de l'api de Last.fm.
+     * Utilisé pour récupèrer le lien de l'image la plus grande.
+     */
+    private final int[] tabIndicesImagesJson = {4, 3, 2, 1, 0, 5};
 
     public MainFrameControleur() {
     }
@@ -165,28 +171,26 @@ public class MainFrameControleur {
                         stringBuilder.append("?method=album.getinfo");
                         stringBuilder.append("&api_key=");
                         stringBuilder.append("939ac33f69cba097acffdb5b025c0bb5");
-                        stringBuilder.append("&artist=" + URLEncoder.encode("Kelly Clarkson", "UTF-8"));
-                        stringBuilder.append("&album=" + URLEncoder.encode("Greatest Hits - Chapter   One", "UTF-8"));
+                        stringBuilder.append("&artist=" + URLEncoder.encode("Adrian von Ziegler", "UTF-8"));
+                        stringBuilder.append("&album=" + URLEncoder.encode("Vagabond", "UTF-8"));
                         stringBuilder.append("&format=json");
                         System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum());
                         System.out.println(stringBuilder.toString());
                         System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getArtist());
 
-                        URL imageLink = new URL("https://lastfm-img2.akamaized.net/i/u/174s/aa0163bdf3a04ce58f113a874eda9a58.png");
-                        Image image = SwingFXUtils.toFXImage(ImageIO.read(imageLink), null);
+                        //  URL imageLink = new URL("https://lastfm-img2.akamaized.net/i/u/174s/aa0163bdf3a04ce58f113a874eda9a58.png");
+                        //  Image image = SwingFXUtils.toFXImage(ImageIO.read(imageLink), null);
 
+                        JSONObject jsonObjectLien = readJsonFromUrl(stringBuilder.toString());
+                        JSONObject albumJsonObject = (JSONObject) jsonObjectLien.get("album");
+                        JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
+                        Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
 
-
-                        mainFrame.getLblNomMedia().setGraphic(new ImageView(image));
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
+                        mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
-
-
                 gestionnaireMedia.addMediaPlayerEventListener(controleurLecteurMedia);
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
@@ -205,24 +209,17 @@ public class MainFrameControleur {
         return sb.toString();
     }
 
+
     public static JSONObject readJsonFromUrl(String url) {
         InputStream is = null;
+        JSONObject jsonObject = null;
         try {
             is = new URL(url).openStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
             JSONParser parser = new JSONParser();
-            JSONObject lastFmJsonObject = (JSONObject) parser.parse(jsonText);
-            JSONObject albumJsonObject = (JSONObject) lastFmJsonObject.get("album");
-            JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
+            jsonObject = (JSONObject) parser.parse(jsonText);
 
-
-
-            int i = 0;
-            i++;
-
-
-            return lastFmJsonObject;
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -234,7 +231,30 @@ public class MainFrameControleur {
                 e.printStackTrace();
             }
         }
-        return null;
+        return jsonObject;
+    }
+
+    // TODO Test
+    public Image obtenirLaPlusGrandeImageAPartirDeJsonArray(JSONArray jsonArrayImages) {
+        URL urlImage = null;
+        Image image = null;
+        try {
+            boolean imageTrouvee = false;
+            String lienImageTmp = "";
+            JSONObject itemJsonArrayTmp;
+            for (int i = 0; i < tabIndicesImagesJson.length && !imageTrouvee; i++) {
+                itemJsonArrayTmp = (JSONObject) jsonArrayImages.get(i);
+                lienImageTmp = (String) itemJsonArrayTmp.get("#text");
+                if (lienImageTmp != "") {
+                    urlImage = new URL(lienImageTmp);
+                    image = SwingFXUtils.toFXImage(ImageIO.read(urlImage), null);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
     }
 
 
