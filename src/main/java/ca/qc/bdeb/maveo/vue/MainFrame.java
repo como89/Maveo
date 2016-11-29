@@ -9,16 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -521,7 +518,7 @@ public class MainFrame {
         Dialog<Pair<String,String>> requestDialog = new Dialog<>();
         requestDialog.setTitle(QUESTION_REQUEST_INFO_TITLE);
         requestDialog.setHeaderText(REQUEST_INFO_HEADER);
-
+        
         //TODO : mediaIcon
         DialogPane dialogPane = requestDialog.getDialogPane();
         dialogPane.getButtonTypes().clear();
