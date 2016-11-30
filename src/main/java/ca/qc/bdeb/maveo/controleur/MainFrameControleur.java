@@ -209,7 +209,13 @@ public class MainFrameControleur {
         return sb.toString();
     }
 
-
+    /**
+     * Reçoit lien qui pointe vers une page avec du texte JSON en paramètre et retourne un objet JSON à partir de ce
+     * lien
+     *
+     * @param url le lien qui doit contenir une page avec du texte JSON.
+     * @return objet JSON à partir ce de ce lien
+     */
     public static JSONObject readJsonFromUrl(String url) {
         InputStream is = null;
         JSONObject jsonObject = null;
@@ -234,7 +240,12 @@ public class MainFrameControleur {
         return jsonObject;
     }
 
-    // TODO Test
+    /**
+     * Retourne l'image la plus grande ju JSONArray reçu en paramètre
+     *
+     * @param jsonArrayImages le JSONArray qui contient des liens vers les images
+     * @return l'image la plus grande trouvée (si c'st le cas)
+     */
     public Image obtenirLaPlusGrandeImageAPartirDeJsonArray(JSONArray jsonArrayImages) {
         URL urlImage = null;
         Image image = null;
@@ -243,11 +254,12 @@ public class MainFrameControleur {
             String lienImageTmp = "";
             JSONObject itemJsonArrayTmp;
             for (int i = 0; i < tabIndicesImagesJson.length && !imageTrouvee; i++) {
-                itemJsonArrayTmp = (JSONObject) jsonArrayImages.get(i);
+                itemJsonArrayTmp = (JSONObject) jsonArrayImages.get(tabIndicesImagesJson[i]);
                 lienImageTmp = (String) itemJsonArrayTmp.get("#text");
                 if (lienImageTmp != "") {
                     urlImage = new URL(lienImageTmp);
                     image = SwingFXUtils.toFXImage(ImageIO.read(urlImage), null);
+                    imageTrouvee = true;
                 }
             }
         } catch (IOException e) {
