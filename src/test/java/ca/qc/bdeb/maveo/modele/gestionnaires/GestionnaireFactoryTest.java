@@ -35,7 +35,7 @@ public class GestionnaireFactoryTest extends ApplicationTest {
         FXMLLoader loader = new FXMLLoader(ressource);
         BorderPane page = loader.load();
         mainFrame = loader.getController();
-        mainFrame.getPanelEcran().resize(WIDTH_STAGE, HEIGHT_STAGE);
+       // mainFrame.getPanelEcran().resize(WIDTH_STAGE, HEIGHT_STAGE);
         Scene scene = new Scene(page, WIDTH_STAGE, HEIGHT_STAGE);
         stage.setScene(scene);
         stage.setTitle(MainFrame.STR_NOM_PROGRAMME);

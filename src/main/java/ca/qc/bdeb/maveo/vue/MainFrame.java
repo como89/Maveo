@@ -1,6 +1,5 @@
 package ca.qc.bdeb.maveo.vue;
 
-import ca.qc.bdeb.maveo.MainClass;
 import ca.qc.bdeb.maveo.modele.tags.Tags;
 import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
@@ -9,23 +8,26 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Window;
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -46,8 +48,8 @@ public class MainFrame {
 
     public static final String STR_NOM_PROGRAMME = "M A V E O";
 
-    private final String STR_MENU_ITEM_MEDIA = "Média";
-    private final String STR_MEDIA_OPTION_OUVRIR = "Ouvrir un fichier...";
+    private static final String STR_MENU_ITEM_MEDIA = "Média";
+    private static final String STR_MEDIA_OPTION_OUVRIR = "Ouvrir un fichier...";
     private static final String STR_MEDIA_OPTION_OUVRIRPLUSIEURS = "Ouvrir plusieurs fichiers...";
     private static final String STR_MEDIA_OPTION_ENREGISTRERLISTEDELECTURE = "Enregistrer Liste de lecture";
     private static final String STR_MEDIA_OPTION_QUITTER = "Quitter";
@@ -63,11 +65,11 @@ public class MainFrame {
     static final String LABEL_TITLE = "Le titre : ";
     static final String LABEL_ARTIST = "L'artiste : ";
 
-    @FXML
-    Button boutonPlayPause;
+    public static final int VIDEO_VIEW = 0;
+    public static final int MUSIC_VIEW = 1;
 
     @FXML
-    TextFlow textFlow;
+    Button boutonPlayPause;
 
     @FXML
     Button boutonArreter;
@@ -91,13 +93,13 @@ public class MainFrame {
     Pane panelControleur;
 
     @FXML
-    Pane panelEcran;
-
-    @FXML
     BorderPane boxBorder;
 
     @FXML
     BorderPane fenetrePrincipale;
+
+    @FXML
+    Pane paneEcran;
 
     @FXML
     MenuBar menuBar;
@@ -142,16 +144,7 @@ public class MainFrame {
     Label lblNomMedia;
 
     @FXML
-    ScrollPane scrollText;
-
-    @FXML
-    Text lyricTitle;
-
-    @FXML
-    Text lyricText;
-
-    @FXML
-    StackPane stackPane;
+    AnchorPane anchorPane;
 
     @FXML
     Label labelTempsEcoule;
@@ -170,6 +163,15 @@ public class MainFrame {
 
     @FXML
     MenuItem menuItemMediaSaveLyric;
+
+    Pane ecranVideo;
+
+    Pane ecranMusique;
+
+    public MainFrame() {
+       ecranVideo = generateEcran(getClass().getClassLoader().getResource("EcranVideo.fxml"));
+       ecranMusique = generateEcran(getClass().getClassLoader().getResource("EcranMusique.fxml"));
+    }
 
     public MenuItem getMenuItemHidePlaylist() {
         return menuItemHidePlaylist;
@@ -265,10 +267,6 @@ public class MainFrame {
 
     public void setPanelControleur(Pane panelControleur) {
         this.panelControleur = panelControleur;
-    }
-
-    public void setPanelEcran(BorderPane panelEcran) {
-        this.panelEcran = panelEcran;
     }
 
     public BorderPane getFenetrePrincipale() {
@@ -423,26 +421,6 @@ public class MainFrame {
         return boutonSuivant;
     }
 
-    public Pane getPanelEcran() {
-        return panelEcran;
-    }
-
-    public ScrollPane getScrollPane(){
-        return scrollText;
-    }
-
-    public TextFlow getTextFlow() {
-        return textFlow;
-    }
-
-    public Text getLyricTitle() {
-        return lyricTitle;
-    }
-
-    public Text getLyricText(){
-        return lyricText;
-    }
-
     public Slider getSliderProgression() {
         return sliderProgression;
     }
@@ -467,6 +445,14 @@ public class MainFrame {
         lblNomMedia.setGraphic(new ImageView(image));
     }
 
+    public ImageView getVideoView() {
+        return (ImageView) ecranVideo.lookup("#videoView");
+    }
+
+    public Pane getPaneEcran() {
+        return paneEcran;
+    }
+
     public void setBoxBorder(BorderPane boxBorder) {
         this.boxBorder.setPrefSize(boxBorder.getPrefWidth(), boxBorder.getPrefHeight());
         this.boxBorder.setCenter(boxBorder.getCenter());
@@ -475,24 +461,22 @@ public class MainFrame {
         this.boxBorder.getStylesheets().addAll(boxBorder.getStylesheets());
     }
 
-    public void actualiseEcranPane(ImageView imageVideo) {
-
-        if (imageVideo != null) {
-            panelEcran.getChildren().clear();
-            panelEcran.getChildren().add(imageVideo);
-            panelEcran.getChildren().add(playlistPane);
-        } else {
-            panelEcran.getChildren().clear();
-            panelEcran.getChildren().add(lblNomMedia);
-            panelEcran.getChildren().add(playlistPane);
-            ImageView imageView = new ImageView(MainClass.LOGO_SOFTWARE);
-            imageView.setFitHeight(200);
-            imageView.setFitWidth(200);
-            lblNomMedia.setGraphic(imageView);
+    public void switchView(int typeView) {
+        anchorPane.getChildren().clear();
+        Pane pane = null;
+        switch (typeView) {
+            case VIDEO_VIEW :
+                    pane = ecranVideo;
+                break;
+            case MUSIC_VIEW:
+                    pane = ecranMusique;
+                break;
         }
-            stackPane.getChildren().clear();
-            stackPane.getChildren().add(panelEcran);
-            stackPane.getChildren().add(scrollText);
+        anchorPane.getChildren().add(pane);
+        AnchorPane.setBottomAnchor(pane,0.0);
+        AnchorPane.setLeftAnchor(pane,0.0);
+        AnchorPane.setRightAnchor(pane,0.0);
+        AnchorPane.setTopAnchor(pane,0.0);
     }
 
     /**
@@ -641,5 +625,21 @@ public class MainFrame {
 
     public void addEventHandlerMenuItemMediaSaveLyric(EventHandler<ActionEvent> MenuItemMediaSaveLyricPlaylistEventHandler){
         menuItemMediaSaveLyric.setOnAction(MenuItemMediaSaveLyricPlaylistEventHandler);
+    }
+
+    /**
+     * Méthode qui génère un panel écran pour l'écran envoyé en paramètre.
+     * @return Retourne l'écran générer avec ses composants, retourne null si l'écran ne peut pas être généré.
+     */
+    private Pane generateEcran(URL ressource) {
+        Pane panel = null;
+        try {
+            if(ressource != null) {
+                panel = FXMLLoader.load(ressource);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return panel;
     }
 }

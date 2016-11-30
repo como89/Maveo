@@ -41,7 +41,7 @@ public class ComposantVideoTest extends ApplicationTest {
         UtilLib.chargerLibSysteme();
         videoPane = new Pane();
         Scene scene = new Scene(videoPane, WIDTH, HEIGHT);
-        composant = new ComposantVideo(videoPane);
+        //composant = new ComposantVideo(videoPane);
         stage.setScene(scene);
     }
 
@@ -74,7 +74,7 @@ public class ComposantVideoTest extends ApplicationTest {
         FXMLLoader loader = new FXMLLoader(ressource);
         BorderPane page = loader.load();
         mainFrame = loader.getController();
-        mainFrame.getPanelEcran().resize(WIDTH, HEIGHT);
+      //  mainFrame.getPanelEcran().resize(WIDTH, HEIGHT);
 
         UtilLib.chargerLibSysteme();
 
@@ -82,7 +82,7 @@ public class ComposantVideoTest extends ApplicationTest {
         BorderPane panelTest = new BorderPane();
         panelTest.setBackground(Background.EMPTY);
         panelTest.resize(200, 200);
-        mainFrame.setPanelEcran(panelTest);
+     //   mainFrame.setPanelEcran(panelTest);
 
 
         final int width_vid = 1280;

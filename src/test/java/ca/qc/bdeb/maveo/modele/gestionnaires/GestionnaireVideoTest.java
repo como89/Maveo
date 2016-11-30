@@ -29,8 +29,8 @@ public class GestionnaireVideoTest extends ApplicationTest {
         final Pane pane = new Pane();
         Scene scene = new Scene(pane, 400, 400);
         stage.setScene(scene);
-        ComposantVideo composantVideo = new ComposantVideo(pane);
-        gestionnaireVideo = new GestionnaireVideo(composantVideo);
+        //ComposantVideo composantVideo = new ComposantVideo(pane);
+        //gestionnaireVideo = new GestionnaireVideo(composantVideo);
         gestionnaireVideo.setCheminFichier(PATH);
     }
 

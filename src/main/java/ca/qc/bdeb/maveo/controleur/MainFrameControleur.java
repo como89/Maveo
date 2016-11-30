@@ -35,9 +35,11 @@ public class MainFrameControleur {
      * Ajoute la fenêtre principale au contrôleur
      *
      * @param mainFrame la fenêtre principale
+     *
      */
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+        this.mainFrame.switchView(MainFrame.MUSIC_VIEW);
         this.mainFrame.addEventHandlerBtnPlay(new BtnJouerPauseEventHandler());
         this.mainFrame.addEventHandlerBtnStop(new BtnArreterEventHandler());
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
@@ -180,7 +182,7 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
             GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
             //String lyrics = gestionnaireMedia.recupererTags();
-            mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
+        //    mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
             mainFrame.getLblNomMedia().setGraphic(null);
 
             // mainFrame.getLblNomMedia().setText(lyrics);

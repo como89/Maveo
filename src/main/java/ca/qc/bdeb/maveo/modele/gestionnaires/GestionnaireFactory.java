@@ -28,13 +28,11 @@ public class GestionnaireFactory {
 
         // Si vidéo
         if (extensionFilter.getExtensions().contains(extensionFichier)) {
-            composantVideo = new ComposantVideo(mainFrame.getPanelEcran());
-            mainFrame.actualiseEcranPane(composantVideo.getVideoView());
-
+            composantVideo = new ComposantVideo(mainFrame.getPaneEcran(),mainFrame.getVideoView());
+            mainFrame.switchView(MainFrame.VIDEO_VIEW);
             gestionnaireMedia = new GestionnaireVideo(composantVideo);
-
         } else {
-            mainFrame.actualiseEcranPane(null);
+            mainFrame.switchView(MainFrame.MUSIC_VIEW);
             gestionnaireMedia = new GestionnaireMusique();
         }
         gestionnaireMedia.setCheminFichier(media.getPathMedia());

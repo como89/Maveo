@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.ImageView?>
-<Pane fx:id="panelEcran" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="videoView"/>
+<?import javafx.scene.layout.Pane?>
+<Pane fx:id="panelEcran" xmlns:fx="http://javafx.com/fxml/1" stylesheets="StylePane.css" styleClass="decorate_pane_video">
+    <children>
+    <ImageView id = "videoView" fx:id="videoView"/>
+    </children>
 </Pane>

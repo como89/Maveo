@@ -32,13 +32,14 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
 
     private WritablePixelFormat<ByteBuffer> pixelFormat;
 
-    public ComposantVideo(final Pane videoPane) {
+    public ComposantVideo(Pane videoPane, ImageView videoView) {
         super(videoBufferCallBack);
 
+        this.videoView = videoView;
         pixelFormat = PixelFormat.getByteBgraPreInstance();
         writableImage = new WritableImage((int) videoPane.getWidth(), (int) videoPane.getHeight());
-        videoView = new ImageView(writableImage);
-        videoView.setSmooth(true);
+        this.videoView.setImage(writableImage);
+        this.videoView.setSmooth(true);
         videoBufferCallBack.videoPane = videoPane;
 
         videoPane.widthProperty().addListener(new ChangeListener<Number>() {
@@ -54,15 +55,6 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
             }
         });
 
-    }
-
-    /**
-     * Méthode qui permet d'obtenir la view de la vidéo.
-     *
-     * @return la view de la vidéo.
-     */
-    public ImageView getVideoView() {
-        return videoView;
     }
 
     /**

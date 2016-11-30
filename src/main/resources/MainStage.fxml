@@ -18,9 +18,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.stage.Screen?>
-<?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.AnchorPane?>
 <BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" minHeight="500.0"
             minWidth="600.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
@@ -68,14 +66,22 @@
         </VBox>
     </top>
     <center>
-        <StackPane fx:id ="stackPane" styleClass="paneEcran" stylesheets="StylePane.css">
+        <Pane fx:id = "paneEcran" stylesheets="StylePane.css">
+            <children>
+            <AnchorPane fx:id ="anchorPane" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}">
+                <children>
+                    <Pane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" styleClass="decorate_pane_video"/>
+                </children>
+            </AnchorPane>
             <TitledPane fx:id="playlistPane" prefHeight="325.0" prefWidth="202.0" text="Playlist"
-                                                  styleClass="decorate_title_pane">
-            <content>
-                <ListView fx:id="listviewPlaylist" prefHeight="325.0" prefWidth="200.0"/>
-            </content>
+                        styleClass="decorate_title_pane">
+                <content>
+                    <ListView fx:id="listviewPlaylist" prefHeight="325.0" prefWidth="200.0"/>
+                </content>
             </TitledPane>
-        </StackPane>
+            </children>
+        </Pane>
     </center>
     <bottom>
         <BorderPane fx:id="panelControleur" prefHeight="122.0" prefWidth="638.0"
