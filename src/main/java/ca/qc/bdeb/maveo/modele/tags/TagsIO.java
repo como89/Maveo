@@ -9,6 +9,7 @@ import org.farng.mp3.id3.AbstractID3v2Frame;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
 
 /**
  * Created by nicholas on 15/11/16.
@@ -18,17 +19,19 @@ public class TagsIO {
     /**
      * Constructeur par défaut qui ne prend pas d'arguments.
      */
-    public TagsIO() {}
+    public TagsIO() {
+    }
 
     /**
      * Méthode qui permet de récupérer les tags du fichier.
+     *
      * @param pathMedia - Le path du fichier média.
      * @return retourne les tags du fichier.
      */
     public Tags getTagsFromMedia(String pathMedia) {
         Tags tags = null;
         File file = new File(pathMedia);
-        if(file.exists()) {
+        if (file.exists()) {
             try {
                 MP3File mp3File = new MP3File(file);
                 AbstractID3 id3 = null;
@@ -44,14 +47,18 @@ public class TagsIO {
 
 
                 if (id3 != null) {
+
                     String title = id3.getSongTitle();
                     String artist = id3.getLeadArtist();
                     String album = id3.getAlbumTitle();
 
+                    title = epurerChainesDeCaracteres(title);
+                    artist = epurerChainesDeCaracteres(artist);
+                    album = epurerChainesDeCaracteres(album);
 
 
                     tags = new Tags(title, artist, album);
-                    System.out.println("--------------------TITLE + ARTIST + ALBUM : " + title + " " + artist + " " +album);
+                    System.out.println("--------------------TITLE " + album);
                 }
                 System.out.println(id3);
             } catch (IOException | TagException e) {
@@ -59,4 +66,28 @@ public class TagsIO {
         }
         return tags;
     }
+
+    public String epurerChainesDeCaracteres(String chaine) {
+        String chaineFinie = "";
+        if(!chaine.isEmpty()){
+
+            String[] tableauPlusieursMots = chaine.split("   ");
+
+            for (int i = 0; i < tableauPlusieursMots.length; i++) {
+                chaineFinie += tableauPlusieursMots[i] + " ";
+
+
+            }
+
+
+
+        }
+      chaineFinie = chaineFinie.trim();
+
+        return chaineFinie;
+
+
+    }
+
+
 }
