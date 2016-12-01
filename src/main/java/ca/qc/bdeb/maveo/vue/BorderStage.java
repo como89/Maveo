@@ -3,7 +3,7 @@ package ca.qc.bdeb.maveo.vue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -54,22 +54,6 @@ public class BorderStage {
 
     double xOffSet = 0;
     double yOffSet = 0;
-
-    public ToggleButton getBtnHide() {
-        return btnHide;
-    }
-
-    public ToggleButton getBtnMaximise() {
-        return btnMaximise;
-    }
-
-    public ToggleButton getBtnClose() {
-        return btnClose;
-    }
-
-    public BorderPane getBorderPane() {
-        return borderPane;
-    }
 
     public double getX() {
         return originX;
@@ -159,9 +143,5 @@ public class BorderStage {
         boxCenter.setOnMousePressed(eventClick);
         boxButtons.setOnMousePressed(eventClick);
         boxTitle.setOnMousePressed(eventClick);
-    }
-
-    public String demanderInformation() {
-        return "";
     }
 }

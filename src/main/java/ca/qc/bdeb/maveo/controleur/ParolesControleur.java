@@ -7,12 +7,16 @@ import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.paroles.ChartLyricsClient;
 import ca.qc.bdeb.maveo.modele.paroles.ParolesIO;
 import ca.qc.bdeb.maveo.modele.tags.Tags;
+import ca.qc.bdeb.maveo.util.DialogUtil;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.text.Text;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
-import java.awt.*;
+import java.util.Optional;
 
 import static java.awt.Color.*;
 
@@ -36,7 +40,8 @@ public class ParolesControleur {
         this.mainFrame.addEventHandlerMenuItemMediaOpenLyric(new MenuItemMediaOpenLyricHandler());
         this.mainFrame.addEventHandlerMenuItemMediaSaveLyric(new MenuItemMediaSaveLyricHandler());
     }
-        /**
+
+    /**
      * Cette méthode permet de charger les paroles, soit grâce au fichier média, dans un fichier .maveop ou
      * le programme demande à l'utilisateur les informations nécessaire pour charger les paroles.
      */
@@ -45,18 +50,52 @@ public class ParolesControleur {
         if (gestionnaireMedia instanceof GestionnaireMusique) {
             Media media = null;
             GestionnaireMusique gestionnaireMusique = (GestionnaireMusique) gestionnaireMedia;
-            if (mainFrame.openQuestionDialog()) {
-                media = parolesIO.afficherFenetreOuvertureFichierParoles(mainFrame.getFenetre());
-            } else {
-                Tags tags = gestionnaireMusique.getTags();
-                if (tags == null) {
-                    tags = mainFrame.openRequestInformation();
+            String question = "Que voulez-vous faire?";
+            String[] response = {"Ouvrir un\n .maveop", "Charger\n les tags"};
+            Alert alert = DialogUtil.prepareQuestionDialog(question, response);
+            Optional<ButtonType> resultButton = alert.showAndWait();
+            if (resultButton.isPresent()) {
+                if (resultButton.get().getText().equals(response[0])) {
+                    media = parolesIO.afficherFenetreOuvertureFichierParoles(mainFrame.getFenetre());
+                } else if(resultButton.get().getText().equals(response[1])) {
+                    Tags tags = gestionnaireMusique.getTags();
+                    if (tags == null) {
+                        String title = "";
+                        String artiste = "";
+                        String[] fieldsName = {"Le titre : ", "L'artiste : "};
+                        Dialog<String[]> dialog = DialogUtil.prepareRequestInformation(fieldsName);
+                        DialogPane dialogPane = dialog.getDialogPane();
+                        Parent root = (Parent) dialogPane.getContent();
+                        VBox verticalBoxField = (VBox) root.lookup("#boxVerticalField");
+
+                        dialog.setResultConverter(new Callback<ButtonType, String[]>() {
+                            @Override
+                            public String[] call(ButtonType dialogButton) {
+                                String[] fieldContent = null;
+                                if (dialogButton == ButtonType.OK) {
+                                    fieldContent = new String[fieldsName.length];
+                                    for (int index = 0; index < fieldContent.length; index++) {
+                                        fieldContent[index] = ((TextField) verticalBoxField.getChildren().get(index)).getText();
+                                    }
+                                }
+                                return fieldContent;
+                            }
+                        });
+                        Optional<String[]> result = dialog.showAndWait();
+                        if (result.isPresent()) {
+                            title = result.get()[0];
+                            artiste = result.get()[1];
+                            tags = new Tags(title, artiste);
+                        }
+                    }
+                    if (tags != null) {
+                        String paroles = recupererParoles(tags.getTitle(), tags.getArtist());
+                        media = new Media(tags.getTitle(), tags.getArtist(), gestionnaireMusique.getCheminFichier(), paroles);
+                    }
                 }
-                String paroles = recupererParoles(tags.getTitle(), tags.getArtist());
-                media = new Media(tags.getTitle(), tags.getArtist(), gestionnaireMusique.getCheminFichier(), paroles);
             }
             // Afficher les paroles
-            if(media != null) {
+            if (media != null) {
                 mainFrame.getScrollPane().setVisible(true);
                 mainFrame.getLyricTitle().setText(media.getTitre());
                 mainFrame.getLyricText().setText(media.getParolesMedia());

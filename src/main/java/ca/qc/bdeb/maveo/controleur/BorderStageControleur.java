@@ -1,19 +1,22 @@
 package ca.qc.bdeb.maveo.controleur;
 
+import ca.qc.bdeb.maveo.util.DialogUtil;
 import ca.qc.bdeb.maveo.vue.BorderStage;
-import com.sun.deploy.uitoolkit.impl.fx.HostServicesFactory;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.Optional;
 
 /**
  * Created by nicholas on 02/11/16.
@@ -88,9 +91,35 @@ public class BorderStageControleur {
         }
     }
 
-    //Link : wikipedia.org/wiki/Janis Joplin
     void openWikiPage() {
-        hostServices.showDocument("http://wikipedia.org/wiki/Janis Joplin");
+        String[] fieldsName = {"Recherche sur wiki : "};
+        Dialog<String[]> dialog = DialogUtil.prepareRequestInformation(fieldsName);
+        DialogPane dialogPane = dialog.getDialogPane();
+        Parent root = (Parent) dialogPane.getContent();
+        VBox verticalBoxField = (VBox) root.lookup("#boxVerticalField");
+
+        dialog.setResultConverter(dialogButton -> {
+            String[] fieldContent = null;
+            if(dialogButton == ButtonType.OK) {
+                fieldContent = new String[fieldsName.length];
+                for(int index = 0;index < fieldContent.length;index++) {
+                    fieldContent[index] = ((TextField) verticalBoxField.getChildren().get(index)).getText();
+                }
+            }
+            return fieldContent;
+        });
+        Optional<String[]> result = dialog.showAndWait();
+        StringBuilder builder = new StringBuilder();
+        builder.append("https://fr.wikipedia.org/w/index.php?search=");
+        if(result.isPresent()) {
+            String[] fieldContents = result.get();
+            if(fieldContents != null) {
+                for (String content : fieldContents) {
+                    builder.append(content);
+                }
+                hostServices.showDocument(builder.toString());
+            }
+        }
     }
 
     void minimiseWindow() {

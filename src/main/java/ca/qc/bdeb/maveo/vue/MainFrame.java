@@ -60,14 +60,6 @@ public class MainFrame {
     public static final String DEFAULT_TEMPS_ECOULE = "-- : --";
     public static final String DEFAULT_TEMPS_TOTAL = "-- : -- / -- : --";
 
-    static final String QUESTION_TITLE = "Question";
-    static final String QUESTION_ASK_OPEN_LYRIC_CONTENT = "Voulez-vous ouvrir un fichier .maveop?";
-    static final String QUESTION_REQUEST_INFO_TITLE = "Information sur la chanson";
-    static final String REQUEST_INFO_HEADER = "Entrez les informations demandées : ";
-
-    static final String LABEL_TITLE = "Le titre : ";
-    static final String LABEL_ARTIST = "L'artiste : ";
-
     public static final int VIDEO_VIEW = 0;
     public static final int MUSIC_VIEW = 1;
 
@@ -462,93 +454,6 @@ public class MainFrame {
                 break;
         }
         stackPane.getChildren().add(pane);
-    }
-
-    /**
-     * Méthode qui ouvre une boite de dialog pour poser une question à l'utilisateur.
-     * @return Retourne true, si l'utilisateur clique sur yes. Sinon, c'est false.
-     */
-    public boolean openQuestionDialog() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(QUESTION_TITLE);
-        alert.setContentText(QUESTION_ASK_OPEN_LYRIC_CONTENT);
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(ButtonType.NO,ButtonType.YES);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.YES;
-    }
-
-    /**
-     * Méthode qui ouvre une boite de dialog pour demander le titre et l'artiste de la musique.
-     * @return Les tags de la musique.
-     */
-    @Nullable
-    public Tags openRequestInformation() {
-        //On prépare le dialog
-        Tags tags = null;
-        Dialog<Pair<String,String>> requestDialog = new Dialog<>();
-        requestDialog.setTitle(QUESTION_REQUEST_INFO_TITLE);
-        requestDialog.setHeaderText(REQUEST_INFO_HEADER);
-
-        //TODO : mediaIcon
-        DialogPane dialogPane = requestDialog.getDialogPane();
-        dialogPane.getButtonTypes().clear();
-        dialogPane.getButtonTypes().addAll(ButtonType.CANCEL,ButtonType.OK);
-
-        try {
-        Parent root = null;
-        // On charge le fichier fxml pour l'interface de la boite de dialog.
-            URL ressourceDialog = getClass().getClassLoader().getResource("InformationDialog.fxml");
-            if(ressourceDialog != null) {
-                root = FXMLLoader.load(ressourceDialog);
-                //On récupère les labels dans l'interface.
-                Label labelTitle = (Label) root.lookup("#labelTitle");
-                Label labelArtist = (Label) root.lookup("#labelArtist");
-                //On récupère les fields dans l'interface.
-                final TextField fieldTitle = (TextField) root.lookup("#fieldTitle");
-                final TextField fieldArtist = (TextField) root.lookup("#fieldArtist");
-
-                //On modifie le texte des labels.
-                labelTitle.setText(LABEL_TITLE);
-                labelArtist.setText(LABEL_ARTIST);
-
-                Node buttonOk = dialogPane.lookupButton(ButtonType.OK);
-                buttonOk.setDisable(true);
-
-                //On désactive le bouton ok, si un des fields est vide.
-                fieldArtist.textProperty().addListener((observable, oldValue, newValue) -> {
-                    buttonOk.setDisable(fieldTitle.getText().isEmpty()||newValue.isEmpty());
-                });
-
-                fieldTitle.textProperty().addListener((observable, oldValue, newValue) -> {
-                    buttonOk.setDisable(fieldArtist.getText().isEmpty()||newValue.trim().isEmpty());
-                });
-
-                dialogPane.setContent(root);
-
-                //On demande le focus sur le field pour le titre.
-                Platform.runLater(fieldTitle::requestFocus);
-
-                //Ici est la méthode lorsqu'on clique sur le bouton ok, on envois les informations des fields.
-                requestDialog.setResultConverter(dialogButton -> {
-                    Pair<String,String> fieldContent = null;
-                    if (dialogButton == ButtonType.OK) {
-                        fieldContent = new Pair<>(fieldTitle.getText(),fieldArtist.getText());
-                    }
-                    return fieldContent;
-                });
-
-                //On affiche et attend une réponse.
-                Optional<Pair<String,String>> result = requestDialog.showAndWait();
-                //Ici, on récupère le résultat avec les infos envoyés avec le bouton ok.
-                if(result.isPresent()) {
-                    Pair<String,String> fieldContent = result.get();
-                    tags = new Tags(fieldContent.getKey(),fieldContent.getValue());
-                }
-            }
-        } catch (IOException e) {e.printStackTrace();}
-        return tags;
     }
 
     public void addEventHandlerBtnPlay(EventHandler<ActionEvent> actionEvent) {
