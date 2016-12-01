@@ -86,6 +86,7 @@ public class MainClass extends Application {
 
             BorderStageControleur borderStageControleur = new BorderStageControleur();
             borderStageControleur.setBorderStage(borderStage);
+            borderStageControleur.setHostService(this.getHostServices());
 
             MainFrameControleur mainFrameControleur = new MainFrameControleur();
 

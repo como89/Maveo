@@ -1,12 +1,12 @@
 .decorate_button {
-    -fx-background-color: linear-gradient(#B6B4B4, #717070);
+    -fx-background-color: linear-gradient(#B6B4B4, #3C3C3C);
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
 .decorate_pane {
-    -fx-background-color: linear-gradient(#B6B4B4, #90C4DF);
+    -fx-background-color: linear-gradient(#ACD9E6, #7DAAC1);
 }
 
 .decorate_text {
@@ -28,8 +28,12 @@
     -fx-background-image: url("IconesBoutons/close_btn.png");
 }
 
-.decorate_button_close:hover, .decorate_button_hide:hover, .decorate_button_maximum:hover {
-    -fx-background-color: linear-gradient(#717070, #B6B4B4);
+.decorate_button_wiki {
+    -fx-background-image: url("IconesBoutons/wiki_btn.png");
+}
+
+.decorate_button_close:hover, .decorate_button_hide:hover, .decorate_button_maximum:hover, .decorate_button_wiki:hover {
+    -fx-background-color: linear-gradient(#3C3C3C, #B6B4B4);
 }
 
 .decorate_img_logo {

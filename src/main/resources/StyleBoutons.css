@@ -1,6 +1,5 @@
 .buttonPlay {
     -fx-background-image: url("IconesBoutons/play.png");
-    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 60px;
     -fx-background-repeat: no-repeat;
@@ -10,7 +9,6 @@
 
 .buttonPause {
     -fx-background-image: url("IconesBoutons/pause.png");
-    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 60px;
     -fx-background-repeat: no-repeat;
@@ -20,7 +18,6 @@
 
 .buttonPrecedent {
     -fx-background-image: url("IconesBoutons/previous.png");
-    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 45px;
     -fx-background-repeat: no-repeat;
@@ -30,7 +27,6 @@
 
 .buttonStop {
     -fx-background-image: url("IconesBoutons/stop.png");
-    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 60px;
     -fx-background-repeat: no-repeat;
@@ -40,7 +36,6 @@
 
 .buttonNext {
     -fx-background-image: url("IconesBoutons/next.png");
-    -fx-background-color: linear-gradient(#B6B4B4, #717070);
     -fx-background-size: 30px 30px;
     -fx-background-radius: 45px;
     -fx-background-repeat: no-repeat;
@@ -48,7 +43,11 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
 }
 
+.buttonNext, .buttonPause, .buttonPlay, .buttonPrecedent, .buttonStop {
+    -fx-background-color: linear-gradient(#B6B4B4, #3C3C3C);
+}
+
 .buttonNext:hover, .buttonPause:hover, .buttonPlay:hover, .buttonPrecedent:hover, .buttonStop:hover {
-    -fx-background-color: linear-gradient(#717070, #B6B4B4);
+    -fx-background-color: linear-gradient(#3C3C3C, #B6B4B4);
 }
 

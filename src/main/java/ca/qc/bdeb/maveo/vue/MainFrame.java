@@ -17,6 +17,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Window;
 import javafx.util.Pair;
 
@@ -138,13 +141,7 @@ public class MainFrame {
     MenuItem menuItemHidePlaylist;
 
     @FXML
-    Label lblTxtVolume;
-
-    @FXML
-    Label lblNomMedia;
-
-    @FXML
-    AnchorPane anchorPane;
+    StackPane stackPane;
 
     @FXML
     Label labelTempsEcoule;
@@ -357,14 +354,6 @@ public class MainFrame {
         return progressVolume;
     }
 
-    public Label getLblTxtVolume() {
-        return lblTxtVolume;
-    }
-
-    public void setLblTxtVolume(Label lblTxtVolume) {
-        this.lblTxtVolume = lblTxtVolume;
-    }
-
     public ListView<String> getListviewPlaylist() {
         return listviewPlaylist;
     }
@@ -375,6 +364,18 @@ public class MainFrame {
 
     public void setMenuItemHidePlaylist(MenuItem menuItemHidePlaylist) {
         this.menuItemHidePlaylist = menuItemHidePlaylist;
+    }
+
+    public ScrollPane getScrollPane() {
+        return (ScrollPane) ecranMusique.lookup("#scrollText");
+    }
+
+    public Text getLyricTitle() {
+        return (Text) ecranMusique.lookup("#lyricTitle");
+    }
+
+    public Text getLyricText() {
+        return (Text) ecranMusique.lookup("#lyricText");
     }
 
     public Label getLabelTempsEcoule() {
@@ -433,18 +434,6 @@ public class MainFrame {
         return listviewPlaylist;
     }
 
-    public Label getLblNomMedia() {
-        return lblNomMedia;
-    }
-
-    public void setLblNomMedia(Label lblNomMedia) {
-        this.lblNomMedia = lblNomMedia;
-    }
-
-    public void setImageLblEcran(Image image) {
-        lblNomMedia.setGraphic(new ImageView(image));
-    }
-
     public ImageView getVideoView() {
         return (ImageView) ecranVideo.lookup("#videoView");
     }
@@ -462,7 +451,7 @@ public class MainFrame {
     }
 
     public void switchView(int typeView) {
-        anchorPane.getChildren().clear();
+        stackPane.getChildren().clear();
         Pane pane = null;
         switch (typeView) {
             case VIDEO_VIEW :
@@ -472,11 +461,7 @@ public class MainFrame {
                     pane = ecranMusique;
                 break;
         }
-        anchorPane.getChildren().add(pane);
-        AnchorPane.setBottomAnchor(pane,0.0);
-        AnchorPane.setLeftAnchor(pane,0.0);
-        AnchorPane.setRightAnchor(pane,0.0);
-        AnchorPane.setTopAnchor(pane,0.0);
+        stackPane.getChildren().add(pane);
     }
 
     /**
@@ -533,11 +518,11 @@ public class MainFrame {
 
                 //On désactive le bouton ok, si un des fields est vide.
                 fieldArtist.textProperty().addListener((observable, oldValue, newValue) -> {
-                    buttonOk.setDisable(newValue.trim().isEmpty());
+                    buttonOk.setDisable(fieldTitle.getText().isEmpty()||newValue.isEmpty());
                 });
 
                 fieldTitle.textProperty().addListener((observable, oldValue, newValue) -> {
-                    buttonOk.setDisable(newValue.trim().isEmpty());
+                    buttonOk.setDisable(fieldArtist.getText().isEmpty()||newValue.trim().isEmpty());
                 });
 
                 dialogPane.setContent(root);

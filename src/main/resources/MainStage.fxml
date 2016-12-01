@@ -66,14 +66,12 @@
         </VBox>
     </top>
     <center>
-        <Pane fx:id = "paneEcran" stylesheets="StylePane.css">
+        <AnchorPane fx:id = "paneEcran" stylesheets="StylePane.css">
             <children>
-            <AnchorPane fx:id ="anchorPane" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}">
-                <children>
-                    <Pane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
-                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" styleClass="decorate_pane_video"/>
-                </children>
-            </AnchorPane>
+            <StackPane fx:id ="stackPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <Pane styleClass="decorate_pane_video"/>
+            </StackPane>
             <TitledPane fx:id="playlistPane" prefHeight="325.0" prefWidth="202.0" text="Playlist"
                         styleClass="decorate_title_pane">
                 <content>
@@ -81,7 +79,7 @@
                 </content>
             </TitledPane>
             </children>
-        </Pane>
+        </AnchorPane>
     </center>
     <bottom>
         <BorderPane fx:id="panelControleur" prefHeight="122.0" prefWidth="638.0"

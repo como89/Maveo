@@ -4,9 +4,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
-<Pane xmlns:fx="http://javafx.com/fxml/1">
-    <Label fx:id="lblNomMedia" layoutX="188.0" layoutY="68.0" prefHeight="253.0" prefWidth="263.0"/>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+    <Label fx:id="lblNomMedia" prefHeight="253.0" prefWidth="263.0"/>
+        <BorderPane>
+            <center>
     <ScrollPane fx:id="scrollText" visible="false">
         <content>
             <TextFlow styleClass="textFlow" stylesheets="@StyleText.css" fx:id="textFlow" textAlignment="CENTER">
@@ -19,4 +22,7 @@
             </TextFlow>
         </content>
     </ScrollPane>
-</Pane>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>

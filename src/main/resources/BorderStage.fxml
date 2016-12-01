@@ -16,6 +16,19 @@
             <children>
                 <Pane>
                     <padding>
+                        <Insets left="5" right="30"/>
+                    </padding>
+                    <ToggleButton fx:id="btnWiki"
+                                  prefWidth="32"
+                                  prefHeight="32"
+                                  styleClass="decorate_button,decorate_button_wiki">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </ToggleButton>
+                </Pane>
+                <Pane>
+                    <padding>
                         <Insets left="5" right="5"/>
                     </padding>
                     <ToggleButton fx:id="btnHide"

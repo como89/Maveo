@@ -57,9 +57,9 @@ public class ParolesControleur {
             }
             // Afficher les paroles
             if(media != null) {
-             //   mainFrame.getScrollPane().setVisible(true);
-            //    mainFrame.getLyricTitle().setText(media.getTitre());
-             //   mainFrame.getLyricText().setText(media.getParolesMedia());
+                mainFrame.getScrollPane().setVisible(true);
+                mainFrame.getLyricTitle().setText(media.getTitre());
+                mainFrame.getLyricText().setText(media.getParolesMedia());
             }
         }
     }

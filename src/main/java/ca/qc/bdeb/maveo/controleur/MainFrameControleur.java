@@ -39,13 +39,11 @@ public class MainFrameControleur {
      */
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        this.mainFrame.switchView(MainFrame.MUSIC_VIEW);
         this.mainFrame.addEventHandlerBtnPlay(new BtnJouerPauseEventHandler());
         this.mainFrame.addEventHandlerBtnStop(new BtnArreterEventHandler());
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
-        this.mainFrame.addEventHandlerDisplayLyrics(new DisplayLyricsEventHandler());
 
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
@@ -174,21 +172,6 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().getStyleClass().remove("buttonPlay");
                 mainFrame.getBtnJouerPause().getStyleClass().add("buttonPause");
             }
-        }
-    }
-
-    class DisplayLyricsEventHandler implements EventHandler<ActionEvent> {
-
-        public void handle(ActionEvent event) {
-            GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
-            //String lyrics = gestionnaireMedia.recupererTags();
-        //    mainFrame.getPanelEcran().setStyle("-fx-background-color: white");
-            mainFrame.getLblNomMedia().setGraphic(null);
-
-            // mainFrame.getLblNomMedia().setText(lyrics);
-            mainFrame.getLblNomMedia().setPrefSize(1000, 1000);
-
-
         }
     }
 

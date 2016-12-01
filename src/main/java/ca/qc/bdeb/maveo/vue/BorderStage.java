@@ -37,6 +37,9 @@ public class BorderStage {
     ToggleButton btnClose;
 
     @FXML
+    ToggleButton btnWiki;
+
+    @FXML
     Text textTitle;
 
     Stage stage;
@@ -142,6 +145,10 @@ public class BorderStage {
         btnClose.setOnAction(eventClose);
     }
 
+    public void setBtnWikiEventHandler(EventHandler<ActionEvent> eventWiki) {
+        btnWiki.setOnAction(eventWiki);
+    }
+
     public void setMouseDragEventHandler(EventHandler<MouseEvent> eventDrag) {
         boxCenter.setOnMouseDragged(eventDrag);
         boxButtons.setOnMouseDragged(eventDrag);
@@ -152,5 +159,9 @@ public class BorderStage {
         boxCenter.setOnMousePressed(eventClick);
         boxButtons.setOnMousePressed(eventClick);
         boxTitle.setOnMousePressed(eventClick);
+    }
+
+    public String demanderInformation() {
+        return "";
     }
 }

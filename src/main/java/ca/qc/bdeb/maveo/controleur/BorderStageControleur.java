@@ -1,6 +1,8 @@
 package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.vue.BorderStage;
+import com.sun.deploy.uitoolkit.impl.fx.HostServicesFactory;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -8,12 +10,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 /**
  * Created by nicholas on 02/11/16.
  */
 public class BorderStageControleur {
 
     BorderStage borderStage;
+    HostServices hostServices;
 
     public BorderStageControleur() {
     }
@@ -25,6 +33,11 @@ public class BorderStageControleur {
         this.borderStage.setBtnCloseEventHandler(new ButtonCloseEventHandler());
         this.borderStage.setMouseClickEventHandler(new MouseClickWindowEventHandler());
         this.borderStage.setMouseDragEventHandler(new MouseDragWindowEventHandler());
+        this.borderStage.setBtnWikiEventHandler(new ButtonWikiEventHandler());
+    }
+
+    public void setHostService(HostServices hostServices) {
+        this.hostServices = hostServices;
     }
 
     class ButtonHideEventHandler implements EventHandler<ActionEvent> {
@@ -51,6 +64,14 @@ public class BorderStageControleur {
         }
     }
 
+    class ButtonWikiEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            openWikiPage();
+        }
+    }
+
     class MouseClickWindowEventHandler implements EventHandler<MouseEvent> {
 
         @Override
@@ -65,6 +86,11 @@ public class BorderStageControleur {
         public void handle(MouseEvent event) {
             dragMouse(event.getScreenX(), event.getScreenY());
         }
+    }
+
+    //Link : wikipedia.org/wiki/Janis Joplin
+    void openWikiPage() {
+        hostServices.showDocument("http://wikipedia.org/wiki/Janis Joplin");
     }
 
     void minimiseWindow() {

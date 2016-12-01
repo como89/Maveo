@@ -147,10 +147,10 @@ public class PlaylistControleur {
         }
 
         // Si la taille de la palylist permet l'utilisation des boutons suivant et précédent, active ces boutons
-        if (playList.getLongueurListe() >= TAILLE_MINIMALE_PLAYLIST_ACTIVATION_BOUTONS_SUIVANT_PRECEDENT) {
-            mainframe.getBoutonSuivant().setDisable(false);
-            mainframe.getBoutonPrecedent().setDisable(false);
-        }
+        boolean activeButton = playList.getLongueurListe()
+                >= TAILLE_MINIMALE_PLAYLIST_ACTIVATION_BOUTONS_SUIVANT_PRECEDENT;
+        mainframe.getBoutonSuivant().setDisable(activeButton);
+        mainframe.getBoutonPrecedent().setDisable(activeButton);
     }
 
     class OpenPlaylistEventHandler implements EventHandler<ActionEvent> {

@@ -3,20 +3,20 @@
 }
 
 .decorate_pane_controleur {
-    -fx-background-color: linear-gradient(#B6B4B4, #7DAAC1);
+    -fx-background-color: linear-gradient(#ACD9E6, #7DAAC1);
 }
 
 .decorate_title_pane > .title {
-    -fx-background-color: linear-gradient(#B6B4B4, #FF5208);
+    -fx-background-color: linear-gradient(#D97144, #FF5208);
 }
 
 .progress_bar_position {
     -fx-box-border: #9BCAE2;
-    -fx-accent: #286786;
+    -fx-accent:  #2893C9;
 }
 
 .progress_bar_volume {
-    -fx-accent: #EB500E;
+    -fx-accent: #FF5208;
     -fx-box-border: #9BCAE2;
 }
 
