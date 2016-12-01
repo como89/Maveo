@@ -18,8 +18,16 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.binding.LibVlcFactory;
 
 import javax.imageio.ImageIO;
+import java.io.*;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -71,6 +79,8 @@ public class MainFrameControleur {
         this.mainFrame.getBtnJouerPause().setDisable(true);
         this.mainFrame.getBoutonPrecedent().setDisable(true);
         this.mainFrame.getBoutonSuivant().setDisable(true);
+
+        this.mainFrame.addEventHandlerMenuItemMediaSousTitres(new MenuItemMediaSousTitresEventHandler());
     }
 
     /**
@@ -330,6 +340,20 @@ public class MainFrameControleur {
                 isFreeMutexLockSliderVolume = true;
             }
             mainFrame.getProgressVolume().setProgress(volumePourcentage / 100.0);
+        }
+    }
+
+
+    class MenuItemMediaSousTitresEventHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent event) {
+            // Si video
+            if(GestionnaireFactory.getCurrentInstance() instanceof GestionnaireVideo){
+                LibVlcFactory factory = LibVlcFactory.factory();
+
+            }
+
+
         }
     }
 }

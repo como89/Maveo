@@ -49,6 +49,8 @@
                                       text="Ouvrir paroles..."/>
                             <MenuItem  fx:id="menuItemMediaSaveLyric" mnemonicParsing="false"
                                       text="Enregistrer paroles..."/>
+                            <MenuItem  fx:id="menuItemMediaSousTitres" mnemonicParsing="false"
+                                       text="Sous Titres"/>
 
                         </items>
                     </Menu>

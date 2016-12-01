@@ -138,6 +138,11 @@ public class MainFrame {
     @FXML
     Label labelTempsEcoule;
 
+
+
+    @FXML
+    MenuItem menuItemMediaSousTitres;
+
     @FXML
     Label labelTempsTotal;
 
@@ -515,6 +520,18 @@ public class MainFrame {
 
     public void addEventHandlerMenuItemMediaSaveLyric(EventHandler<ActionEvent> MenuItemMediaSaveLyricPlaylistEventHandler){
         menuItemMediaSaveLyric.setOnAction(MenuItemMediaSaveLyricPlaylistEventHandler);
+    }
+
+    public MenuItem getMenuItemMediaSousTitres() {
+        return menuItemMediaSousTitres;
+    }
+
+    public void setMenuItemMediaSousTitres(MenuItem menuItemMediaSousTitres) {
+        this.menuItemMediaSousTitres = menuItemMediaSousTitres;
+    }
+
+    public void addEventHandlerMenuItemMediaSousTitres(EventHandler<ActionEvent> MenuItemMediaSousTitresEventHandler){
+        menuItemMediaSousTitres.setOnAction(MenuItemMediaSousTitresEventHandler);
     }
 
     /**

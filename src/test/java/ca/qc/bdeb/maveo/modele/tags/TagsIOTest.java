@@ -11,6 +11,12 @@ import static org.junit.Assert.*;
  */
 public class TagsIOTest {
 
+
+    @Test
+    public void getTagsFromMedia() throws Exception {
+
+    }
+
     private TagsIO tagsIO;
 
     @Before
@@ -35,5 +41,15 @@ public class TagsIOTest {
         Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
         assertNotEquals(tags.title,"");
     }
+
+    @Test
+    public void epurerChainesTest(){
+        String chaineTest = "Hello   World";
+      String chaineFinale =  tagsIO.epurerChainesDeCaracteres(chaineTest);
+      assertEquals("Hello World", chaineFinale);
+    }
+
+
+
 
 }
