@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.controleur;
 
+import ca.qc.bdeb.maveo.modele.ResizeHelper;
 import ca.qc.bdeb.maveo.util.DialogUtil;
 import ca.qc.bdeb.maveo.vue.BorderStage;
 import javafx.application.HostServices;
@@ -37,6 +38,7 @@ public class BorderStageControleur {
         this.borderStage.setMouseClickEventHandler(new MouseClickWindowEventHandler());
         this.borderStage.setMouseDragEventHandler(new MouseDragWindowEventHandler());
         this.borderStage.setBtnWikiEventHandler(new ButtonWikiEventHandler());
+        ResizeHelper.addResizeListener(this.borderStage.getStage());
     }
 
     public void setHostService(HostServices hostServices) {
@@ -100,9 +102,9 @@ public class BorderStageControleur {
 
         dialog.setResultConverter(dialogButton -> {
             String[] fieldContent = null;
-            if(dialogButton == ButtonType.OK) {
+            if (dialogButton == ButtonType.OK) {
                 fieldContent = new String[fieldsName.length];
-                for(int index = 0;index < fieldContent.length;index++) {
+                for (int index = 0; index < fieldContent.length; index++) {
                     fieldContent[index] = ((TextField) verticalBoxField.getChildren().get(index)).getText();
                 }
             }
@@ -111,9 +113,9 @@ public class BorderStageControleur {
         Optional<String[]> result = dialog.showAndWait();
         StringBuilder builder = new StringBuilder();
         builder.append("https://fr.wikipedia.org/w/index.php?search=");
-        if(result.isPresent()) {
+        if (result.isPresent()) {
             String[] fieldContents = result.get();
-            if(fieldContents != null) {
+            if (fieldContents != null) {
                 for (String content : fieldContents) {
                     builder.append(content);
                 }
