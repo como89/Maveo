@@ -138,8 +138,6 @@ public class MainFrame {
     @FXML
     Label labelTempsEcoule;
 
-
-
     @FXML
     MenuItem menuItemMediaSousTitres;
 
@@ -375,6 +373,10 @@ public class MainFrame {
         return (Text) ecranMusique.lookup("#lyricText");
     }
 
+    public Label getLblNomMedia() {
+        return (Label) ecranMusique.lookup("#lblNomMedia");
+    }
+
     public Label getLabelTempsEcoule() {
         return labelTempsEcoule;
     }
@@ -480,10 +482,6 @@ public class MainFrame {
 
     public void addChangeListenerSliderVolume(ChangeListener<Number> changeListener) {
         sliderVolume.valueProperty().addListener(changeListener);
-    }
-
-    public void addEventHandlerDisplayLyrics(EventHandler<ActionEvent> displayLyricsEventHandler) {
-        menuItemMediaOpenLyric.setOnAction(displayLyricsEventHandler);
     }
 
     public void addEventHandlerAddMediaInPlayList(EventHandler<ActionEvent> menuAddToPlaylistEventHandler) {

@@ -48,4 +48,20 @@ public class TagsIO {
         }
         return tags;
     }
+
+    public String epurerChainesDeCaracteres(String chaine) {
+        String chaineFinie = "";
+        if(!chaine.isEmpty()){
+
+            String[] tableauPlusieursMots = chaine.split("   ");
+
+            for (int i = 0; i < tableauPlusieursMots.length; i++) {
+                chaineFinie += tableauPlusieursMots[i] + " ";
+            }
+        }
+        chaineFinie = chaineFinie.trim();
+
+        return chaineFinie;
+    }
+
 }
