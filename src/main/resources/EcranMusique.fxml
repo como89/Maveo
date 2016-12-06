@@ -5,11 +5,11 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1">
     <center>
-    <Label fx:id="lblNomMedia" prefHeight="253.0" prefWidth="263.0"/>
-        <BorderPane>
-            <center>
+        <Pane>
+    <Label fx:id="lblImage" prefHeight="253.0" prefWidth="263.0"/>
     <ScrollPane fx:id="scrollText" visible="false">
         <content>
             <TextFlow styleClass="textFlow" stylesheets="@StyleText.css" fx:id="textFlow" textAlignment="CENTER">
@@ -22,7 +22,6 @@
             </TextFlow>
         </content>
     </ScrollPane>
-            </center>
-        </BorderPane>
+        </Pane>
     </center>
 </BorderPane>

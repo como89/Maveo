@@ -12,6 +12,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.json.simple.JSONArray;
@@ -22,6 +23,7 @@ import uk.co.caprica.vlcj.binding.LibVlcFactory;
 import uk.co.caprica.vlcj.binding.internal.libvlc_media_player_t;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -56,7 +58,6 @@ public class MainFrameControleur {
      * Ajoute la fenêtre principale au contrôleur
      *
      * @param mainFrame la fenêtre principale
-     *
      */
     public void ajouterMainFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -175,11 +176,21 @@ public class MainFrameControleur {
 
 
                         String artiste = ((GestionnaireMusique) gestionnaireMedia).getTags().getArtist();
-                        artiste = artiste.replaceAll("\\u0000", "");
-                        artiste = artiste.replaceAll("\\ufffd", "");
                         String album = ((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum();
-                        album = album.replaceAll("\\u0000", "");
-                        album = album.replaceAll("\\ufffd", "");
+
+                        if (artiste != null) {
+                            artiste = artiste.replaceAll("\\u0000", "");
+                            artiste = artiste.replaceAll("\\ufffd", "");
+                        } else {
+                            artiste = "";
+                        }
+
+                        if (album != null) {
+                            album = album.replaceAll("\\u0000", "");
+                            album = album.replaceAll("\\ufffd", "");
+                        } else {
+                            album = "";
+                        }
 
 
                         StringBuilder stringBuilder = new StringBuilder("http://ws.audioscrobbler.com/2.0/");
@@ -205,8 +216,11 @@ public class MainFrameControleur {
 
                             mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
                         } else {
-
-                            mainFrame.getLblNomMedia().setGraphic(new ImageView("file:res/noart.png"));
+                            Label label = mainFrame.getLblNomMedia();
+                            URL ressource = getClass().getClassLoader().getResource("noart.png");
+                            Image image = SwingFXUtils.toFXImage(ImageIO.read(ressource),null);
+                            ImageView imageView = new ImageView(image);
+                            label.setGraphic(imageView);
                         }
 
                     } catch (IOException e) {

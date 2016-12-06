@@ -21,6 +21,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -161,8 +164,8 @@ public class MainFrame {
     Pane ecranMusique;
 
     public MainFrame() {
-       ecranVideo = generateEcran(getClass().getClassLoader().getResource("EcranVideo.fxml"));
-       ecranMusique = generateEcran(getClass().getClassLoader().getResource("EcranMusique.fxml"));
+        ecranVideo = generateEcran(getClass().getClassLoader().getResource("EcranVideo.fxml"));
+        ecranMusique = generateEcran(getClass().getClassLoader().getResource("EcranMusique.fxml"));
     }
 
     public MenuItem getMenuItemHidePlaylist() {
@@ -374,7 +377,7 @@ public class MainFrame {
     }
 
     public Label getLblNomMedia() {
-        return (Label) ecranMusique.lookup("#lblNomMedia");
+        return (Label) ecranMusique.lookup("#lblImage");
     }
 
     public Label getLabelTempsEcoule() {
@@ -453,11 +456,11 @@ public class MainFrame {
         stackPane.getChildren().clear();
         Pane pane = null;
         switch (typeView) {
-            case VIDEO_VIEW :
-                    pane = ecranVideo;
+            case VIDEO_VIEW:
+                pane = ecranVideo;
                 break;
             case MUSIC_VIEW:
-                    pane = ecranMusique;
+                pane = ecranMusique;
                 break;
         }
         stackPane.getChildren().add(pane);
@@ -512,11 +515,11 @@ public class MainFrame {
         menuItemHidePlaylist.setOnAction(MenuHidePlaylistEventHandler);
     }
 
-    public void addEventHandlerMenuItemMediaOpenLyric(EventHandler<ActionEvent> MenuItemMediaOpenLyricEventHandler){
+    public void addEventHandlerMenuItemMediaOpenLyric(EventHandler<ActionEvent> MenuItemMediaOpenLyricEventHandler) {
         menuItemMediaOpenLyric.setOnAction(MenuItemMediaOpenLyricEventHandler);
     }
 
-    public void addEventHandlerMenuItemMediaSaveLyric(EventHandler<ActionEvent> MenuItemMediaSaveLyricPlaylistEventHandler){
+    public void addEventHandlerMenuItemMediaSaveLyric(EventHandler<ActionEvent> MenuItemMediaSaveLyricPlaylistEventHandler) {
         menuItemMediaSaveLyric.setOnAction(MenuItemMediaSaveLyricPlaylistEventHandler);
     }
 
@@ -528,18 +531,19 @@ public class MainFrame {
         this.menuItemMediaSousTitres = menuItemMediaSousTitres;
     }
 
-    public void addEventHandlerMenuItemMediaSousTitres(EventHandler<ActionEvent> MenuItemMediaSousTitresEventHandler){
+    public void addEventHandlerMenuItemMediaSousTitres(EventHandler<ActionEvent> MenuItemMediaSousTitresEventHandler) {
         menuItemMediaSousTitres.setOnAction(MenuItemMediaSousTitresEventHandler);
     }
 
     /**
      * Méthode qui génère un panel écran pour l'écran envoyé en paramètre.
+     *
      * @return Retourne l'écran générer avec ses composants, retourne null si l'écran ne peut pas être généré.
      */
     private Pane generateEcran(URL ressource) {
         Pane panel = null;
         try {
-            if(ressource != null) {
+            if (ressource != null) {
                 panel = FXMLLoader.load(ressource);
             }
         } catch (IOException e) {

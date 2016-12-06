@@ -11,6 +11,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -80,6 +83,17 @@ public class MainClass extends Application {
             Scene scene = new Scene(page);
             mainStage.setScene(scene);
             mainStage.show();
+
+
+            mainFrame.getBtnJouerPause().getScene().getAccelerators().put(
+                    new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            mainFrame.getBtnJouerPause().fire();
+                        }
+                    }
+            );
 
             // modele
             FileOpener fileOpener = new FileOpener();

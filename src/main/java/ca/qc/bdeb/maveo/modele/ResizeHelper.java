@@ -48,7 +48,7 @@ public class ResizeHelper {
         private double startX = 0;
         private double startY = 0;
 
-        public ResizeListener(Stage stage) {
+        ResizeListener(Stage stage) {
             this.stage = stage;
         }
 
