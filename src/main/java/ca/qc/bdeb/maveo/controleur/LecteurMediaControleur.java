@@ -2,7 +2,6 @@ package ca.qc.bdeb.maveo.controleur;
 
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.application.Platform;
-import sun.applet.Main;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 
@@ -34,15 +33,14 @@ public class LecteurMediaControleur extends MediaPlayerEventAdapter {
      * Lorsque la position du média a changé, le slider est ajusté en conséquence
      *
      * @param mediaPlayer le MediaPlayer dans lequel la position du média a changé
-     * @param v           la position, en pourcentage. Ex. 0.15 est 15%
+     * @param position           la position, en pourcentage. Ex. 0.15 est 15%
      */
     @Override
-    public void positionChanged(final MediaPlayer mediaPlayer, final float v) {
+    public void positionChanged(final MediaPlayer mediaPlayer, final float position) {
         isFreeMutexLockSliderPosition = false;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                double position = v;
                 double multiplier = 100;
 
                 long dureeEcoule = mediaPlayer.getTime();

@@ -2,7 +2,7 @@
     -fx-padding: 5;
     -fx-background-color: #ffffff;
     -fx-border-width: 5;
-    -fx-border-color: linear-gradient(to bottom, #ff362e, derive(#0dbcd2, 50%));
+    -fx-border-color: linear-gradient(to bottom, #ff362e, #0dbcd2);
 }
 
 .lblTitle {

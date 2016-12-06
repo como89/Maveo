@@ -128,7 +128,7 @@ public class AccesExtensionsTest {
         Iterator<FileChooser.ExtensionFilter> it2 = liste2.iterator();
 
 
-        while (it1.hasNext() && it2.hasNext() && sontIdentiques == true) {
+        while (it1.hasNext() && it2.hasNext() && sontIdentiques) {
             sontIdentiques = verifierContenuFiltresIdentique(it1.next(), it2.next());
         }
 

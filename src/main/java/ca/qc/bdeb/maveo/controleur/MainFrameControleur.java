@@ -261,7 +261,7 @@ public class MainFrameControleur {
             for (int i = 0; i < tabIndicesImagesJson.length && !imageTrouvee; i++) {
                 itemJsonArrayTmp = (JSONObject) jsonArrayImages.get(tabIndicesImagesJson[i]);
                 lienImageTmp = (String) itemJsonArrayTmp.get("#text");
-                if (lienImageTmp != "") {
+                if (!lienImageTmp.equals("")) {
                     urlImage = new URL(lienImageTmp);
                     image = SwingFXUtils.toFXImage(ImageIO.read(urlImage), null);
                     imageTrouvee = true;
