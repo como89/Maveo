@@ -19,6 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import uk.co.caprica.vlcj.binding.LibVlcFactory;
+import uk.co.caprica.vlcj.binding.internal.libvlc_media_player_t;
 
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -172,26 +173,42 @@ public class MainFrameControleur {
                 } else if (gestionnaireMedia instanceof GestionnaireMusique) {
                     try {
 
+
+                        String artiste = ((GestionnaireMusique) gestionnaireMedia).getTags().getArtist();
+                        artiste = artiste.replaceAll("\\u0000", "");
+                        artiste = artiste.replaceAll("\\ufffd", "");
+                        String album = ((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum();
+                        album = album.replaceAll("\\u0000", "");
+                        album = album.replaceAll("\\ufffd", "");
+
+
                         StringBuilder stringBuilder = new StringBuilder("http://ws.audioscrobbler.com/2.0/");
                         stringBuilder.append("?method=album.getinfo");
                         stringBuilder.append("&api_key=");
                         stringBuilder.append("939ac33f69cba097acffdb5b025c0bb5");
-                        stringBuilder.append("&artist=" + URLEncoder.encode("Adrian von Ziegler", "UTF-8"));
-                        stringBuilder.append("&album=" + URLEncoder.encode("Vagabond", "UTF-8"));
+                        stringBuilder.append("&artist=" + URLEncoder.encode(artiste, "UTF-8"));
+                        stringBuilder.append("&album=" + URLEncoder.encode(album, "UTF-8"));
                         stringBuilder.append("&format=json");
                         System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum());
                         System.out.println(stringBuilder.toString());
                         System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getArtist());
 
-                        //  URL imageLink = new URL("https://lastfm-img2.akamaized.net/i/u/174s/aa0163bdf3a04ce58f113a874eda9a58.png");
-                        //  Image image = SwingFXUtils.toFXImage(ImageIO.read(imageLink), null);
+
+                        //   Image image = SwingFXUtils.toFXImage(ImageIO.read("http://www.okayplayer.com/wp-content/uploads/2012/08/rsz_bloc-party-day-4.jpg"), null);
 
                         JSONObject jsonObjectLien = readJsonFromUrl(stringBuilder.toString());
                         JSONObject albumJsonObject = (JSONObject) jsonObjectLien.get("album");
-                        JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
-                        Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
 
-                        mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
+                        if (albumJsonObject != null) {
+                            JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
+                            Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
+
+                            mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
+                        } else {
+
+                            mainFrame.getLblNomMedia().setGraphic(new ImageView("file:res/noart.png"));
+                        }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -343,9 +360,8 @@ public class MainFrameControleur {
 
         public void handle(ActionEvent event) {
             // Si video
-            if(GestionnaireFactory.getCurrentInstance() instanceof GestionnaireVideo){
-                LibVlcFactory factory = LibVlcFactory.factory();
-
+            if (GestionnaireFactory.getCurrentInstance() instanceof GestionnaireVideo) {
+                ((GestionnaireVideo) GestionnaireFactory.getCurrentInstance()).cacherSousTitres();
             }
 
 

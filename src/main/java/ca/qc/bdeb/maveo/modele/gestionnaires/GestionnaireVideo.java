@@ -13,6 +13,7 @@ public class GestionnaireVideo extends GestionnaireMedia {
 
     private DirectMediaPlayer embeddedMediaPlayer;
     private ComposantVideo composantVideo;
+    boolean estDesactive = false;
 
     private String linkFichier;
 
@@ -99,5 +100,19 @@ public class GestionnaireVideo extends GestionnaireMedia {
     @Override
     public void addMediaPlayerEventListener(MediaPlayerEventListener mediaPlayerEventListener) {
         embeddedMediaPlayer.addMediaPlayerEventListener(mediaPlayerEventListener);
+    }
+
+
+    public void cacherSousTitres(){
+
+        if(!estDesactive){
+            embeddedMediaPlayer.setSpu(-1);
+            estDesactive = true;
+        }
+        else{
+            embeddedMediaPlayer.setSubTitleFile("res/Vikings.S04E11.HDTV.x264-KILLERS_ettv__1480585725.srt");
+            estDesactive = false;
+        }
+
     }
 }
