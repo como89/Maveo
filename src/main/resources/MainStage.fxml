@@ -19,8 +19,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.stage.Screen?>
 <?import javafx.scene.layout.AnchorPane?>
-<BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" minHeight="500.0"
-            minWidth="600.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0"
+<BorderPane id="fenetrePrincipale" fx:id="fenetrePrincipale" maxHeight="503.0" maxWidth="700.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="503.0" prefWidth="638.0"
             xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ca.qc.bdeb.maveo.vue.MainFrame">
     <top>
