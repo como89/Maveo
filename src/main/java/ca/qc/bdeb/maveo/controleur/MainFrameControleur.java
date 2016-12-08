@@ -206,7 +206,7 @@ public class MainFrameControleur {
                         stringBuilder.append("&artist=" + URLEncoder.encode(artiste, "UTF-8"));
                         stringBuilder.append("&album=" + URLEncoder.encode(album, "UTF-8"));
                         stringBuilder.append("&format=json");
-                        System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum());
+                        System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum() + "XOIXOI");
                         System.out.println(stringBuilder.toString());
                         System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getArtist());
 
@@ -220,7 +220,10 @@ public class MainFrameControleur {
                             JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
                             Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
 
+
                             mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
+
+
                         } else {
                             Label label = mainFrame.getLblNomMedia();
                             URL ressource = getClass().getClassLoader().getResource("noart.png");
