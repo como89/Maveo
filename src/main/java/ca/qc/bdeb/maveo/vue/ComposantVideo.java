@@ -58,13 +58,6 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
     }
 
     /**
-     * Méthode qui permet de vider les pixels affichés.
-     * TODO : Méthode à refaire.
-     */
-    public void clearPixelWriter() {
-    }
-
-    /**
      * Méthode qui affiche à l'écran la vidéo pixel par pixel.
      *
      * @param mediaPlayer   - Le DirectMédiaPLayer.
@@ -80,7 +73,7 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
                 try {
                     Memory buffMem = mediaPlayer.lock()[0];
                     ByteBuffer bytebuff = buffMem.getByteBuffer(0, buffMem.size());
-                    ComposantVideo.this.getPixWriter().setPixels(0, 0, bufferFormat.getWidth(),
+                    getPixWriter().setPixels(0, 0, bufferFormat.getWidth(),
                             bufferFormat.getHeight(), pixelFormat, bytebuff, bufferFormat.getPitches()[0]);
                 } catch (Exception e) {
                 } finally {
@@ -101,11 +94,11 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
     void fitImageWithSize(float newPaneWidth, float newPaneHeight) {
         DefaultDirectMediaPlayer defaultDirectMediaPlayer = (DefaultDirectMediaPlayer) this.getMediaPlayer();
 
-        Dimension dimension = defaultDirectMediaPlayer.getVideoDimension();
+        Dimension videoResolution = defaultDirectMediaPlayer.getVideoDimension();
 
-        if(dimension != null) {
+        if (videoResolution != null) {
 
-            float rapport = (float) calculerRapport(dimension);
+            float rapport = (float) calculerRapport(videoResolution);
 
             float widthEmpty = 0;
             float heightEmpty = 0;
@@ -120,6 +113,14 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
             } else if (newPaneHeight > newPaneWidth) {
                 heightEmpty = newPaneHeight - newPaneWidth / rapport;
                 newPaneHeight = newPaneWidth / rapport;
+            } else if (newPaneHeight == newPaneWidth) { // Si le pane est carré, alors la vidéo dans le pane est redimensionnée pour respecter le rapport
+                if (videoResolution.getWidth() > videoResolution.getHeight()) {
+                    heightEmpty = newPaneHeight - newPaneWidth / rapport;
+                    newPaneHeight = newPaneWidth / rapport;
+                } else if (videoResolution.getHeight() > videoResolution.getWidth()) {
+                    widthEmpty = newPaneWidth - rapport * newPaneHeight;
+                    newPaneWidth = (float) videoResolution.getHeight() * rapport;
+                }
             }
 
             videoView.setFitHeight(newPaneHeight);

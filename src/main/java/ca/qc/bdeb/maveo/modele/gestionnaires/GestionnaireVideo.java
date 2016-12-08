@@ -47,7 +47,6 @@ public class GestionnaireVideo extends GestionnaireMedia {
     @Override
     public void arreter() {
         embeddedMediaPlayer.stop();
-        composantVideo.clearPixelWriter();
     }
 
     /**
