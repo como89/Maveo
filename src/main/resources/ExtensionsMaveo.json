@@ -71,5 +71,16 @@
       "*.maveop"
     ]
   }
-]
+],
+
+  "ExtensionsSousTitres" : [
+    {
+      "Description": "Fichier Srt (*.srt)",
+      "Extensions": [
+        "*.srt"
+      ]
+    }
+  ]
+
+
 }

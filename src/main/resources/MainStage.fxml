@@ -53,7 +53,10 @@
                                       text="Enregistrer paroles..."/>
                             <MenuItem  fx:id="menuItemMediaSousTitres" mnemonicParsing="false"
                                        accelerator="Shortcut+T"
-                                       text="Sous Titres"/>
+                                       text="Cacher Sous Titres"/>
+                            <MenuItem  fx:id="menuItemMediaChargerSousTitres" mnemonicParsing="false"
+                                       accelerator="Shortcut+T"
+                                       text="Charger Sous Titres"/>
 
                         </items>
                     </Menu>

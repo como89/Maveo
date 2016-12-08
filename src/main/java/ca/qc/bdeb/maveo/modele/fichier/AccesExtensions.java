@@ -20,6 +20,7 @@ public class AccesExtensions {
     public final String CLE_JSON_EXTENSIONS_MEDIA = "ExtensionsOuvertureMedia";
     public final String CLE_JSON_EXTENSIONS_PLAYLIST = "ExtensionsPlaylist";
     public final String CLE_JSON_EXTENSIONS_PAROLES = "ExtensionsParoles";
+    public final String CLE_JSON_EXTENSIONS_SOUSTITRES = "ExtensionsSousTitres";
     public final String CLE_DESCRIPTION = "Description";
     public final String CLE_EXTENSIONS = "Extensions";
 
@@ -35,6 +36,7 @@ public class AccesExtensions {
     ArrayList<FileChooser.ExtensionFilter> listeFiltresMedia;
     ArrayList<FileChooser.ExtensionFilter> listeFiltresPlaylist;
     ArrayList<FileChooser.ExtensionFilter> listeFiltresParoles;
+    ArrayList<FileChooser.ExtensionFilter> listeFiltresSousTitres;
 
 
     public AccesExtensions() {
@@ -50,6 +52,7 @@ public class AccesExtensions {
         listeFiltresMedia = new ArrayList<FileChooser.ExtensionFilter>();
         listeFiltresPlaylist = new ArrayList<FileChooser.ExtensionFilter>();
         listeFiltresParoles = new ArrayList<FileChooser.ExtensionFilter>();
+        listeFiltresSousTitres = new ArrayList<FileChooser.ExtensionFilter>();
 
         try {
             JSONObject jsonObject =
@@ -97,6 +100,19 @@ public class AccesExtensions {
             }
 
 
+            JSONArray jsonArrayExtensionsSousTitre = (JSONArray) jsonObject.get(CLE_JSON_EXTENSIONS_SOUSTITRES);
+
+            JSONObject jsonObjectExtensionsSousTitres;
+            JSONArray tabExtensionsSousTitres;
+            for (int i = 0; i < jsonArrayExtensionsSousTitre.size(); i++) {
+                jsonObjectExtensionsSousTitres = (JSONObject) jsonArrayExtensionsSousTitre.get(i);
+                description = (String) jsonObjectExtensionsSousTitres.get(CLE_DESCRIPTION);
+                tabExtensionsSousTitres = (JSONArray) jsonObjectExtensionsSousTitres.get(CLE_EXTENSIONS);
+                extensionFilterTmp = new FileChooser.ExtensionFilter(description, tabExtensionsSousTitres);
+                listeFiltresSousTitres.add(extensionFilterTmp);
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,5 +128,9 @@ public class AccesExtensions {
 
     public ArrayList<FileChooser.ExtensionFilter> getListeFiltresParoles() {
         return listeFiltresParoles;
+    }
+
+    public ArrayList<FileChooser.ExtensionFilter> getListeFiltresSousTitres() {
+        return listeFiltresSousTitres;
     }
 }

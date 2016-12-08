@@ -18,13 +18,13 @@ package ca.qc.bdeb.maveo.modele.paroles;
  * if not, see <http://www.gnu.org/licenses>.
  */
 
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-
-        import java.io.BufferedInputStream;
-        import java.io.ByteArrayOutputStream;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 /**
@@ -36,6 +36,7 @@ public class HttpGet {
 
     /**
      * Downloads the data from the provided URL.
+     *
      * @param inUrl The URL to get from
      * @param query The query field. '?' + query will be appended automatically, and the query data
      *              MUST be encoded properly.
@@ -48,20 +49,20 @@ public class HttpGet {
 
     /**
      * Downloads the data from the provided URL.
+     *
      * @param inUrl The URL to get from
      * @param query The query field. '?' + query will be appended automatically, and the query data
      *              MUST be encoded properly.
      * @return A byte array of the data
      */
     public static byte[] getBytes(String inUrl, String query, boolean cached)
-            throws Exception{
+            throws Exception {
         final String formattedUrl = inUrl + (query.isEmpty() ? "" : ("?" + query));
-
 
 
         URL url = new URL(formattedUrl);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestProperty("User-Agent","OmniMusic/1.0-dev (http://www.omnirom.org)");
+        urlConnection.setRequestProperty("User-Agent", "OmniMusic/1.0-dev (http://www.omnirom.org)");
         urlConnection.setUseCaches(cached);
         urlConnection.setInstanceFollowRedirects(true);
         int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale

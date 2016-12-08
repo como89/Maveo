@@ -52,6 +52,11 @@ public class FileOpener {
         return fileChooser.showOpenDialog(parent);
     }
 
+    public File activerOuvertureSousTitres(Window parent) {
+        activerFiltresSousTitre();
+        return fileChooser.showOpenDialog(parent);
+    }
+
     /**
      * Active la fenêtre de sauveagarde de média.
      *
@@ -107,5 +112,11 @@ public class FileOpener {
     void activerFiltresParoles() {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresParoles());
+    }
+
+
+    void activerFiltresSousTitre(){
+        fileChooser.getExtensionFilters().clear();
+        fileChooser.getExtensionFilters().addAll(accesExtensions.getListeFiltresSousTitres());
     }
 }
