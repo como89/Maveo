@@ -17,7 +17,7 @@
             </BorderPane>
     <ScrollPane fx:id="scrollText" visible="false" prefWidth="${borderPane.width}"
                 prefHeight="${borderPane.height}">
-            <TextFlow fx:id="textFlow" styleClass="textFlow" stylesheets="@StyleText.css" textAlignment="CENTER"
+            <TextFlow fx:id="textFlow" stylesheets="@StyleText.css" textAlignment="CENTER"
             prefWidth="${scrollText.width}">
                 <children>
                     <VBox spacing="10">
