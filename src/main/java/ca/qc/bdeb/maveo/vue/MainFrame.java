@@ -379,8 +379,8 @@ public class MainFrame {
         return (Text) ecranMusique.lookup("#lyricText");
     }
 
-    public Label getLblImage() {
-        return (Label) ecranMusique.lookup("#lblImage");
+    public ImageView getAlbumView() {
+        return (ImageView) ecranMusique.lookup("#albumImage");
     }
 
     public Label getLabelTempsEcoule() {

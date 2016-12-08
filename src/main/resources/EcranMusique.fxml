@@ -3,13 +3,18 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane fx:id = "borderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <Pane>
-    <Label fx:id="lblImage" prefHeight="253.0" prefWidth="263.0"/>
+            <BorderPane prefWidth="${borderPane.width}"
+                        prefHeight="${borderPane.height}">
+                <center>
+                    <ImageView fx:id="albumImage" fitHeight="${borderPane.height}" fitWidth="${borderPane.width}"/>
+                </center>
+            </BorderPane>
     <ScrollPane fx:id="scrollText" visible="false" prefWidth="${borderPane.width}"
                 prefHeight="${borderPane.height}">
             <TextFlow fx:id="textFlow" styleClass="textFlow" stylesheets="@StyleText.css" textAlignment="CENTER"

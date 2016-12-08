@@ -216,13 +216,12 @@ public class MainFrameControleur {
                             JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
                             Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
 
-                            mainFrame.getLblImage().setGraphic(new ImageView(albumArt));
+                            mainFrame.getAlbumView().setImage(albumArt);
                         } else {
-                            Label label = mainFrame.getLblImage();
+                            ImageView view = mainFrame.getAlbumView();
                             URL ressource = getClass().getClassLoader().getResource("noart.png");
                             Image image = SwingFXUtils.toFXImage(ImageIO.read(ressource), null);
-                            ImageView imageView = new ImageView(image);
-                            label.setGraphic(imageView);
+                            view.setImage(image);
                         }
 
                     } catch (IOException e) {
@@ -233,6 +232,8 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
                 mainFrame.getTraitProgress().setDisable(false);
+                mainFrame.getScrollPane().setVisible(false);
+                mainFrame.getAlbumView().setVisible(true);
             }
         }
     }
