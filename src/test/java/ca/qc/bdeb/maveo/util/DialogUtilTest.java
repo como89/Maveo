@@ -33,7 +33,7 @@ public class DialogUtilTest extends ApplicationTest {
                 Alert alertDialog = DialogUtil.prepareQuestionDialog(question,responses);
 
                 ObservableList<ButtonType> listButtonType = alertDialog.getButtonTypes();
-                String content = alertDialog.getContentText();
+                String content = alertDialog.getHeaderText();
                 String title = alertDialog.getTitle();
                 Alert.AlertType type = alertDialog.getAlertType();
 
@@ -70,5 +70,25 @@ public class DialogUtilTest extends ApplicationTest {
 
 
 
+    }
+
+    @Test
+    public void testPrepareAboutDialog() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                String title = "MyTitle";
+                String content = "MyContent";
+                Alert alert = DialogUtil.prepareAboutDialog(title, content);
+
+                Alert.AlertType type = alert.getAlertType();
+
+                assertEquals(title, alert.getHeaderText());
+
+                assertEquals(content, alert.getContentText());
+
+                assertEquals(Alert.AlertType.INFORMATION,type);
+            }
+        });
     }
 }

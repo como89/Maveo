@@ -1,7 +1,12 @@
 package ca.qc.bdeb.maveo.controleur;
 
-import ca.qc.bdeb.maveo.modele.ResizeHelper;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
+import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
+import ca.qc.bdeb.maveo.modele.tags.Tags;
+import ca.qc.bdeb.maveo.util.ResizeHelper;
 import ca.qc.bdeb.maveo.util.DialogUtil;
+import ca.qc.bdeb.maveo.util.WikiUtil;
 import ca.qc.bdeb.maveo.vue.BorderStage;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
@@ -41,7 +46,7 @@ public class BorderStageControleur {
         ResizeHelper.addResizeListener(this.borderStage.getStage());
     }
 
-    public void setHostService(HostServices hostServices) {
+    public void setHostServices(HostServices hostServices) {
         this.hostServices = hostServices;
     }
 
@@ -73,7 +78,7 @@ public class BorderStageControleur {
 
         @Override
         public void handle(ActionEvent event) {
-            openWikiPage();
+            handleWikiPage();
         }
     }
 
@@ -93,7 +98,43 @@ public class BorderStageControleur {
         }
     }
 
-    void openWikiPage() {
+    /**
+     * Méthode qui vérifie si des tags existent, si oui, il ajoute le contenu au wikiUtil afin
+     * de pouvoir afficher la page de wiki.
+     * Si les tags n'existent pas, on demande des informations pour effectuer une recherche sur wiki.
+     * Si aucune musique n'est joué, on demande des informations pour effectuer une recherche sur wiki.
+     */
+    void handleWikiPage() {
+        boolean noTags = true;
+        WikiUtil wikiUtil = new WikiUtil(hostServices);
+        GestionnaireMedia gestionnaireMedia = GestionnaireFactory.getCurrentInstance();
+        if(gestionnaireMedia instanceof GestionnaireMusique) {
+            GestionnaireMusique gestionnaireMusique = (GestionnaireMusique) gestionnaireMedia;
+            Tags tags = gestionnaireMusique.getTags();
+            if(tags != null) {
+                String title = tags.hasTitle()?tags.getTitle():"";
+                String artist = tags.hasArtist()?tags.getArtist():"";
+                String album = tags.hasAlbum()?tags.getAlbum():"";
+                wikiUtil.addSearchContent(title + " " + artist + " " + album);
+                noTags = false;
+            }
+        }
+
+        if(noTags) {
+            String[] informations = askWikiSearch();
+            if(informations != null) {
+                wikiUtil.addSearchContent(informations[0]);
+            }
+        }
+
+        wikiUtil.openWikiPage();
+    }
+
+    /**
+     * Méthode pour demander des informations afin de faire une recherche sur wiki.
+     * @return Retourne les informations écrites dans le dialog.
+     */
+    String[] askWikiSearch() {
         String[] fieldsName = {"Recherche sur wiki : "};
         Dialog<String[]> dialog = DialogUtil.prepareRequestInformation(fieldsName);
         DialogPane dialogPane = dialog.getDialogPane();
@@ -111,17 +152,7 @@ public class BorderStageControleur {
             return fieldContent;
         });
         Optional<String[]> result = dialog.showAndWait();
-        StringBuilder builder = new StringBuilder();
-        builder.append("https://fr.wikipedia.org/w/index.php?search=");
-        if (result.isPresent()) {
-            String[] fieldContents = result.get();
-            if (fieldContents != null) {
-                for (String content : fieldContents) {
-                    builder.append(content);
-                }
-                hostServices.showDocument(builder.toString());
-            }
-        }
+        return result.isPresent()?result.get():null;
     }
 
     void minimiseWindow() {

@@ -6,12 +6,14 @@ import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireFactory;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMedia;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireMusique;
 import ca.qc.bdeb.maveo.modele.gestionnaires.GestionnaireVideo;
+import ca.qc.bdeb.maveo.util.DialogUtil;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +26,7 @@ import uk.co.caprica.vlcj.binding.internal.libvlc_media_player_t;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
 import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -66,6 +69,8 @@ public class MainFrameControleur {
         this.mainFrame.addEventHandlerOuvrirFichier(new MenuItemOuvrirEventHandler());
         this.mainFrame.addChangeListenerSliderProgression(new SliderPositionChangeListener());
         this.mainFrame.addChangeListenerSliderVolume(new SliderVolumeChangeListener());
+        this.mainFrame.addEventHandlerExitItem(new MenuItemExitEventHandler());
+        this.mainFrame.addEventHandlerAboutItem(new MenuItemAboutEventHandler());
 
 
         this.mainFrame.getSliderVolume().setValue(this.mainFrame.getSliderVolume().getMax());
@@ -301,8 +306,30 @@ public class MainFrameControleur {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return image;
+    }
+
+    class MenuItemExitEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            System.exit(0);
+        }
+    }
+
+    class MenuItemAboutEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            String title = "About M A V E O";
+            String content = "Lecteur de musiques et de vidéos. \n\n"
+                    + "Créateurs : \n"
+                    + "Catalin Sandolache\n"
+                    + "Nicholas Vézina\n"
+                    + "Cédric Wu Tchan Ki";
+            Alert aboutDialog = DialogUtil.prepareAboutDialog(title, content);
+            aboutDialog.show();
+        }
     }
 
 
@@ -377,8 +404,6 @@ public class MainFrameControleur {
             if (GestionnaireFactory.getCurrentInstance() instanceof GestionnaireVideo) {
                 ((GestionnaireVideo) GestionnaireFactory.getCurrentInstance()).cacherSousTitres();
             }
-
-
         }
     }
 }

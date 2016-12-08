@@ -38,6 +38,8 @@ public class TagsIO {
                 if (id3 != null) {
                     String title = id3.getSongTitle();
                     String artist = id3.getLeadArtist();
+                    title = epurerChainesDeCaracteres(title);
+                    artist = epurerChainesDeCaracteres(artist);
 
                     tags = new Tags(title, artist);
                     System.out.println("--------------------TITLE + ARTIST : " + title + " " + artist);
@@ -49,7 +51,7 @@ public class TagsIO {
         return tags;
     }
 
-    public String epurerChainesDeCaracteres(String chaine) {
+    String epurerChainesDeCaracteres(String chaine) {
         String chaineFinie = "";
         if(!chaine.isEmpty()){
 
@@ -59,6 +61,8 @@ public class TagsIO {
                 chaineFinie += tableauPlusieursMots[i] + " ";
             }
         }
+        chaineFinie = chaineFinie.replaceAll("\\u0000", "");
+        chaineFinie = chaineFinie.replaceAll("\\ufffd", "");
         chaineFinie = chaineFinie.trim();
 
         return chaineFinie;

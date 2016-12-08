@@ -300,15 +300,15 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void getMenuItemFileClose() throws Exception {
-        MenuItem menuItemTest = testFrame.getMenuItemFileClose();
+        MenuItem menuItemTest = testFrame.getMenuItemExit();
         Assert.assertEquals(menuItemTest, testFrame.getMenuBar().getMenus().get(0).getItems().get(1));
     }
 
     @Test
     public void setMenuItemFileClose() throws Exception {
         MenuItem menuItemTest = new MenuItem("LISA");
-        testFrame.setMenuItemFileClose(menuItemTest);
-        Assert.assertEquals(menuItemTest, testFrame.getMenuItemFileClose());
+        testFrame.setMenuItemExit(menuItemTest);
+        Assert.assertEquals(menuItemTest, testFrame.getMenuItemExit());
     }
 
     @Test

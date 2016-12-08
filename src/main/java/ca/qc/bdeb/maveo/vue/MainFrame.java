@@ -112,7 +112,7 @@ public class MainFrame {
     MenuItem menuItemHelp;
 
     @FXML
-    MenuItem menuItemFileClose;
+    MenuItem menuItemExit;
 
     @FXML
     MenuItem menuItemHelpAbout;
@@ -304,12 +304,12 @@ public class MainFrame {
         this.menuItemHelp = menuItemHelp;
     }
 
-    public MenuItem getMenuItemFileClose() {
-        return menuItemFileClose;
+    public MenuItem getMenuItemExit() {
+        return menuItemExit;
     }
 
-    public void setMenuItemFileClose(MenuItem menuItemFileClose) {
-        this.menuItemFileClose = menuItemFileClose;
+    public void setMenuItemExit(MenuItem menuItemExit) {
+        this.menuItemExit = menuItemExit;
     }
 
     public MenuItem getMenuItemHelpAbout() {
@@ -521,6 +521,14 @@ public class MainFrame {
 
     public void addEventHandlerMenuItemMediaSaveLyric(EventHandler<ActionEvent> MenuItemMediaSaveLyricPlaylistEventHandler) {
         menuItemMediaSaveLyric.setOnAction(MenuItemMediaSaveLyricPlaylistEventHandler);
+    }
+
+    public void addEventHandlerExitItem(EventHandler<ActionEvent> exitItemEvent) {
+        menuItemExit.setOnAction(exitItemEvent);
+    }
+
+    public void addEventHandlerAboutItem(EventHandler<ActionEvent> aboutItemEvent) {
+        menuItemHelpAbout.setOnAction(aboutItemEvent);
     }
 
     public MenuItem getMenuItemMediaSousTitres() {

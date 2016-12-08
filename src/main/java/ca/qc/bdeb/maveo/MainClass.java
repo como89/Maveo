@@ -4,6 +4,7 @@ import ca.qc.bdeb.maveo.controleur.*;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.util.UtilLib;
+import ca.qc.bdeb.maveo.util.WikiUtil;
 import ca.qc.bdeb.maveo.vue.BorderStage;
 import ca.qc.bdeb.maveo.vue.MainFrame;
 import ca.qc.bdeb.maveo.vue.SplashScreen;
@@ -100,7 +101,7 @@ public class MainClass extends Application {
 
             BorderStageControleur borderStageControleur = new BorderStageControleur();
             borderStageControleur.setBorderStage(borderStage);
-            borderStageControleur.setHostService(this.getHostServices());
+            borderStageControleur.setHostServices(this.getHostServices());
 
             MainFrameControleur mainFrameControleur = new MainFrameControleur();
 

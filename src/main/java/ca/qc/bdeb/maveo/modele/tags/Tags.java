@@ -37,4 +37,16 @@ public class Tags {
         return album;
     }
 
+    public boolean hasTitle() {
+        return title != null;
+    }
+
+    public boolean hasArtist() {
+        return artist != null;
+    }
+
+    public boolean hasAlbum() {
+        return album != null;
+    }
+
 }

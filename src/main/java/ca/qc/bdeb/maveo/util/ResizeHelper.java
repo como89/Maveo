@@ -1,4 +1,4 @@
-package ca.qc.bdeb.maveo.modele;
+package ca.qc.bdeb.maveo.util;
 
 import javafx.collections.ObservableList;
         import javafx.event.EventHandler;

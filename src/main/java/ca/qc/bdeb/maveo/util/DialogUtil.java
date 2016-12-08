@@ -93,4 +93,12 @@ public class DialogUtil {
         } catch (IOException e) {e.printStackTrace();}
         return requestDialog;
     }
+
+    public static Alert prepareAboutDialog(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(title);
+        alert.setContentText(content);
+        return alert;
+    }
 }
