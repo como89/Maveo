@@ -21,12 +21,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import uk.co.caprica.vlcj.binding.LibVlcFactory;
-import uk.co.caprica.vlcj.binding.internal.libvlc_media_player_t;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
 import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -206,7 +202,7 @@ public class MainFrameControleur {
                         stringBuilder.append("&artist=" + URLEncoder.encode(artiste, "UTF-8"));
                         stringBuilder.append("&album=" + URLEncoder.encode(album, "UTF-8"));
                         stringBuilder.append("&format=json");
-                        System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum());
+                        System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getAlbum() + "XOIXOI");
                         System.out.println(stringBuilder.toString());
                         System.out.println(((GestionnaireMusique) gestionnaireMedia).getTags().getArtist());
 
@@ -220,13 +216,12 @@ public class MainFrameControleur {
                             JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
                             Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
 
-                            mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
+                            mainFrame.getAlbumView().setImage(albumArt);
                         } else {
-                            Label label = mainFrame.getLblNomMedia();
+                            ImageView view = mainFrame.getAlbumView();
                             URL ressource = getClass().getClassLoader().getResource("noart.png");
                             Image image = SwingFXUtils.toFXImage(ImageIO.read(ressource), null);
-                            ImageView imageView = new ImageView(image);
-                            label.setGraphic(imageView);
+                            view.setImage(image);
                         }
 
                     } catch (IOException e) {
@@ -237,6 +232,8 @@ public class MainFrameControleur {
                 mainFrame.getBtnJouerPause().setDisable(false);
                 mainFrame.getSliderProgression().setDisable(false);
                 mainFrame.getTraitProgress().setDisable(false);
+                mainFrame.getScrollPane().setVisible(false);
+                mainFrame.getAlbumView().setVisible(true);
             }
         }
     }

@@ -52,24 +52,26 @@ public class DialogUtilTest extends ApplicationTest {
 
     @Test
     public void testPrepareDialogInformation() {
-        String[] fieldNames = {"field1","field2"};
-        Dialog<String[]> dialog = DialogUtil.prepareRequestInformation(fieldNames);
-        DialogPane dialogPane = dialog.getDialogPane();
-        ObservableList<ButtonType> listButtons = dialogPane.getButtonTypes();
-        String title = dialog.getTitle();
-        String header = dialog.getHeaderText();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                String[] fieldNames = {"field1", "field2"};
+                Dialog<String[]> dialog = DialogUtil.prepareRequestInformation(fieldNames);
+                DialogPane dialogPane = dialog.getDialogPane();
+                ObservableList<ButtonType> listButtons = dialogPane.getButtonTypes();
+                String title = dialog.getTitle();
+                String header = dialog.getHeaderText();
 
-        assertEquals(title,DialogUtil.QUESTION_REQUEST_INFO_TITLE);
-        assertEquals(header,DialogUtil.REQUEST_INFO_HEADER);
+                assertEquals(title, DialogUtil.QUESTION_REQUEST_INFO_TITLE);
+                assertEquals(header, DialogUtil.REQUEST_INFO_HEADER);
 
-        Parent root = (Parent) dialogPane.getContent();
+                Parent root = (Parent) dialogPane.getContent();
 
-        int nbTextField = 0;
-        VBox verticalBoxLabel = (VBox) root.lookup("#boxVerticalLabel");
-        VBox verticalBoxField = (VBox) root.lookup("#boxVerticalField");
-
-
-
+                int nbTextField = 0;
+                VBox verticalBoxLabel = (VBox) root.lookup("#boxVerticalLabel");
+                VBox verticalBoxField = (VBox) root.lookup("#boxVerticalField");
+            }
+        });
     }
 
     @Test

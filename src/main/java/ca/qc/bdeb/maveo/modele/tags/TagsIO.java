@@ -38,10 +38,13 @@ public class TagsIO {
                 if (id3 != null) {
                     String title = id3.getSongTitle();
                     String artist = id3.getLeadArtist();
+                    String album = id3.getAlbumTitle();
                     title = epurerChainesDeCaracteres(title);
                     artist = epurerChainesDeCaracteres(artist);
+                    album = epurerChainesDeCaracteres(album);
 
-                    tags = new Tags(title, artist);
+
+                    tags = new Tags(title, artist, album);
                     System.out.println("--------------------TITLE + ARTIST : " + title + " " + artist);
                 }
                 System.out.println(id3);

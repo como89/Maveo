@@ -487,15 +487,15 @@ public class MainFrameTest extends ApplicationTest {
 
     @Test
     public void getLblNomMedia() throws Exception {
- //       Label labelTest = testFrame.getLblNomMedia();
-    //    Assert.assertEquals(labelTest, testFrame.getLblNomMedia());
+ //       Label labelTest = testFrame.getLblImage();
+    //    Assert.assertEquals(labelTest, testFrame.getLblImage());
     }
 
     @Test
     public void setLblNomMedia() throws Exception {
         Label labelTest = new Label("TEST");
      //   testFrame.setLblNomMedia(labelTest);
-      //   Assert.assertEquals(labelTest, testFrame.getLblNomMedia());
+      //   Assert.assertEquals(labelTest, testFrame.getLblImage());
     }
 
     @Test

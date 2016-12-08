@@ -3,24 +3,29 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.image.ImageView?>
+<BorderPane fx:id = "borderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <Pane>
-    <Label fx:id="lblImage" prefHeight="253.0" prefWidth="263.0"/>
-    <ScrollPane fx:id="scrollText" visible="false">
-        <content>
-            <TextFlow styleClass="textFlow" stylesheets="@StyleText.css" fx:id="textFlow" textAlignment="CENTER">
+            <BorderPane prefWidth="${borderPane.width}"
+                        prefHeight="${borderPane.height}">
+                <center>
+                    <ImageView fx:id="albumImage" fitHeight="${borderPane.height}" fitWidth="${borderPane.width}"/>
+                </center>
+            </BorderPane>
+    <ScrollPane fx:id="scrollText" visible="false" prefWidth="${borderPane.width}"
+                prefHeight="${borderPane.height}">
+            <TextFlow fx:id="textFlow" stylesheets="@StyleText.css" textAlignment="CENTER"
+            prefWidth="${scrollText.width}">
                 <children>
                     <VBox spacing="10">
-                        <Text fx:id = "lyricTitle" styleClass="h1" text="Title" textAlignment="CENTER"/>
-                        <Text fx:id = "lyricText" styleClass="h2" text="body" textAlignment="CENTER" />
+                        <Text fx:id = "lyricTitle" styleClass="h1" text="Title" textAlignment="CENTER" wrappingWidth="${textFlow.width}"/>
+                        <Text fx:id = "lyricText" styleClass="h2" text="body" textAlignment="CENTER" wrappingWidth="${textFlow.width}"/>
                     </VBox>
                 </children>
             </TextFlow>
-        </content>
     </ScrollPane>
         </Pane>
     </center>
