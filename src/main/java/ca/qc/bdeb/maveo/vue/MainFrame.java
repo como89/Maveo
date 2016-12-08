@@ -145,6 +145,9 @@ public class MainFrame {
     MenuItem menuItemMediaSousTitres;
 
     @FXML
+    MenuItem menuItemMediaChargerSousTitres;
+
+    @FXML
     Label labelTempsTotal;
 
     @FXML
@@ -543,6 +546,9 @@ public class MainFrame {
         menuItemMediaSousTitres.setOnAction(MenuItemMediaSousTitresEventHandler);
     }
 
+    public void addEventHandlerMenuItemMediaChargerSousTitres(EventHandler<ActionEvent> MenuItemMediaChargerSousTitresEventHandler) {
+        menuItemMediaChargerSousTitres.setOnAction(MenuItemMediaChargerSousTitresEventHandler);
+    }
     /**
      * Méthode qui génère un panel écran pour l'écran envoyé en paramètre.
      *

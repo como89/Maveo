@@ -81,6 +81,7 @@ public class MainFrameControleur {
         this.mainFrame.getBoutonSuivant().setDisable(true);
 
         this.mainFrame.addEventHandlerMenuItemMediaSousTitres(new MenuItemMediaSousTitresEventHandler());
+        this.mainFrame.addEventHandlerMenuItemMediaChargerSousTitres(new MenuItemMediaChargerSousTitresEventHandler());
 
 
     }
@@ -223,7 +224,7 @@ public class MainFrameControleur {
                         } else {
                             Label label = mainFrame.getLblNomMedia();
                             URL ressource = getClass().getClassLoader().getResource("noart.png");
-                            Image image = SwingFXUtils.toFXImage(ImageIO.read(ressource),null);
+                            Image image = SwingFXUtils.toFXImage(ImageIO.read(ressource), null);
                             ImageView imageView = new ImageView(image);
                             label.setGraphic(imageView);
                         }
@@ -402,8 +403,26 @@ public class MainFrameControleur {
         public void handle(ActionEvent event) {
             // Si video
             if (GestionnaireFactory.getCurrentInstance() instanceof GestionnaireVideo) {
-                ((GestionnaireVideo) GestionnaireFactory.getCurrentInstance()).cacherSousTitres();
+                ((GestionnaireVideo) GestionnaireFactory.getCurrentInstance()).cacherAfficherSousTitres();
+
+                if (((GestionnaireVideo) GestionnaireFactory.getCurrentInstance()).isEstSousTitresDesactives()) {
+                    mainFrame.getMenuItemMediaSousTitres().setText("Afficher Sous Titres");
+                } else {
+
+                    mainFrame.getMenuItemMediaSousTitres().setText("Cacher Sous Titres");
+                }
             }
+        }
+    }
+
+    class MenuItemMediaChargerSousTitresEventHandler implements EventHandler<ActionEvent> {
+
+        public void handle(ActionEvent event) {
+            File file = fileOpener.activerOuvertureSousTitres(mainFrame.getFenetre());
+
+            ((GestionnaireVideo) GestionnaireFactory.getCurrentInstance()).chargerSousTitres(file);
+
+
         }
     }
 }

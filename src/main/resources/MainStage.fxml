@@ -38,8 +38,8 @@
                     <Menu mnemonicParsing="false" text="Playlist">
                         <items>
                             <MenuItem fx:id="menuItemOpenPlaylist" mnemonicParsing="false" accelerator="Shortcut+P" text="Open Playlist"/>
-                            <MenuItem fx:id="menuItemAddToPlaylist" mnemonicParsing="false" accelerator="Shortcut+A" text="Add to Playlist"/>
-                            <MenuItem fx:id="menuItemSavePlaylist" mnemonicParsing="false" accelerator="Shortcut+S" text="Save Playlist"/>
+                            <MenuItem fx:id="menuItemAddToPlaylist" mnemonicParsing="false" accelerator="Shortcut+D" text="Add to Playlist"/>
+                            <MenuItem fx:id="menuItemSavePlaylist" mnemonicParsing="false" accelerator="Shortcut+F" text="Save Playlist"/>
                             <MenuItem fx:id="menuItemHidePlaylist" mnemonicParsing="false" accelerator="Shortcut+H" text="Hide Playlist"/>
                         </items>
                     </Menu>
@@ -52,8 +52,11 @@
                                        accelerator="Shortcut+K"
                                       text="Enregistrer paroles..."/>
                             <MenuItem  fx:id="menuItemMediaSousTitres" mnemonicParsing="false"
+                                       accelerator="Shortcut+R"
+                                       text="Cacher Sous Titres"/>
+                            <MenuItem  fx:id="menuItemMediaChargerSousTitres" mnemonicParsing="false"
                                        accelerator="Shortcut+T"
-                                       text="Sous Titres"/>
+                                       text="Charger Sous Titres"/>
 
                         </items>
                     </Menu>

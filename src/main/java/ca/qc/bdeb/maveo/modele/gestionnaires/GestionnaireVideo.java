@@ -5,6 +5,8 @@ import uk.co.caprica.vlcj.player.DefaultMediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
 import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 
+import java.io.File;
+
 /**
  * @author Nicholas
  * @doc http://caprica.github.io/vlcj/javadoc/3.10.1/uk/co/caprica/vlcj/player/direct/DirectMediaPlayer.html
@@ -13,7 +15,12 @@ public class GestionnaireVideo extends GestionnaireMedia {
 
     private DirectMediaPlayer embeddedMediaPlayer;
     private ComposantVideo composantVideo;
-    boolean estDesactive = false;
+
+    public boolean isEstSousTitresDesactives() {
+        return estSousTitresDesactives;
+    }
+
+    boolean estSousTitresDesactives = false;
 
     private String linkFichier;
 
@@ -103,16 +110,28 @@ public class GestionnaireVideo extends GestionnaireMedia {
     }
 
 
-    public void cacherSousTitres(){
+    public void cacherAfficherSousTitres(){
 
-        if(!estDesactive){
+
+        if(!estSousTitresDesactives){
+
             embeddedMediaPlayer.setSpu(-1);
-            estDesactive = true;
+            estSousTitresDesactives = true;
+
+
         }
         else{
-            embeddedMediaPlayer.setSubTitleFile("res/Vikings.S04E11.HDTV.x264-KILLERS_ettv__1480585725.srt");
-            estDesactive = false;
+
+
+            embeddedMediaPlayer.setSpu(2);
+
+
+            estSousTitresDesactives = false;
         }
 
+    }
+
+    public void chargerSousTitres(File file) {
+        embeddedMediaPlayer.setSubTitleFile(file);
     }
 }
