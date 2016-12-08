@@ -216,10 +216,6 @@ public class MainFrameControleur {
                             JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
                             Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
 
-
-                            mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
-
-
                             mainFrame.getLblImage().setGraphic(new ImageView(albumArt));
                         } else {
                             Label label = mainFrame.getLblImage();
