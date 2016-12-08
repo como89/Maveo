@@ -101,8 +101,8 @@ public class BorderStageControleur {
     /**
      * Méthode qui vérifie si des tags existent, si oui, il ajoute le contenu au wikiUtil afin
      * de pouvoir afficher la page de wiki.
-     * Si les tags n'existent pas, on demande des informations pour effectuer une recherche sur wiki.
-     * Si aucune musique n'est joué, on demande des informations pour effectuer une recherche sur wiki.
+     * Si les tags n'existent pas ou aucune musique n'est joué,
+     * on demande des informations pour effectuer une recherche sur wiki.
      */
     void handleWikiPage() {
         boolean noTags = true;
@@ -155,11 +155,17 @@ public class BorderStageControleur {
         return result.isPresent()?result.get():null;
     }
 
+    /**
+     * Méthode qui permet de minimiser la fenêtre.
+     */
     void minimiseWindow() {
         Stage stage = borderStage.getStage();
         stage.setIconified(true);
     }
 
+    /**
+     * Méthode qui permet de maximiser la fenêtre.
+     */
     void maximiseWindow() {
         Stage stage = borderStage.getStage();
 
@@ -184,11 +190,21 @@ public class BorderStageControleur {
         }
     }
 
+    /**
+     * Méthode lorsqu'on clique à une position précise.
+     * @param x - position x
+     * @param y - position y
+     */
     void pressMouse(double x, double y) {
         borderStage.setXOffSet(x);
         borderStage.setYOffSet(y);
     }
 
+    /**
+     * Méthode qui permet de drag la fenêtre à une certaine position.
+     * @param xWindow - position x
+     * @param yWindow - position y
+     */
     void dragMouse(double xWindow, double yWindow) {
         if (!borderStage.isMaximized()) {
             Stage stage = borderStage.getStage();

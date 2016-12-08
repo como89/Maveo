@@ -18,8 +18,6 @@ import javafx.util.Callback;
 
 import java.util.Optional;
 
-import static java.awt.Color.*;
-
 /**
  * Created by C A T A on 2016-11-15.
  */
@@ -97,6 +95,7 @@ public class ParolesControleur {
             // Afficher les paroles
             if (media != null) {
                 mainFrame.getScrollPane().setVisible(true);
+                mainFrame.getLblImage().setVisible(false);
                 mainFrame.getLyricTitle().setText(media.getTitre());
                 mainFrame.getLyricText().setText(media.getParolesMedia());
             }

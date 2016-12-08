@@ -6,12 +6,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.stage.Screen?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <Pane>
     <Label fx:id="lblImage" prefHeight="253.0" prefWidth="263.0"/>
-    <ScrollPane fx:id="scrollText" visible="false">
-        <content>
+    <ScrollPane fx:id="scrollText" visible="false" prefWidth="${screen.visualBounds.width}"
+                prefHeight="${screen.visualBounds.height}">
+        <fx:define>
+            <Screen fx:factory="getPrimary" fx:id="screen"/>
+        </fx:define>
             <TextFlow styleClass="textFlow" stylesheets="@StyleText.css" fx:id="textFlow" textAlignment="CENTER">
                 <children>
                     <VBox spacing="10">
@@ -20,7 +24,6 @@
                     </VBox>
                 </children>
             </TextFlow>
-        </content>
     </ScrollPane>
         </Pane>
     </center>

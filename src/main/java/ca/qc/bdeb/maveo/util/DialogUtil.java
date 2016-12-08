@@ -94,6 +94,12 @@ public class DialogUtil {
         return requestDialog;
     }
 
+    /**
+     * Méthode qui prépare un dialog pour afficher un about.
+     * @param title - Le titre et le header de la fenêtre
+     * @param content - Le contenu du message.
+     * @return La boite de dialogue préparé.
+     */
     public static Alert prepareAboutDialog(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

@@ -22,7 +22,6 @@ public class Tags {
     public Tags(String title,String artist) {
         this.title = title;
         this.artist = artist;
-
     }
 
     public String getTitle() {

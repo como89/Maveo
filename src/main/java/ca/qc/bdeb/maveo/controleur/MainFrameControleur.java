@@ -21,12 +21,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import uk.co.caprica.vlcj.binding.LibVlcFactory;
-import uk.co.caprica.vlcj.binding.internal.libvlc_media_player_t;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
 import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -220,9 +216,9 @@ public class MainFrameControleur {
                             JSONArray jsonArrayImage = (JSONArray) albumJsonObject.get("image");
                             Image albumArt = obtenirLaPlusGrandeImageAPartirDeJsonArray(jsonArrayImage);
 
-                            mainFrame.getLblNomMedia().setGraphic(new ImageView(albumArt));
+                            mainFrame.getLblImage().setGraphic(new ImageView(albumArt));
                         } else {
-                            Label label = mainFrame.getLblNomMedia();
+                            Label label = mainFrame.getLblImage();
                             URL ressource = getClass().getClassLoader().getResource("noart.png");
                             Image image = SwingFXUtils.toFXImage(ImageIO.read(ressource), null);
                             ImageView imageView = new ImageView(image);

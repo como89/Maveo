@@ -379,7 +379,7 @@ public class MainFrame {
         return (Text) ecranMusique.lookup("#lyricText");
     }
 
-    public Label getLblNomMedia() {
+    public Label getLblImage() {
         return (Label) ecranMusique.lookup("#lblImage");
     }
 
@@ -447,6 +447,10 @@ public class MainFrame {
         return paneEcran;
     }
 
+    /**
+     * Méthode qui permet de set le border avec ses styles et ses composants.
+     * @param boxBorder - Le border à modifier.
+     */
     public void setBoxBorder(BorderPane boxBorder) {
         this.boxBorder.setPrefSize(boxBorder.getPrefWidth(), boxBorder.getPrefHeight());
         this.boxBorder.setCenter(boxBorder.getCenter());
@@ -455,6 +459,11 @@ public class MainFrame {
         this.boxBorder.getStylesheets().addAll(boxBorder.getStylesheets());
     }
 
+    /**
+     * Méthode qui permet de switch entre les diverses interface du programme.
+     * Soit VIDEO_VIEW OU MUSIC_VIEW.
+     * @param typeView - On lui donne en paramètre l'id du view qu'on veut afficher.
+     */
     public void switchView(int typeView) {
         stackPane.getChildren().clear();
         Pane pane = null;
