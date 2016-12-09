@@ -98,28 +98,29 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
 
         if (videoResolution != null) {
 
-            float rapport = (float) calculerRapport(videoResolution);
+            float rapportVideo = (float) calculerRapport(videoResolution);
+            float rapportPane = (float) calculerRapport(new Dimension((int) newPaneWidth, (int) newPaneHeight));
 
             float widthEmpty = 0;
             float heightEmpty = 0;
 
             /**
-             * Ce bloc if()..else if() fixe la taille de l'affichage vidéo pour respecter le rapport d'aspect
+             * Ce bloc if()..else if() fixe la taille de l'affichage vidéo pour respecter le rapportVideo d'aspect
              * original de la vidéo.
              */
-            if (newPaneWidth > newPaneHeight) {
-                widthEmpty = newPaneWidth - rapport * newPaneHeight;
-                newPaneWidth = rapport * newPaneHeight;
-            } else if (newPaneHeight > newPaneWidth) {
-                heightEmpty = newPaneHeight - newPaneWidth / rapport;
-                newPaneHeight = newPaneWidth / rapport;
-            } else if (newPaneHeight == newPaneWidth) { // Si le pane est carré, alors la vidéo dans le pane est redimensionnée pour respecter le rapport
+            if (rapportPane > rapportVideo) {
+                widthEmpty = newPaneWidth - rapportVideo * newPaneHeight;
+                newPaneWidth = rapportVideo * newPaneHeight;
+            } else if (rapportVideo > rapportPane) {
+                heightEmpty = newPaneHeight - newPaneWidth / rapportVideo;
+                newPaneHeight = newPaneWidth / rapportVideo;
+            } else if (rapportPane == rapportVideo) { // Si le pane est carré, alors la vidéo dans le pane est redimensionnée pour respecter le rapportVideo
                 if (videoResolution.getWidth() > videoResolution.getHeight()) {
-                    heightEmpty = newPaneHeight - newPaneWidth / rapport;
-                    newPaneHeight = newPaneWidth / rapport;
+                    heightEmpty = newPaneHeight - newPaneWidth / rapportVideo;
+                    newPaneHeight = newPaneWidth / rapportVideo;
                 } else if (videoResolution.getHeight() > videoResolution.getWidth()) {
-                    widthEmpty = newPaneWidth - rapport * newPaneHeight;
-                    newPaneWidth = (float) videoResolution.getHeight() * rapport;
+                    widthEmpty = newPaneWidth - rapportVideo * newPaneHeight;
+                    newPaneWidth = (float) videoResolution.getHeight() * rapportVideo;
                 }
             }
 
