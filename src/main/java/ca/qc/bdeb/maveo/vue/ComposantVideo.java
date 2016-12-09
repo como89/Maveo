@@ -105,24 +105,26 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
             float heightEmpty = 0;
 
             /**
-             * Ce bloc if()..else if() fixe la taille de l'affichage vidéo pour respecter le rapportVideo d'aspect
-             * original de la vidéo.
+             * Ce bloc if()..else if() fixe la taille de l'affichage vidéo pour :
+             * 1. Respecter le rapport d'aspect original de la vidéo
+             * 2. Encadrer la vidéo entièrement dans la fenêtre, sans la dépasser, et sans mettre des espacements inutiles
+             * 3. Poser la vidéo au centre du pane.
+             *
+             * Gére les cas suivants:
+             * 1. La vidéo doit s'afficher avec deux bandes verticales (rapport pane > rapport vidéo)
+             * 2. La vidéo doit s'afficher avec deux bandes horizontales (rapport vidéo > rapprot pane)
+             * 3. La vidéo doit s'afficher sans bandes horizontales ni verticales. Dans le cas où que les rapprots
+             * sont égaux, les bandes sont nulles, les espacements sont nuls, et la vidéo rentre entièrement dans le
+             * pane sans modification. Il n'y a donc pas de traitement à faire.
              */
-            if (rapportPane > rapportVideo) {
+            if (rapportPane > rapportVideo) { // Si la vidéo doit s'afficher avec deux bandes verticales
                 widthEmpty = newPaneWidth - rapportVideo * newPaneHeight;
                 newPaneWidth = rapportVideo * newPaneHeight;
-            } else if (rapportVideo > rapportPane) {
+            } else if (rapportVideo > rapportPane) { // Si la vidéo doit s'afficher avec deux bandes horizontales
                 heightEmpty = newPaneHeight - newPaneWidth / rapportVideo;
                 newPaneHeight = newPaneWidth / rapportVideo;
-            } else if (rapportPane == rapportVideo) { // Si le pane est carré, alors la vidéo dans le pane est redimensionnée pour respecter le rapportVideo
-                if (videoResolution.getWidth() > videoResolution.getHeight()) {
-                    heightEmpty = newPaneHeight - newPaneWidth / rapportVideo;
-                    newPaneHeight = newPaneWidth / rapportVideo;
-                } else if (videoResolution.getHeight() > videoResolution.getWidth()) {
-                    widthEmpty = newPaneWidth - rapportVideo * newPaneHeight;
-                    newPaneWidth = (float) videoResolution.getHeight() * rapportVideo;
-                }
             }
+
 
             videoView.setFitHeight(newPaneHeight);
             videoView.setFitWidth(newPaneWidth);
