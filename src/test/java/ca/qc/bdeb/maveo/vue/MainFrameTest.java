@@ -1,5 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
+import com.sun.javaws.progress.Progress;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,94 @@ import java.net.URL;
  * Created by WuTchanKi on 2016-10-24.
  */
 public class MainFrameTest extends ApplicationTest {
+    @Test
+    public void getMenuItemExit() throws Exception {
+        MenuItem menuItemTest = testFrame.getMenuItemExit();
+        Assert.assertNotNull(menuItemTest);
+    }
+
+    @Test
+    public void setMenuItemExit() throws Exception {
+        MenuItem menuItemTest = testFrame.getMenuItemFile();
+        testFrame.setMenuItemExit(menuItemTest);
+        Assert.assertEquals(testFrame.getMenuItemExit(), testFrame.getMenuItemFile());
+
+    }
+
+    @Test
+    public void getTraitProgress() throws Exception {
+        ProgressBar testProgressBar = testFrame.getTraitProgress();
+        Assert.assertNotNull(testProgressBar);
+
+    }
+
+    @Test
+    public void getProgressVolume() throws Exception {
+        ProgressBar testProgressBar = testFrame.getProgressVolume();
+        Assert.assertNotNull(testProgressBar);
+
+    }
+
+    @Test
+    public void getScrollPane() throws Exception {
+        ScrollPane scrollPaneTest = testFrame.getScrollPane();
+Assert.assertNotNull(scrollPaneTest);
+    }
+
+
+
+    @Test
+    public void getLyricText() throws Exception {
+
+    }
+
+    @Test
+    public void getLblImage() throws Exception {
+
+    }
+
+    @Test
+    public void setLabelTempsEcoule() throws Exception {
+
+    }
+
+    @Test
+    public void setLabelTempsTotal() throws Exception {
+
+    }
+
+    @Test
+    public void getVideoView() throws Exception {
+
+    }
+
+    @Test
+    public void getPaneEcran() throws Exception {
+
+    }
+
+    @Test
+    public void setBoxBorder() throws Exception {
+
+    }
+
+    @Test
+    public void switchView() throws Exception {
+
+    }
+
+
+    @Test
+    public void getMenuItemMediaSousTitres() throws Exception {
+
+    }
+
+    @Test
+    public void setMenuItemMediaSousTitres() throws Exception {
+
+    }
+
+
 
     private MainFrame testFrame;
 
@@ -587,5 +676,7 @@ public class MainFrameTest extends ApplicationTest {
     public void addEventHandlerHidePlaylist() throws Exception {
 
     }
+
+
 
 }

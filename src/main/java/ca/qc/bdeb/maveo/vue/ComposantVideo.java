@@ -168,9 +168,6 @@ public class ComposantVideo extends DirectMediaPlayerComponent {
         return pixWriter;
     }
 
-    public static VideoBufferedCallBack getVideoBufferCallBack() {
-        return videoBufferCallBack;
-    }
 
     static class VideoBufferedCallBack implements BufferFormatCallback {
 

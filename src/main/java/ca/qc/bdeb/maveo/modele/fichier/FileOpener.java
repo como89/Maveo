@@ -57,16 +57,6 @@ public class FileOpener {
         return fileChooser.showOpenDialog(parent);
     }
 
-    /**
-     * Active la fenêtre de sauveagarde de média.
-     *
-     * @param parent La composante dans laquelle la fenêtre d'ouverture doit s'afficher.
-     * @return le fichier sélectionné ou null si aucune sélection n'a été effectuée.
-     */
-    public File afficherFenetreSauvegardeMedia(Window parent) {
-        activerFiltresMedia();
-        return fileChooser.showSaveDialog(parent);
-    }
 
     /**
      * Active la fenêtre de sauveagarde de playlist.

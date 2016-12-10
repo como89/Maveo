@@ -3,6 +3,8 @@ package ca.qc.bdeb.maveo.modele.fichier;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.awt.*;
+
 
 /**
  * Created by nicholas on 21/09/16.
@@ -42,4 +44,15 @@ public class FileOpenerTest {
         Assert.assertEquals(fileOpener.fileChooser.getExtensionFilters(),
                 fileOpener.accesExtensions.getListeFiltresMedia());
     }
+
+    @Test
+    public void testHaveFiltreSousTitre(){
+        fileOpener = new FileOpener();
+        fileOpener.activerFiltresSousTitre();
+
+        Assert.assertEquals(fileOpener.fileChooser.getExtensionFilters(),
+                fileOpener.accesExtensions.getListeFiltresSousTitres());
+    }
+
+
 }

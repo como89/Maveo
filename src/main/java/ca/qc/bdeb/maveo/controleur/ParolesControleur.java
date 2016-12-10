@@ -97,6 +97,7 @@ public class ParolesControleur {
                 mainFrame.getScrollPane().setVisible(true);
                 mainFrame.getAlbumView().setVisible(false);
                 mainFrame.getLyricTitle().setText(media.getTitre());
+
                 mainFrame.getLyricText().setText(media.getParolesMedia());
             }
         }
@@ -110,7 +111,7 @@ public class ParolesControleur {
      * @param artist artiste du média
      * @return paroles du média
      */
-    private String recupererParoles(String title, String artist) {
+    public String recupererParoles(String title, String artist) {
         String paroles = "";
         try {
             paroles = ChartLyricsClient.getSongLyrics(artist, title).lyrics;

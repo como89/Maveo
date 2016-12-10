@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
  */
 public class GestionnaireVideoTest extends ApplicationTest {
 
+
     static final String PATH = "res/video_samples/example.mp4";
     static GestionnaireVideo gestionnaireVideo;
 
@@ -150,6 +151,56 @@ public class GestionnaireVideoTest extends ApplicationTest {
         gestionnaireVideo.setCheminFichier("res/video_samples/example.wmv");
         boolean success = gestionnaireVideo.preparerMedia();
         Assert.assertTrue(success);
+    }
+
+
+
+    @Test
+    public void getVolume() throws Exception {
+gestionnaireVideo.setVolume(25);
+Assert.assertEquals(gestionnaireVideo.getVolume(), 25);
+    }
+
+    @Test
+    public void setVolume() throws Exception {
+        gestionnaireVideo.setVolume(25);
+        Assert.assertEquals(gestionnaireVideo.getVolume(), 25);
+
+    }
+
+    @Test
+    public void getTempsRestant() throws Exception {
+
+    }
+
+    @Test
+    public void getTempsTotal() throws Exception {
+
+    }
+
+    @Test
+    public void getTempsEcoule() throws Exception {
+
+    }
+
+    @Test
+    public void setPosition() throws Exception {
+
+    }
+
+    @Test
+    public void addMediaPlayerEventListener() throws Exception {
+
+    }
+
+    @Test
+    public void cacherAfficherSousTitres() throws Exception {
+
+    }
+
+    @Test
+    public void chargerSousTitres() throws Exception {
+
     }
 
 }

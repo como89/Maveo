@@ -1,8 +1,11 @@
 package ca.qc.bdeb.maveo.modele.tags;
 
 import ca.qc.bdeb.maveo.modele.Media;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
 
 import static org.junit.Assert.*;
 
@@ -11,11 +14,6 @@ import static org.junit.Assert.*;
  */
 public class TagsIOTest {
 
-
-    @Test
-    public void getTagsFromMedia() throws Exception {
-
-    }
 
     private TagsIO tagsIO;
 
@@ -39,15 +37,55 @@ public class TagsIOTest {
     @Test
     public void testHasTitle() {
         Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
-        assertNotEquals(tags.title,"");
+        assertNotEquals(tags.title, "");
     }
 
     @Test
-    public void epurerChainesTest(){
+    public void epurerChainesTest() {
         String chaineTest = "Hello   World";
-      String chaineFinale =  tagsIO.epurerChainesDeCaracteres(chaineTest);
-      assertEquals("Hello World", chaineFinale);
+        String chaineFinale = tagsIO.epurerChainesDeCaracteres(chaineTest);
+        assertEquals("Hello World", chaineFinale);
     }
+
+    @Test
+    public void getTitle() throws Exception {
+        Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
+        Assert.assertEquals(tags.getTitle(), "Miss Independent");
+
+    }
+
+    @Test
+    public void getArtist() throws Exception {
+        Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
+        Assert.assertEquals(tags.getArtist(), "Kelly Clarkson");
+    }
+
+    @Test
+    public void getAlbum() throws Exception {
+        Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
+        Assert.assertEquals(tags.getAlbum(), "Greatest Hits - Chapter One");
+    }
+
+    @Test
+    public void hasTitle() throws Exception {
+        Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
+
+        Assert.assertTrue(tags.hasTitle());
+    }
+
+    @Test
+    public void hasArtist() throws Exception {
+        Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
+        Assert.assertTrue(tags.hasArtist());
+    }
+
+    @Test
+    public void hasAlbum() throws Exception {
+        Tags tags = tagsIO.getTagsFromMedia("res/uilo.mp3");
+
+        Assert.assertTrue(tags.hasAlbum());
+    }
+
 
 
 
