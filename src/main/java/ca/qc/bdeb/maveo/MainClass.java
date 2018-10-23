@@ -4,10 +4,8 @@ import ca.qc.bdeb.maveo.controleur.*;
 import ca.qc.bdeb.maveo.modele.fichier.FileOpener;
 import ca.qc.bdeb.maveo.modele.playlist.PlaylistIO;
 import ca.qc.bdeb.maveo.util.UtilLib;
-import ca.qc.bdeb.maveo.util.WikiUtil;
 import ca.qc.bdeb.maveo.vue.BorderStage;
 import ca.qc.bdeb.maveo.vue.MainFrame;
-import ca.qc.bdeb.maveo.vue.SplashScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,17 +37,11 @@ public class MainClass extends Application {
 
     public void start(Stage stage) throws Exception {
 
-        //Création du splashScreen.
-        SplashScreen splashScreen = new SplashScreen(stage);
-
-
         //Chargement des libs
         UtilLib.chargerLibSysteme();
 
         //On affiche le stage principal.
         showMainStage(stage);
-        //On affiche le splashScreen
-        splashScreen.showSplash();
     }
 
     /**
