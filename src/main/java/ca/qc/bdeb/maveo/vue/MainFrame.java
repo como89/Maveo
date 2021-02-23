@@ -1,7 +1,6 @@
 package ca.qc.bdeb.maveo.vue;
 
 import ca.qc.bdeb.maveo.modele.tags.Tags;
-import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;

@@ -1,6 +1,5 @@
 package ca.qc.bdeb.maveo.vue;
 
-import com.sun.javaws.progress.Progress;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
