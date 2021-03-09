@@ -8,15 +8,27 @@ Maveo est un logiciel pour écouter de la <strong>musique</strong> et de la **vi
 
 ## Features principales :
 
- - Écouter des fichiers audios parmi ces extensions compatibles : mp3, ogg, aac, flac, gsm, m4a et wma.
+ - Écouter des fichiers audios parmi ces extensions compatibles : 
+     - mp3 
+     - ogg 
+     - aac 
+     - flac 
+     - gsm 
+     - m4a 
+     - wma
 
- - Écouter des fichiers vidéos parmi ces extensions compatibles : mp4, wmv, mov, webm, mpg, 3gp et flv.
+ - Écouter des fichiers vidéos parmi ces extensions compatibles : 
+     - mp4
+     - wmv
+     - mov
+     - webm
+     - mpg
+     - 3gp
+     - flv
 
  - Créer une playlist de média (audio et vidéo) afin de pouvoir les écouter un après l'autre.
 
- - Sauvegarder la playlist en format json ou maveo.
-
- - Charger une playlist.
+ - Sauvegarder ou charger la playlist en format json ou maveo.
 
  - Obtenir les paroles de la chanson en écoute.
 
@@ -27,12 +39,29 @@ Maveo est un logiciel pour écouter de la <strong>musique</strong> et de la **vi
  - Rechercher sur Wikipédia en cliquant sur le bouton du logo Wiki. Si des tags existent, il cherche à partir des informations dans les tags. Sinon, il demande à l'utilisateur des infos de recherche.
 
 ## Raccourcis possibles :
-> ctrl + Barre d'espace - (pause, play)
-
-Sinon les autres options sont décrites sur les menus du logiciel.
-
-
-
+> ctrl + O - Ouverture d'un fichier
+> 
+> ctrl + Q - Quitter
+> 
+> ctrl + P - Ouvrir une playlist
+> 
+> ctrl + D - Ajout à la playlist
+> 
+> ctrl + F - Sauvegarde de la playlist
+> 
+> ctrl + H - Afficher ou cacher la playlist
+> 
+> ctrl + L - Ouvrir les paroles
+> 
+> ctrl + K - Enregistrer les paroles
+> 
+> ctrl + R - Cacher les sous-titres
+> 
+> ctrl + T - Charger les sous-titres
+> 
+> ctrl + espace - (pause, play)
+> 
+> ctrl + B - About
 
 Le logiciel a une interface simple et intuitive.
 
