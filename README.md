@@ -1,33 +1,37 @@
-# Maveo
-Maveo - Music and Video Element OpenSource
+# Maveo  - Music and Video Element OpenSource
 
 Un logiciel créé par Catalin, Cédric et Nicholas
 
-Maveo est un logiciel pour écouter de la musique et de la vidéo.
+Maintenu par Nicholas (@como89)
 
-Il permet de :
+Maveo est un logiciel pour écouter de la <strong>musique</strong> et de la **vidéo**.
 
--> Écouter des fichiers audios parmi ces extensions compatibles : mp3, ogg, aac, flac, gsm, m4a et wma.
+## Features principales :
 
--> Écouter des fichiers vidéos parmi ces extensions compatibles : mp4, wmv, mov, webm, mpg, 3gp et flv.
+ - Écouter des fichiers audios parmi ces extensions compatibles : mp3, ogg, aac, flac, gsm, m4a et wma.
 
--> Créer une playlist de média (audio et vidéo) afin de pouvoir les écouter un après l'autre.
+ - Écouter des fichiers vidéos parmi ces extensions compatibles : mp4, wmv, mov, webm, mpg, 3gp et flv.
 
--> Sauvegarder la playlist en format json ou maveo.
+ - Créer une playlist de média (audio et vidéo) afin de pouvoir les écouter un après l'autre.
 
--> Charger une playlist.
+ - Sauvegarder la playlist en format json ou maveo.
 
--> Obtenir les paroles de la chanson en écoute.
+ - Charger une playlist.
 
--> Obtenir l'image de l'album si des tags existent. (Fonctionne seulement avec les fichiers mp3).
+ - Obtenir les paroles de la chanson en écoute.
 
--> Utiliser des raccourcis afin d'utiliser certaines fonctionnalités.
+ - Obtenir l'image de l'album si des tags existent. (Fonctionne seulement avec les fichiers mp3).
 
-ctrl + Barre d'espace - (pause, play)
+ - Utiliser des raccourcis afin d'utiliser certaines fonctionnalités.
+
+ - Rechercher sur Wikipédia en cliquant sur le bouton du logo Wiki. Si des tags existent, il cherche à partir des informations dans les tags. Sinon, il demande à l'utilisateur des infos de recherche.
+
+## Raccourcis possibles :
+> ctrl + Barre d'espace - (pause, play)
 
 Sinon les autres options sont décrites sur les menus du logiciel.
 
--> Rechercher sur Wikipédia en cliquant sur le bouton du logo Wiki. Si des tags existent, il cherche à partir des informations dans les tags. Sinon, il demande à l'utilisateur des infos de recherche.
+
 
 
 Le logiciel a une interface simple et intuitive.
